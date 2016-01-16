@@ -2,13 +2,13 @@
   "name": "ordercloud-ng-sdk",
   "version": "1.0.0",
   "description": "OrderCloud AngularJS 1.x SDK",
-  "main": "./dist/ordercloud-ng-sdk",
+  "main": "./dist/ordercloud-ng-sdk.js",
   "scripts": {
     "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": " "
+    "url": "https://github.com/cobrien451/OrderCloud-ng-SDK.git"
   },
   "author": "Four51 Inc.",
   "license": "MIT",
