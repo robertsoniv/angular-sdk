@@ -1,0 +1,25 @@
+{
+  "name": "ordercloud-ng-sdk",
+  "version": "1.0.0",
+  "description": "OrderCloud AngularJS 1.x SDK",
+  "main": "./dist/ordercloud-ng-sdk",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": " "
+  },
+  "author": "Four51 Inc.",
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^2.2.0",
+    "fs": "0.0.2",
+    "gulp": "^3.9.0",
+    "gulp-beautify": "^2.0.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-replace": "^0.5.4",
+    "gulp-uglify": "^1.5.1",
+    "gulp-wrapper": "^1.0.0"
+  }
+}
