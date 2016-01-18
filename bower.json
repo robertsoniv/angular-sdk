@@ -1,7 +1,8 @@
 {
   "name": "ordercloud-ng-sdk",
+  "version": "1.0.0",
   "description": "OrderCloud AngularJS 1.x SDK",
-  "main": "./dist/ordercloud-ng-sdk.js",
+  "main": "dist/ordercloud-ng-sdk.js",
   "authors": [
     "Four51 Inc."
   ],
