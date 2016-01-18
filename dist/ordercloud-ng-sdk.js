@@ -1,9 +1,9 @@
 (function() {
     'use strict';
-    angular.module('orderCloud.sdk')
+    angular.module('orderCloud.sdk', [])
         .factory('OrderCloud', orderCloud);
 
-    function orderCloud($q, $resource, $cookieStore, $exceptionHandler, appname, apiurl, authurl, ocscope, clientid) {
+    function orderCloud($q, $resource, $cookieStore, appname, apiurl, authurl, ocscope, clientid) {
         var impersonating = false;
         return {
             'Auth': Auth(),

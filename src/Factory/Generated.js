@@ -1,6 +1,6 @@
-angular.module('orderCloud.sdk')
-	.factory('OrderCloud', orderCloud);
-function orderCloud( $q, $resource, $cookieStore, $exceptionHandler, appname, apiurl, authurl, ocscope, clientid ) {
+angular.module('orderCloud.sdk', [])
+.factory('OrderCloud', orderCloud);
+function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocscope, clientid ) {
 	var impersonating = false;
 	return {
 		/* INSERT FUNCTION DECLARATIONS HERE */
