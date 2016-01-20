@@ -3,7 +3,7 @@ function As() {
 
 	switch (typeof arguments[0]) {
 		case 'string':
-			Auth.SetImpToken(arguments[0]);
+			Auth().SetImpersonationToken(arguments[0]);
 			break;
 		case 'object':
 			CreateToken(arguements[0]);
@@ -15,9 +15,9 @@ function As() {
 
 	function CreateToken(CredientialsObject) {
 		if (CredientialsObject.UserID && CredientialsObject.ClientID) {
-			Users.GetAccessToken(CredientialsObject.UserID, {ClientID: CredientialsObject.ClientID, Claims: CredientialsObject.Claims ? CredientialsObject.Claims : ["FullAccess"]})
+			Users().GetAccessToken(CredientialsObject.UserID, {ClientID: CredientialsObject.ClientID, Claims: CredientialsObject.Claims ? CredientialsObject.Claims : ["FullAccess"]})
 				.then(function(token) {
-					Auth.SetImpToken(token);
+					Auth().SetImpersonationToken(token);
 				});
 		}
 	}

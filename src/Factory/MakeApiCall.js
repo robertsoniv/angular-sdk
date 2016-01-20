@@ -3,7 +3,7 @@ function makeApiCall(method, routingUrl, parameters, requestBody) {
     $resource(apiurl + routingUrl, parameters, {
         callApi: {
             method: method,
-            headers: {'Authorization': 'Bearer ' + Auth().GetToken()}
+            headers: {'Authorization': 'Bearer ' + Auth().ReadToken()}
         }
     }).callApi(requestBody).$promise
         .then(function(data) {
