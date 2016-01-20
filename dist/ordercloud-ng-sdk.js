@@ -1,11 +1,14 @@
 (function() {
     'use strict';
+
+    orderCloud.$inject = ["$q", "$resource", "$cookieStore", "appname", "apiurl", "authurl", "ocscope", "clientid"];
     angular.module('orderCloud.sdk', ['ngResource', 'ngCookies'])
         .factory('OrderCloud', orderCloud);
 
     function orderCloud($q, $resource, $cookieStore, appname, apiurl, authurl, ocscope, clientid) {
         var impersonating = false;
         return {
+            'As': As,
             'Auth': Auth(),
             'BuyerID': BuyerID(),
             'Credentials': Credentials(),
@@ -22,6 +25,7 @@
             'CreditCards': CreditCards(),
             'EmailTemplates': EmailTemplates(),
             'Files': Files(),
+            'SecurityProfiles': SecurityProfiles(),
             'Specs': Specs(),
             'UserGroups': UserGroups(),
             'LineItems': LineItems(),
@@ -34,6 +38,34 @@
             'Products': Products(),
             'Users': Users()
         };
+
+        function As() {
+            impersonating = true;
+
+            switch (typeof arguments[0]) {
+                case 'string':
+                    Auth.SetImpToken(arguments[0]);
+                    break;
+                case 'object':
+                    CreateToken(arguements[0]);
+                    break;
+                default:
+                    break;
+            }
+            return this;
+
+            function CreateToken(CredientialsObject) {
+                if (CredientialsObject.UserID && CredientialsObject.ClientID) {
+                    Users.GetAccessToken(CredientialsObject.UserID, {
+                            ClientID: CredientialsObject.ClientID,
+                            Claims: CredientialsObject.Claims ? CredientialsObject.Claims : ["FullAccess"]
+                        })
+                        .then(function(token) {
+                            Auth.SetImpToken(token);
+                        });
+                }
+            }
+        }
 
         function Auth() {
             return {
@@ -880,6 +912,57 @@
                 return makeApiCall('POST', '/v1/files', {
                     'filename': filename
                 });
+            }
+        }
+
+        function SecurityProfiles() {
+            return {
+                'List': _list,
+                'Get': _get,
+                'Create': _create,
+                'Delete': _delete,
+                'Update': _update,
+                'Patch': _patch
+            };
+
+            function _list(search, page, pageSize, searchOn, sortBy, filters) {
+                var listArgs = {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                };
+                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
+                return makeApiCall('GET', '/v1/securityprofiles', listArgs);
+            }
+
+            function _get(securityProfileID) {
+                return makeApiCall('GET', '/v1/securityprofiles/:securityProfileID', {
+                    'securityProfileID': securityProfileID
+                }, null);
+            }
+
+            function _create(securityProfile) {
+                return makeApiCall('POST', '/v1/securityprofiles', securityProfile);
+            }
+
+            function _delete(securityProfileID) {
+                return makeApiCall('DELETE', '/v1/securityprofiles/:securityProfileID', {
+                    'securityProfileID': securityProfileID
+                }, null);
+            }
+
+            function _update(securityProfileID, securityProfile) {
+                return makeApiCall('PUT', '/v1/securityprofiles/:securityProfileID', {
+                    'securityProfileID': securityProfileID
+                }, securityProfile);
+            }
+
+            function _patch(securityProfileID, securityProfile) {
+                return makeApiCall('PATCH', '/v1/securityprofiles/:securityProfileID', {
+                    'securityProfileID': securityProfileID
+                }, securityProfile);
             }
         }
 

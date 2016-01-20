@@ -38,7 +38,10 @@
     function GetFuncList(files) {
         var fileList = '';
         files.forEach(function(fileObj) {
-            fileList = fileList + "'" + fileObj.name + "': " + fileObj.name + "(),\n";
+            if (fileObj.name != 'As') {
+                fileList = fileList + "'" + fileObj.name + "': " + fileObj.name + "(),\n";
+            }
+            else fileList = fileList + "'" + fileObj.name + "': " + fileObj.name + ",\n";
         });
         return fileList;
     }

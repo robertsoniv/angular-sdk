@@ -1,5 +1,6 @@
 var config = require('./config'),
     gulp = require('gulp'),
+    annotate = require('gulp-ng-annotate'),
     beautify = require('gulp-beautify'),
     replace = require('gulp-replace'),
     uglify = require('gulp-uglify'),
@@ -19,6 +20,7 @@ gulp.task('compile', ['clean'], function() {
         .pipe(replace('/* INSERT FUNCTION DECLARATIONS HERE */', config.func_list))
         .pipe(replace('/* INSERT FUNCTIONS HERE */', config.file_group))
         .pipe(replace('/* INSERT FUNCTION MAKEAPICALL HERE */', config.makeApiCall_file))
+        .pipe(annotate())
         .pipe(wrapper({header: config.wrap.header, footer: config.wrap.footer}))
         .pipe(beautify({indentSize: 4}))
         .pipe(concat(config.sdk_name + '.js'))

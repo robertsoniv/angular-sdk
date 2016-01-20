@@ -11,6 +11,26 @@ An AngularJs SDK for OrderCloud API
 
 - [Cache](#cache)
 
+- [SecurityProfiles](#securityprofiles)
+
+  - [Get a Single Security Profile](#get-a-single-security-profile)
+
+  - [Get a List of Security Profiles](#get-a-list-of-security-profiles)
+
+  - [Create New Security Profile](#create-new-security-profile)
+
+  - [Create or Update Security Profile](#create-or-update-security-profile)
+
+  - [Delete Security Profile](#delete-security-profile)
+
+  - [Partially Update Security Profile](#partially-update-security-profile)
+
+- [ForgottenPassword](#forgottenpassword)
+
+  - [Send Verification Code](#send-verification-code)
+
+  - [Reset Password](#reset-password)
+
 - [BuyerAPIClient](#buyerapiclient)
 
   - [Get a Single Buyer API Client](#get-a-single-buyer-api-client)
@@ -22,12 +42,6 @@ An AngularJs SDK for OrderCloud API
   - [Create or Update Buyer API Client](#create-or-update-buyer-api-client)
 
   - [Delete Buyer API Client](#delete-buyer-api-client)
-
-- [ForgottenPassword](#forgottenpassword)
-
-  - [Send Verification Code](#send-verification-code)
-
-  - [Reset Password](#reset-password)
 
 - [AdminAPIClient](#adminapiclient)
 
@@ -455,23 +469,368 @@ In some cases, your app will need to access multiple buyer companies, so the buy
 In order to set an initial/default buyerid, add a run function in addition to the above constants.
 
 ```js
-.run(function(BuyerID) { BuyerID.Set('BUYERIDHERE'); })
+.run(function(BuyerID) { OrderCloud.BuyerID.Set('BUYERIDHERE'); })
 ```
 
-The BuyerID service can be used within any AngularJS controller and/or factory within your application in order to change which buyerid should be used.
-Simply inject the BuyerID factory into your controller or factory and call BuyerID.Set('NEWIDHERE');.
-If needed, BuyerID.Get() will return the buyerid that is currently set.
+The BuyerID function can be used within any AngularJS controller and/or factory within your application in order to change which buyerid should be used.
+Simply inject the BuyerID factory into your controller or factory and call OrderCloud.BuyerID.Set('NEWIDHERE');.
+If needed, OrderCloud.BuyerID.Get() will return the buyerid that is currently set.
 
 ***
-
-# Cache
-
-An implementation of localForage. This factory is a wrapper for their primary functions.
-This factory is not the implementation of the api caching mechanism. Those are built directly into the resource factories.
 
 # API RESOURCES AND METHODS
 
 ***
+
+# SecurityProfiles
+
+```js
+angular.module('orderCloud.sdk).factory(SecurityProfiles, SecurityProfilesFactory)
+```
+
+
+## Get a Single Security Profile
+
+```js
+OrderCloud.SecurityProfiles.Get(securityProfileID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|securityProfileID|string|ID of the security profile.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "FullAccess": false,
+  "ProductAdmin": false,
+  "ProductReader": false,
+  "InventoryAdmin": false,
+  "ProductAssignmentAdmin": false,
+  "BuyerAdmin": false,
+  "BuyerReader": false,
+  "CategoryAdmin": false,
+  "CategoryReader": false,
+  "AddressAdmin": false,
+  "AddressReader": false,
+  "CostCenterAdmin": false,
+  "CostCenterReader": false,
+  "CouponAdmin": false,
+  "CouponReader": false,
+  "CreditCardAdmin": false,
+  "CreditCardReader": false,
+  "EmailTemplateAdmin": false,
+  "EmailTemplateReader": false,
+  "PriceScheduleAdmin": false,
+  "PriceScheduleReader": false,
+  "SpendingAccountAdmin": false,
+  "SpendingAccountReader": false,
+  "BuyerUserAdmin": false,
+  "BuyerUserReader": false,
+  "UserGroupAdmin": false,
+  "UserGroupReader": false,
+  "ApprovalRuleAdmin": false,
+  "ApprovalRuleReader": false,
+  "PermissionAdmin": false,
+  "OverrideUnitPrice": false,
+  "ChangeCreditCardOrders": false,
+  "ChangeNonCreditCardOrders": false,
+  "OverrideShipping": false,
+  "OverrideTax": false,
+  "ApproveAllOrders": false,
+  "SecurityProfileAdmin": false
+}
+```
+
+## Get a List of Security Profiles
+
+```js
+OrderCloud.SecurityProfiles.List(listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+[
+  {
+    "ID": "…",
+    "Name": "…",
+    "FullAccess": false,
+    "ProductAdmin": false,
+    "ProductReader": false,
+    "InventoryAdmin": false,
+    "ProductAssignmentAdmin": false,
+    "BuyerAdmin": false,
+    "BuyerReader": false,
+    "CategoryAdmin": false,
+    "CategoryReader": false,
+    "AddressAdmin": false,
+    "AddressReader": false,
+    "CostCenterAdmin": false,
+    "CostCenterReader": false,
+    "CouponAdmin": false,
+    "CouponReader": false,
+    "CreditCardAdmin": false,
+    "CreditCardReader": false,
+    "EmailTemplateAdmin": false,
+    "EmailTemplateReader": false,
+    "PriceScheduleAdmin": false,
+    "PriceScheduleReader": false,
+    "SpendingAccountAdmin": false,
+    "SpendingAccountReader": false,
+    "BuyerUserAdmin": false,
+    "BuyerUserReader": false,
+    "UserGroupAdmin": false,
+    "UserGroupReader": false,
+    "ApprovalRuleAdmin": false,
+    "ApprovalRuleReader": false,
+    "PermissionAdmin": false,
+    "OverrideUnitPrice": false,
+    "ChangeCreditCardOrders": false,
+    "ChangeNonCreditCardOrders": false,
+    "OverrideShipping": false,
+    "OverrideTax": false,
+    "ApproveAllOrders": false,
+    "SecurityProfileAdmin": false
+  }
+]
+```
+
+## Create New Security Profile
+
+```js
+OrderCloud.SecurityProfiles.Create(securityProfile).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "FullAccess": false,
+  "ProductAdmin": false,
+  "ProductReader": false,
+  "InventoryAdmin": false,
+  "ProductAssignmentAdmin": false,
+  "BuyerAdmin": false,
+  "BuyerReader": false,
+  "CategoryAdmin": false,
+  "CategoryReader": false,
+  "AddressAdmin": false,
+  "AddressReader": false,
+  "CostCenterAdmin": false,
+  "CostCenterReader": false,
+  "CouponAdmin": false,
+  "CouponReader": false,
+  "CreditCardAdmin": false,
+  "CreditCardReader": false,
+  "EmailTemplateAdmin": false,
+  "EmailTemplateReader": false,
+  "PriceScheduleAdmin": false,
+  "PriceScheduleReader": false,
+  "SpendingAccountAdmin": false,
+  "SpendingAccountReader": false,
+  "BuyerUserAdmin": false,
+  "BuyerUserReader": false,
+  "UserGroupAdmin": false,
+  "UserGroupReader": false,
+  "ApprovalRuleAdmin": false,
+  "ApprovalRuleReader": false,
+  "PermissionAdmin": false,
+  "OverrideUnitPrice": false,
+  "ChangeCreditCardOrders": false,
+  "ChangeNonCreditCardOrders": false,
+  "OverrideShipping": false,
+  "OverrideTax": false,
+  "ApproveAllOrders": false,
+  "SecurityProfileAdmin": false
+}
+```
+
+## Create or Update Security Profile
+
+```js
+OrderCloud.SecurityProfiles.Update(securityProfileID,securityProfile).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|securityProfileID|string|ID of the security profile.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "FullAccess": false,
+  "ProductAdmin": false,
+  "ProductReader": false,
+  "InventoryAdmin": false,
+  "ProductAssignmentAdmin": false,
+  "BuyerAdmin": false,
+  "BuyerReader": false,
+  "CategoryAdmin": false,
+  "CategoryReader": false,
+  "AddressAdmin": false,
+  "AddressReader": false,
+  "CostCenterAdmin": false,
+  "CostCenterReader": false,
+  "CouponAdmin": false,
+  "CouponReader": false,
+  "CreditCardAdmin": false,
+  "CreditCardReader": false,
+  "EmailTemplateAdmin": false,
+  "EmailTemplateReader": false,
+  "PriceScheduleAdmin": false,
+  "PriceScheduleReader": false,
+  "SpendingAccountAdmin": false,
+  "SpendingAccountReader": false,
+  "BuyerUserAdmin": false,
+  "BuyerUserReader": false,
+  "UserGroupAdmin": false,
+  "UserGroupReader": false,
+  "ApprovalRuleAdmin": false,
+  "ApprovalRuleReader": false,
+  "PermissionAdmin": false,
+  "OverrideUnitPrice": false,
+  "ChangeCreditCardOrders": false,
+  "ChangeNonCreditCardOrders": false,
+  "OverrideShipping": false,
+  "OverrideTax": false,
+  "ApproveAllOrders": false,
+  "SecurityProfileAdmin": false
+}
+```
+
+## Delete Security Profile
+
+```js
+OrderCloud.SecurityProfiles.Delete(securityProfileID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|securityProfileID|string|ID of the security profile.|
+## Partially Update Security Profile
+
+```js
+OrderCloud.SecurityProfiles.Patch(securityProfileID,securityProfile).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|securityProfileID|string|ID of the security profile.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "FullAccess": false,
+  "ProductAdmin": false,
+  "ProductReader": false,
+  "InventoryAdmin": false,
+  "ProductAssignmentAdmin": false,
+  "BuyerAdmin": false,
+  "BuyerReader": false,
+  "CategoryAdmin": false,
+  "CategoryReader": false,
+  "AddressAdmin": false,
+  "AddressReader": false,
+  "CostCenterAdmin": false,
+  "CostCenterReader": false,
+  "CouponAdmin": false,
+  "CouponReader": false,
+  "CreditCardAdmin": false,
+  "CreditCardReader": false,
+  "EmailTemplateAdmin": false,
+  "EmailTemplateReader": false,
+  "PriceScheduleAdmin": false,
+  "PriceScheduleReader": false,
+  "SpendingAccountAdmin": false,
+  "SpendingAccountReader": false,
+  "BuyerUserAdmin": false,
+  "BuyerUserReader": false,
+  "UserGroupAdmin": false,
+  "UserGroupReader": false,
+  "ApprovalRuleAdmin": false,
+  "ApprovalRuleReader": false,
+  "PermissionAdmin": false,
+  "OverrideUnitPrice": false,
+  "ChangeCreditCardOrders": false,
+  "ChangeNonCreditCardOrders": false,
+  "OverrideShipping": false,
+  "OverrideTax": false,
+  "ApproveAllOrders": false,
+  "SecurityProfileAdmin": false
+}
+```
+
+# ForgottenPassword
+
+```js
+angular.module('orderCloud.sdk).factory(ForgottenPassword, ForgottenPasswordFactory)
+```
+
+
+## Send Verification Code
+
+```js
+OrderCloud.ForgottenPassword.SendVerificationCode(passwordResetRequest).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "ClientID": "…",
+  "Email": "…",
+  "Username": "…",
+  "URL": "…"
+}
+```
+
+## Reset Password
+
+```js
+OrderCloud.ForgottenPassword.ResetPassword(verificationCode,passwordReset).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|verificationCode|string|Verification code of the forgotten password.|
+### Request Body Sample
+
+```json
+{
+  "ClientID": "…",
+  "Username": "…",
+  "Password": "…"
+}
+```
 
 # BuyerAPIClient
 
@@ -483,7 +842,7 @@ angular.module('orderCloud.sdk).factory(BuyerAPIClient, BuyerAPIClientFactory)
 ## Get a Single Buyer API Client
 
 ```js
-BuyerAPIClient.Get(clientID).then(successFn).catch(errorFn);
+OrderCloud.BuyerAPIClient.Get(clientID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -511,7 +870,7 @@ BuyerAPIClient.Get(clientID).then(successFn).catch(errorFn);
 ## Get a List of Buyer API Clients
 
 ```js
-BuyerAPIClient.List(page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.BuyerAPIClient.List(page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -542,7 +901,7 @@ BuyerAPIClient.List(page,pageSize).then(successFn).catch(errorFn);
 ## Create New Buyer API Client
 
 ```js
-BuyerAPIClient.Create(api).then(successFn).catch(errorFn);
+OrderCloud.BuyerAPIClient.Create(api).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -564,7 +923,7 @@ BuyerAPIClient.Create(api).then(successFn).catch(errorFn);
 ## Create or Update Buyer API Client
 
 ```js
-BuyerAPIClient.Update(clientID,client).then(successFn).catch(errorFn);
+OrderCloud.BuyerAPIClient.Update(clientID,client).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -591,7 +950,7 @@ BuyerAPIClient.Update(clientID,client).then(successFn).catch(errorFn);
 ## Delete Buyer API Client
 
 ```js
-BuyerAPIClient.Delete(clientID).then(successFn).catch(errorFn);
+OrderCloud.BuyerAPIClient.Delete(clientID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -599,51 +958,6 @@ BuyerAPIClient.Delete(clientID).then(successFn).catch(errorFn);
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |clientID|string|ID of the API client|
-# ForgottenPassword
-
-```js
-angular.module('orderCloud.sdk).factory(ForgottenPassword, ForgottenPasswordFactory)
-```
-
-
-## Send Verification Code
-
-```js
-ForgottenPassword.SendVerificationCode(passwordResetRequest).then(successFn).catch(errorFn);
-```
-
-### Request Body Sample
-
-```json
-{
-  "ClientID": "…",
-  "Email": "…",
-  "Username": "…",
-  "URL": "…"
-}
-```
-
-## Reset Password
-
-```js
-ForgottenPassword.ResetPassword(verificationCode,passwordReset).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|verificationCode|string|Verification code of the forgotten password.|
-### Request Body Sample
-
-```json
-{
-  "ClientID": "…",
-  "Username": "…",
-  "Password": "…"
-}
-```
-
 # AdminAPIClient
 
 ```js
@@ -654,7 +968,7 @@ angular.module('orderCloud.sdk).factory(AdminAPIClient, AdminAPIClientFactory)
 ## Get a Single Admin API Client
 
 ```js
-AdminAPIClient.Get(clientID).then(successFn).catch(errorFn);
+OrderCloud.AdminAPIClient.Get(clientID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -682,7 +996,7 @@ AdminAPIClient.Get(clientID).then(successFn).catch(errorFn);
 ## Get a List of Admin API Clients
 
 ```js
-AdminAPIClient.List(page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.AdminAPIClient.List(page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -713,7 +1027,7 @@ AdminAPIClient.List(page,pageSize).then(successFn).catch(errorFn);
 ## Create New Admin API Client
 
 ```js
-AdminAPIClient.Create(client).then(successFn).catch(errorFn);
+OrderCloud.AdminAPIClient.Create(client).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -735,7 +1049,7 @@ AdminAPIClient.Create(client).then(successFn).catch(errorFn);
 ## Create or Update Admin API Client
 
 ```js
-AdminAPIClient.Update(clientID,client).then(successFn).catch(errorFn);
+OrderCloud.AdminAPIClient.Update(clientID,client).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -762,7 +1076,7 @@ AdminAPIClient.Update(clientID,client).then(successFn).catch(errorFn);
 ## Delete Admin API Client
 
 ```js
-AdminAPIClient.Delete(clientID).then(successFn).catch(errorFn);
+OrderCloud.AdminAPIClient.Delete(clientID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -781,7 +1095,7 @@ angular.module('orderCloud.sdk).factory(Me, MeFactory)
 ## Get the Current Authenticated User
 
 ```js
-Me.Get().then(successFn).catch(errorFn);
+OrderCloud.Me.Get().then(successFn).catch(errorFn);
 ```
 
 ### Response Body Sample
@@ -804,7 +1118,7 @@ Me.Get().then(successFn).catch(errorFn);
 ## List Cost Centers
 
 ```js
-Me.ListCostCenters(search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Me.ListCostCenters(search,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -829,7 +1143,7 @@ Me.ListCostCenters(search,page,pageSize).then(successFn).catch(errorFn);
 ## List User Groups
 
 ```js
-Me.ListUserGroups(listArgs).then(successFn).catch(errorFn);
+OrderCloud.Me.ListUserGroups(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -859,7 +1173,7 @@ Me.ListUserGroups(listArgs).then(successFn).catch(errorFn);
 ## List Addresses
 
 ```js
-Me.ListAddresses(page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Me.ListAddresses(page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -894,7 +1208,7 @@ Me.ListAddresses(page,pageSize).then(successFn).catch(errorFn);
 ## List Categories
 
 ```js
-Me.ListCategories(search,depth,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Me.ListCategories(search,depth,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -925,7 +1239,7 @@ Me.ListCategories(search,depth,page,pageSize).then(successFn).catch(errorFn);
 ## List Subcategories
 
 ```js
-Me.ListSubcategories(parentID,search,depth,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Me.ListSubcategories(parentID,search,depth,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -957,7 +1271,7 @@ Me.ListSubcategories(parentID,search,depth,page,pageSize).then(successFn).catch(
 ## List Products
 
 ```js
-Me.ListProducts(search,categoryID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Me.ListProducts(search,categoryID,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1029,7 +1343,7 @@ Me.ListProducts(search,categoryID,page,pageSize).then(successFn).catch(errorFn);
 ## Get Product
 
 ```js
-Me.GetProduct(productID).then(successFn).catch(errorFn);
+OrderCloud.Me.GetProduct(productID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1104,7 +1418,7 @@ An Order represents a business transaction between two parties. It typically con
 ## Get a Single Order
 
 ```js
-Orders.Get(orderID).then(successFn).catch(errorFn);
+OrderCloud.Orders.Get(orderID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1183,7 +1497,7 @@ Orders.Get(orderID).then(successFn).catch(errorFn);
 ## Get a List of Orders
 
 ```js
-Orders.List(direction,from,to,listArgs).then(successFn).catch(errorFn);
+OrderCloud.Orders.List(direction,from,to,listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1272,7 +1586,7 @@ Orders.List(direction,from,to,listArgs).then(successFn).catch(errorFn);
 ## Create New Order
 
 ```js
-Orders.Create(order).then(successFn).catch(errorFn);
+OrderCloud.Orders.Create(order).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -1297,7 +1611,7 @@ Orders.Create(order).then(successFn).catch(errorFn);
 ## Create or Update Order
 
 ```js
-Orders.Update(orderID,order).then(successFn).catch(errorFn);
+OrderCloud.Orders.Update(orderID,order).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1327,7 +1641,7 @@ Orders.Update(orderID,order).then(successFn).catch(errorFn);
 ## Delete Order
 
 ```js
-Orders.Delete(orderID).then(successFn).catch(errorFn);
+OrderCloud.Orders.Delete(orderID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1338,7 +1652,7 @@ Orders.Delete(orderID).then(successFn).catch(errorFn);
 ## Partially Update Order
 
 ```js
-Orders.Patch(orderID,order).then(successFn).catch(errorFn);
+OrderCloud.Orders.Patch(orderID,order).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1368,7 +1682,7 @@ Orders.Patch(orderID,order).then(successFn).catch(errorFn);
 ## Submit Order
 
 ```js
-Orders.Submit(orderID).then(successFn).catch(errorFn);
+OrderCloud.Orders.Submit(orderID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1447,7 +1761,7 @@ Orders.Submit(orderID).then(successFn).catch(errorFn);
 ## Approve Order
 
 ```js
-Orders.Approve(orderID,comments).then(successFn).catch(errorFn);
+OrderCloud.Orders.Approve(orderID,comments).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1527,7 +1841,7 @@ Orders.Approve(orderID,comments).then(successFn).catch(errorFn);
 ## Decline Order
 
 ```js
-Orders.Decline(orderID,comments).then(successFn).catch(errorFn);
+OrderCloud.Orders.Decline(orderID,comments).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1607,7 +1921,7 @@ Orders.Decline(orderID,comments).then(successFn).catch(errorFn);
 ## Cancel Order
 
 ```js
-Orders.Cancel(orderID).then(successFn).catch(errorFn);
+OrderCloud.Orders.Cancel(orderID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1686,7 +2000,7 @@ Orders.Cancel(orderID).then(successFn).catch(errorFn);
 ## Ship Order
 
 ```js
-Orders.Ship(orderID,shipment).then(successFn).catch(errorFn);
+OrderCloud.Orders.Ship(orderID,shipment).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1716,7 +2030,7 @@ Orders.Ship(orderID,shipment).then(successFn).catch(errorFn);
 ## Set Shipping Address
 
 ```js
-Orders.SetShippingAddress(orderID,address).then(successFn).catch(errorFn);
+OrderCloud.Orders.SetShippingAddress(orderID,address).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1746,7 +2060,7 @@ Orders.SetShippingAddress(orderID,address).then(successFn).catch(errorFn);
 ## Patch Shipping Address
 
 ```js
-Orders.PatchShippingAddress(orderID,address).then(successFn).catch(errorFn);
+OrderCloud.Orders.PatchShippingAddress(orderID,address).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1776,7 +2090,7 @@ Orders.PatchShippingAddress(orderID,address).then(successFn).catch(errorFn);
 ## Set Billing Address
 
 ```js
-Orders.SetBillingAddress(orderID,address).then(successFn).catch(errorFn);
+OrderCloud.Orders.SetBillingAddress(orderID,address).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1806,7 +2120,7 @@ Orders.SetBillingAddress(orderID,address).then(successFn).catch(errorFn);
 ## Patch Billing Address
 
 ```js
-Orders.PatchBillingAddress(orderID,address).then(successFn).catch(errorFn);
+OrderCloud.Orders.PatchBillingAddress(orderID,address).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1844,7 +2158,7 @@ A Line Item represents a single line on an Order. At a minimum, it contains a si
 ## Get a Single Line Item
 
 ```js
-LineItems.Get(orderID,lineItemID).then(successFn).catch(errorFn);
+OrderCloud.LineItems.Get(orderID,lineItemID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1900,7 +2214,7 @@ LineItems.Get(orderID,lineItemID).then(successFn).catch(errorFn);
 ## Get a List of Line Items
 
 ```js
-LineItems.List(orderID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.LineItems.List(orderID,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1959,7 +2273,7 @@ LineItems.List(orderID,page,pageSize).then(successFn).catch(errorFn);
 ## Create New Line Item
 
 ```js
-LineItems.Create(orderID,lineItem).then(successFn).catch(errorFn);
+OrderCloud.LineItems.Create(orderID,lineItem).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1994,7 +2308,7 @@ LineItems.Create(orderID,lineItem).then(successFn).catch(errorFn);
 ## Create or Update Line Item
 
 ```js
-LineItems.Update(orderID,lineItemID,lineItem).then(successFn).catch(errorFn);
+OrderCloud.LineItems.Update(orderID,lineItemID,lineItem).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2030,7 +2344,7 @@ LineItems.Update(orderID,lineItemID,lineItem).then(successFn).catch(errorFn);
 ## Delete Line Item
 
 ```js
-LineItems.Delete(orderID,lineItemID).then(successFn).catch(errorFn);
+OrderCloud.LineItems.Delete(orderID,lineItemID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2042,7 +2356,7 @@ LineItems.Delete(orderID,lineItemID).then(successFn).catch(errorFn);
 ## Partially Update Line Item
 
 ```js
-LineItems.Patch(orderID,lineItemID,lineItem).then(successFn).catch(errorFn);
+OrderCloud.LineItems.Patch(orderID,lineItemID,lineItem).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2078,7 +2392,7 @@ LineItems.Patch(orderID,lineItemID,lineItem).then(successFn).catch(errorFn);
 ## Set Shipping Address
 
 ```js
-LineItems.SetShippingAddress(orderID,lineItemID,address).then(successFn).catch(errorFn);
+OrderCloud.LineItems.SetShippingAddress(orderID,lineItemID,address).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2109,7 +2423,7 @@ LineItems.SetShippingAddress(orderID,lineItemID,address).then(successFn).catch(e
 ## Patch Shipping Address
 
 ```js
-LineItems.PatchShippingAddress(orderID,lineItemID,address).then(successFn).catch(errorFn);
+OrderCloud.LineItems.PatchShippingAddress(orderID,lineItemID,address).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2148,7 +2462,7 @@ A Shipment is a grouping of Line Items from one or more Orders that is physicall
 ## Get a Single Shipment
 
 ```js
-Shipments.Get(shipmentID).then(successFn).catch(errorFn);
+OrderCloud.Shipments.Get(shipmentID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2178,7 +2492,7 @@ Shipments.Get(shipmentID).then(successFn).catch(errorFn);
 ## Get a List of Shipments
 
 ```js
-Shipments.List(orderID,search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Shipments.List(orderID,search,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2213,7 +2527,7 @@ Shipments.List(orderID,search,page,pageSize).then(successFn).catch(errorFn);
 ## Create New Shipment
 
 ```js
-Shipments.Create(shipment).then(successFn).catch(errorFn);
+OrderCloud.Shipments.Create(shipment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -2238,7 +2552,7 @@ Shipments.Create(shipment).then(successFn).catch(errorFn);
 ## Create or Update Shipment
 
 ```js
-Shipments.Update(shipmentID,shipment).then(successFn).catch(errorFn);
+OrderCloud.Shipments.Update(shipmentID,shipment).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2268,7 +2582,7 @@ Shipments.Update(shipmentID,shipment).then(successFn).catch(errorFn);
 ## Delete Shipment
 
 ```js
-Shipments.Delete(shipmentID).then(successFn).catch(errorFn);
+OrderCloud.Shipments.Delete(shipmentID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2279,7 +2593,7 @@ Shipments.Delete(shipmentID).then(successFn).catch(errorFn);
 ## Partially Update Shipment
 
 ```js
-Shipments.Patch(shipmentID,shipment).then(successFn).catch(errorFn);
+OrderCloud.Shipments.Patch(shipmentID,shipment).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2309,7 +2623,7 @@ Shipments.Patch(shipmentID,shipment).then(successFn).catch(errorFn);
 ## Save Item
 
 ```js
-Shipments.SaveItem(shipmentID,item).then(successFn).catch(errorFn);
+OrderCloud.Shipments.SaveItem(shipmentID,item).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2330,7 +2644,7 @@ Shipments.SaveItem(shipmentID,item).then(successFn).catch(errorFn);
 ## Delete Item
 
 ```js
-Shipments.DeleteItem(shipmentID,orderID,lineItemID).then(successFn).catch(errorFn);
+OrderCloud.Shipments.DeleteItem(shipmentID,orderID,lineItemID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2372,7 +2686,7 @@ Products may also have inventory associated with them and various inventory attr
 ## Get a Single Product
 
 ```js
-Products.Get(productID).then(successFn).catch(errorFn);
+OrderCloud.Products.Get(productID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2403,7 +2717,7 @@ Products.Get(productID).then(successFn).catch(errorFn);
 ## Get a List of Products
 
 ```js
-Products.List(listArgs).then(successFn).catch(errorFn);
+OrderCloud.Products.List(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2441,7 +2755,7 @@ Products.List(listArgs).then(successFn).catch(errorFn);
 ## Create New Product
 
 ```js
-Products.Create(product).then(successFn).catch(errorFn);
+OrderCloud.Products.Create(product).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -2467,7 +2781,7 @@ Products.Create(product).then(successFn).catch(errorFn);
 ## Create or Update Product
 
 ```js
-Products.Update(productID,product).then(successFn).catch(errorFn);
+OrderCloud.Products.Update(productID,product).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2498,7 +2812,7 @@ Products.Update(productID,product).then(successFn).catch(errorFn);
 ## Delete Product
 
 ```js
-Products.Delete(productID).then(successFn).catch(errorFn);
+OrderCloud.Products.Delete(productID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2509,7 +2823,7 @@ Products.Delete(productID).then(successFn).catch(errorFn);
 ## Partially Update Product
 
 ```js
-Products.Patch(productID,product).then(successFn).catch(errorFn);
+OrderCloud.Products.Patch(productID,product).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2540,7 +2854,7 @@ Products.Patch(productID,product).then(successFn).catch(errorFn);
 ## List Variants
 
 ```js
-Products.ListVariants(productID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Products.ListVariants(productID,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2566,7 +2880,7 @@ Products.ListVariants(productID,page,pageSize).then(successFn).catch(errorFn);
 ## List Variant Inventory
 
 ```js
-Products.ListVariantInventory(productID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Products.ListVariantInventory(productID,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2593,7 +2907,7 @@ Products.ListVariantInventory(productID,page,pageSize).then(successFn).catch(err
 ## Get Variant Inventory
 
 ```js
-Products.GetVariantInventory(productID,variantID).then(successFn).catch(errorFn);
+OrderCloud.Products.GetVariantInventory(productID,variantID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2617,7 +2931,7 @@ Products.GetVariantInventory(productID,variantID).then(successFn).catch(errorFn)
 ## Update Variant Inventory
 
 ```js
-Products.UpdateVariantInventory(productID,variantID,inventory).then(successFn).catch(errorFn);
+OrderCloud.Products.UpdateVariantInventory(productID,variantID,inventory).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2630,7 +2944,7 @@ Products.UpdateVariantInventory(productID,variantID,inventory).then(successFn).c
 ## Update Variant
 
 ```js
-Products.UpdateVariant(productID,variantID,variant).then(successFn).catch(errorFn);
+OrderCloud.Products.UpdateVariant(productID,variantID,variant).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2653,7 +2967,7 @@ Products.UpdateVariant(productID,variantID,variant).then(successFn).catch(errorF
 ## Get Variant
 
 ```js
-Products.GetVariant(productID,variantID).then(successFn).catch(errorFn);
+OrderCloud.Products.GetVariant(productID,variantID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2676,7 +2990,7 @@ Products.GetVariant(productID,variantID).then(successFn).catch(errorFn);
 ## Get Inventory
 
 ```js
-Products.GetInventory(productID).then(successFn).catch(errorFn);
+OrderCloud.Products.GetInventory(productID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2699,7 +3013,7 @@ Products.GetInventory(productID).then(successFn).catch(errorFn);
 ## Update Inventory
 
 ```js
-Products.UpdateInventory(productID,inventory).then(successFn).catch(errorFn);
+OrderCloud.Products.UpdateInventory(productID,inventory).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2711,7 +3025,7 @@ Products.UpdateInventory(productID,inventory).then(successFn).catch(errorFn);
 ## Save Assignment
 
 ```js
-Products.SaveAssignment(productAssignment).then(successFn).catch(errorFn);
+OrderCloud.Products.SaveAssignment(productAssignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -2730,7 +3044,7 @@ Products.SaveAssignment(productAssignment).then(successFn).catch(errorFn);
 ## List Assignments
 
 ```js
-Products.ListAssignments(productID,userID,userGroupID,level,priceScheduleID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Products.ListAssignments(productID,userID,userGroupID,level,priceScheduleID,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2762,7 +3076,7 @@ Products.ListAssignments(productID,userID,userGroupID,level,priceScheduleID,page
 ## Delete Assignment
 
 ```js
-Products.DeleteAssignment(productID,userID,userGroupID).then(successFn).catch(errorFn);
+OrderCloud.Products.DeleteAssignment(productID,userID,userGroupID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2783,7 +3097,7 @@ Price schedules allow the same product to be sold across multiple channels.  A p
 ## Get a Single Price Schedule
 
 ```js
-PriceSchedules.Get(priceScheduleID).then(successFn).catch(errorFn);
+OrderCloud.PriceSchedules.Get(priceScheduleID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2817,7 +3131,7 @@ PriceSchedules.Get(priceScheduleID).then(successFn).catch(errorFn);
 ## Get a List of Price Schedules
 
 ```js
-PriceSchedules.List(page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.PriceSchedules.List(page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2854,7 +3168,7 @@ PriceSchedules.List(page,pageSize).then(successFn).catch(errorFn);
 ## Create New Price Schedule
 
 ```js
-PriceSchedules.Create(priceSchedule).then(successFn).catch(errorFn);
+OrderCloud.PriceSchedules.Create(priceSchedule).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -2883,7 +3197,7 @@ PriceSchedules.Create(priceSchedule).then(successFn).catch(errorFn);
 ## Create or Update Price Schedule
 
 ```js
-PriceSchedules.Update(priceScheduleID,priceSchedule).then(successFn).catch(errorFn);
+OrderCloud.PriceSchedules.Update(priceScheduleID,priceSchedule).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2917,7 +3231,7 @@ PriceSchedules.Update(priceScheduleID,priceSchedule).then(successFn).catch(error
 ## Delete Price Schedule
 
 ```js
-PriceSchedules.Delete(priceScheduleID).then(successFn).catch(errorFn);
+OrderCloud.PriceSchedules.Delete(priceScheduleID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2928,7 +3242,7 @@ PriceSchedules.Delete(priceScheduleID).then(successFn).catch(errorFn);
 ## Partially Update Price Schedule
 
 ```js
-PriceSchedules.Patch(priceScheduleID,priceSchedule).then(successFn).catch(errorFn);
+OrderCloud.PriceSchedules.Patch(priceScheduleID,priceSchedule).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2962,7 +3276,7 @@ PriceSchedules.Patch(priceScheduleID,priceSchedule).then(successFn).catch(errorF
 ## Save Price Break
 
 ```js
-PriceSchedules.SavePriceBreak(priceScheduleID,priceBreak).then(successFn).catch(errorFn);
+OrderCloud.PriceSchedules.SavePriceBreak(priceScheduleID,priceBreak).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2982,7 +3296,7 @@ PriceSchedules.SavePriceBreak(priceScheduleID,priceBreak).then(successFn).catch(
 ## Delete Price Break
 
 ```js
-PriceSchedules.DeletePriceBreak(priceScheduleID,quantity).then(successFn).catch(errorFn);
+OrderCloud.PriceSchedules.DeletePriceBreak(priceScheduleID,quantity).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3006,7 +3320,7 @@ There are three different types of Specs: Text, Selection, and File.
 ## Get a Single Spec
 
 ```js
-Specs.Get(specID).then(successFn).catch(errorFn);
+OrderCloud.Specs.Get(specID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3044,7 +3358,7 @@ Specs.Get(specID).then(successFn).catch(errorFn);
 ## Get a List of Specs
 
 ```js
-Specs.List(page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Specs.List(page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3085,7 +3399,7 @@ Specs.List(page,pageSize).then(successFn).catch(errorFn);
 ## Create New Spec
 
 ```js
-Specs.Create(spec).then(successFn).catch(errorFn);
+OrderCloud.Specs.Create(spec).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -3107,7 +3421,7 @@ Specs.Create(spec).then(successFn).catch(errorFn);
 ## Create or Update Spec
 
 ```js
-Specs.Update(specID,spec).then(successFn).catch(errorFn);
+OrderCloud.Specs.Update(specID,spec).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3134,7 +3448,7 @@ Specs.Update(specID,spec).then(successFn).catch(errorFn);
 ## Delete Spec
 
 ```js
-Specs.Delete(specID).then(successFn).catch(errorFn);
+OrderCloud.Specs.Delete(specID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3145,7 +3459,7 @@ Specs.Delete(specID).then(successFn).catch(errorFn);
 ## Partially Update Spec
 
 ```js
-Specs.Patch(specID,spec).then(successFn).catch(errorFn);
+OrderCloud.Specs.Patch(specID,spec).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3172,7 +3486,7 @@ Specs.Patch(specID,spec).then(successFn).catch(errorFn);
 ## List Product Assignments
 
 ```js
-Specs.ListProductAssignments(specID,productID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Specs.ListProductAssignments(specID,productID,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3197,7 +3511,7 @@ Specs.ListProductAssignments(specID,productID,page,pageSize).then(successFn).cat
 ## Delete Product Assignment
 
 ```js
-Specs.DeleteProductAssignment(specID,productID).then(successFn).catch(errorFn);
+OrderCloud.Specs.DeleteProductAssignment(specID,productID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3209,7 +3523,7 @@ Specs.DeleteProductAssignment(specID,productID).then(successFn).catch(errorFn);
 ## Save Product Assignment
 
 ```js
-Specs.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
+OrderCloud.Specs.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -3224,7 +3538,7 @@ Specs.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
 ## Create Option
 
 ```js
-Specs.CreateOption(specID,option).then(successFn).catch(errorFn);
+OrderCloud.Specs.CreateOption(specID,option).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3249,7 +3563,7 @@ Specs.CreateOption(specID,option).then(successFn).catch(errorFn);
 ## Update Option
 
 ```js
-Specs.UpdateOption(specID,optionID,option).then(successFn).catch(errorFn);
+OrderCloud.Specs.UpdateOption(specID,optionID,option).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3275,7 +3589,7 @@ Specs.UpdateOption(specID,optionID,option).then(successFn).catch(errorFn);
 ## Get Option
 
 ```js
-Specs.GetOption(specID,optionID).then(successFn).catch(errorFn);
+OrderCloud.Specs.GetOption(specID,optionID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3301,7 +3615,7 @@ Specs.GetOption(specID,optionID).then(successFn).catch(errorFn);
 ## Delete Option
 
 ```js
-Specs.DeleteOption(specID,optionID).then(successFn).catch(errorFn);
+OrderCloud.Specs.DeleteOption(specID,optionID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3321,7 +3635,7 @@ Categories are used within a catalog to group and place content for a specific a
 ## Get a Single Category
 
 ```js
-Categories.Get(categoryID).then(successFn).catch(errorFn);
+OrderCloud.Categories.Get(categoryID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3347,7 +3661,7 @@ Categories.Get(categoryID).then(successFn).catch(errorFn);
 ## Get a List of Categories
 
 ```js
-Categories.List(search,depth,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Categories.List(search,depth,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3378,7 +3692,7 @@ Categories.List(search,depth,page,pageSize).then(successFn).catch(errorFn);
 ## Create New Category
 
 ```js
-Categories.Create(category).then(successFn).catch(errorFn);
+OrderCloud.Categories.Create(category).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -3398,7 +3712,7 @@ Categories.Create(category).then(successFn).catch(errorFn);
 ## Create or Update Category
 
 ```js
-Categories.Update(categoryID,category).then(successFn).catch(errorFn);
+OrderCloud.Categories.Update(categoryID,category).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3423,7 +3737,7 @@ Categories.Update(categoryID,category).then(successFn).catch(errorFn);
 ## Delete Category
 
 ```js
-Categories.Delete(categoryID).then(successFn).catch(errorFn);
+OrderCloud.Categories.Delete(categoryID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3434,7 +3748,7 @@ Categories.Delete(categoryID).then(successFn).catch(errorFn);
 ## List Children
 
 ```js
-Categories.ListChildren(parentID,search,depth,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Categories.ListChildren(parentID,search,depth,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3466,7 +3780,7 @@ Categories.ListChildren(parentID,search,depth,page,pageSize).then(successFn).cat
 ## Partially Update Category
 
 ```js
-Categories.Patch(categoryID,category).then(successFn).catch(errorFn);
+OrderCloud.Categories.Patch(categoryID,category).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3491,7 +3805,7 @@ Categories.Patch(categoryID,category).then(successFn).catch(errorFn);
 ## List Product Assignments
 
 ```js
-Categories.ListProductAssignments(categoryID,productID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Categories.ListProductAssignments(categoryID,productID,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3517,7 +3831,7 @@ Categories.ListProductAssignments(categoryID,productID,page,pageSize).then(succe
 ## Save Product Assignment
 
 ```js
-Categories.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
+OrderCloud.Categories.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -3533,7 +3847,7 @@ Categories.SaveProductAssignment(productAssignment).then(successFn).catch(errorF
 ## Delete Product Assignment
 
 ```js
-Categories.DeleteProductAssignment(categoryID,productID).then(successFn).catch(errorFn);
+OrderCloud.Categories.DeleteProductAssignment(categoryID,productID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3545,7 +3859,7 @@ Categories.DeleteProductAssignment(categoryID,productID).then(successFn).catch(e
 ## List Assignments
 
 ```js
-Categories.ListAssignments(categoryID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Categories.ListAssignments(categoryID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3573,7 +3887,7 @@ Categories.ListAssignments(categoryID,userID,userGroupID,level,page,pageSize).th
 ## Delete Assignment
 
 ```js
-Categories.DeleteAssignment(categoryID,userID,userGroupID).then(successFn).catch(errorFn);
+OrderCloud.Categories.DeleteAssignment(categoryID,userID,userGroupID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3586,7 +3900,7 @@ Categories.DeleteAssignment(categoryID,userID,userGroupID).then(successFn).catch
 ## Save Assignment
 
 ```js
-Categories.SaveAssignment(categoryAssignment).then(successFn).catch(errorFn);
+OrderCloud.Categories.SaveAssignment(categoryAssignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -3610,7 +3924,7 @@ Buyers, or customers, are the organizations that view the categories and product
 ## Get a Single Buyer
 
 ```js
-Buyers.Get().then(successFn).catch(errorFn);
+OrderCloud.Buyers.Get().then(successFn).catch(errorFn);
 ```
 
 ### Response Body Sample
@@ -3627,7 +3941,7 @@ Buyers.Get().then(successFn).catch(errorFn);
 ## Get a List of Buyers
 
 ```js
-Buyers.List(search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Buyers.List(search,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3653,7 +3967,7 @@ Buyers.List(search,page,pageSize).then(successFn).catch(errorFn);
 ## Create New Buyer
 
 ```js
-Buyers.Create(company).then(successFn).catch(errorFn);
+OrderCloud.Buyers.Create(company).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -3670,7 +3984,7 @@ Buyers.Create(company).then(successFn).catch(errorFn);
 ## Create or Update Buyer
 
 ```js
-Buyers.Update(company).then(successFn).catch(errorFn);
+OrderCloud.Buyers.Update(company).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -3695,7 +4009,7 @@ A user is a person with access to the application.  The properties of a user def
 ## Get a Single User
 
 ```js
-Users.Get(userID).then(successFn).catch(errorFn);
+OrderCloud.Users.Get(userID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3723,7 +4037,7 @@ Users.Get(userID).then(successFn).catch(errorFn);
 ## Get a List of Users
 
 ```js
-Users.List(listArgs).then(successFn).catch(errorFn);
+OrderCloud.Users.List(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3758,7 +4072,7 @@ Users.List(listArgs).then(successFn).catch(errorFn);
 ## Create New User
 
 ```js
-Users.Create(user).then(successFn).catch(errorFn);
+OrderCloud.Users.Create(user).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -3782,7 +4096,7 @@ Users.Create(user).then(successFn).catch(errorFn);
 ## Create or Update User
 
 ```js
-Users.Update(userID,user).then(successFn).catch(errorFn);
+OrderCloud.Users.Update(userID,user).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3811,7 +4125,7 @@ Users.Update(userID,user).then(successFn).catch(errorFn);
 ## Delete User
 
 ```js
-Users.Delete(userID).then(successFn).catch(errorFn);
+OrderCloud.Users.Delete(userID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3822,7 +4136,7 @@ Users.Delete(userID).then(successFn).catch(errorFn);
 ## Partially Update User
 
 ```js
-Users.Patch(userID,user).then(successFn).catch(errorFn);
+OrderCloud.Users.Patch(userID,user).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3851,7 +4165,7 @@ Users.Patch(userID,user).then(successFn).catch(errorFn);
 ## Get Access Token
 
 ```js
-Users.GetAccessToken(userID,tokenRequest).then(successFn).catch(errorFn);
+OrderCloud.Users.GetAccessToken(userID,tokenRequest).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3881,7 +4195,7 @@ User Groups are used to streamline the management of users within an application
 ## Get a Single User Group
 
 ```js
-UserGroups.Get(userGroupID).then(successFn).catch(errorFn);
+OrderCloud.UserGroups.Get(userGroupID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3904,7 +4218,7 @@ UserGroups.Get(userGroupID).then(successFn).catch(errorFn);
 ## Get a List of User Groups
 
 ```js
-UserGroups.List(listArgs).then(successFn).catch(errorFn);
+OrderCloud.UserGroups.List(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3934,7 +4248,7 @@ UserGroups.List(listArgs).then(successFn).catch(errorFn);
 ## Create New User Group
 
 ```js
-UserGroups.Create(group).then(successFn).catch(errorFn);
+OrderCloud.UserGroups.Create(group).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -3952,7 +4266,7 @@ UserGroups.Create(group).then(successFn).catch(errorFn);
 ## Create or Update User Group
 
 ```js
-UserGroups.Update(userGroupID,group).then(successFn).catch(errorFn);
+OrderCloud.UserGroups.Update(userGroupID,group).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3975,7 +4289,7 @@ UserGroups.Update(userGroupID,group).then(successFn).catch(errorFn);
 ## Delete User Group
 
 ```js
-UserGroups.Delete(userGroupID).then(successFn).catch(errorFn);
+OrderCloud.UserGroups.Delete(userGroupID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3986,7 +4300,7 @@ UserGroups.Delete(userGroupID).then(successFn).catch(errorFn);
 ## Partially Update User Group
 
 ```js
-UserGroups.Patch(userGroupID,group).then(successFn).catch(errorFn);
+OrderCloud.UserGroups.Patch(userGroupID,group).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4009,7 +4323,7 @@ UserGroups.Patch(userGroupID,group).then(successFn).catch(errorFn);
 ## List User Assignments
 
 ```js
-UserGroups.ListUserAssignments(userGroupID,userID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.UserGroups.ListUserAssignments(userGroupID,userID,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4035,7 +4349,7 @@ UserGroups.ListUserAssignments(userGroupID,userID,page,pageSize).then(successFn)
 ## Delete User Assignment
 
 ```js
-UserGroups.DeleteUserAssignment(userGroupID,userID).then(successFn).catch(errorFn);
+OrderCloud.UserGroups.DeleteUserAssignment(userGroupID,userID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4047,7 +4361,7 @@ UserGroups.DeleteUserAssignment(userGroupID,userID).then(successFn).catch(errorF
 ## Save User Assignment
 
 ```js
-UserGroups.SaveUserAssignment(userGroupAssignment).then(successFn).catch(errorFn);
+OrderCloud.UserGroups.SaveUserAssignment(userGroupAssignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -4071,7 +4385,7 @@ Addresses are used for the purposes of billing and shipping an order.  An addres
 ## Get a Single Address
 
 ```js
-Addresses.Get(addressID).then(successFn).catch(errorFn);
+OrderCloud.Addresses.Get(addressID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4101,7 +4415,7 @@ Addresses.Get(addressID).then(successFn).catch(errorFn);
 ## Get a List of Addresses
 
 ```js
-Addresses.List(search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Addresses.List(search,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4135,7 +4449,7 @@ Addresses.List(search,page,pageSize).then(successFn).catch(errorFn);
 ## Create New Address
 
 ```js
-Addresses.Create(address).then(successFn).catch(errorFn);
+OrderCloud.Addresses.Create(address).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -4160,7 +4474,7 @@ Addresses.Create(address).then(successFn).catch(errorFn);
 ## Create or Update Address
 
 ```js
-Addresses.Update(addressID,address).then(successFn).catch(errorFn);
+OrderCloud.Addresses.Update(addressID,address).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4190,7 +4504,7 @@ Addresses.Update(addressID,address).then(successFn).catch(errorFn);
 ## Delete Address
 
 ```js
-Addresses.Delete(addressID,overrideOrderConflict).then(successFn).catch(errorFn);
+OrderCloud.Addresses.Delete(addressID,overrideOrderConflict).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4202,7 +4516,7 @@ Addresses.Delete(addressID,overrideOrderConflict).then(successFn).catch(errorFn)
 ## List Assignments
 
 ```js
-Addresses.ListAssignments(addressID,userID,userGroupID,level,isShipping,isBilling,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Addresses.ListAssignments(addressID,userID,userGroupID,level,isShipping,isBilling,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4234,7 +4548,7 @@ Addresses.ListAssignments(addressID,userID,userGroupID,level,isShipping,isBillin
 ## Delete Assignment
 
 ```js
-Addresses.DeleteAssignment(addressID,userID,userGroupID).then(successFn).catch(errorFn);
+OrderCloud.Addresses.DeleteAssignment(addressID,userID,userGroupID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4247,7 +4561,7 @@ Addresses.DeleteAssignment(addressID,userID,userGroupID).then(successFn).catch(e
 ## Save Assignment
 
 ```js
-Addresses.SaveAssignment(assignment).then(successFn).catch(errorFn);
+OrderCloud.Addresses.SaveAssignment(assignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -4276,7 +4590,7 @@ When multiple Spending Accounts are used on a transaction each is deducted indiv
 ## Get a Single Spending Account
 
 ```js
-SpendingAccounts.Get(spendingAccountID).then(successFn).catch(errorFn);
+OrderCloud.SpendingAccounts.Get(spendingAccountID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4302,7 +4616,7 @@ SpendingAccounts.Get(spendingAccountID).then(successFn).catch(errorFn);
 ## Get a List of Spending Accounts
 
 ```js
-SpendingAccounts.List(listArgs).then(successFn).catch(errorFn);
+OrderCloud.SpendingAccounts.List(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4335,7 +4649,7 @@ SpendingAccounts.List(listArgs).then(successFn).catch(errorFn);
 ## Create New Spending Account
 
 ```js
-SpendingAccounts.Create(spendingAccount).then(successFn).catch(errorFn);
+OrderCloud.SpendingAccounts.Create(spendingAccount).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -4356,7 +4670,7 @@ SpendingAccounts.Create(spendingAccount).then(successFn).catch(errorFn);
 ## Create or Update Spending Account
 
 ```js
-SpendingAccounts.Update(spendingAccountID,spendingAccount).then(successFn).catch(errorFn);
+OrderCloud.SpendingAccounts.Update(spendingAccountID,spendingAccount).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4382,7 +4696,7 @@ SpendingAccounts.Update(spendingAccountID,spendingAccount).then(successFn).catch
 ## Delete Spending Account
 
 ```js
-SpendingAccounts.Delete(spendingAccountID).then(successFn).catch(errorFn);
+OrderCloud.SpendingAccounts.Delete(spendingAccountID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4393,7 +4707,7 @@ SpendingAccounts.Delete(spendingAccountID).then(successFn).catch(errorFn);
 ## List Assignments
 
 ```js
-SpendingAccounts.ListAssignments(spendingAccountID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.SpendingAccounts.ListAssignments(spendingAccountID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4422,7 +4736,7 @@ SpendingAccounts.ListAssignments(spendingAccountID,userID,userGroupID,level,page
 ## Save Assignment
 
 ```js
-SpendingAccounts.SaveAssignment(assignment).then(successFn).catch(errorFn);
+OrderCloud.SpendingAccounts.SaveAssignment(assignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -4439,7 +4753,7 @@ SpendingAccounts.SaveAssignment(assignment).then(successFn).catch(errorFn);
 ## Delete Assignment
 
 ```js
-SpendingAccounts.DeleteAssignment(spendingAccountID,userID,userGroupID).then(successFn).catch(errorFn);
+OrderCloud.SpendingAccounts.DeleteAssignment(spendingAccountID,userID,userGroupID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4460,7 +4774,7 @@ Admin users are users that have administrative access to things like adding user
 ## Get a Single Admin User
 
 ```js
-AdminUsers.Get(userID).then(successFn).catch(errorFn);
+OrderCloud.AdminUsers.Get(userID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4488,7 +4802,7 @@ AdminUsers.Get(userID).then(successFn).catch(errorFn);
 ## Get a List of Admin Users
 
 ```js
-AdminUsers.List(listArgs).then(successFn).catch(errorFn);
+OrderCloud.AdminUsers.List(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4523,7 +4837,7 @@ AdminUsers.List(listArgs).then(successFn).catch(errorFn);
 ## Create New Admin User
 
 ```js
-AdminUsers.Create(user).then(successFn).catch(errorFn);
+OrderCloud.AdminUsers.Create(user).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -4547,7 +4861,7 @@ AdminUsers.Create(user).then(successFn).catch(errorFn);
 ## Create or Update Admin User
 
 ```js
-AdminUsers.Update(userID,user).then(successFn).catch(errorFn);
+OrderCloud.AdminUsers.Update(userID,user).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4576,7 +4890,7 @@ AdminUsers.Update(userID,user).then(successFn).catch(errorFn);
 ## Delete Admin User
 
 ```js
-AdminUsers.Delete(userID).then(successFn).catch(errorFn);
+OrderCloud.AdminUsers.Delete(userID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4596,7 +4910,7 @@ Coupons can be assigned to Products, Categories, Buyers, UserGroups and Users fo
 ## Get a Single Coupon
 
 ```js
-Coupons.Get(couponID).then(successFn).catch(errorFn);
+OrderCloud.Coupons.Get(couponID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4630,7 +4944,7 @@ Coupons.Get(couponID).then(successFn).catch(errorFn);
 ## Get a List of Coupons
 
 ```js
-Coupons.List(search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Coupons.List(search,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4668,7 +4982,7 @@ Coupons.List(search,page,pageSize).then(successFn).catch(errorFn);
 ## Create New Coupon
 
 ```js
-Coupons.Create(coupon).then(successFn).catch(errorFn);
+OrderCloud.Coupons.Create(coupon).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -4696,7 +5010,7 @@ Coupons.Create(coupon).then(successFn).catch(errorFn);
 ## Create or Update Coupon
 
 ```js
-Coupons.Update(couponID,coupon).then(successFn).catch(errorFn);
+OrderCloud.Coupons.Update(couponID,coupon).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4729,7 +5043,7 @@ Coupons.Update(couponID,coupon).then(successFn).catch(errorFn);
 ## Delete Coupon
 
 ```js
-Coupons.Delete(couponID).then(successFn).catch(errorFn);
+OrderCloud.Coupons.Delete(couponID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4740,7 +5054,7 @@ Coupons.Delete(couponID).then(successFn).catch(errorFn);
 ## List Product Assignments
 
 ```js
-Coupons.ListProductAssignments(couponID,productID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Coupons.ListProductAssignments(couponID,productID,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4766,7 +5080,7 @@ Coupons.ListProductAssignments(couponID,productID,page,pageSize).then(successFn)
 ## Save Product Assignment
 
 ```js
-Coupons.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
+OrderCloud.Coupons.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -4782,7 +5096,7 @@ Coupons.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
 ## Delete Product Assignment
 
 ```js
-Coupons.DeleteProductAssignment(couponID,productID).then(successFn).catch(errorFn);
+OrderCloud.Coupons.DeleteProductAssignment(couponID,productID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4794,7 +5108,7 @@ Coupons.DeleteProductAssignment(couponID,productID).then(successFn).catch(errorF
 ## List Category Assignments
 
 ```js
-Coupons.ListCategoryAssignments(couponID,categoryID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Coupons.ListCategoryAssignments(couponID,categoryID,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4820,7 +5134,7 @@ Coupons.ListCategoryAssignments(couponID,categoryID,page,pageSize).then(successF
 ## Save Category Assignment
 
 ```js
-Coupons.SaveCategoryAssignment(categoryAssignment).then(successFn).catch(errorFn);
+OrderCloud.Coupons.SaveCategoryAssignment(categoryAssignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -4836,7 +5150,7 @@ Coupons.SaveCategoryAssignment(categoryAssignment).then(successFn).catch(errorFn
 ## Delete Category Assignment
 
 ```js
-Coupons.DeleteCategoryAssignment(couponID,categoryID).then(successFn).catch(errorFn);
+OrderCloud.Coupons.DeleteCategoryAssignment(couponID,categoryID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4848,7 +5162,7 @@ Coupons.DeleteCategoryAssignment(couponID,categoryID).then(successFn).catch(erro
 ## List Assignments
 
 ```js
-Coupons.ListAssignments(couponID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Coupons.ListAssignments(couponID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4876,7 +5190,7 @@ Coupons.ListAssignments(couponID,userID,userGroupID,level,page,pageSize).then(su
 ## Save Assignment
 
 ```js
-Coupons.SaveAssignment(assignment).then(successFn).catch(errorFn);
+OrderCloud.Coupons.SaveAssignment(assignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -4892,7 +5206,7 @@ Coupons.SaveAssignment(assignment).then(successFn).catch(errorFn);
 ## Delete Assignment
 
 ```js
-Coupons.DeleteAssignment(couponID,userID,userGroupID).then(successFn).catch(errorFn);
+OrderCloud.Coupons.DeleteAssignment(couponID,userID,userGroupID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4913,7 +5227,7 @@ A cost center is used to allocate organizational expenditures.  Different busine
 ## Get a Single Cost Center
 
 ```js
-CostCenters.Get(costCenterID).then(successFn).catch(errorFn);
+OrderCloud.CostCenters.Get(costCenterID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4934,7 +5248,7 @@ CostCenters.Get(costCenterID).then(successFn).catch(errorFn);
 ## Get a List of Cost Centers
 
 ```js
-CostCenters.List(search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.CostCenters.List(search,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4959,7 +5273,7 @@ CostCenters.List(search,page,pageSize).then(successFn).catch(errorFn);
 ## Create New Cost Center
 
 ```js
-CostCenters.Create(costCenter).then(successFn).catch(errorFn);
+OrderCloud.CostCenters.Create(costCenter).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -4975,7 +5289,7 @@ CostCenters.Create(costCenter).then(successFn).catch(errorFn);
 ## Create or Update Cost Center
 
 ```js
-CostCenters.Update(costCenterID,costCenter).then(successFn).catch(errorFn);
+OrderCloud.CostCenters.Update(costCenterID,costCenter).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4996,7 +5310,7 @@ CostCenters.Update(costCenterID,costCenter).then(successFn).catch(errorFn);
 ## Delete Cost Center
 
 ```js
-CostCenters.Delete(costCenterID).then(successFn).catch(errorFn);
+OrderCloud.CostCenters.Delete(costCenterID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5007,7 +5321,7 @@ CostCenters.Delete(costCenterID).then(successFn).catch(errorFn);
 ## List Assignments
 
 ```js
-CostCenters.ListAssignments(costCenterID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.CostCenters.ListAssignments(costCenterID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5035,7 +5349,7 @@ CostCenters.ListAssignments(costCenterID,userID,userGroupID,level,page,pageSize)
 ## Delete Assignment
 
 ```js
-CostCenters.DeleteAssignment(costCenterID,userID,userGroupID).then(successFn).catch(errorFn);
+OrderCloud.CostCenters.DeleteAssignment(costCenterID,userID,userGroupID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5048,7 +5362,7 @@ CostCenters.DeleteAssignment(costCenterID,userID,userGroupID).then(successFn).ca
 ## Save Assignment
 
 ```js
-CostCenters.SaveAssignment(assignment).then(successFn).catch(errorFn);
+OrderCloud.CostCenters.SaveAssignment(assignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -5072,7 +5386,7 @@ Approval rules are used to verify the integrity of an order.  Common examples in
 ## Get a Single Approval Rule
 
 ```js
-ApprovalRules.Get(approvalRuleID).then(successFn).catch(errorFn);
+OrderCloud.ApprovalRules.Get(approvalRuleID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5113,7 +5427,7 @@ ApprovalRules.Get(approvalRuleID).then(successFn).catch(errorFn);
 ## Get a List of Approval Rules
 
 ```js
-ApprovalRules.List(search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.ApprovalRules.List(search,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5158,7 +5472,7 @@ ApprovalRules.List(search,page,pageSize).then(successFn).catch(errorFn);
 ## Create New Approval Rule
 
 ```js
-ApprovalRules.Create(approvalRule).then(successFn).catch(errorFn);
+OrderCloud.ApprovalRules.Create(approvalRule).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -5194,7 +5508,7 @@ ApprovalRules.Create(approvalRule).then(successFn).catch(errorFn);
 ## Create or Update Approval Rule
 
 ```js
-ApprovalRules.Update(approvalRuleID,approvalRule).then(successFn).catch(errorFn);
+OrderCloud.ApprovalRules.Update(approvalRuleID,approvalRule).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5235,7 +5549,7 @@ ApprovalRules.Update(approvalRuleID,approvalRule).then(successFn).catch(errorFn)
 ## Delete Approval Rule
 
 ```js
-ApprovalRules.Delete(approvalRuleID).then(successFn).catch(errorFn);
+OrderCloud.ApprovalRules.Delete(approvalRuleID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5255,7 +5569,7 @@ Credit Cards may be saved and assigned to members of an organization for use dur
 ## Get a Single Credit Card
 
 ```js
-CreditCards.Get(creditCardID).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.Get(creditCardID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5280,7 +5594,7 @@ CreditCards.Get(creditCardID).then(successFn).catch(errorFn);
 ## Get a List of Credit Cards
 
 ```js
-CreditCards.List(page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.List(page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5308,7 +5622,7 @@ CreditCards.List(page,pageSize).then(successFn).catch(errorFn);
 ## Create New Credit Card
 
 ```js
-CreditCards.Create(card).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.Create(card).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -5328,7 +5642,7 @@ CreditCards.Create(card).then(successFn).catch(errorFn);
 ## Create or Update Credit Card
 
 ```js
-CreditCards.Update(creditCardID,card).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.Update(creditCardID,card).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5353,7 +5667,7 @@ CreditCards.Update(creditCardID,card).then(successFn).catch(errorFn);
 ## Delete Credit Card
 
 ```js
-CreditCards.Delete(creditCardID).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.Delete(creditCardID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5364,7 +5678,7 @@ CreditCards.Delete(creditCardID).then(successFn).catch(errorFn);
 ## List Assignments
 
 ```js
-CreditCards.ListAssignments(creditCardID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.ListAssignments(creditCardID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5392,7 +5706,7 @@ CreditCards.ListAssignments(creditCardID,userID,userGroupID,level,page,pageSize)
 ## Save Assignment
 
 ```js
-CreditCards.SaveAssignment(assignment).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.SaveAssignment(assignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -5408,7 +5722,7 @@ CreditCards.SaveAssignment(assignment).then(successFn).catch(errorFn);
 ## Delete Assignment
 
 ```js
-CreditCards.DeleteAssignment(creditCardID,userID,userGroupID).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.DeleteAssignment(creditCardID,userID,userGroupID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5428,7 +5742,7 @@ angular.module('orderCloud.sdk).factory(Files, FilesFactory)
 ## Get a Single File
 
 ```js
-Files.Get(fileID).then(successFn).catch(errorFn);
+OrderCloud.Files.Get(fileID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5449,7 +5763,7 @@ Files.Get(fileID).then(successFn).catch(errorFn);
 ## Get a List of Files
 
 ```js
-Files.List(page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Files.List(page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5473,7 +5787,7 @@ Files.List(page,pageSize).then(successFn).catch(errorFn);
 ## Post File Data
 
 ```js
-Files.PostFileData(filename).then(successFn).catch(errorFn);
+OrderCloud.Files.PostFileData(filename).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5502,7 +5816,7 @@ Typically, events within an application will trigger a specific email to be sent
 ## Get a Single Email Template
 
 ```js
-EmailTemplates.Get(emailTemplateType).then(successFn).catch(errorFn);
+OrderCloud.EmailTemplates.Get(emailTemplateType).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5525,7 +5839,7 @@ EmailTemplates.Get(emailTemplateType).then(successFn).catch(errorFn);
 ## Create or Update Email Template
 
 ```js
-EmailTemplates.Update(emailTemplateType,emailTemplate).then(successFn).catch(errorFn);
+OrderCloud.EmailTemplates.Update(emailTemplateType,emailTemplate).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5548,7 +5862,7 @@ EmailTemplates.Update(emailTemplateType,emailTemplate).then(successFn).catch(err
 ## Partially Update Email Template
 
 ```js
-EmailTemplates.Patch(emailTemplateType,emailTemplate).then(successFn).catch(errorFn);
+OrderCloud.EmailTemplates.Patch(emailTemplateType,emailTemplate).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5571,7 +5885,7 @@ EmailTemplates.Patch(emailTemplateType,emailTemplate).then(successFn).catch(erro
 ## Reset To Default
 
 ```js
-EmailTemplates.ResetToDefault(emailTemplateType).then(successFn).catch(errorFn);
+OrderCloud.EmailTemplates.ResetToDefault(emailTemplateType).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
