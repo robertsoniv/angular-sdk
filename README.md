@@ -61,6 +61,8 @@ An AngularJs SDK for OrderCloud API
 
   - [List Cost Centers](#list-cost-centers)
 
+  - [List Credit Cards](#list-credit-cards)
+
   - [List User Groups](#list-user-groups)
 
   - [List Addresses](#list-addresses)
@@ -1118,7 +1120,7 @@ OrderCloud.Me.Get().then(successFn).catch(errorFn);
 ## List Cost Centers
 
 ```js
-OrderCloud.Me.ListCostCenters(search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Me.ListCostCenters(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1126,16 +1128,62 @@ OrderCloud.Me.ListCostCenters(search,page,pageSize).then(successFn).catch(errorF
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+[
+  {
+    "InteropID": "…",
+    "Name": "…",
+    "Description": "…",
+    "CompanyID": "…",
+    "DefaultAddressID": "…",
+    "Html": "…",
+    "DataContainerType": null,
+    "ExtendedProperties": {
+      "Item": null,
+      "Count": 0,
+      "Keys": null
+    },
+    "ID": "…",
+    "IsCachable": false
+  }
+]
+```
+
+## List Credit Cards
+
+```js
+OrderCloud.Me.ListCreditCards(listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
 [
   {
     "ID": "…",
-    "Name": "…",
-    "Description": "…"
+    "Token": "…",
+    "CardType": "…",
+    "PartialAccountNumber": "…",
+    "CardholderName": "…",
+    "ExpirationDate": null,
+    "xp": null
   }
 ]
 ```
@@ -1173,22 +1221,26 @@ OrderCloud.Me.ListUserGroups(listArgs).then(successFn).catch(errorFn);
 ## List Addresses
 
 ```js
-OrderCloud.Me.ListAddresses(page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Me.ListAddresses(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
 [
   {
     "Shipping": false,
-    "Biling": false,
+    "Billing": false,
     "ID": "…",
     "CompanyName": "…",
     "FirstName": "…",
