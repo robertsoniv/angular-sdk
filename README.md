@@ -61,11 +61,11 @@ An AngularJs SDK for OrderCloud API
 
   - [List Cost Centers](#list-cost-centers)
 
-  - [List Credit Cards](#list-credit-cards)
-
   - [List User Groups](#list-user-groups)
 
   - [List Addresses](#list-addresses)
+
+  - [List Credit Cards](#list-credit-cards)
 
   - [List Categories](#list-categories)
 
@@ -476,7 +476,7 @@ In order to set an initial/default buyerid, add a run function in addition to th
 
 The BuyerID function can be used within any AngularJS controller and/or factory within your application in order to change which buyerid should be used.
 Simply inject the BuyerID factory into your controller or factory and call OrderCloud.BuyerID.Set('NEWIDHERE');.
-If needed, OrderCloud.BuyerID.Get() will return the buyerid that is currently set.
+If needed, OrderCloud.BuyerID().Get() will return the buyerid that is currently set.
 
 ***
 
@@ -1120,7 +1120,7 @@ OrderCloud.Me.Get().then(successFn).catch(errorFn);
 ## List Cost Centers
 
 ```js
-OrderCloud.Me.ListCostCenters(listArgs).then(successFn).catch(errorFn);
+OrderCloud.Me.ListCostCenters(search,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1128,62 +1128,16 @@ OrderCloud.Me.ListCostCenters(listArgs).then(successFn).catch(errorFn);
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |search|string|Word or phrase to search for.|
-|searchOn|string|Comma-delimited list of fields to search on.|
-|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
 [
   {
-    "InteropID": "…",
+    "ID": "…",
     "Name": "…",
-    "Description": "…",
-    "CompanyID": "…",
-    "DefaultAddressID": "…",
-    "Html": "…",
-    "DataContainerType": null,
-    "ExtendedProperties": {
-      "Item": null,
-      "Count": 0,
-      "Keys": null
-    },
-    "ID": "…",
-    "IsCachable": false
-  }
-]
-```
-
-## List Credit Cards
-
-```js
-OrderCloud.Me.ListCreditCards(listArgs).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|search|string|Word or phrase to search for.|
-|searchOn|string|Comma-delimited list of fields to search on.|
-|sortBy|string|Comma-delimited list of fields to sort by.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
-### Response Body Sample
-
-```json
-[
-  {
-    "ID": "…",
-    "Token": "…",
-    "CardType": "…",
-    "PartialAccountNumber": "…",
-    "CardholderName": "…",
-    "ExpirationDate": null,
-    "xp": null
+    "Description": "…"
   }
 ]
 ```
@@ -1221,7 +1175,42 @@ OrderCloud.Me.ListUserGroups(listArgs).then(successFn).catch(errorFn);
 ## List Addresses
 
 ```js
-OrderCloud.Me.ListAddresses(listArgs).then(successFn).catch(errorFn);
+OrderCloud.Me.ListAddresses(page,pageSize).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+### Response Body Sample
+
+```json
+[
+  {
+    "Shipping": false,
+    "Biling": false,
+    "ID": "…",
+    "CompanyName": "…",
+    "FirstName": "…",
+    "LastName": "…",
+    "Street1": "…",
+    "Street2": "…",
+    "City": "…",
+    "State": "…",
+    "Zip": "…",
+    "Country": "…",
+    "Phone": "…",
+    "AddressName": "…"
+  }
+]
+```
+
+## List Credit Cards
+
+```js
+OrderCloud.Me.ListCreditCards(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1239,20 +1228,13 @@ OrderCloud.Me.ListAddresses(listArgs).then(successFn).catch(errorFn);
 ```json
 [
   {
-    "Shipping": false,
-    "Billing": false,
     "ID": "…",
-    "CompanyName": "…",
-    "FirstName": "…",
-    "LastName": "…",
-    "Street1": "…",
-    "Street2": "…",
-    "City": "…",
-    "State": "…",
-    "Zip": "…",
-    "Country": "…",
-    "Phone": "…",
-    "AddressName": "…"
+    "Token": "…",
+    "CardType": "…",
+    "PartialAccountNumber": "…",
+    "CardholderName": "…",
+    "ExpirationDate": null,
+    "xp": null
   }
 ]
 ```

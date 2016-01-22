@@ -1237,9 +1237,9 @@
             return {
                 'Get': _get,
                 'ListCostCenters': _listcostcenters,
-                'ListCreditCards': _listcreditcards,
                 'ListUserGroups': _listusergroups,
                 'ListAddresses': _listaddresses,
+                'ListCreditCards': _listcreditcards,
                 'ListCategories': _listcategories,
                 'ListSubcategories': _listsubcategories,
                 'ListProducts': _listproducts,
@@ -1250,28 +1250,12 @@
                 return makeApiCall('GET', '/v1/me', null);
             }
 
-            function _listcostcenters(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+            function _listcostcenters(search, page, pageSize) {
+                return makeApiCall('GET', '/v1/me/costcenters', {
                     'search': search,
                     'page': page,
-                    'pageSize': pageSize,
-                    'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/costcenters', listArgs);
-            }
-
-            function _listcreditcards(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
-                    'search': search,
-                    'page': page,
-                    'pageSize': pageSize,
-                    'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/creditcards', listArgs);
+                    'pageSize': pageSize
+                });
             }
 
             function _listusergroups(search, page, pageSize, searchOn, sortBy, filters) {
@@ -1286,7 +1270,14 @@
                 return makeApiCall('GET', '/v1/me/usergroups', listArgs);
             }
 
-            function _listaddresses(search, page, pageSize, searchOn, sortBy, filters) {
+            function _listaddresses(page, pageSize) {
+                return makeApiCall('GET', '/v1/me/addresses', {
+                    'page': page,
+                    'pageSize': pageSize
+                });
+            }
+
+            function _listcreditcards(search, page, pageSize, searchOn, sortBy, filters) {
                 var listArgs = {
                     'search': search,
                     'page': page,
@@ -1295,7 +1286,7 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/addresses', listArgs);
+                return makeApiCall('GET', '/v1/me/creditcards', listArgs);
             }
 
             function _listcategories(search, depth, page, pageSize) {
