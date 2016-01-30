@@ -92,13 +92,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 						if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-						return makeApiCall('GET', '/v1/adminusers', listArgs);
+						return makeApiCall('GET', '/v1/adminusers', null, listArgs);
 					}
 					function _delete(userID) {
 						return makeApiCall('DELETE', '/v1/adminusers/:userID', { 'userID': userID }, null);
 					}
 					function _create(user) {
-						return makeApiCall('POST', '/v1/adminusers', user);
+						return makeApiCall('POST', '/v1/adminusers', null, user);
 					}
 				}
 				function ApiClients() {
@@ -136,13 +136,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						}
 					;
 					function _list(page, pageSize) {
-						return makeApiCall('GET', '/v1/apiclient', { 'page': page, 'pageSize': pageSize });
+						return makeApiCall('GET', '/v1/apiclient', null, { 'page': page, 'pageSize': pageSize });
 					}
 					function _get(clientID) {
 						return makeApiCall('GET', '/v1/apiclient/:clientID', { 'clientID': clientID }, null);
 					}
 					function _create(client) {
-						return makeApiCall('POST', '/v1/apiclient', client);
+						return makeApiCall('POST', '/v1/apiclient', null, client);
 					}
 					function _update(clientID, client) {
 						return makeApiCall('PUT', '/v1/apiclient/:clientID', { 'clientID': clientID }, client);
@@ -185,13 +185,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						}
 					;
 					function _list(search, page, pageSize) {
-						return makeApiCall('GET', '/v1/buyers', { 'search': search, 'page': page, 'pageSize': pageSize });
+						return makeApiCall('GET', '/v1/buyers', null, { 'search': search, 'page': page, 'pageSize': pageSize });
 					}
 					function _get(buyerID) {
 						return makeApiCall('GET', '/v1/buyers/:buyerID', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, null);
 					}
 					function _create(company) {
-						return makeApiCall('POST', '/v1/buyers', company);
+						return makeApiCall('POST', '/v1/buyers', null, company);
 					}
 					function _update(buyerID, company) {
 						return makeApiCall('PUT', '/v1/buyers/:buyerID', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, company);
@@ -418,13 +418,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						}
 					;
 					function _list(page, pageSize) {
-						return makeApiCall('GET', '/v1/files', { 'page': page, 'pageSize': pageSize });
+						return makeApiCall('GET', '/v1/files', null, { 'page': page, 'pageSize': pageSize });
 					}
 					function _get(fileID) {
 						return makeApiCall('GET', '/v1/files/:fileID', { 'fileID': fileID }, null);
 					}
 					function _postfiledata(filename) {
-						return makeApiCall('POST', '/v1/files', { 'filename': filename });
+						return makeApiCall('POST', '/v1/files', null, { 'filename': filename });
 					}
 				}
 				function SecurityProfiles() {
@@ -446,13 +446,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 							'sortBy': sortBy
 							};
 							if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-							return makeApiCall('GET', '/v1/securityprofiles', listArgs);
+							return makeApiCall('GET', '/v1/securityprofiles', null, listArgs);
 						}
 						function _get(securityProfileID) {
 							return makeApiCall('GET', '/v1/securityprofiles/:securityProfileID', { 'securityProfileID': securityProfileID }, null);
 						}
 						function _create(securityProfile) {
-							return makeApiCall('POST', '/v1/securityprofiles', securityProfile);
+							return makeApiCall('POST', '/v1/securityprofiles', null, securityProfile);
 						}
 						function _delete(securityProfileID) {
 							return makeApiCall('DELETE', '/v1/securityprofiles/:securityProfileID', { 'securityProfileID': securityProfileID }, null);
@@ -482,7 +482,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 							}
 						;
 						function _list(page, pageSize) {
-							return makeApiCall('GET', '/v1/specs', { 'page': page, 'pageSize': pageSize });
+							return makeApiCall('GET', '/v1/specs', null, { 'page': page, 'pageSize': pageSize });
 						}
 						function _get(specID) {
 							return makeApiCall('GET', '/v1/specs/:specID', { 'specID': specID }, null);
@@ -494,19 +494,19 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 							return makeApiCall('PUT', '/v1/specs/:specID', { 'specID': specID }, spec);
 						}
 						function _create(spec) {
-							return makeApiCall('POST', '/v1/specs', spec);
+							return makeApiCall('POST', '/v1/specs', null, spec);
 						}
 						function _delete(specID) {
 							return makeApiCall('DELETE', '/v1/specs/:specID', { 'specID': specID }, null);
 						}
 						function _listproductassignments(specID, productID, page, pageSize) {
-							return makeApiCall('GET', '/v1/specs/productassignments', { 'specID': specID, 'productID': productID, 'page': page, 'pageSize': pageSize });
+							return makeApiCall('GET', '/v1/specs/productassignments', null, { 'specID': specID, 'productID': productID, 'page': page, 'pageSize': pageSize });
 						}
 						function _deleteproductassignment(specID, productID) {
 							return makeApiCall('DELETE', '/v1/specs/:specID/productassignments/:productID', { 'specID': specID, 'productID': productID }, null);
 						}
 						function _saveproductassignment(productAssignment) {
-							return makeApiCall('POST', '/v1/specs/productassignments', productAssignment);
+							return makeApiCall('POST', '/v1/specs/productassignments', null, productAssignment);
 						}
 						function _createoption(specID, option) {
 							return makeApiCall('POST', '/v1/specs/:specID/options', { 'specID': specID }, option);
@@ -621,10 +621,10 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 								}
 							;
 							function _get() {
-								return makeApiCall('GET', '/v1/me', null);
+								return makeApiCall('GET', '/v1/me', null, null);
 							}
 							function _listcostcenters(search, page, pageSize) {
-								return makeApiCall('GET', '/v1/me/costcenters', { 'search': search, 'page': page, 'pageSize': pageSize });
+								return makeApiCall('GET', '/v1/me/costcenters', null, { 'search': search, 'page': page, 'pageSize': pageSize });
 							}
 							function _listusergroups(search, page, pageSize, searchOn, sortBy, filters) {
 								var listArgs = {
@@ -635,10 +635,10 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 									'sortBy': sortBy
 									};
 									if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-									return makeApiCall('GET', '/v1/me/usergroups', listArgs);
+									return makeApiCall('GET', '/v1/me/usergroups', null, listArgs);
 								}
 								function _listaddresses(page, pageSize) {
-									return makeApiCall('GET', '/v1/me/addresses', { 'page': page, 'pageSize': pageSize });
+									return makeApiCall('GET', '/v1/me/addresses', null, { 'page': page, 'pageSize': pageSize });
 								}
 								function _listcreditcards(search, page, pageSize, searchOn, sortBy, filters) {
 									var listArgs = {
@@ -649,16 +649,16 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 										'sortBy': sortBy
 										};
 										if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-										return makeApiCall('GET', '/v1/me/creditcards', listArgs);
+										return makeApiCall('GET', '/v1/me/creditcards', null, listArgs);
 									}
 									function _listcategories(search, depth, page, pageSize) {
-										return makeApiCall('GET', '/v1/me/categories', { 'search': search, 'depth': depth, 'page': page, 'pageSize': pageSize });
+										return makeApiCall('GET', '/v1/me/categories', null, { 'search': search, 'depth': depth, 'page': page, 'pageSize': pageSize });
 									}
 									function _listsubcategories(parentID, search, depth, page, pageSize) {
 										return makeApiCall('GET', '/v1/me/categories/:parentID/categories', { 'parentID': parentID }, { 'search': search, 'depth': depth, 'page': page, 'pageSize': pageSize });
 									}
 									function _listproducts(search, categoryID, page, pageSize) {
-										return makeApiCall('GET', '/v1/me/products', { 'search': search, 'categoryID': categoryID, 'page': page, 'pageSize': pageSize });
+										return makeApiCall('GET', '/v1/me/products', null, { 'search': search, 'categoryID': categoryID, 'page': page, 'pageSize': pageSize });
 									}
 									function _getproduct(productID) {
 										return makeApiCall('GET', '/v1/me/products/:productID', { 'productID': productID }, null);
@@ -699,7 +699,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 											listArgs['buyerID'] = BuyerID().Get();
 											listArgs['from'] = from;
 											listArgs['to'] = to;
-											return makeApiCall('GET', '/v1/orders', listArgs);
+											return makeApiCall('GET', '/v1/orders', null, listArgs);
 										}
 										function _create(order) {
 											return makeApiCall('POST', '/v1/buyers/:buyerID/orders', { 'buyerID': BuyerID().Get() }, order);
@@ -707,8 +707,8 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 										function _update(orderID, order) {
 											return makeApiCall('PUT', '/v1/buyers/:buyerID/orders/:orderID', { 'buyerID': BuyerID().Get(), 'orderID': orderID }, order);
 										}
-										function _patch(orderID, order) {
-											return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID', { 'buyerID': BuyerID().Get(), 'orderID': orderID }, order);
+										function _patch(orderID, partialOrder) {
+											return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID', { 'buyerID': BuyerID().Get(), 'orderID': orderID }, partialOrder);
 										}
 										function _delete(orderID) {
 											return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID', { 'buyerID': BuyerID().Get(), 'orderID': orderID }, null);
@@ -748,7 +748,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 											}
 										;
 										function _sendverificationcode(passwordResetRequest) {
-											return makeApiCall('POST', '/v1/password/reset', passwordResetRequest);
+											return makeApiCall('POST', '/v1/password/reset', null, passwordResetRequest);
 										}
 										function _resetpassword(verificationCode, passwordReset) {
 											return makeApiCall('PUT', '/v1/password/reset/:verificationCode', { 'verificationCode': verificationCode }, passwordReset);
@@ -767,13 +767,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 											}
 										;
 										function _list(page, pageSize) {
-											return makeApiCall('GET', '/v1/priceschedules', { 'page': page, 'pageSize': pageSize });
+											return makeApiCall('GET', '/v1/priceschedules', null, { 'page': page, 'pageSize': pageSize });
 										}
 										function _get(priceScheduleID) {
 											return makeApiCall('GET', '/v1/priceschedules/:priceScheduleID', { 'priceScheduleID': priceScheduleID }, null);
 										}
 										function _create(priceSchedule) {
-											return makeApiCall('POST', '/v1/priceschedules', priceSchedule);
+											return makeApiCall('POST', '/v1/priceschedules', null, priceSchedule);
 										}
 										function _patch(priceScheduleID, priceSchedule) {
 											return makeApiCall('PATCH', '/v1/priceschedules/:priceScheduleID', { 'priceScheduleID': priceScheduleID }, priceSchedule);
@@ -903,7 +903,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 													'sortBy': sortBy
 													};
 													if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-													return makeApiCall('GET', '/v1/products', listArgs);
+													return makeApiCall('GET', '/v1/products', null, listArgs);
 												}
 												function _get(productID) {
 													return makeApiCall('GET', '/v1/products/:productID', { 'productID': productID }, null);
@@ -915,7 +915,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 													return makeApiCall('PATCH', '/v1/products/:productID', { 'productID': productID }, product);
 												}
 												function _create(product) {
-													return makeApiCall('POST', '/v1/products', product);
+													return makeApiCall('POST', '/v1/products', null, product);
 												}
 												function _delete(productID) {
 													return makeApiCall('DELETE', '/v1/products/:productID', { 'productID': productID }, null);
@@ -945,10 +945,10 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 													return makeApiCall('PUT', '/v1/products/:productID/inventory/:inventory', { 'productID': productID, 'inventory': inventory }, null);
 												}
 												function _saveassignment(productAssignment) {
-													return makeApiCall('POST', '/v1/products/assignments', productAssignment);
+													return makeApiCall('POST', '/v1/products/assignments', null, productAssignment);
 												}
 												function _listassignments(productID, userID, userGroupID, level, priceScheduleID, page, pageSize) {
-													return makeApiCall('GET', '/v1/products/assignments', { 'productID': productID, 'buyerID': BuyerID().Get(), 'userID': userID, 'userGroupID': userGroupID, 'level': level, 'priceScheduleID': priceScheduleID, 'page': page, 'pageSize': pageSize });
+													return makeApiCall('GET', '/v1/products/assignments', null, { 'productID': productID, 'buyerID': BuyerID().Get(), 'userID': userID, 'userGroupID': userGroupID, 'level': level, 'priceScheduleID': priceScheduleID, 'page': page, 'pageSize': pageSize });
 												}
 												function _deleteassignment(productID, userID, userGroupID) {
 													return makeApiCall('DELETE', '/v1/products/:productID/assignments/:buyerID', { 'buyerID': BuyerID().Get(), 'productID': productID }, { 'userID': userID, 'userGroupID': userGroupID });

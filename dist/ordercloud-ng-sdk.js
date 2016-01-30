@@ -253,7 +253,7 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/adminusers', listArgs);
+                return makeApiCall('GET', '/v1/adminusers', null, listArgs);
             }
 
             function _delete(userID) {
@@ -263,7 +263,7 @@
             }
 
             function _create(user) {
-                return makeApiCall('POST', '/v1/adminusers', user);
+                return makeApiCall('POST', '/v1/adminusers', null, user);
             }
         }
 
@@ -323,7 +323,7 @@
             };
 
             function _list(page, pageSize) {
-                return makeApiCall('GET', '/v1/apiclient', {
+                return makeApiCall('GET', '/v1/apiclient', null, {
                     'page': page,
                     'pageSize': pageSize
                 });
@@ -336,7 +336,7 @@
             }
 
             function _create(client) {
-                return makeApiCall('POST', '/v1/apiclient', client);
+                return makeApiCall('POST', '/v1/apiclient', null, client);
             }
 
             function _update(clientID, client) {
@@ -408,7 +408,7 @@
             };
 
             function _list(search, page, pageSize) {
-                return makeApiCall('GET', '/v1/buyers', {
+                return makeApiCall('GET', '/v1/buyers', null, {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize
@@ -422,7 +422,7 @@
             }
 
             function _create(company) {
-                return makeApiCall('POST', '/v1/buyers', company);
+                return makeApiCall('POST', '/v1/buyers', null, company);
             }
 
             function _update(buyerID, company) {
@@ -898,7 +898,7 @@
             };
 
             function _list(page, pageSize) {
-                return makeApiCall('GET', '/v1/files', {
+                return makeApiCall('GET', '/v1/files', null, {
                     'page': page,
                     'pageSize': pageSize
                 });
@@ -911,7 +911,7 @@
             }
 
             function _postfiledata(filename) {
-                return makeApiCall('POST', '/v1/files', {
+                return makeApiCall('POST', '/v1/files', null, {
                     'filename': filename
                 });
             }
@@ -936,7 +936,7 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/securityprofiles', listArgs);
+                return makeApiCall('GET', '/v1/securityprofiles', null, listArgs);
             }
 
             function _get(securityProfileID) {
@@ -946,7 +946,7 @@
             }
 
             function _create(securityProfile) {
-                return makeApiCall('POST', '/v1/securityprofiles', securityProfile);
+                return makeApiCall('POST', '/v1/securityprofiles', null, securityProfile);
             }
 
             function _delete(securityProfileID) {
@@ -986,7 +986,7 @@
             };
 
             function _list(page, pageSize) {
-                return makeApiCall('GET', '/v1/specs', {
+                return makeApiCall('GET', '/v1/specs', null, {
                     'page': page,
                     'pageSize': pageSize
                 });
@@ -1011,7 +1011,7 @@
             }
 
             function _create(spec) {
-                return makeApiCall('POST', '/v1/specs', spec);
+                return makeApiCall('POST', '/v1/specs', null, spec);
             }
 
             function _delete(specID) {
@@ -1021,7 +1021,7 @@
             }
 
             function _listproductassignments(specID, productID, page, pageSize) {
-                return makeApiCall('GET', '/v1/specs/productassignments', {
+                return makeApiCall('GET', '/v1/specs/productassignments', null, {
                     'specID': specID,
                     'productID': productID,
                     'page': page,
@@ -1037,7 +1037,7 @@
             }
 
             function _saveproductassignment(productAssignment) {
-                return makeApiCall('POST', '/v1/specs/productassignments', productAssignment);
+                return makeApiCall('POST', '/v1/specs/productassignments', null, productAssignment);
             }
 
             function _createoption(specID, option) {
@@ -1247,11 +1247,11 @@
             };
 
             function _get() {
-                return makeApiCall('GET', '/v1/me', null);
+                return makeApiCall('GET', '/v1/me', null, null);
             }
 
             function _listcostcenters(search, page, pageSize) {
-                return makeApiCall('GET', '/v1/me/costcenters', {
+                return makeApiCall('GET', '/v1/me/costcenters', null, {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize
@@ -1267,11 +1267,11 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/usergroups', listArgs);
+                return makeApiCall('GET', '/v1/me/usergroups', null, listArgs);
             }
 
             function _listaddresses(page, pageSize) {
-                return makeApiCall('GET', '/v1/me/addresses', {
+                return makeApiCall('GET', '/v1/me/addresses', null, {
                     'page': page,
                     'pageSize': pageSize
                 });
@@ -1286,11 +1286,11 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/creditcards', listArgs);
+                return makeApiCall('GET', '/v1/me/creditcards', null, listArgs);
             }
 
             function _listcategories(search, depth, page, pageSize) {
-                return makeApiCall('GET', '/v1/me/categories', {
+                return makeApiCall('GET', '/v1/me/categories', null, {
                     'search': search,
                     'depth': depth,
                     'page': page,
@@ -1310,7 +1310,7 @@
             }
 
             function _listproducts(search, categoryID, page, pageSize) {
-                return makeApiCall('GET', '/v1/me/products', {
+                return makeApiCall('GET', '/v1/me/products', null, {
                     'search': search,
                     'categoryID': categoryID,
                     'page': page,
@@ -1364,7 +1364,7 @@
                 listArgs['buyerID'] = BuyerID().Get();
                 listArgs['from'] = from;
                 listArgs['to'] = to;
-                return makeApiCall('GET', '/v1/orders', listArgs);
+                return makeApiCall('GET', '/v1/orders', null, listArgs);
             }
 
             function _create(order) {
@@ -1380,11 +1380,11 @@
                 }, order);
             }
 
-            function _patch(orderID, order) {
+            function _patch(orderID, partialOrder) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID', {
                     'buyerID': BuyerID().Get(),
                     'orderID': orderID
-                }, order);
+                }, partialOrder);
             }
 
             function _delete(orderID) {
@@ -1469,7 +1469,7 @@
             };
 
             function _sendverificationcode(passwordResetRequest) {
-                return makeApiCall('POST', '/v1/password/reset', passwordResetRequest);
+                return makeApiCall('POST', '/v1/password/reset', null, passwordResetRequest);
             }
 
             function _resetpassword(verificationCode, passwordReset) {
@@ -1492,7 +1492,7 @@
             };
 
             function _list(page, pageSize) {
-                return makeApiCall('GET', '/v1/priceschedules', {
+                return makeApiCall('GET', '/v1/priceschedules', null, {
                     'page': page,
                     'pageSize': pageSize
                 });
@@ -1505,7 +1505,7 @@
             }
 
             function _create(priceSchedule) {
-                return makeApiCall('POST', '/v1/priceschedules', priceSchedule);
+                return makeApiCall('POST', '/v1/priceschedules', null, priceSchedule);
             }
 
             function _patch(priceScheduleID, priceSchedule) {
@@ -1728,7 +1728,7 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/products', listArgs);
+                return makeApiCall('GET', '/v1/products', null, listArgs);
             }
 
             function _get(productID) {
@@ -1750,7 +1750,7 @@
             }
 
             function _create(product) {
-                return makeApiCall('POST', '/v1/products', product);
+                return makeApiCall('POST', '/v1/products', null, product);
             }
 
             function _delete(productID) {
@@ -1820,11 +1820,11 @@
             }
 
             function _saveassignment(productAssignment) {
-                return makeApiCall('POST', '/v1/products/assignments', productAssignment);
+                return makeApiCall('POST', '/v1/products/assignments', null, productAssignment);
             }
 
             function _listassignments(productID, userID, userGroupID, level, priceScheduleID, page, pageSize) {
-                return makeApiCall('GET', '/v1/products/assignments', {
+                return makeApiCall('GET', '/v1/products/assignments', null, {
                     'productID': productID,
                     'buyerID': BuyerID().Get(),
                     'userID': userID,

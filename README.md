@@ -1469,7 +1469,6 @@ OrderCloud.Orders.Get(orderID).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "FromUserFirstName": "…",
   "FromUserLastName": "…",
-  "BillingAddressID": "…",
   "BillingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -1557,7 +1556,6 @@ OrderCloud.Orders.List(direction,from,to,listArgs).then(successFn).catch(errorFn
     "FromUserID": "…",
     "FromUserFirstName": "…",
     "FromUserLastName": "…",
-    "BillingAddressID": "…",
     "BillingAddress": {
       "ID": "…",
       "CompanyName": "…",
@@ -1686,7 +1684,7 @@ OrderCloud.Orders.Delete(orderID).then(successFn).catch(errorFn);
 ## Partially Update Order
 
 ```js
-OrderCloud.Orders.Patch(orderID,order).then(successFn).catch(errorFn);
+OrderCloud.Orders.Patch(orderID,partialOrder).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1733,7 +1731,6 @@ OrderCloud.Orders.Submit(orderID).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "FromUserFirstName": "…",
   "FromUserLastName": "…",
-  "BillingAddressID": "…",
   "BillingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -1813,7 +1810,6 @@ OrderCloud.Orders.Approve(orderID,comments).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "FromUserFirstName": "…",
   "FromUserLastName": "…",
-  "BillingAddressID": "…",
   "BillingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -1893,7 +1889,6 @@ OrderCloud.Orders.Decline(orderID,comments).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "FromUserFirstName": "…",
   "FromUserLastName": "…",
-  "BillingAddressID": "…",
   "BillingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -1972,7 +1967,6 @@ OrderCloud.Orders.Cancel(orderID).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "FromUserFirstName": "…",
   "FromUserLastName": "…",
-  "BillingAddressID": "…",
   "BillingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -2216,7 +2210,6 @@ OrderCloud.LineItems.Get(orderID,lineItemID).then(successFn).catch(errorFn);
   "DateNeeded": null,
   "PriceScheduleID": "…",
   "ShippingAccount": "…",
-  "ShippingAddressID": "…",
   "ShippingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -2274,7 +2267,6 @@ OrderCloud.LineItems.List(orderID,page,pageSize).then(successFn).catch(errorFn);
     "DateNeeded": null,
     "PriceScheduleID": "…",
     "ShippingAccount": "…",
-    "ShippingAddressID": "…",
     "ShippingAddress": {
       "ID": "…",
       "CompanyName": "…",
