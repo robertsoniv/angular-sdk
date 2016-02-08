@@ -567,49 +567,61 @@ OrderCloud.SecurityProfiles.List(listArgs).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "FullAccess": false,
-    "ProductAdmin": false,
-    "ProductReader": false,
-    "InventoryAdmin": false,
-    "ProductAssignmentAdmin": false,
-    "BuyerAdmin": false,
-    "BuyerReader": false,
-    "CategoryAdmin": false,
-    "CategoryReader": false,
-    "AddressAdmin": false,
-    "AddressReader": false,
-    "CostCenterAdmin": false,
-    "CostCenterReader": false,
-    "CouponAdmin": false,
-    "CouponReader": false,
-    "CreditCardAdmin": false,
-    "CreditCardReader": false,
-    "EmailTemplateAdmin": false,
-    "EmailTemplateReader": false,
-    "PriceScheduleAdmin": false,
-    "PriceScheduleReader": false,
-    "SpendingAccountAdmin": false,
-    "SpendingAccountReader": false,
-    "BuyerUserAdmin": false,
-    "BuyerUserReader": false,
-    "UserGroupAdmin": false,
-    "UserGroupReader": false,
-    "ApprovalRuleAdmin": false,
-    "ApprovalRuleReader": false,
-    "PermissionAdmin": false,
-    "OverrideUnitPrice": false,
-    "ChangeCreditCardOrders": false,
-    "ChangeNonCreditCardOrders": false,
-    "OverrideShipping": false,
-    "OverrideTax": false,
-    "ApproveAllOrders": false,
-    "SecurityProfileAdmin": false
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "FullAccess": false,
+      "ProductAdmin": false,
+      "ProductReader": false,
+      "InventoryAdmin": false,
+      "ProductAssignmentAdmin": false,
+      "BuyerAdmin": false,
+      "BuyerReader": false,
+      "CategoryAdmin": false,
+      "CategoryReader": false,
+      "AddressAdmin": false,
+      "AddressReader": false,
+      "CostCenterAdmin": false,
+      "CostCenterReader": false,
+      "CouponAdmin": false,
+      "CouponReader": false,
+      "CreditCardAdmin": false,
+      "CreditCardReader": false,
+      "EmailTemplateAdmin": false,
+      "EmailTemplateReader": false,
+      "PriceScheduleAdmin": false,
+      "PriceScheduleReader": false,
+      "SpendingAccountAdmin": false,
+      "SpendingAccountReader": false,
+      "BuyerUserAdmin": false,
+      "BuyerUserReader": false,
+      "UserGroupAdmin": false,
+      "UserGroupReader": false,
+      "ApprovalRuleAdmin": false,
+      "ApprovalRuleReader": false,
+      "PermissionAdmin": false,
+      "OverrideUnitPrice": false,
+      "ChangeCreditCardOrders": false,
+      "ChangeNonCreditCardOrders": false,
+      "OverrideShipping": false,
+      "OverrideTax": false,
+      "ApproveAllOrders": false,
+      "SecurityProfileAdmin": false
+    }
+  ]
+}
 ```
 
 ## Create New Security Profile
@@ -884,20 +896,32 @@ OrderCloud.BuyerAPIClient.List(page,pageSize).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "ClientSecret": "…",
-    "AccessTokenDuration": 0,
-    "Active": false,
-    "AppName": "…",
-    "Claims": [
-      "FullAccess"
-    ],
-    "RefreshTokenDuration": 0,
-    "DefaultUserContextID": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "ClientSecret": "…",
+      "AccessTokenDuration": 0,
+      "Active": false,
+      "AppName": "…",
+      "Claims": [
+        "FullAccess"
+      ],
+      "RefreshTokenDuration": 0,
+      "DefaultUserContextID": "…"
+    }
+  ]
+}
 ```
 
 ## Create New Buyer API Client
@@ -1010,20 +1034,32 @@ OrderCloud.AdminAPIClient.List(page,pageSize).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "ClientSecret": "…",
-    "AccessTokenDuration": 0,
-    "Active": false,
-    "AppName": "…",
-    "Claims": [
-      "FullAccess"
-    ],
-    "RefreshTokenDuration": 0,
-    "DefaultUserContextID": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "ClientSecret": "…",
+      "AccessTokenDuration": 0,
+      "Active": false,
+      "AppName": "…",
+      "Claims": [
+        "FullAccess"
+      ],
+      "RefreshTokenDuration": 0,
+      "DefaultUserContextID": "…"
+    }
+  ]
+}
 ```
 
 ## Create New Admin API Client
@@ -1133,13 +1169,25 @@ OrderCloud.Me.ListCostCenters(search,page,pageSize).then(successFn).catch(errorF
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Description": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…"
+    }
+  ]
+}
 ```
 
 ## List User Groups
@@ -1161,15 +1209,27 @@ OrderCloud.Me.ListUserGroups(listArgs).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Description": "…",
-    "IsReportingGroup": false,
-    "xp": null
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…",
+      "IsReportingGroup": false,
+      "xp": null
+    }
+  ]
+}
 ```
 
 ## List Addresses
@@ -1187,24 +1247,36 @@ OrderCloud.Me.ListAddresses(page,pageSize).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "Shipping": false,
-    "Biling": false,
-    "ID": "…",
-    "CompanyName": "…",
-    "FirstName": "…",
-    "LastName": "…",
-    "Street1": "…",
-    "Street2": "…",
-    "City": "…",
-    "State": "…",
-    "Zip": "…",
-    "Country": "…",
-    "Phone": "…",
-    "AddressName": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "Shipping": false,
+      "Biling": false,
+      "ID": "…",
+      "CompanyName": "…",
+      "FirstName": "…",
+      "LastName": "…",
+      "Street1": "…",
+      "Street2": "…",
+      "City": "…",
+      "State": "…",
+      "Zip": "…",
+      "Country": "…",
+      "Phone": "…",
+      "AddressName": "…"
+    }
+  ]
+}
 ```
 
 ## List Credit Cards
@@ -1226,17 +1298,29 @@ OrderCloud.Me.ListCreditCards(listArgs).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Token": "…",
-    "CardType": "…",
-    "PartialAccountNumber": "…",
-    "CardholderName": "…",
-    "ExpirationDate": null,
-    "xp": null
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Token": "…",
+      "CardType": "…",
+      "PartialAccountNumber": "…",
+      "CardholderName": "…",
+      "ExpirationDate": null,
+      "xp": null
+    }
+  ]
+}
 ```
 
 ## List Categories
@@ -1256,18 +1340,30 @@ OrderCloud.Me.ListCategories(search,depth,page,pageSize).then(successFn).catch(e
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Description": "…",
-    "xp": null,
-    "ListOrder": 1,
-    "Active": false,
-    "ParentID": "…",
-    "ChildCount": 0
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…",
+      "xp": null,
+      "ListOrder": 1,
+      "Active": false,
+      "ParentID": "…",
+      "ChildCount": 0
+    }
+  ]
+}
 ```
 
 ## List Subcategories
@@ -1288,18 +1384,30 @@ OrderCloud.Me.ListSubcategories(parentID,search,depth,page,pageSize).then(succes
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Description": "…",
-    "xp": null,
-    "ListOrder": 1,
-    "Active": false,
-    "ParentID": "…",
-    "ChildCount": 0
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…",
+      "xp": null,
+      "ListOrder": 1,
+      "Active": false,
+      "ParentID": "…",
+      "ChildCount": 0
+    }
+  ]
+}
 ```
 
 ## List Products
@@ -1319,59 +1427,71 @@ OrderCloud.Me.ListProducts(search,categoryID,page,pageSize).then(successFn).catc
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ReplenishmentPriceSchedule": {
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ReplenishmentPriceSchedule": {
+        "ID": "…",
+        "Name": "…",
+        "ApplyTax": false,
+        "ApplyShipping": false,
+        "MinQuantity": null,
+        "MaxQuantity": null,
+        "UseCumulativeQuantity": false,
+        "RestrictedQuantity": false,
+        "OrderType": "Standard",
+        "PriceBreaks": [
+          {
+            "Quantity": 0,
+            "Price": 0.0
+          }
+        ],
+        "xp": null
+      },
+      "StandardPriceSchedule": {
+        "ID": "…",
+        "Name": "…",
+        "ApplyTax": false,
+        "ApplyShipping": false,
+        "MinQuantity": null,
+        "MaxQuantity": null,
+        "UseCumulativeQuantity": false,
+        "RestrictedQuantity": false,
+        "OrderType": "Standard",
+        "PriceBreaks": [
+          {
+            "Quantity": 0,
+            "Price": 0.0
+          }
+        ],
+        "xp": null
+      },
       "ID": "…",
       "Name": "…",
-      "ApplyTax": false,
-      "ApplyShipping": false,
-      "MinQuantity": null,
-      "MaxQuantity": null,
-      "UseCumulativeQuantity": false,
-      "RestrictedQuantity": false,
-      "OrderType": "Standard",
-      "PriceBreaks": [
-        {
-          "Quantity": 0,
-          "Price": 0.0
-        }
-      ],
-      "xp": null
-    },
-    "StandardPriceSchedule": {
-      "ID": "…",
-      "Name": "…",
-      "ApplyTax": false,
-      "ApplyShipping": false,
-      "MinQuantity": null,
-      "MaxQuantity": null,
-      "UseCumulativeQuantity": false,
-      "RestrictedQuantity": false,
-      "OrderType": "Standard",
-      "PriceBreaks": [
-        {
-          "Quantity": 0,
-          "Price": 0.0
-        }
-      ],
-      "xp": null
-    },
-    "ID": "…",
-    "Name": "…",
-    "Description": "…",
-    "QuantityMultiplier": 0,
-    "ShipWeight": null,
-    "Active": false,
-    "Type": "Static",
-    "InventoryEnabled": false,
-    "InventoryNotificationPoint": null,
-    "VariantLevelInventory": false,
-    "xp": null,
-    "AllowOrderExceedInventory": false,
-    "DisplayInventory": false
-  }
-]
+      "Description": "…",
+      "QuantityMultiplier": 0,
+      "ShipWeight": null,
+      "Active": false,
+      "Type": "Static",
+      "InventoryEnabled": false,
+      "InventoryNotificationPoint": null,
+      "VariantLevelInventory": false,
+      "xp": null,
+      "AllowOrderExceedInventory": false,
+      "DisplayInventory": false
+    }
+  ]
+}
 ```
 
 ## Get Product
@@ -1549,70 +1669,82 @@ OrderCloud.Orders.List(direction,from,to,listArgs).then(successFn).catch(errorFn
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Type": "Standard",
-    "FromUserID": "…",
-    "FromUserFirstName": "…",
-    "FromUserLastName": "…",
-    "BillingAddress": {
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
       "ID": "…",
-      "CompanyName": "…",
-      "FirstName": "…",
-      "LastName": "…",
-      "Street1": "…",
-      "Street2": "…",
-      "City": "…",
-      "State": "…",
-      "Zip": "…",
-      "Country": "…",
-      "Phone": "…",
-      "AddressName": "…"
-    },
-    "SpendingAccountID": "…",
-    "Comments": "…",
-    "PaymentMethod": null,
-    "CreditCardID": "…",
-    "CreditCard": {
-      "ID": "…",
-      "Token": "…",
-      "CardType": "…",
-      "PartialAccountNumber": "…",
-      "CardholderName": "…",
-      "ExpirationDate": null,
+      "Type": "Standard",
+      "FromUserID": "…",
+      "FromUserFirstName": "…",
+      "FromUserLastName": "…",
+      "BillingAddress": {
+        "ID": "…",
+        "CompanyName": "…",
+        "FirstName": "…",
+        "LastName": "…",
+        "Street1": "…",
+        "Street2": "…",
+        "City": "…",
+        "State": "…",
+        "Zip": "…",
+        "Country": "…",
+        "Phone": "…",
+        "AddressName": "…"
+      },
+      "SpendingAccountID": "…",
+      "Comments": "…",
+      "PaymentMethod": null,
+      "CreditCardID": "…",
+      "CreditCard": {
+        "ID": "…",
+        "Token": "…",
+        "CardType": "…",
+        "PartialAccountNumber": "…",
+        "CardholderName": "…",
+        "ExpirationDate": null,
+        "xp": null
+      },
+      "Approvals": [
+        {
+          "Status": "Pending",
+          "DateCreated": "0001-01-01T00:00:00+00:00",
+          "DateApproved": null,
+          "DateDeclined": null,
+          "ApprovedByUserID": "…",
+          "ApprovedByFirstName": "…",
+          "ApprovedByLastName": "…",
+          "Reasons": [
+            "…"
+          ],
+          "Comments": "…"
+        }
+      ],
+      "Status": "Unsubmitted",
+      "DateCreated": null,
+      "DateSubmitted": null,
+      "DateApproved": null,
+      "DateDeclined": null,
+      "DateCanceled": null,
+      "DateCompleted": null,
+      "Subtotal": 0.0,
+      "ShippingCost": null,
+      "TaxCost": null,
+      "CouponDiscount": 0.0,
+      "Total": 0.0,
       "xp": null
-    },
-    "Approvals": [
-      {
-        "Status": "Pending",
-        "DateCreated": "0001-01-01T00:00:00+00:00",
-        "DateApproved": null,
-        "DateDeclined": null,
-        "ApprovedByUserID": "…",
-        "ApprovedByFirstName": "…",
-        "ApprovedByLastName": "…",
-        "Reasons": [
-          "…"
-        ],
-        "Comments": "…"
-      }
-    ],
-    "Status": "Unsubmitted",
-    "DateCreated": null,
-    "DateSubmitted": null,
-    "DateApproved": null,
-    "DateDeclined": null,
-    "DateCanceled": null,
-    "DateCompleted": null,
-    "Subtotal": 0.0,
-    "ShippingCost": null,
-    "TaxCost": null,
-    "CouponDiscount": 0.0,
-    "Total": 0.0,
-    "xp": null
-  }
-]
+    }
+  ]
+}
 ```
 
 ## Create New Order
@@ -2254,46 +2386,58 @@ OrderCloud.LineItems.List(orderID,page,pageSize).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "OrderID": "…",
-    "ID": "…",
-    "ProductID": "…",
-    "Quantity": 0,
-    "QuantityShipped": 0,
-    "UnitPrice": null,
-    "LineTotal": 0.0,
-    "CostCenter": "…",
-    "DateNeeded": null,
-    "PriceScheduleID": "…",
-    "ShippingAccount": "…",
-    "ShippingAddress": {
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "OrderID": "…",
       "ID": "…",
-      "CompanyName": "…",
-      "FirstName": "…",
-      "LastName": "…",
-      "Street1": "…",
-      "Street2": "…",
-      "City": "…",
-      "State": "…",
-      "Zip": "…",
-      "Country": "…",
-      "Phone": "…",
-      "AddressName": "…"
-    },
-    "ShipperID": "…",
-    "ShipperName": "…",
-    "Specs": [
-      {
-        "SpecID": "…",
-        "Name": "…",
-        "OptionID": "…",
-        "Value": "…"
-      }
-    ],
-    "xp": null
-  }
-]
+      "ProductID": "…",
+      "Quantity": 0,
+      "QuantityShipped": 0,
+      "UnitPrice": null,
+      "LineTotal": 0.0,
+      "CostCenter": "…",
+      "DateNeeded": null,
+      "PriceScheduleID": "…",
+      "ShippingAccount": "…",
+      "ShippingAddress": {
+        "ID": "…",
+        "CompanyName": "…",
+        "FirstName": "…",
+        "LastName": "…",
+        "Street1": "…",
+        "Street2": "…",
+        "City": "…",
+        "State": "…",
+        "Zip": "…",
+        "Country": "…",
+        "Phone": "…",
+        "AddressName": "…"
+      },
+      "ShipperID": "…",
+      "ShipperName": "…",
+      "Specs": [
+        {
+          "SpecID": "…",
+          "Name": "…",
+          "OptionID": "…",
+          "Value": "…"
+        }
+      ],
+      "xp": null
+    }
+  ]
+}
 ```
 
 ## Create New Line Item
@@ -2532,22 +2676,34 @@ OrderCloud.Shipments.List(orderID,search,page,pageSize).then(successFn).catch(er
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Shipper": "…",
-    "DateShipped": null,
-    "TrackingNumber": "…",
-    "Cost": null,
-    "Items": [
-      {
-        "OrderID": "…",
-        "LineItemId": "…",
-        "QuantityShipped": 0
-      }
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
     ]
-  }
-]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Shipper": "…",
+      "DateShipped": null,
+      "TrackingNumber": "…",
+      "Cost": null,
+      "Items": [
+        {
+          "OrderID": "…",
+          "LineItemId": "…",
+          "QuantityShipped": 0
+        }
+      ]
+    }
+  ]
+}
 ```
 
 ## Create New Shipment
@@ -2759,23 +2915,35 @@ OrderCloud.Products.List(listArgs).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Description": "…",
-    "QuantityMultiplier": 0,
-    "ShipWeight": null,
-    "Active": false,
-    "Type": "Static",
-    "InventoryEnabled": false,
-    "InventoryNotificationPoint": null,
-    "VariantLevelInventory": false,
-    "xp": null,
-    "AllowOrderExceedInventory": false,
-    "DisplayInventory": false
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…",
+      "QuantityMultiplier": 0,
+      "ShipWeight": null,
+      "Active": false,
+      "Type": "Static",
+      "InventoryEnabled": false,
+      "InventoryNotificationPoint": null,
+      "VariantLevelInventory": false,
+      "xp": null,
+      "AllowOrderExceedInventory": false,
+      "DisplayInventory": false
+    }
+  ]
+}
 ```
 
 ## Create New Product
@@ -2893,14 +3061,26 @@ OrderCloud.Products.ListVariants(productID,page,pageSize).then(successFn).catch(
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Description": "…",
-    "Active": false
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…",
+      "Active": false
+    }
+  ]
+}
 ```
 
 ## List Variant Inventory
@@ -2919,15 +3099,27 @@ OrderCloud.Products.ListVariantInventory(productID,page,pageSize).then(successFn
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Available": null,
-    "Reserved": null,
-    "LastUpdated": null
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Available": null,
+      "Reserved": null,
+      "LastUpdated": null
+    }
+  ]
+}
 ```
 
 ## Get Variant Inventory
@@ -3087,16 +3279,28 @@ OrderCloud.Products.ListAssignments(productID,userID,userGroupID,level,priceSche
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ProductID": "…",
-    "StandardPriceScheduleID": "…",
-    "ReplenishmentPriceScheduleID": "…",
-    "UserID": "…",
-    "UserGroupID": "…",
-    "BuyerID": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ProductID": "…",
+      "StandardPriceScheduleID": "…",
+      "ReplenishmentPriceScheduleID": "…",
+      "UserID": "…",
+      "UserGroupID": "…",
+      "BuyerID": "…"
+    }
+  ]
+}
 ```
 
 ## Delete Assignment
@@ -3169,26 +3373,38 @@ OrderCloud.PriceSchedules.List(page,pageSize).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "ApplyTax": false,
-    "ApplyShipping": false,
-    "MinQuantity": null,
-    "MaxQuantity": null,
-    "UseCumulativeQuantity": false,
-    "RestrictedQuantity": false,
-    "OrderType": "Standard",
-    "PriceBreaks": [
-      {
-        "Quantity": 0,
-        "Price": 0.0
-      }
-    ],
-    "xp": null
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "ApplyTax": false,
+      "ApplyShipping": false,
+      "MinQuantity": null,
+      "MaxQuantity": null,
+      "UseCumulativeQuantity": false,
+      "RestrictedQuantity": false,
+      "OrderType": "Standard",
+      "PriceBreaks": [
+        {
+          "Quantity": 0,
+          "Price": 0.0
+        }
+      ],
+      "xp": null
+    }
+  ]
+}
 ```
 
 ## Create New Price Schedule
@@ -3396,30 +3612,42 @@ OrderCloud.Specs.List(page,pageSize).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "ListOrder": 0,
-    "Name": "…",
-    "DefaultValue": "…",
-    "Required": false,
-    "DefinesVariant": false,
-    "AllowOpenText": false,
-    "DefaultOptionID": "…",
-    "Options": [
-      {
-        "ID": "…",
-        "Value": "…",
-        "ListOrder": 0,
-        "IsOpenText": false,
-        "PriceMarkupType": null,
-        "PriceMarkup": null,
-        "xp": null
-      }
-    ],
-    "xp": null
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "ListOrder": 0,
+      "Name": "…",
+      "DefaultValue": "…",
+      "Required": false,
+      "DefinesVariant": false,
+      "AllowOpenText": false,
+      "DefaultOptionID": "…",
+      "Options": [
+        {
+          "ID": "…",
+          "Value": "…",
+          "ListOrder": 0,
+          "IsOpenText": false,
+          "PriceMarkupType": null,
+          "PriceMarkup": null,
+          "xp": null
+        }
+      ],
+      "xp": null
+    }
+  ]
+}
 ```
 
 ## Create New Spec
@@ -3526,12 +3754,24 @@ OrderCloud.Specs.ListProductAssignments(specID,productID,page,pageSize).then(suc
 ### Response Body Sample
 
 ```json
-[
-  {
-    "SpecID": "…",
-    "ProductID": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "SpecID": "…",
+      "ProductID": "…"
+    }
+  ]
+}
 ```
 
 ## Delete Product Assignment
@@ -3701,18 +3941,30 @@ OrderCloud.Categories.List(search,depth,page,pageSize).then(successFn).catch(err
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Description": "…",
-    "xp": null,
-    "ListOrder": 1,
-    "Active": false,
-    "ParentID": "…",
-    "ChildCount": 0
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…",
+      "xp": null,
+      "ListOrder": 1,
+      "Active": false,
+      "ParentID": "…",
+      "ChildCount": 0
+    }
+  ]
+}
 ```
 
 ## Create New Category
@@ -3789,18 +4041,30 @@ OrderCloud.Categories.ListChildren(parentID,search,depth,page,pageSize).then(suc
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Description": "…",
-    "xp": null,
-    "ListOrder": 1,
-    "Active": false,
-    "ParentID": "…",
-    "ChildCount": 0
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…",
+      "xp": null,
+      "ListOrder": 1,
+      "Active": false,
+      "ParentID": "…",
+      "ChildCount": 0
+    }
+  ]
+}
 ```
 
 ## Partially Update Category
@@ -3845,13 +4109,25 @@ OrderCloud.Categories.ListProductAssignments(categoryID,productID,page,pageSize)
 ### Response Body Sample
 
 ```json
-[
-  {
-    "CategoryID": "…",
-    "ProductID": "…",
-    "ListOrder": null
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "CategoryID": "…",
+      "ProductID": "…",
+      "ListOrder": null
+    }
+  ]
+}
 ```
 
 ## Save Product Assignment
@@ -3901,13 +4177,25 @@ OrderCloud.Categories.ListAssignments(categoryID,userID,userGroupID,level,page,p
 ### Response Body Sample
 
 ```json
-[
-  {
-    "UserID": "…",
-    "UserGroupID": "…",
-    "CategoryID": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "UserID": "…",
+      "UserGroupID": "…",
+      "CategoryID": "…"
+    }
+  ]
+}
 ```
 
 ## Delete Assignment
@@ -3980,14 +4268,26 @@ OrderCloud.Buyers.List(search,page,pageSize).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Active": false,
-    "xp": null
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Active": false,
+      "xp": null
+    }
+  ]
+}
 ```
 
 ## Create New Buyer
@@ -4079,20 +4379,32 @@ OrderCloud.Users.List(listArgs).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Username": "…",
-    "FirstName": "…",
-    "LastName": "…",
-    "Email": "…",
-    "Phone": "…",
-    "TermsAccepted": null,
-    "Active": false,
-    "xp": null,
-    "SecurityProfileID": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Username": "…",
+      "FirstName": "…",
+      "LastName": "…",
+      "Email": "…",
+      "Phone": "…",
+      "TermsAccepted": null,
+      "Active": false,
+      "xp": null,
+      "SecurityProfileID": "…"
+    }
+  ]
+}
 ```
 
 ## Create New User
@@ -4260,15 +4572,27 @@ OrderCloud.UserGroups.List(listArgs).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Description": "…",
-    "IsReportingGroup": false,
-    "xp": null
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…",
+      "IsReportingGroup": false,
+      "xp": null
+    }
+  ]
+}
 ```
 
 ## Create New User Group
@@ -4363,13 +4687,25 @@ OrderCloud.UserGroups.ListUserAssignments(userGroupID,userID,page,pageSize).then
 ### Response Body Sample
 
 ```json
-[
-  {
-    "UserGroupID": "…",
-    "UserID": "…",
-    "BuyerID": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "UserGroupID": "…",
+      "UserID": "…",
+      "BuyerID": "…"
+    }
+  ]
+}
 ```
 
 ## Delete User Assignment
@@ -4454,22 +4790,34 @@ OrderCloud.Addresses.List(search,page,pageSize).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "CompanyName": "…",
-    "FirstName": "…",
-    "LastName": "…",
-    "Street1": "…",
-    "Street2": "…",
-    "City": "…",
-    "State": "…",
-    "Zip": "…",
-    "Country": "…",
-    "Phone": "…",
-    "AddressName": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "CompanyName": "…",
+      "FirstName": "…",
+      "LastName": "…",
+      "Street1": "…",
+      "Street2": "…",
+      "City": "…",
+      "State": "…",
+      "Zip": "…",
+      "Country": "…",
+      "Phone": "…",
+      "AddressName": "…"
+    }
+  ]
+}
 ```
 
 ## Create New Address
@@ -4560,15 +4908,27 @@ OrderCloud.Addresses.ListAssignments(addressID,userID,userGroupID,level,isShippi
 ### Response Body Sample
 
 ```json
-[
-  {
-    "UserID": "…",
-    "UserGroupID": "…",
-    "AddressID": "…",
-    "IsShipping": false,
-    "IsBilling": false
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "UserID": "…",
+      "UserGroupID": "…",
+      "AddressID": "…",
+      "IsShipping": false,
+      "IsBilling": false
+    }
+  ]
+}
 ```
 
 ## Delete Assignment
@@ -4658,18 +5018,30 @@ OrderCloud.SpendingAccounts.List(listArgs).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Balance": 0.0,
-    "AllowAsPaymentMethod": false,
-    "RedemptionCode": "…",
-    "StartDate": null,
-    "EndDate": null,
-    "xp": null
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Balance": 0.0,
+      "AllowAsPaymentMethod": false,
+      "RedemptionCode": "…",
+      "StartDate": null,
+      "EndDate": null,
+      "xp": null
+    }
+  ]
+}
 ```
 
 ## Create New Spending Account
@@ -4749,14 +5121,26 @@ OrderCloud.SpendingAccounts.ListAssignments(spendingAccountID,userID,userGroupID
 ### Response Body Sample
 
 ```json
-[
-  {
-    "SpendingAccountID": "…",
-    "UserID": "…",
-    "UserGroupID": "…",
-    "AllowExceed": false
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "SpendingAccountID": "…",
+      "UserID": "…",
+      "UserGroupID": "…",
+      "AllowExceed": false
+    }
+  ]
+}
 ```
 
 ## Save Assignment
@@ -4844,20 +5228,32 @@ OrderCloud.AdminUsers.List(listArgs).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Username": "…",
-    "FirstName": "…",
-    "LastName": "…",
-    "Email": "…",
-    "Phone": "…",
-    "TermsAccepted": null,
-    "Active": false,
-    "xp": null,
-    "SecurityProfileID": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Username": "…",
+      "FirstName": "…",
+      "LastName": "…",
+      "Email": "…",
+      "Phone": "…",
+      "TermsAccepted": null,
+      "Active": false,
+      "xp": null,
+      "SecurityProfileID": "…"
+    }
+  ]
+}
 ```
 
 ## Create New Admin User
@@ -4983,26 +5379,38 @@ OrderCloud.Coupons.List(search,page,pageSize).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "CouponCode": "…",
-    "Label": "…",
-    "Description": "…",
-    "DiscountAmountType": "FlatAmountPerOrder",
-    "Enabled": false,
-    "RedeemLimit": 0,
-    "StartDate": null,
-    "ExpirationDate": null,
-    "DiscountAmount": 0.0,
-    "MinimumPurchase": 0.0,
-    "CouponType": "Order",
-    "ApplyToSubtotal": false,
-    "ApplyToShipping": false,
-    "ApplyToTax": false,
-    "Status": "Active"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "CouponCode": "…",
+      "Label": "…",
+      "Description": "…",
+      "DiscountAmountType": "FlatAmountPerOrder",
+      "Enabled": false,
+      "RedeemLimit": 0,
+      "StartDate": null,
+      "ExpirationDate": null,
+      "DiscountAmount": 0.0,
+      "MinimumPurchase": 0.0,
+      "CouponType": "Order",
+      "ApplyToSubtotal": false,
+      "ApplyToShipping": false,
+      "ApplyToTax": false,
+      "Status": "Active"
+    }
+  ]
+}
 ```
 
 ## Create New Coupon
@@ -5094,13 +5502,25 @@ OrderCloud.Coupons.ListProductAssignments(couponID,productID,page,pageSize).then
 ### Response Body Sample
 
 ```json
-[
-  {
-    "CouponID": "…",
-    "ProductID": "…",
-    "ListOrder": null
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "CouponID": "…",
+      "ProductID": "…",
+      "ListOrder": null
+    }
+  ]
+}
 ```
 
 ## Save Product Assignment
@@ -5148,13 +5568,25 @@ OrderCloud.Coupons.ListCategoryAssignments(couponID,categoryID,page,pageSize).th
 ### Response Body Sample
 
 ```json
-[
-  {
-    "CouponID": "…",
-    "CategoryID": "…",
-    "ListOrder": null
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "CouponID": "…",
+      "CategoryID": "…",
+      "ListOrder": null
+    }
+  ]
+}
 ```
 
 ## Save Category Assignment
@@ -5204,13 +5636,25 @@ OrderCloud.Coupons.ListAssignments(couponID,userID,userGroupID,level,page,pageSi
 ### Response Body Sample
 
 ```json
-[
-  {
-    "CouponID": "…",
-    "UserID": "…",
-    "UserGroupID": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "CouponID": "…",
+      "UserID": "…",
+      "UserGroupID": "…"
+    }
+  ]
+}
 ```
 
 ## Save Assignment
@@ -5287,13 +5731,25 @@ OrderCloud.CostCenters.List(search,page,pageSize).then(successFn).catch(errorFn)
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Name": "…",
-    "Description": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…"
+    }
+  ]
+}
 ```
 
 ## Create New Cost Center
@@ -5363,13 +5819,25 @@ OrderCloud.CostCenters.ListAssignments(costCenterID,userID,userGroupID,level,pag
 ### Response Body Sample
 
 ```json
-[
-  {
-    "UserID": "…",
-    "UserGroupID": "…",
-    "CostCenterID": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "UserID": "…",
+      "UserGroupID": "…",
+      "CostCenterID": "…"
+    }
+  ]
+}
 ```
 
 ## Delete Assignment
@@ -5466,33 +5934,45 @@ OrderCloud.ApprovalRules.List(search,page,pageSize).then(successFn).catch(errorF
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "SubmitType": "Approve",
-    "Sequence": null,
-    "SubmittingAssignment": {
-      "BuyerID": "…",
-      "UserID": "…",
-      "UserGroupID": "…"
-    },
-    "ApprovingAssignment": {
-      "BuyerID": "…",
-      "UserID": "…",
-      "UserGroupID": "…"
-    },
-    "Price": null,
-    "CostCenterID": "…",
-    "PaymentMethod": null,
-    "CategoryID": "…",
-    "Quantity": null,
-    "Stage": 0,
-    "MinutesAllowed": null,
-    "ImplicitAction": "None",
-    "SendShipNoticeEmail": false,
-    "SendApprovalNoticeEmail": false
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "SubmitType": "Approve",
+      "Sequence": null,
+      "SubmittingAssignment": {
+        "BuyerID": "…",
+        "UserID": "…",
+        "UserGroupID": "…"
+      },
+      "ApprovingAssignment": {
+        "BuyerID": "…",
+        "UserID": "…",
+        "UserGroupID": "…"
+      },
+      "Price": null,
+      "CostCenterID": "…",
+      "PaymentMethod": null,
+      "CategoryID": "…",
+      "Quantity": null,
+      "Stage": 0,
+      "MinutesAllowed": null,
+      "ImplicitAction": "None",
+      "SendShipNoticeEmail": false,
+      "SendApprovalNoticeEmail": false
+    }
+  ]
+}
 ```
 
 ## Create New Approval Rule
@@ -5632,17 +6112,29 @@ OrderCloud.CreditCards.List(page,pageSize).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "Token": "…",
-    "CardType": "…",
-    "PartialAccountNumber": "…",
-    "CardholderName": "…",
-    "ExpirationDate": null,
-    "xp": null
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Token": "…",
+      "CardType": "…",
+      "PartialAccountNumber": "…",
+      "CardholderName": "…",
+      "ExpirationDate": null,
+      "xp": null
+    }
+  ]
+}
 ```
 
 ## Create New Credit Card
@@ -5720,13 +6212,25 @@ OrderCloud.CreditCards.ListAssignments(creditCardID,userID,userGroupID,level,pag
 ### Response Body Sample
 
 ```json
-[
-  {
-    "CreditCardID": "…",
-    "UserID": "…",
-    "UserGroupID": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "CreditCardID": "…",
+      "UserID": "…",
+      "UserGroupID": "…"
+    }
+  ]
+}
 ```
 
 ## Save Assignment
@@ -5801,13 +6305,25 @@ OrderCloud.Files.List(page,pageSize).then(successFn).catch(errorFn);
 ### Response Body Sample
 
 ```json
-[
-  {
-    "ID": "…",
-    "OriginalName": "…",
-    "URL": "…"
-  }
-]
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "OriginalName": "…",
+      "URL": "…"
+    }
+  ]
+}
 ```
 
 ## Post File Data
