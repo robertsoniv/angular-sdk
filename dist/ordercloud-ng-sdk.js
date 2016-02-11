@@ -14,8 +14,6 @@
 
             'Addresses': Addresses(),
             'AdminUsers': AdminUsers(),
-            'ApiClients': ApiClients(),
-            'AdminApiClients': AdminApiClients(),
             'ApprovalRules': ApprovalRules(),
             'Buyers': Buyers(),
             'Categories': Categories(),
@@ -24,7 +22,6 @@
             'CreditCards': CreditCards(),
             'EmailTemplates': EmailTemplates(),
             'Files': Files(),
-            'SecurityProfiles': SecurityProfiles(),
             'Specs': Specs(),
             'UserGroups': UserGroups(),
             'LineItems': LineItems(),
@@ -267,91 +264,6 @@
             }
         }
 
-        function ApiClients() {
-            return {
-                'List': _list,
-                'Get': _get,
-                'Create': _create,
-                'Update': _update,
-                'Delete': _delete
-            };
-
-            function _list(page, pageSize) {
-                return makeApiCall('GET', '/v1/buyers/:buyerID/apiclients', {
-                    'buyerID': BuyerID().Get()
-                }, {
-                    'page': page,
-                    'pageSize': pageSize
-                });
-            }
-
-            function _get(clientID) {
-                return makeApiCall('GET', '/v1/buyers/:buyerID/apiclients/:clientID', {
-                    'buyerID': BuyerID().Get(),
-                    'clientID': clientID
-                }, null);
-            }
-
-            function _create(api) {
-                return makeApiCall('POST', '/v1/buyers/:buyerID/apiclients', {
-                    'buyerID': BuyerID().Get()
-                }, api);
-            }
-
-            function _update(clientID, client) {
-                return makeApiCall('PUT', '/v1/buyers/:buyerID/apiclients/:clientID', {
-                    'buyerID': BuyerID().Get(),
-                    'clientID': clientID
-                }, client);
-            }
-
-            function _delete(clientID) {
-                return makeApiCall('DELETE', '/v1/buyers/:buyerID/apiclients/:clientID', {
-                    'buyerID': BuyerID().Get(),
-                    'clientID': clientID
-                }, null);
-            }
-        }
-
-        function AdminApiClients() {
-            return {
-                'List': _list,
-                'Get': _get,
-                'Create': _create,
-                'Update': _update,
-                'Delete': _delete
-            };
-
-            function _list(page, pageSize) {
-                return makeApiCall('GET', '/v1/apiclient', null, {
-                    'page': page,
-                    'pageSize': pageSize
-                });
-            }
-
-            function _get(clientID) {
-                return makeApiCall('GET', '/v1/apiclient/:clientID', {
-                    'clientID': clientID
-                }, null);
-            }
-
-            function _create(client) {
-                return makeApiCall('POST', '/v1/apiclient', null, client);
-            }
-
-            function _update(clientID, client) {
-                return makeApiCall('PUT', '/v1/apiclient/:clientID', {
-                    'clientID': clientID
-                }, client);
-            }
-
-            function _delete(clientID) {
-                return makeApiCall('DELETE', '/v1/apiclient/:clientID', {
-                    'clientID': clientID
-                }, null);
-            }
-        }
-
         function ApprovalRules() {
             return {
                 'List': _list,
@@ -403,6 +315,7 @@
             return {
                 'List': _list,
                 'Get': _get,
+                'Delete': _delete,
                 'Create': _create,
                 'Update': _update
             };
@@ -421,11 +334,17 @@
                 }, null);
             }
 
+            function _delete(buyerID) {
+                return makeApiCall('DELETE', '/v1/buyers/:buyerID', {
+                    'buyerID': BuyerID().Get()
+                }, null);
+            }
+
             function _create(company) {
                 return makeApiCall('POST', '/v1/buyers', null, company);
             }
 
-            function _update(buyerID, company) {
+            function _update(company, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, company);
@@ -917,57 +836,6 @@
             }
         }
 
-        function SecurityProfiles() {
-            return {
-                'List': _list,
-                'Get': _get,
-                'Create': _create,
-                'Delete': _delete,
-                'Update': _update,
-                'Patch': _patch
-            };
-
-            function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
-                    'search': search,
-                    'page': page,
-                    'pageSize': pageSize,
-                    'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/securityprofiles', null, listArgs);
-            }
-
-            function _get(securityProfileID) {
-                return makeApiCall('GET', '/v1/securityprofiles/:securityProfileID', {
-                    'securityProfileID': securityProfileID
-                }, null);
-            }
-
-            function _create(securityProfile) {
-                return makeApiCall('POST', '/v1/securityprofiles', null, securityProfile);
-            }
-
-            function _delete(securityProfileID) {
-                return makeApiCall('DELETE', '/v1/securityprofiles/:securityProfileID', {
-                    'securityProfileID': securityProfileID
-                }, null);
-            }
-
-            function _update(securityProfileID, securityProfile) {
-                return makeApiCall('PUT', '/v1/securityprofiles/:securityProfileID', {
-                    'securityProfileID': securityProfileID
-                }, securityProfile);
-            }
-
-            function _patch(securityProfileID, securityProfile) {
-                return makeApiCall('PATCH', '/v1/securityprofiles/:securityProfileID', {
-                    'securityProfileID': securityProfileID
-                }, securityProfile);
-            }
-        }
-
         function Specs() {
             return {
                 'List': _list,
@@ -1344,14 +1212,14 @@
                 'PatchBillingAddress': _patchbillingaddress
             };
 
-            function _get(buyerID, orderID) {
+            function _get(orderID, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
                 }, null);
             }
 
-            function _list(direction, buyerID, from, to, search, page, pageSize, searchOn, sortBy, filters) {
+            function _list(direction, from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
                 var listArgs = {
                     'search': search,
                     'page': page,
@@ -1361,47 +1229,47 @@
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 listArgs['direction'] = direction;
-                listArgs['buyerID'] = BuyerID().Get();
+                listArgs['buyerID'] = buyerID ? buyerID : BuyerID().Get();
                 listArgs['from'] = from;
                 listArgs['to'] = to;
                 return makeApiCall('GET', '/v1/orders', null, listArgs);
             }
 
-            function _create(buyerID, order) {
+            function _create(order, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/orders', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, order);
             }
 
-            function _update(buyerID, orderID, order) {
+            function _update(orderID, order, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/orders/:orderID', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
                 }, order);
             }
 
-            function _patch(buyerID, orderID, partialOrder) {
+            function _patch(orderID, partialOrder, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
                 }, partialOrder);
             }
 
-            function _delete(buyerID, orderID) {
+            function _delete(orderID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
                 }, null);
             }
 
-            function _submit(buyerID, orderID) {
+            function _submit(orderID, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/submit', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
                 }, null);
             }
 
-            function _approve(buyerID, orderID, comments) {
+            function _approve(orderID, comments, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/approve', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
@@ -1410,7 +1278,7 @@
                 });
             }
 
-            function _decline(buyerID, orderID, comments) {
+            function _decline(orderID, comments, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/decline', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
@@ -1419,42 +1287,42 @@
                 });
             }
 
-            function _cancel(buyerID, orderID) {
+            function _cancel(orderID, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/cancel', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
                 }, null);
             }
 
-            function _ship(buyerID, orderID, shipment) {
+            function _ship(orderID, shipment, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/ship', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
                 }, shipment);
             }
 
-            function _setshippingaddress(buyerID, orderID, address) {
+            function _setshippingaddress(orderID, address, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/orders/:orderID/shipto', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
                 }, address);
             }
 
-            function _patchshippingaddress(buyerID, orderID, address) {
+            function _patchshippingaddress(orderID, address, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/shipto', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
                 }, address);
             }
 
-            function _setbillingaddress(buyerID, orderID, address) {
+            function _setbillingaddress(orderID, address, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/orders/:orderID/billto', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
                 }, address);
             }
 
-            function _patchbillingaddress(buyerID, orderID, address) {
+            function _patchbillingaddress(orderID, address, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/billto', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
