@@ -336,7 +336,7 @@
 
             function _delete(buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, null);
             }
 

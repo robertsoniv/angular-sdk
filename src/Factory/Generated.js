@@ -138,7 +138,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, null);
 				}
 				function _delete(buyerID) {
-					return makeApiCall('DELETE', '/v1/buyers/:buyerID', { 'buyerID': BuyerID().Get() }, null);
+					return makeApiCall('DELETE', '/v1/buyers/:buyerID', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, null);
 				}
 				function _create(company) {
 					return makeApiCall('POST', '/v1/buyers', null, company);
