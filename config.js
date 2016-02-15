@@ -11,6 +11,11 @@
         files = GetFiles();
 
     module.exports = {
+        packages: [
+            './bower.json',
+            './package.json'
+        ],
+        root: './',
         source: src + factory,
         dist: dist,
         generated: gen,

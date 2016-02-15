@@ -1,4 +1,6 @@
 var config = require('./config'),
+    args = require('yargs').argv,
+    bump = require('gulp-bump'),
     gulp = require('gulp'),
     annotate = require('gulp-ng-annotate'),
     beautify = require('gulp-beautify'),
@@ -27,7 +29,7 @@ gulp.task('compile', ['clean'], function() {
         .pipe(gulp.dest(config.dist));
 });
 
-gulp.task('build', ['compile'], function() {
+gulp.task('build', ['compile', 'bump'], function() {
     return gulp
         .src(config.dist + config.sdk_name + '.js')
         .pipe(uglify())
@@ -35,3 +37,26 @@ gulp.task('build', ['compile'], function() {
         .pipe(gulp.dest(config.dist));
 });
 
+/**
+ * Bump the version
+ * --type=pre will bump the prerelease version *.*.*-x
+ * --type=patch or no flag will bump the patch version *.*.x
+ * --type=minor will bump the minor version *.x.*
+ * --type=major will bump the major version x.*.*
+ * --version=1.2.3 will bump to a specific version and ignore other flags
+ */
+gulp.task('bump', function() {
+    var type = args.type;
+    var version = args.ver;
+    var options = {};
+    if (version) {
+        options.version = version;
+    } else {
+        options.type = type;
+    }
+
+    return gulp
+        .src(config.packages)
+        .pipe(bump(options))
+        .pipe(gulp.dest(config.root));
+});
