@@ -3,7 +3,6 @@
     var fs = require('fs');
 
     var src = './src/',
-        factory = 'Factory/',
         gen = 'Generated.js',
         makeApiCall = 'MakeApiCall.js',
         dist = './dist/',
@@ -16,13 +15,13 @@
             './package.json'
         ],
         root: './',
-        source: src + factory,
+        source: src,
         dist: dist,
         generated: gen,
         sdk_name: SDK_Name,
         func_list: GetFuncList(files),
         file_group: ConcatFiles(files),
-        makeApiCall_file: fs.readFileSync(src + factory + makeApiCall),
+        makeApiCall_file: fs.readFileSync(src + makeApiCall),
         wrap: {
             header: "(function() {\n'use strict';\n",
             footer: '}());\n'
@@ -31,11 +30,11 @@
 
     function GetFiles() {
         var files = [];
-        var fileNames = fs.readdirSync(src + factory);
+        var fileNames = fs.readdirSync(src);
         fileNames.splice(fileNames.indexOf(gen), 1);
         fileNames.splice(fileNames.indexOf(makeApiCall), 1);
         fileNames.forEach(function(filename) {
-            files.push({name: filename.replace('.js', ''), contents: fs.readFileSync(src + factory + filename)});
+            files.push({name: filename.replace('.js', ''), contents: fs.readFileSync(src + filename)});
         });
         return files;
     }
