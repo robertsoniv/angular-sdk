@@ -1,4 +1,4 @@
-angular.module('orderCloud.newsdk', ['ngResource','ngCookies'])
+angular.module('orderCloud.sdk', ['ngResource','ngCookies'])
 .factory('OrderCloud', orderCloud);
 function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocscope, clientid ) {
 	var impersonating = false;
