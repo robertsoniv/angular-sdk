@@ -87,6 +87,20 @@ An AngularJs SDK for OrderCloud API
 
   - [Patch Shipping Address](#patch-shipping-address)
 
+- [Payments](#payments)
+
+  - [Get a Single Payment](#get-a-single-payment)
+
+  - [Get a List of Payments](#get-a-list-of-payments)
+
+  - [Create New Payment](#create-new-payment)
+
+  - [Create or Update Payment](#create-or-update-payment)
+
+  - [Delete Payment](#delete-payment)
+
+  - [Partially Update Payment](#partially-update-payment)
+
 - [Shipments](#shipments)
 
   - [Get a Single Shipment](#get-a-single-shipment)
@@ -118,6 +132,8 @@ An AngularJs SDK for OrderCloud API
   - [Delete Product](#delete-product)
 
   - [Partially Update Product](#partially-update-product)
+
+  - [Generate Variants](#generate-variants)
 
   - [List Variants](#list-variants)
 
@@ -974,19 +990,7 @@ OrderCloud.Orders.Get(orderID).then(successFn).catch(errorFn);
     "Phone": "…",
     "AddressName": "…"
   },
-  "SpendingAccountID": "…",
   "Comments": "…",
-  "PaymentMethod": null,
-  "CreditCardID": "…",
-  "CreditCard": {
-    "ID": "…",
-    "Token": "…",
-    "CardType": "…",
-    "PartialAccountNumber": "…",
-    "CardholderName": "…",
-    "ExpirationDate": null,
-    "xp": null
-  },
   "Approvals": [
     {
       "Status": "Pending",
@@ -1072,19 +1076,7 @@ OrderCloud.Orders.List(direction,from,to,listArgs).then(successFn).catch(errorFn
         "Phone": "…",
         "AddressName": "…"
       },
-      "SpendingAccountID": "…",
       "Comments": "…",
-      "PaymentMethod": null,
-      "CreditCardID": "…",
-      "CreditCard": {
-        "ID": "…",
-        "Token": "…",
-        "CardType": "…",
-        "PartialAccountNumber": "…",
-        "CardholderName": "…",
-        "ExpirationDate": null,
-        "xp": null
-      },
       "Approvals": [
         {
           "Status": "Pending",
@@ -1133,10 +1125,7 @@ OrderCloud.Orders.Create(order).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "BillingAddressID": "…",
   "ShippingAddressID": "…",
-  "SpendingAccountID": "…",
   "Comments": "…",
-  "PaymentMethod": null,
-  "CreditCardID": "…",
   "ShippingCost": null,
   "TaxCost": null,
   "xp": null
@@ -1163,10 +1152,7 @@ OrderCloud.Orders.Update(orderID,order).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "BillingAddressID": "…",
   "ShippingAddressID": "…",
-  "SpendingAccountID": "…",
   "Comments": "…",
-  "PaymentMethod": null,
-  "CreditCardID": "…",
   "ShippingCost": null,
   "TaxCost": null,
   "xp": null
@@ -1204,10 +1190,7 @@ OrderCloud.Orders.Patch(orderID,partialOrder).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "BillingAddressID": "…",
   "ShippingAddressID": "…",
-  "SpendingAccountID": "…",
   "Comments": "…",
-  "PaymentMethod": null,
-  "CreditCardID": "…",
   "ShippingCost": null,
   "TaxCost": null,
   "xp": null
@@ -1248,19 +1231,7 @@ OrderCloud.Orders.Submit(orderID).then(successFn).catch(errorFn);
     "Phone": "…",
     "AddressName": "…"
   },
-  "SpendingAccountID": "…",
   "Comments": "…",
-  "PaymentMethod": null,
-  "CreditCardID": "…",
-  "CreditCard": {
-    "ID": "…",
-    "Token": "…",
-    "CardType": "…",
-    "PartialAccountNumber": "…",
-    "CardholderName": "…",
-    "ExpirationDate": null,
-    "xp": null
-  },
   "Approvals": [
     {
       "Status": "Pending",
@@ -1327,19 +1298,7 @@ OrderCloud.Orders.Approve(orderID,comments).then(successFn).catch(errorFn);
     "Phone": "…",
     "AddressName": "…"
   },
-  "SpendingAccountID": "…",
   "Comments": "…",
-  "PaymentMethod": null,
-  "CreditCardID": "…",
-  "CreditCard": {
-    "ID": "…",
-    "Token": "…",
-    "CardType": "…",
-    "PartialAccountNumber": "…",
-    "CardholderName": "…",
-    "ExpirationDate": null,
-    "xp": null
-  },
   "Approvals": [
     {
       "Status": "Pending",
@@ -1406,19 +1365,7 @@ OrderCloud.Orders.Decline(orderID,comments).then(successFn).catch(errorFn);
     "Phone": "…",
     "AddressName": "…"
   },
-  "SpendingAccountID": "…",
   "Comments": "…",
-  "PaymentMethod": null,
-  "CreditCardID": "…",
-  "CreditCard": {
-    "ID": "…",
-    "Token": "…",
-    "CardType": "…",
-    "PartialAccountNumber": "…",
-    "CardholderName": "…",
-    "ExpirationDate": null,
-    "xp": null
-  },
   "Approvals": [
     {
       "Status": "Pending",
@@ -1484,19 +1431,7 @@ OrderCloud.Orders.Cancel(orderID).then(successFn).catch(errorFn);
     "Phone": "…",
     "AddressName": "…"
   },
-  "SpendingAccountID": "…",
   "Comments": "…",
-  "PaymentMethod": null,
-  "CreditCardID": "…",
-  "CreditCard": {
-    "ID": "…",
-    "Token": "…",
-    "CardType": "…",
-    "PartialAccountNumber": "…",
-    "CardholderName": "…",
-    "ExpirationDate": null,
-    "xp": null
-  },
   "Approvals": [
     {
       "Status": "Pending",
@@ -1992,6 +1927,175 @@ OrderCloud.LineItems.PatchShippingAddress(orderID,lineItemID,address).then(succe
 }
 ```
 
+# Payments
+
+```js
+angular.module('orderCloud.sdk).factory(Payments, PaymentsFactory)
+```
+
+
+## Get a Single Payment
+
+```js
+OrderCloud.Payments.Get(orderID,paymentID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|paymentID|string|ID of the payment.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Type": "PurchaseOrder",
+  "DateCreated": "0001-01-01T00:00:00+00:00",
+  "CreditCardID": "…",
+  "SpendingAccountID": "…",
+  "Description": "…",
+  "Amount": null,
+  "xp": null
+}
+```
+
+## Get a List of Payments
+
+```js
+OrderCloud.Payments.List(orderID,listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Type": "PurchaseOrder",
+      "DateCreated": "0001-01-01T00:00:00+00:00",
+      "CreditCardID": "…",
+      "SpendingAccountID": "…",
+      "Description": "…",
+      "Amount": null,
+      "xp": null
+    }
+  ]
+}
+```
+
+## Create New Payment
+
+```js
+OrderCloud.Payments.Create(orderID,payment).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Type": "PurchaseOrder",
+  "CreditCardID": "…",
+  "SpendingAccountID": "…",
+  "Description": "…",
+  "Amount": null,
+  "xp": null
+}
+```
+
+## Create or Update Payment
+
+```js
+OrderCloud.Payments.Update(orderID,paymentID,payment).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|paymentID|string|ID of the payment.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Type": "PurchaseOrder",
+  "CreditCardID": "…",
+  "SpendingAccountID": "…",
+  "Description": "…",
+  "Amount": null,
+  "xp": null
+}
+```
+
+## Delete Payment
+
+```js
+OrderCloud.Payments.Delete(orderID,paymentID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|paymentID|string|ID of the payment.|
+## Partially Update Payment
+
+```js
+OrderCloud.Payments.Patch(orderID,paymentID,partialPayment).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|paymentID|string|ID of the payment.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Type": "PurchaseOrder",
+  "CreditCardID": "…",
+  "SpendingAccountID": "…",
+  "Description": "…",
+  "Amount": null,
+  "xp": null
+}
+```
+
 # Shipments
 
 ```js
@@ -2416,6 +2520,18 @@ OrderCloud.Products.Patch(productID,product).then(successFn).catch(errorFn);
 }
 ```
 
+## Generate Variants
+
+```js
+OrderCloud.Products.GenerateVariants(productID,overwriteExisting).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|productID|string|ID of the product.|
+|overwriteExisting|boolean|Overwrite existing of the product.|
 ## List Variants
 
 ```js
@@ -2950,7 +3066,6 @@ OrderCloud.Specs.Get(specID).then(successFn).catch(errorFn);
   "Name": "…",
   "DefaultValue": "…",
   "Required": false,
-  "DefinesVariant": false,
   "AllowOpenText": false,
   "DefaultOptionID": "…",
   "Options": [
@@ -3001,7 +3116,6 @@ OrderCloud.Specs.List(page,pageSize).then(successFn).catch(errorFn);
       "Name": "…",
       "DefaultValue": "…",
       "Required": false,
-      "DefinesVariant": false,
       "AllowOpenText": false,
       "DefaultOptionID": "…",
       "Options": [
@@ -3036,7 +3150,6 @@ OrderCloud.Specs.Create(spec).then(successFn).catch(errorFn);
   "Name": "…",
   "DefaultValue": "…",
   "Required": false,
-  "DefinesVariant": false,
   "AllowOpenText": false,
   "DefaultOptionID": "…",
   "xp": null
@@ -3063,7 +3176,6 @@ OrderCloud.Specs.Update(specID,spec).then(successFn).catch(errorFn);
   "Name": "…",
   "DefaultValue": "…",
   "Required": false,
-  "DefinesVariant": false,
   "AllowOpenText": false,
   "DefaultOptionID": "…",
   "xp": null
@@ -3101,7 +3213,6 @@ OrderCloud.Specs.Patch(specID,spec).then(successFn).catch(errorFn);
   "Name": "…",
   "DefaultValue": "…",
   "Required": false,
-  "DefinesVariant": false,
   "AllowOpenText": false,
   "DefaultOptionID": "…",
   "xp": null
@@ -3139,7 +3250,8 @@ OrderCloud.Specs.ListProductAssignments(specID,productID,page,pageSize).then(suc
   "Items": [
     {
       "SpecID": "…",
-      "ProductID": "…"
+      "ProductID": "…",
+      "DefinesVariant": false
     }
   ]
 }
@@ -3168,7 +3280,8 @@ OrderCloud.Specs.SaveProductAssignment(productAssignment).then(successFn).catch(
 ```json
 {
   "SpecID": "…",
-  "ProductID": "…"
+  "ProductID": "…",
+  "DefinesVariant": false
 }
 ```
 

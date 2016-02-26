@@ -22,6 +22,7 @@
             'CreditCards': CreditCards(),
             'EmailTemplates': EmailTemplates(),
             'Files': Files(),
+            'Payments': Payments(),
             'Specs': Specs(),
             'UserGroups': UserGroups(),
             'LineItems': LineItems(),
@@ -836,6 +837,71 @@
             }
         }
 
+        function Payments() {
+            return {
+                'Get': _get,
+                'List': _list,
+                'Create': _create,
+                'Update': _update,
+                'Patch': _patch,
+                'Delete': _delete
+            };
+
+            function _get(orderID, paymentID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID', {
+                    'buyerID': BuyerID().Get(),
+                    'orderID': orderID,
+                    'paymentID': paymentID
+                }, null);
+            }
+
+            function _list(orderID, search, page, pageSize, searchOn, sortBy, filters) {
+                var listArgs = {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                };
+                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
+                return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/payments', {
+                    'buyerID': BuyerID().Get(),
+                    'orderID': orderID
+                }, listArgs);
+            }
+
+            function _create(orderID, payment) {
+                return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/payments', {
+                    'buyerID': BuyerID().Get(),
+                    'orderID': orderID
+                }, payment);
+            }
+
+            function _update(orderID, paymentID, payment) {
+                return makeApiCall('PUT', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID', {
+                    'buyerID': BuyerID().Get(),
+                    'orderID': orderID,
+                    'paymentID': paymentID
+                }, payment);
+            }
+
+            function _patch(orderID, paymentID, partialPayment) {
+                return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID', {
+                    'buyerID': BuyerID().Get(),
+                    'orderID': orderID,
+                    'paymentID': paymentID
+                }, partialPayment);
+            }
+
+            function _delete(orderID, paymentID) {
+                return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID', {
+                    'buyerID': BuyerID().Get(),
+                    'orderID': orderID,
+                    'paymentID': paymentID
+                }, null);
+            }
+        }
+
         function Specs() {
             return {
                 'List': _list,
@@ -1574,6 +1640,7 @@
                 'Patch': _patch,
                 'Create': _create,
                 'Delete': _delete,
+                'GenerateVariants': _generatevariants,
                 'ListVariants': _listvariants,
                 'ListVariantInventory': _listvariantinventory,
                 'GetVariantInventory': _getvariantinventory,
@@ -1625,6 +1692,14 @@
                 return makeApiCall('DELETE', '/v1/products/:productID', {
                     'productID': productID
                 }, null);
+            }
+
+            function _generatevariants(productID, overwriteExisting) {
+                return makeApiCall('POST', '/v1/products/:productID/variants/generate', {
+                    'productID': productID
+                }, {
+                    'overwriteExisting': overwriteExisting
+                });
             }
 
             function _listvariants(productID, page, pageSize) {
