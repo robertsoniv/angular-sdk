@@ -44,6 +44,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID/addresses', { 'buyerID': BuyerID().Get() }, { 'search': search, 'page': page, 'pageSize': pageSize });
 				}
 				function _get(addressID) {
+					if (!addressID) {
+						var errMessage = 'addressID is a required field for OrderCloud.Addresses.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/addresses/:addressID', { 'buyerID': BuyerID().Get(), 'addressID': addressID }, null);
 				}
 				function _create(address) {
@@ -75,6 +82,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _get(userID) {
+					if (!userID) {
+						var errMessage = 'userID is a required field for OrderCloud.AdminUsers.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/adminusers/:userID', { 'userID': userID }, null);
 				}
 				function _update(userID, user) {
@@ -111,6 +125,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID/approvalrules', { 'buyerID': BuyerID().Get() }, { 'search': search, 'page': page, 'pageSize': pageSize });
 				}
 				function _get(approvalRuleID) {
+					if (!approvalRuleID) {
+						var errMessage = 'approvalRuleID is a required field for OrderCloud.ApprovalRules.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/approvalrules/:approvalRuleID', { 'buyerID': BuyerID().Get(), 'approvalRuleID': approvalRuleID }, null);
 				}
 				function _create(approvalRule) {
@@ -172,6 +193,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID/categories/:parentID/categories', { 'buyerID': BuyerID().Get(), 'parentID': parentID }, { 'search': search, 'depth': depth, 'page': page, 'pageSize': pageSize });
 				}
 				function _get(categoryID) {
+					if (!categoryID) {
+						var errMessage = 'categoryID is a required field for OrderCloud.Categories.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/categories/:categoryID', { 'buyerID': BuyerID().Get(), 'categoryID': categoryID }, null);
 				}
 				function _create(category) {
@@ -221,6 +249,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters', { 'buyerID': BuyerID().Get() }, { 'search': search, 'page': page, 'pageSize': pageSize });
 				}
 				function _get(costCenterID) {
+					if (!costCenterID) {
+						var errMessage = 'costCenterID is a required field for OrderCloud.CostCenters.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters/:costCenterID', { 'buyerID': BuyerID().Get(), 'costCenterID': costCenterID }, null);
 				}
 				function _create(costCenter) {
@@ -264,6 +299,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID/coupons', { 'buyerID': BuyerID().Get() }, { 'search': search, 'page': page, 'pageSize': pageSize });
 				}
 				function _get(couponID) {
+					if (!couponID) {
+						var errMessage = 'couponID is a required field for OrderCloud.Coupons.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/coupons/:couponID', { 'buyerID': BuyerID().Get(), 'couponID': couponID }, null);
 				}
 				function _create(coupon) {
@@ -319,6 +361,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards', { 'buyerID': BuyerID().Get() }, { 'page': page, 'pageSize': pageSize });
 				}
 				function _get(creditCardID) {
+					if (!creditCardID) {
+						var errMessage = 'creditCardID is a required field for OrderCloud.CreditCards.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards/:creditCardID', { 'buyerID': BuyerID().Get(), 'creditCardID': creditCardID }, null);
 				}
 				function _create(card) {
@@ -349,6 +398,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _get(emailTemplateType) {
+					if (!emailTemplateType) {
+						var errMessage = 'emailTemplateType is a required field for OrderCloud.EmailTemplates.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/emailtemplates/:emailTemplateType', { 'buyerID': BuyerID().Get(), 'emailTemplateType': emailTemplateType }, null);
 				}
 				function _update(emailTemplateType, emailTemplate) {
@@ -372,6 +428,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/files', null, { 'page': page, 'pageSize': pageSize });
 				}
 				function _get(fileID) {
+					if (!fileID) {
+						var errMessage = 'fileID is a required field for OrderCloud.Files.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/files/:fileID', { 'fileID': fileID }, null);
 				}
 				function _postfiledata(filename) {
@@ -389,6 +452,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _get(orderID, paymentID) {
+					if (!orderID || !paymentID) {
+						var errMessage = 'orderID and paymentID are required fields for OrderCloud.Payments.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID', { 'buyerID': BuyerID().Get(), 'orderID': orderID, 'paymentID': paymentID }, null);
 				}
 				function _list(orderID, search, page, pageSize, searchOn, sortBy, filters) {
@@ -436,6 +506,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/specs', null, { 'page': page, 'pageSize': pageSize });
 				}
 				function _get(specID) {
+					if (!specID) {
+						var errMessage = 'specID is a required field for OrderCloud.Specs.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/specs/:specID', { 'specID': specID }, null);
 				}
 				function _patch(specID, spec) {
@@ -497,6 +574,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups', { 'buyerID': BuyerID().Get() }, listArgs);
 				}
 				function _get(userGroupID) {
+					if (!userGroupID) {
+						var errMessage = 'userGroupID is a required field for OrderCloud.UserGroups.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups/:userGroupID', { 'buyerID': BuyerID().Get(), 'userGroupID': userGroupID }, null);
 				}
 				function _update(userGroupID, group) {
@@ -534,6 +618,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _get(orderID, lineItemID) {
+					if (!orderID || !lineItemID) {
+						var errMessage = 'orderID and lineItemID are required fields for OrderCloud.LineItems.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID', { 'buyerID': BuyerID().Get(), 'orderID': orderID, 'lineItemID': lineItemID }, null);
 				}
 				function _list(orderID, page, pageSize) {
@@ -635,6 +726,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _get(orderID, buyerID) {
+					if (!orderID) {
+						var errMessage = 'orderID is a required field for OrderCloud.Orders.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID }, null);
 				}
 				function _list(direction, from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
@@ -721,6 +819,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/priceschedules', null, { 'page': page, 'pageSize': pageSize });
 				}
 				function _get(priceScheduleID) {
+					if (!priceScheduleID) {
+						var errMessage = 'priceScheduleID is a required field for OrderCloud.PriceSchedules.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/priceschedules/:priceScheduleID', { 'priceScheduleID': priceScheduleID }, null);
 				}
 				function _create(priceSchedule) {
@@ -755,6 +860,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _get(shipmentID) {
+					if (!shipmentID) {
+						var errMessage = 'shipmentID is a required field for OrderCloud.Shipments.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/shipments/:shipmentID', { 'buyerID': BuyerID().Get(), 'shipmentID': shipmentID }, null);
 				}
 				function _list(orderID, search, page, pageSize) {
@@ -803,6 +915,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts', { 'buyerID': BuyerID().Get() }, listArgs);
 				}
 				function _get(spendingAccountID) {
+					if (!spendingAccountID) {
+						var errMessage = 'spendingAccountID is a required field for OrderCloud.SpendingAccounts.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts/:spendingAccountID', { 'buyerID': BuyerID().Get(), 'spendingAccountID': spendingAccountID }, null);
 				}
 				function _create(spendingAccount) {
@@ -858,6 +977,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/products', null, listArgs);
 				}
 				function _get(productID) {
+					if (!productID) {
+						var errMessage = 'productID is a required field for OrderCloud.Products.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/products/:productID', { 'productID': productID }, null);
 				}
 				function _update(productID, product) {
@@ -932,6 +1058,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID/users', { 'buyerID': BuyerID().Get() }, listArgs);
 				}
 				function _get(userID) {
+					if (!userID) {
+						var errMessage = 'userID is a required field for OrderCloud.Users.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/users/:userID', { 'buyerID': BuyerID().Get(), 'userID': userID }, null);
 				}
 				function _update(userID, user) {

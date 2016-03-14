@@ -13,7 +13,7 @@ var config = require('./config'),
 gulp.task('default', ['build']);
 
 gulp.task('clean', function() {
-    return del('./dist');
+    return del('./dist/**/*');
 });
 
 gulp.task('compile', ['clean'], function() {

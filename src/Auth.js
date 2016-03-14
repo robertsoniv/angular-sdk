@@ -1,6 +1,7 @@
 function Auth() {
     return {
         'GetToken': _getToken,
+        'RefreshToken': _refreshToken,
         'SetToken': _setToken,
         'RemoveToken': _removeToken,
         'SetImpersonationToken': _setImpersonationToken,
@@ -29,6 +30,20 @@ function Auth() {
         }
 
         return $resource(authurl, {}, { login: { method: 'POST'}}).login($.param(params)).$promise;
+    }
+
+    function _refreshToken(refresh_token) {
+        var params = {
+            client_id: clientid,
+            grant_type: 'refresh_token',
+            scope: ocscope,
+            refresh_token: refresh_token
+        };
+        return $resource(authurl, {}, {
+            login: {
+                method: 'POST'
+            }
+        }).login($.param(params)).$promise;
     }
 
     function _setToken(token) {
