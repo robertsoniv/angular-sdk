@@ -6,7 +6,7 @@ function As() {
 			Auth().SetImpersonationToken(arguments[0]);
 			break;
 		case 'object':
-			CreateToken(arguements[0]);
+			CreateToken(arguments[0]);
 			break;
 		default: 
 			break;
