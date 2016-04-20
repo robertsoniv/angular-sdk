@@ -101,6 +101,14 @@ An AngularJs SDK for OrderCloud API
 
   - [Partially Update Payment](#partially-update-payment)
 
+  - [Create Transaction](#create-transaction)
+
+  - [Update Transaction](#update-transaction)
+
+  - [Patch Transaction](#patch-transaction)
+
+  - [Delete Transacion](#delete-transacion)
+
 - [Shipments](#shipments)
 
   - [Get a Single Shipment](#get-a-single-shipment)
@@ -543,7 +551,7 @@ OrderCloud.Me.Get().then(successFn).catch(errorFn);
 ## List Cost Centers
 
 ```js
-OrderCloud.Me.ListCostCenters(search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Me.ListCostCenters(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -551,8 +559,11 @@ OrderCloud.Me.ListCostCenters(search,page,pageSize).then(successFn).catch(errorF
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
@@ -990,22 +1001,9 @@ OrderCloud.Orders.Get(orderID).then(successFn).catch(errorFn);
     "Phone": "…",
     "AddressName": "…"
   },
+  "ShippingAddressID": "…",
   "Comments": "…",
-  "Approvals": [
-    {
-      "Status": "Pending",
-      "DateCreated": "0001-01-01T00:00:00+00:00",
-      "DateApproved": null,
-      "DateDeclined": null,
-      "ApprovedByUserID": "…",
-      "ApprovedByFirstName": "…",
-      "ApprovedByLastName": "…",
-      "Reasons": [
-        "…"
-      ],
-      "Comments": "…"
-    }
-  ],
+  "LineItemCount": 0,
   "Status": "Unsubmitted",
   "DateCreated": null,
   "DateSubmitted": null,
@@ -1076,22 +1074,9 @@ OrderCloud.Orders.List(direction,from,to,listArgs).then(successFn).catch(errorFn
         "Phone": "…",
         "AddressName": "…"
       },
+      "ShippingAddressID": "…",
       "Comments": "…",
-      "Approvals": [
-        {
-          "Status": "Pending",
-          "DateCreated": "0001-01-01T00:00:00+00:00",
-          "DateApproved": null,
-          "DateDeclined": null,
-          "ApprovedByUserID": "…",
-          "ApprovedByFirstName": "…",
-          "ApprovedByLastName": "…",
-          "Reasons": [
-            "…"
-          ],
-          "Comments": "…"
-        }
-      ],
+      "LineItemCount": 0,
       "Status": "Unsubmitted",
       "DateCreated": null,
       "DateSubmitted": null,
@@ -1231,22 +1216,9 @@ OrderCloud.Orders.Submit(orderID).then(successFn).catch(errorFn);
     "Phone": "…",
     "AddressName": "…"
   },
+  "ShippingAddressID": "…",
   "Comments": "…",
-  "Approvals": [
-    {
-      "Status": "Pending",
-      "DateCreated": "0001-01-01T00:00:00+00:00",
-      "DateApproved": null,
-      "DateDeclined": null,
-      "ApprovedByUserID": "…",
-      "ApprovedByFirstName": "…",
-      "ApprovedByLastName": "…",
-      "Reasons": [
-        "…"
-      ],
-      "Comments": "…"
-    }
-  ],
+  "LineItemCount": 0,
   "Status": "Unsubmitted",
   "DateCreated": null,
   "DateSubmitted": null,
@@ -1298,22 +1270,9 @@ OrderCloud.Orders.Approve(orderID,comments).then(successFn).catch(errorFn);
     "Phone": "…",
     "AddressName": "…"
   },
+  "ShippingAddressID": "…",
   "Comments": "…",
-  "Approvals": [
-    {
-      "Status": "Pending",
-      "DateCreated": "0001-01-01T00:00:00+00:00",
-      "DateApproved": null,
-      "DateDeclined": null,
-      "ApprovedByUserID": "…",
-      "ApprovedByFirstName": "…",
-      "ApprovedByLastName": "…",
-      "Reasons": [
-        "…"
-      ],
-      "Comments": "…"
-    }
-  ],
+  "LineItemCount": 0,
   "Status": "Unsubmitted",
   "DateCreated": null,
   "DateSubmitted": null,
@@ -1365,22 +1324,9 @@ OrderCloud.Orders.Decline(orderID,comments).then(successFn).catch(errorFn);
     "Phone": "…",
     "AddressName": "…"
   },
+  "ShippingAddressID": "…",
   "Comments": "…",
-  "Approvals": [
-    {
-      "Status": "Pending",
-      "DateCreated": "0001-01-01T00:00:00+00:00",
-      "DateApproved": null,
-      "DateDeclined": null,
-      "ApprovedByUserID": "…",
-      "ApprovedByFirstName": "…",
-      "ApprovedByLastName": "…",
-      "Reasons": [
-        "…"
-      ],
-      "Comments": "…"
-    }
-  ],
+  "LineItemCount": 0,
   "Status": "Unsubmitted",
   "DateCreated": null,
   "DateSubmitted": null,
@@ -1431,22 +1377,9 @@ OrderCloud.Orders.Cancel(orderID).then(successFn).catch(errorFn);
     "Phone": "…",
     "AddressName": "…"
   },
+  "ShippingAddressID": "…",
   "Comments": "…",
-  "Approvals": [
-    {
-      "Status": "Pending",
-      "DateCreated": "0001-01-01T00:00:00+00:00",
-      "DateApproved": null,
-      "DateDeclined": null,
-      "ApprovedByUserID": "…",
-      "ApprovedByFirstName": "…",
-      "ApprovedByLastName": "…",
-      "Reasons": [
-        "…"
-      ],
-      "Comments": "…"
-    }
-  ],
+  "LineItemCount": 0,
   "Status": "Unsubmitted",
   "DateCreated": null,
   "DateSubmitted": null,
@@ -1637,16 +1570,15 @@ OrderCloud.LineItems.Get(orderID,lineItemID).then(successFn).catch(errorFn);
 
 ```json
 {
-  "OrderID": "…",
   "ID": "…",
   "ProductID": "…",
   "Quantity": 0,
+  "DateAdded": "0001-01-01T00:00:00+00:00",
   "QuantityShipped": 0,
   "UnitPrice": null,
   "LineTotal": 0.0,
   "CostCenter": "…",
   "DateNeeded": null,
-  "PriceScheduleID": "…",
   "ShippingAccount": "…",
   "ShippingAddress": {
     "ID": "…",
@@ -1679,7 +1611,7 @@ OrderCloud.LineItems.Get(orderID,lineItemID).then(successFn).catch(errorFn);
 ## Get a List of Line Items
 
 ```js
-OrderCloud.LineItems.List(orderID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.LineItems.List(orderID,listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1687,8 +1619,12 @@ OrderCloud.LineItems.List(orderID,page,pageSize).then(successFn).catch(errorFn);
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |orderID|string|ID of the order.|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
@@ -1705,16 +1641,15 @@ OrderCloud.LineItems.List(orderID,page,pageSize).then(successFn).catch(errorFn);
   },
   "Items": [
     {
-      "OrderID": "…",
       "ID": "…",
       "ProductID": "…",
       "Quantity": 0,
+      "DateAdded": "0001-01-01T00:00:00+00:00",
       "QuantityShipped": 0,
       "UnitPrice": null,
       "LineTotal": 0.0,
       "CostCenter": "…",
       "DateNeeded": null,
-      "PriceScheduleID": "…",
       "ShippingAccount": "…",
       "ShippingAddress": {
         "ID": "…",
@@ -1832,7 +1767,7 @@ OrderCloud.LineItems.Delete(orderID,lineItemID).then(successFn).catch(errorFn);
 ## Partially Update Line Item
 
 ```js
-OrderCloud.LineItems.Patch(orderID,lineItemID,lineItem).then(successFn).catch(errorFn);
+OrderCloud.LineItems.Patch(orderID,lineItemID,partialLineItem).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1957,7 +1892,19 @@ OrderCloud.Payments.Get(orderID,paymentID).then(successFn).catch(errorFn);
   "SpendingAccountID": "…",
   "Description": "…",
   "Amount": null,
-  "xp": null
+  "xp": null,
+  "Transactions": [
+    {
+      "ID": "…",
+      "Type": "…",
+      "DateExecuted": "0001-01-01T00:00:00+00:00",
+      "Amount": null,
+      "Succeeded": false,
+      "ResultCode": "…",
+      "ResultMessage": "…",
+      "xp": null
+    }
+  ]
 }
 ```
 
@@ -2001,7 +1948,19 @@ OrderCloud.Payments.List(orderID,listArgs).then(successFn).catch(errorFn);
       "SpendingAccountID": "…",
       "Description": "…",
       "Amount": null,
-      "xp": null
+      "xp": null,
+      "Transactions": [
+        {
+          "ID": "…",
+          "Type": "…",
+          "DateExecuted": "0001-01-01T00:00:00+00:00",
+          "Amount": null,
+          "Succeeded": false,
+          "ResultCode": "…",
+          "ResultMessage": "…",
+          "xp": null
+        }
+      ]
     }
   ]
 }
@@ -2096,13 +2055,109 @@ OrderCloud.Payments.Patch(orderID,paymentID,partialPayment).then(successFn).catc
 }
 ```
 
+## Create Transaction
+
+```js
+OrderCloud.Payments.CreateTransaction(orderID,paymentID,transaction).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|paymentID|string|ID of the payment.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Type": "…",
+  "DateExecuted": "0001-01-01T00:00:00+00:00",
+  "Amount": null,
+  "Succeeded": false,
+  "ResultCode": "…",
+  "ResultMessage": "…",
+  "xp": null
+}
+```
+
+## Update Transaction
+
+```js
+OrderCloud.Payments.UpdateTransaction(orderID,paymentID,transactionID,transaction).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|paymentID|string|ID of the payment.|
+|transactionID|string|ID of the transaction.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Type": "…",
+  "DateExecuted": "0001-01-01T00:00:00+00:00",
+  "Amount": null,
+  "Succeeded": false,
+  "ResultCode": "…",
+  "ResultMessage": "…",
+  "xp": null
+}
+```
+
+## Patch Transaction
+
+```js
+OrderCloud.Payments.PatchTransaction(orderID,paymentID,transactionID,partialTransaction).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|paymentID|string|ID of the payment.|
+|transactionID|string|ID of the transaction.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Type": "…",
+  "DateExecuted": "0001-01-01T00:00:00+00:00",
+  "Amount": null,
+  "Succeeded": false,
+  "ResultCode": "…",
+  "ResultMessage": "…",
+  "xp": null
+}
+```
+
+## Delete Transacion
+
+```js
+OrderCloud.Payments.DeleteTransacion(orderID,paymentID,transactionID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|paymentID|string|ID of the payment.|
+|transactionID|string|ID of the transaction.|
 # Shipments
 
 ```js
 angular.module('orderCloud.sdk).factory(Shipments, ShipmentsFactory)
 ```
 
-A Shipment is a grouping of Line Items from one or more Orders that is physically packaged and delivered to the Buyer as a single unit. It is typically created by the Seller after the Order is submitted as part of the fulfillment process.
+A Shipment is a grouping of one or more Line Items from one or more Orders that is physically packaged and delivered to the Buyer as a single unit. It is typically created by the Seller after the Order is submitted as part of the fulfillment process.
 
 ## Get a Single Shipment
 
@@ -3041,10 +3096,6 @@ angular.module('orderCloud.sdk).factory(Specs, SpecsFactory)
 ```
 
 Specs are used to capture user input when adding a Product to an Order. At its simplest, a spec is a name/value pair. A spec value may have a price markup or markdown associated with it. In more advanced scenarios, specs can drive the product SKU. For example, a product may be available in 3 colors and 3 sizes and therefore have a total of 9 SKUs. **The OrderCloud platform will choose the correct SKU based on the user-selected color and size specs**.
-There are three different types of Specs: Text, Selection, and File.
-**Text Specs** are custom text options for a product. For example, if you have a pencil (the product), that can have customized text on it, that's what a text spec is for.
-**Selection Specs** are a limited selection of options for a product. For example, if your pencil (that product again) can come in green, red, or blue, or with one pre-set slogan or another, that would be a selection spec.
-**File Specs** are when a user can upload a file with something in it to customize a product. For example, if that pencil can have a custom logo on it, the user can upload the logo image as a JPG file.
 
 ## Get a Single Spec
 
@@ -5208,7 +5259,7 @@ OrderCloud.CostCenters.Get(costCenterID).then(successFn).catch(errorFn);
 ## Get a List of Cost Centers
 
 ```js
-OrderCloud.CostCenters.List(search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.CostCenters.List(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5216,8 +5267,11 @@ OrderCloud.CostCenters.List(search,page,pageSize).then(successFn).catch(errorFn)
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json

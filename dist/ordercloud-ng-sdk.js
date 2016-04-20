@@ -536,14 +536,18 @@
                 'SaveAssignment': _saveassignment
             };
 
-            function _list(search, page, pageSize) {
-                return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters', {
-                    'buyerID': BuyerID().Get()
-                }, {
+            function _list(search, page, pageSize, searchOn, sortBy, filters) {
+                var listArgs = {
                     'search': search,
                     'page': page,
-                    'pageSize': pageSize
-                });
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                };
+                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
+                return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters', {
+                    'buyerID': BuyerID().Get()
+                }, listArgs);
             }
 
             function _get(costCenterID) {
@@ -922,7 +926,11 @@
                 'Create': _create,
                 'Update': _update,
                 'Patch': _patch,
-                'Delete': _delete
+                'Delete': _delete,
+                'CreateTransaction': _createtransaction,
+                'UpdateTransaction': _updatetransaction,
+                'PatchTransaction': _patchtransaction,
+                'DeleteTransacion': _deletetransacion
             };
 
             function _get(orderID, paymentID) {
@@ -983,6 +991,41 @@
                     'buyerID': BuyerID().Get(),
                     'orderID': orderID,
                     'paymentID': paymentID
+                }, null);
+            }
+
+            function _createtransaction(orderID, paymentID, transaction) {
+                return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID/transactions', {
+                    'buyerID': BuyerID().Get(),
+                    'orderID': orderID,
+                    'paymentID': paymentID
+                }, transaction);
+            }
+
+            function _updatetransaction(orderID, paymentID, transactionID, transaction) {
+                return makeApiCall('PUT', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID/transactions/:transactionID', {
+                    'buyerID': BuyerID().Get(),
+                    'orderID': orderID,
+                    'paymentID': paymentID,
+                    'transactionID': transactionID
+                }, transaction);
+            }
+
+            function _patchtransaction(orderID, paymentID, transactionID, partialTransaction) {
+                return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID/transactions/:transactionID', {
+                    'buyerID': BuyerID().Get(),
+                    'orderID': orderID,
+                    'paymentID': paymentID,
+                    'transactionID': transactionID
+                }, partialTransaction);
+            }
+
+            function _deletetransacion(orderID, paymentID, transactionID) {
+                return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID/transactions/:transactionID', {
+                    'buyerID': BuyerID().Get(),
+                    'orderID': orderID,
+                    'paymentID': paymentID,
+                    'transactionID': transactionID
                 }, null);
             }
         }
@@ -1215,14 +1258,19 @@
                 }, null);
             }
 
-            function _list(orderID, page, pageSize) {
+            function _list(orderID, search, page, pageSize, searchOn, sortBy, filters) {
+                var listArgs = {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                };
+                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/lineitems', {
                     'buyerID': BuyerID().Get(),
                     'orderID': orderID
-                }, {
-                    'page': page,
-                    'pageSize': pageSize
-                });
+                }, listArgs);
             }
 
             function _create(orderID, lineItem) {
@@ -1240,12 +1288,12 @@
                 }, lineItem);
             }
 
-            function _patch(orderID, lineItemID, lineItem) {
+            function _patch(orderID, lineItemID, partialLineItem) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID', {
                     'buyerID': BuyerID().Get(),
                     'orderID': orderID,
                     'lineItemID': lineItemID
-                }, lineItem);
+                }, partialLineItem);
             }
 
             function _delete(orderID, lineItemID) {
@@ -1290,12 +1338,16 @@
                 return makeApiCall('GET', '/v1/me', null, null);
             }
 
-            function _listcostcenters(search, page, pageSize) {
-                return makeApiCall('GET', '/v1/me/costcenters', null, {
+            function _listcostcenters(search, page, pageSize, searchOn, sortBy, filters) {
+                var listArgs = {
                     'search': search,
                     'page': page,
-                    'pageSize': pageSize
-                });
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                };
+                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
+                return makeApiCall('GET', '/v1/me/costcenters', null, listArgs);
             }
 
             function _listusergroups(search, page, pageSize, searchOn, sortBy, filters) {
