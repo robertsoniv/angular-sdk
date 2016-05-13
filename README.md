@@ -71,19 +71,25 @@ An AngularJs SDK for OrderCloud API
 
   - [Get Spec](#get-spec)
 
+  - [List Orders](#list-orders)
+
+  - [Get Order](#get-order)
+
   - [Create From Temp User](#create-from-temp-user)
 
 - [Orders](#orders)
 
   - [Get a Single Order](#get-a-single-order)
 
-  - [Get a List of Orders](#get-a-list-of-orders)
-
   - [Create New Order](#create-new-order)
 
   - [Create or Update Order](#create-or-update-order)
 
   - [Delete Order](#delete-order)
+
+  - [List Outgoing](#list-outgoing)
+
+  - [List Incoming](#list-incoming)
 
   - [Partially Update Order](#partially-update-order)
 
@@ -449,6 +455,8 @@ An AngularJs SDK for OrderCloud API
 
   - [Delete Approval Rule](#delete-approval-rule)
 
+  - [Partially Update Approval Rule](#partially-update-approval-rule)
+
 - [CreditCards](#creditcards)
 
   - [Get a Single Credit Card](#get-a-single-credit-card)
@@ -575,6 +583,7 @@ OrderCloud.SecurityProfiles.Get(securityProfileID).then(successFn).catch(errorFn
   "ApprovalRuleAdmin": false,
   "ApprovalRuleReader": false,
   "PermissionAdmin": false,
+  "OrderReader": false,
   "MeAdmin": false,
   "MeXpAdmin": false,
   "MeAddressAdmin": false,
@@ -657,6 +666,7 @@ OrderCloud.SecurityProfiles.List(listArgs).then(successFn).catch(errorFn);
       "ApprovalRuleAdmin": false,
       "ApprovalRuleReader": false,
       "PermissionAdmin": false,
+      "OrderReader": false,
       "MeAdmin": false,
       "MeXpAdmin": false,
       "MeAddressAdmin": false,
@@ -875,7 +885,6 @@ OrderCloud.Me.ListUserGroups(listArgs).then(successFn).catch(errorFn);
       "ID": "…",
       "Name": "…",
       "Description": "…",
-      "IsReportingGroup": false,
       "xp": null
     }
   ]
@@ -1569,6 +1578,137 @@ OrderCloud.Me.GetSpec(productID,specID).then(successFn).catch(errorFn);
 }
 ```
 
+## List Orders
+
+```js
+OrderCloud.Me.ListOrders(listArgs,from,to).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|from|date|Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).|
+|to|date|Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Type": "Standard",
+      "FromUserID": "…",
+      "FromUserFirstName": "…",
+      "FromUserLastName": "…",
+      "BillingAddress": {
+        "ID": "…",
+        "DateCreated": null,
+        "CompanyName": "…",
+        "FirstName": "…",
+        "LastName": "…",
+        "Street1": "…",
+        "Street2": "…",
+        "City": "…",
+        "State": "…",
+        "Zip": "…",
+        "Country": "…",
+        "Phone": "…",
+        "AddressName": "…",
+        "xp": null
+      },
+      "ShippingAddressID": "…",
+      "Comments": "…",
+      "LineItemCount": 0,
+      "Status": "Unsubmitted",
+      "DateCreated": null,
+      "DateSubmitted": null,
+      "DateApproved": null,
+      "DateDeclined": null,
+      "DateCanceled": null,
+      "DateCompleted": null,
+      "Subtotal": 0.0,
+      "ShippingCost": null,
+      "TaxCost": null,
+      "CouponDiscount": 0.0,
+      "Total": 0.0,
+      "xp": null
+    }
+  ]
+}
+```
+
+## Get Order
+
+```js
+OrderCloud.Me.GetOrder(orderID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Type": "Standard",
+  "FromUserID": "…",
+  "FromUserFirstName": "…",
+  "FromUserLastName": "…",
+  "BillingAddress": {
+    "ID": "…",
+    "DateCreated": null,
+    "CompanyName": "…",
+    "FirstName": "…",
+    "LastName": "…",
+    "Street1": "…",
+    "Street2": "…",
+    "City": "…",
+    "State": "…",
+    "Zip": "…",
+    "Country": "…",
+    "Phone": "…",
+    "AddressName": "…",
+    "xp": null
+  },
+  "ShippingAddressID": "…",
+  "Comments": "…",
+  "LineItemCount": 0,
+  "Status": "Unsubmitted",
+  "DateCreated": null,
+  "DateSubmitted": null,
+  "DateApproved": null,
+  "DateDeclined": null,
+  "DateCanceled": null,
+  "DateCompleted": null,
+  "Subtotal": 0.0,
+  "ShippingCost": null,
+  "TaxCost": null,
+  "CouponDiscount": 0.0,
+  "Total": 0.0,
+  "xp": null
+}
+```
+
 ## Create From Temp User
 
 ```js
@@ -1661,19 +1801,78 @@ OrderCloud.Orders.Get(orderID).then(successFn).catch(errorFn);
 }
 ```
 
-## Get a List of Orders
+## Create New Order
 
 ```js
-OrderCloud.Orders.List(direction,from,to,listArgs).then(successFn).catch(errorFn);
+OrderCloud.Orders.Create(order).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Type": "Standard",
+  "FromUserID": "…",
+  "BillingAddressID": "…",
+  "ShippingAddressID": "…",
+  "Comments": "…",
+  "ShippingCost": null,
+  "TaxCost": null,
+  "xp": null
+}
+```
+
+## Create or Update Order
+
+```js
+OrderCloud.Orders.Update(orderID,order).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|direction|string|Direction of the order. Possible values: Incoming, Outgoing.|
-|from|date|Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).|
-|to|date|Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).|
+|orderID|string|ID of the order.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Type": "Standard",
+  "FromUserID": "…",
+  "BillingAddressID": "…",
+  "ShippingAddressID": "…",
+  "Comments": "…",
+  "ShippingCost": null,
+  "TaxCost": null,
+  "xp": null
+}
+```
+
+## Delete Order
+
+```js
+OrderCloud.Orders.Delete(orderID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+## List Outgoing
+
+```js
+OrderCloud.Orders.ListOutgoing(from,to,listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|from|date|Lower bound of date range that the order was created.|
+|to|date|Upper bound of date range that the order was created.|
 |search|string|Word or phrase to search for.|
 |searchOn|string|Comma-delimited list of fields to search on.|
 |sortBy|string|Comma-delimited list of fields to sort by.|
@@ -1738,66 +1937,82 @@ OrderCloud.Orders.List(direction,from,to,listArgs).then(successFn).catch(errorFn
 }
 ```
 
-## Create New Order
+## List Incoming
 
 ```js
-OrderCloud.Orders.Create(order).then(successFn).catch(errorFn);
-```
-
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "Type": "Standard",
-  "FromUserID": "…",
-  "BillingAddressID": "…",
-  "ShippingAddressID": "…",
-  "Comments": "…",
-  "ShippingCost": null,
-  "TaxCost": null,
-  "xp": null
-}
-```
-
-## Create or Update Order
-
-```js
-OrderCloud.Orders.Update(orderID,order).then(successFn).catch(errorFn);
+OrderCloud.Orders.ListIncoming(from,to,listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|orderID|string|ID of the order.|
-### Request Body Sample
+|from|date|Lower bound of date range that the order was submitted.|
+|to|date|Upper bound of date range that the order was submitted.|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
 
 ```json
 {
-  "ID": "…",
-  "Type": "Standard",
-  "FromUserID": "…",
-  "BillingAddressID": "…",
-  "ShippingAddressID": "…",
-  "Comments": "…",
-  "ShippingCost": null,
-  "TaxCost": null,
-  "xp": null
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Type": "Standard",
+      "FromUserID": "…",
+      "FromUserFirstName": "…",
+      "FromUserLastName": "…",
+      "BillingAddress": {
+        "ID": "…",
+        "DateCreated": null,
+        "CompanyName": "…",
+        "FirstName": "…",
+        "LastName": "…",
+        "Street1": "…",
+        "Street2": "…",
+        "City": "…",
+        "State": "…",
+        "Zip": "…",
+        "Country": "…",
+        "Phone": "…",
+        "AddressName": "…",
+        "xp": null
+      },
+      "ShippingAddressID": "…",
+      "Comments": "…",
+      "LineItemCount": 0,
+      "Status": "Unsubmitted",
+      "DateCreated": null,
+      "DateSubmitted": null,
+      "DateApproved": null,
+      "DateDeclined": null,
+      "DateCanceled": null,
+      "DateCompleted": null,
+      "Subtotal": 0.0,
+      "ShippingCost": null,
+      "TaxCost": null,
+      "CouponDiscount": 0.0,
+      "Total": 0.0,
+      "xp": null
+    }
+  ]
 }
 ```
 
-## Delete Order
-
-```js
-OrderCloud.Orders.Delete(orderID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|orderID|string|ID of the order.|
 ## Partially Update Order
 
 ```js
@@ -4749,7 +4964,6 @@ OrderCloud.UserGroups.Get(userGroupID).then(successFn).catch(errorFn);
   "ID": "…",
   "Name": "…",
   "Description": "…",
-  "IsReportingGroup": false,
   "xp": null
 }
 ```
@@ -4789,7 +5003,6 @@ OrderCloud.UserGroups.List(listArgs).then(successFn).catch(errorFn);
       "ID": "…",
       "Name": "…",
       "Description": "…",
-      "IsReportingGroup": false,
       "xp": null
     }
   ]
@@ -4809,7 +5022,6 @@ OrderCloud.UserGroups.Create(group).then(successFn).catch(errorFn);
   "ID": "…",
   "Name": "…",
   "Description": "…",
-  "IsReportingGroup": false,
   "xp": null
 }
 ```
@@ -4832,7 +5044,6 @@ OrderCloud.UserGroups.Update(userGroupID,group).then(successFn).catch(errorFn);
   "ID": "…",
   "Name": "…",
   "Description": "…",
-  "IsReportingGroup": false,
   "xp": null
 }
 ```
@@ -4866,7 +5077,6 @@ OrderCloud.UserGroups.Patch(userGroupID,group).then(successFn).catch(errorFn);
   "ID": "…",
   "Name": "…",
   "Description": "…",
-  "IsReportingGroup": false,
   "xp": null
 }
 ```
@@ -5210,7 +5420,7 @@ OrderCloud.Categories.DeleteProductAssignment(categoryID,productID).then(success
 ## List Assignments
 
 ```js
-OrderCloud.Categories.ListAssignments(categoryID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Categories.ListAssignments(categoryID,userID,userGroupID,level,listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5221,8 +5431,12 @@ OrderCloud.Categories.ListAssignments(categoryID,userID,userGroupID,level,page,p
 |userID|string|ID of the user.|
 |userGroupID|string|ID of the user group.|
 |level|string|Level of the category.|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
@@ -5239,9 +5453,9 @@ OrderCloud.Categories.ListAssignments(categoryID,userID,userGroupID,level,page,p
   },
   "Items": [
     {
+      "CategoryID": "…",
       "UserID": "…",
-      "UserGroupID": "…",
-      "CategoryID": "…"
+      "UserGroupID": "…"
     }
   ]
 }
@@ -5270,9 +5484,9 @@ OrderCloud.Categories.SaveAssignment(categoryAssignment).then(successFn).catch(e
 
 ```json
 {
+  "CategoryID": "…",
   "UserID": "…",
-  "UserGroupID": "…",
-  "CategoryID": "…"
+  "UserGroupID": "…"
 }
 ```
 
@@ -6239,7 +6453,7 @@ OrderCloud.CostCenters.Delete(costCenterID).then(successFn).catch(errorFn);
 ## List Assignments
 
 ```js
-OrderCloud.CostCenters.ListAssignments(costCenterID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.CostCenters.ListAssignments(costCenterID,userID,userGroupID,level,listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -6250,8 +6464,12 @@ OrderCloud.CostCenters.ListAssignments(costCenterID,userID,userGroupID,level,pag
 |userID|string|ID of the user.|
 |userGroupID|string|ID of the user group.|
 |level|string|Level of the cost center.|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
@@ -6268,9 +6486,9 @@ OrderCloud.CostCenters.ListAssignments(costCenterID,userID,userGroupID,level,pag
   },
   "Items": [
     {
+      "CostCenterID": "…",
       "UserID": "…",
-      "UserGroupID": "…",
-      "CostCenterID": "…"
+      "UserGroupID": "…"
     }
   ]
 }
@@ -6299,9 +6517,9 @@ OrderCloud.CostCenters.SaveAssignment(assignment).then(successFn).catch(errorFn)
 
 ```json
 {
+  "CostCenterID": "…",
   "UserID": "…",
-  "UserGroupID": "…",
-  "CostCenterID": "…"
+  "UserGroupID": "…"
 }
 ```
 
@@ -6329,35 +6547,22 @@ OrderCloud.ApprovalRules.Get(approvalRuleID).then(successFn).catch(errorFn);
 ```json
 {
   "ID": "…",
-  "SubmitType": "Approve",
-  "Sequence": null,
-  "SubmittingAssignment": {
-    "BuyerID": "…",
-    "UserID": "…",
-    "UserGroupID": "…"
-  },
-  "ApprovingAssignment": {
-    "BuyerID": "…",
-    "UserID": "…",
-    "UserGroupID": "…"
-  },
-  "Price": null,
-  "CostCenterID": "…",
-  "PaymentMethod": null,
-  "CategoryID": "…",
-  "Quantity": null,
-  "Stage": 0,
-  "MinutesAllowed": null,
-  "ImplicitAction": "None",
-  "SendShipNoticeEmail": false,
-  "SendApprovalNoticeEmail": false
+  "ApprovingGroupID": "…",
+  "RuleExpression": "…",
+  "Scope": "PerOrder",
+  "ScopeTimeUnit": null,
+  "ScopeTimeNumber": null,
+  "ScopeStartDate": null,
+  "ExpireAfterTimeUnit": null,
+  "ExpireAfterNumber": null,
+  "ApproveOnExpire": false
 }
 ```
 
 ## Get a List of Approval Rules
 
 ```js
-OrderCloud.ApprovalRules.List(search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.ApprovalRules.List(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -6365,8 +6570,11 @@ OrderCloud.ApprovalRules.List(search,page,pageSize).then(successFn).catch(errorF
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
@@ -6384,28 +6592,15 @@ OrderCloud.ApprovalRules.List(search,page,pageSize).then(successFn).catch(errorF
   "Items": [
     {
       "ID": "…",
-      "SubmitType": "Approve",
-      "Sequence": null,
-      "SubmittingAssignment": {
-        "BuyerID": "…",
-        "UserID": "…",
-        "UserGroupID": "…"
-      },
-      "ApprovingAssignment": {
-        "BuyerID": "…",
-        "UserID": "…",
-        "UserGroupID": "…"
-      },
-      "Price": null,
-      "CostCenterID": "…",
-      "PaymentMethod": null,
-      "CategoryID": "…",
-      "Quantity": null,
-      "Stage": 0,
-      "MinutesAllowed": null,
-      "ImplicitAction": "None",
-      "SendShipNoticeEmail": false,
-      "SendApprovalNoticeEmail": false
+      "ApprovingGroupID": "…",
+      "RuleExpression": "…",
+      "Scope": "PerOrder",
+      "ScopeTimeUnit": null,
+      "ScopeTimeNumber": null,
+      "ScopeStartDate": null,
+      "ExpireAfterTimeUnit": null,
+      "ExpireAfterNumber": null,
+      "ApproveOnExpire": false
     }
   ]
 }
@@ -6422,28 +6617,15 @@ OrderCloud.ApprovalRules.Create(approvalRule).then(successFn).catch(errorFn);
 ```json
 {
   "ID": "…",
-  "SubmitType": "Approve",
-  "Sequence": null,
-  "SubmittingAssignment": {
-    "BuyerID": "…",
-    "UserID": "…",
-    "UserGroupID": "…"
-  },
-  "ApprovingAssignment": {
-    "BuyerID": "…",
-    "UserID": "…",
-    "UserGroupID": "…"
-  },
-  "Price": null,
-  "CostCenterID": "…",
-  "PaymentMethod": null,
-  "CategoryID": "…",
-  "Quantity": null,
-  "Stage": 0,
-  "MinutesAllowed": null,
-  "ImplicitAction": "None",
-  "SendShipNoticeEmail": false,
-  "SendApprovalNoticeEmail": false
+  "ApprovingGroupID": "…",
+  "RuleExpression": "…",
+  "Scope": "PerOrder",
+  "ScopeTimeUnit": null,
+  "ScopeTimeNumber": null,
+  "ScopeStartDate": null,
+  "ExpireAfterTimeUnit": null,
+  "ExpireAfterNumber": null,
+  "ApproveOnExpire": false
 }
 ```
 
@@ -6463,28 +6645,15 @@ OrderCloud.ApprovalRules.Update(approvalRuleID,approvalRule).then(successFn).cat
 ```json
 {
   "ID": "…",
-  "SubmitType": "Approve",
-  "Sequence": null,
-  "SubmittingAssignment": {
-    "BuyerID": "…",
-    "UserID": "…",
-    "UserGroupID": "…"
-  },
-  "ApprovingAssignment": {
-    "BuyerID": "…",
-    "UserID": "…",
-    "UserGroupID": "…"
-  },
-  "Price": null,
-  "CostCenterID": "…",
-  "PaymentMethod": null,
-  "CategoryID": "…",
-  "Quantity": null,
-  "Stage": 0,
-  "MinutesAllowed": null,
-  "ImplicitAction": "None",
-  "SendShipNoticeEmail": false,
-  "SendApprovalNoticeEmail": false
+  "ApprovingGroupID": "…",
+  "RuleExpression": "…",
+  "Scope": "PerOrder",
+  "ScopeTimeUnit": null,
+  "ScopeTimeNumber": null,
+  "ScopeStartDate": null,
+  "ExpireAfterTimeUnit": null,
+  "ExpireAfterNumber": null,
+  "ApproveOnExpire": false
 }
 ```
 
@@ -6499,6 +6668,34 @@ OrderCloud.ApprovalRules.Delete(approvalRuleID).then(successFn).catch(errorFn);
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |approvalRuleID|string|ID of the approval rule.|
+## Partially Update Approval Rule
+
+```js
+OrderCloud.ApprovalRules.Patch(approvalRuleID,partialApprovalRule).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|approvalRuleID|string|ID of the approval rule.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "ApprovingGroupID": "…",
+  "RuleExpression": "…",
+  "Scope": "PerOrder",
+  "ScopeTimeUnit": null,
+  "ScopeTimeNumber": null,
+  "ScopeStartDate": null,
+  "ExpireAfterTimeUnit": null,
+  "ExpireAfterNumber": null,
+  "ApproveOnExpire": false
+}
+```
+
 # CreditCards
 
 ```js

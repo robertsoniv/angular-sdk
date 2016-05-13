@@ -159,7 +159,8 @@
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/buyers/:buyerID/addresses', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': BuyerID().Get(),
+                    'listArgs': listArgs
                 }, listArgs);
             }
 
@@ -200,16 +201,14 @@
             function _delete(addressID, overrideOrderConflict) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/addresses/:addressID', {
                     'buyerID': BuyerID().Get(),
-                    'addressID': addressID
-                }, {
+                    'addressID': addressID,
                     'overrideOrderConflict': overrideOrderConflict
-                });
+                }, null);
             }
 
             function _listassignments(addressID, userID, userGroupID, level, isShipping, isBilling, page, pageSize) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/addresses/assignments', {
-                    'buyerID': BuyerID().Get()
-                }, {
+                    'buyerID': BuyerID().Get(),
                     'addressID': addressID,
                     'userID': userID,
                     'userGroupID': userGroupID,
@@ -218,17 +217,16 @@
                     'isBilling': isBilling,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _deleteassignment(addressID, userID, userGroupID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/addresses/:addressID/assignments', {
                     'buyerID': BuyerID().Get(),
-                    'addressID': addressID
-                }, {
+                    'addressID': addressID,
                     'userID': userID,
                     'userGroupID': userGroupID
-                });
+                }, null);
             }
 
             function _saveassignment(assignment) {
@@ -282,7 +280,9 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/adminusers', null, listArgs);
+                return makeApiCall('GET', '/v1/adminusers', {
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _delete(userID) {
@@ -302,17 +302,23 @@
                 'Get': _get,
                 'Create': _create,
                 'Update': _update,
+                'Patch': _patch,
                 'Delete': _delete
             };
 
-            function _list(search, page, pageSize) {
-                return makeApiCall('GET', '/v1/buyers/:buyerID/approvalrules', {
-                    'buyerID': BuyerID().Get()
-                }, {
+            function _list(search, page, pageSize, searchOn, sortBy, filters) {
+                var listArgs = {
                     'search': search,
                     'page': page,
-                    'pageSize': pageSize
-                });
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                };
+                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
+                return makeApiCall('GET', '/v1/buyers/:buyerID/approvalrules', {
+                    'buyerID': BuyerID().Get(),
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _get(approvalRuleID) {
@@ -342,6 +348,13 @@
                 }, approvalRule);
             }
 
+            function _patch(approvalRuleID, partialApprovalRule) {
+                return makeApiCall('PATCH', '/v1/buyers/:buyerID/approvalrules/:approvalRuleID', {
+                    'buyerID': BuyerID().Get(),
+                    'approvalRuleID': approvalRuleID
+                }, partialApprovalRule);
+            }
+
             function _delete(approvalRuleID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/approvalrules/:approvalRuleID', {
                     'buyerID': BuyerID().Get(),
@@ -360,11 +373,11 @@
             };
 
             function _list(search, page, pageSize) {
-                return makeApiCall('GET', '/v1/buyers', null, {
+                return makeApiCall('GET', '/v1/buyers', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _get(buyerID) {
@@ -417,20 +430,22 @@
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/buyers/:buyerID/categories', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': BuyerID().Get(),
+                    'listArgs': listArgs,
+                    'parentID': parentID,
+                    'depth': depth
                 }, listArgs);
             }
 
             function _listchildren(parentID, search, depth, page, pageSize) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/categories/:parentID/categories', {
                     'buyerID': BuyerID().Get(),
-                    'parentID': parentID
-                }, {
+                    'parentID': parentID,
                     'search': search,
                     'depth': depth,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _get(categoryID) {
@@ -476,13 +491,12 @@
 
             function _listproductassignments(categoryID, productID, page, pageSize) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/categories/productassignments', {
-                    'buyerID': BuyerID().Get()
-                }, {
+                    'buyerID': BuyerID().Get(),
                     'categoryID': categoryID,
                     'productID': productID,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _saveproductassignment(productAssignment) {
@@ -499,27 +513,32 @@
                 }, null);
             }
 
-            function _listassignments(categoryID, userID, userGroupID, level, page, pageSize) {
+            function _listassignments(categoryID, userID, userGroupID, level, search, page, pageSize, searchOn, sortBy, filters) {
+                var listArgs = {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                };
+                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/buyers/:buyerID/categories/assignments', {
-                    'buyerID': BuyerID().Get()
-                }, {
+                    'buyerID': BuyerID().Get(),
                     'categoryID': categoryID,
                     'userID': userID,
                     'userGroupID': userGroupID,
                     'level': level,
-                    'page': page,
-                    'pageSize': pageSize
-                });
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _deleteassignment(categoryID, userID, userGroupID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/categories/:categoryID/assignments', {
                     'buyerID': BuyerID().Get(),
-                    'categoryID': categoryID
-                }, {
+                    'categoryID': categoryID,
                     'userID': userID,
                     'userGroupID': userGroupID
-                });
+                }, null);
             }
 
             function _saveassignment(categoryAssignment) {
@@ -551,7 +570,8 @@
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': BuyerID().Get(),
+                    'listArgs': listArgs
                 }, listArgs);
             }
 
@@ -589,27 +609,32 @@
                 }, null);
             }
 
-            function _listassignments(costCenterID, userID, userGroupID, level, page, pageSize) {
+            function _listassignments(costCenterID, userID, userGroupID, level, search, page, pageSize, searchOn, sortBy, filters) {
+                var listArgs = {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                };
+                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters/assignments', {
-                    'buyerID': BuyerID().Get()
-                }, {
+                    'buyerID': BuyerID().Get(),
                     'costCenterID': costCenterID,
                     'userID': userID,
                     'userGroupID': userGroupID,
                     'level': level,
-                    'page': page,
-                    'pageSize': pageSize
-                });
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _deleteassignment(costCenterID, userID, userGroupID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/costcenters/:costCenterID/assignments', {
                     'buyerID': BuyerID().Get(),
-                    'costCenterID': costCenterID
-                }, {
+                    'costCenterID': costCenterID,
                     'userID': userID,
                     'userGroupID': userGroupID
-                });
+                }, null);
             }
 
             function _saveassignment(assignment) {
@@ -639,12 +664,11 @@
 
             function _list(search, page, pageSize) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/coupons', {
-                    'buyerID': BuyerID().Get()
-                }, {
+                    'buyerID': BuyerID().Get(),
                     'search': search,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _get(couponID) {
@@ -683,13 +707,12 @@
 
             function _listproductassignments(couponID, productID, page, pageSize) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/coupons/productassignments', {
-                    'buyerID': BuyerID().Get()
-                }, {
+                    'buyerID': BuyerID().Get(),
                     'couponID': couponID,
                     'productID': productID,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _saveproductassignment(productAssignment) {
@@ -708,13 +731,12 @@
 
             function _listcategoryassignments(couponID, categoryID, page, pageSize) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/coupons/categoryassignments', {
-                    'buyerID': BuyerID().Get()
-                }, {
+                    'buyerID': BuyerID().Get(),
                     'couponID': couponID,
                     'categoryID': categoryID,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _savecategoryassignment(categoryAssignment) {
@@ -733,15 +755,14 @@
 
             function _listassignments(couponID, userID, userGroupID, level, page, pageSize) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/coupons/assignments', {
-                    'buyerID': BuyerID().Get()
-                }, {
+                    'buyerID': BuyerID().Get(),
                     'couponID': couponID,
                     'userID': userID,
                     'userGroupID': userGroupID,
                     'level': level,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _saveassignment(assignment) {
@@ -753,11 +774,10 @@
             function _deleteassignment(couponID, userID, userGroupID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/coupons/:couponID/assignments', {
                     'buyerID': BuyerID().Get(),
-                    'couponID': couponID
-                }, {
+                    'couponID': couponID,
                     'userID': userID,
                     'userGroupID': userGroupID
-                });
+                }, null);
             }
         }
 
@@ -784,7 +804,8 @@
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': BuyerID().Get(),
+                    'listArgs': listArgs
                 }, listArgs);
             }
 
@@ -831,15 +852,14 @@
 
             function _listassignments(creditCardID, userID, userGroupID, level, page, pageSize) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards/assignments', {
-                    'buyerID': BuyerID().Get()
-                }, {
+                    'buyerID': BuyerID().Get(),
                     'creditCardID': creditCardID,
                     'userID': userID,
                     'userGroupID': userGroupID,
                     'level': level,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _saveassignment(assignment) {
@@ -851,11 +871,10 @@
             function _deleteassignment(creditCardID, userID, userGroupID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/creditcards/:creditCardID/assignments', {
                     'buyerID': BuyerID().Get(),
-                    'creditCardID': creditCardID
-                }, {
+                    'creditCardID': creditCardID,
                     'userID': userID,
                     'userGroupID': userGroupID
-                });
+                }, null);
             }
         }
 
@@ -911,10 +930,10 @@
             };
 
             function _list(page, pageSize) {
-                return makeApiCall('GET', '/v1/files', null, {
+                return makeApiCall('GET', '/v1/files', {
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _get(fileID) {
@@ -931,9 +950,9 @@
             }
 
             function _postfiledata(filename) {
-                return makeApiCall('POST', '/v1/files', null, {
+                return makeApiCall('POST', '/v1/files', {
                     'filename': filename
-                });
+                }, null);
             }
         }
 
@@ -952,7 +971,9 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/SecurityProfiles', null, listArgs);
+                return makeApiCall('GET', '/v1/SecurityProfiles', {
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _get(securityProfileID) {
@@ -1009,7 +1030,8 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/payments', {
                     'buyerID': BuyerID().Get(),
-                    'orderID': orderID
+                    'orderID': orderID,
+                    'listArgs': listArgs
                 }, listArgs);
             }
 
@@ -1108,7 +1130,9 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/specs', null, listArgs);
+                return makeApiCall('GET', '/v1/specs', {
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _get(specID) {
@@ -1147,12 +1171,12 @@
             }
 
             function _listproductassignments(specID, productID, page, pageSize) {
-                return makeApiCall('GET', '/v1/specs/productassignments', null, {
+                return makeApiCall('GET', '/v1/specs/productassignments', {
                     'specID': specID,
                     'productID': productID,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _deleteproductassignment(specID, productID) {
@@ -1182,7 +1206,8 @@
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/specs/:specID/options', {
-                    'specID': specID
+                    'specID': specID,
+                    'listArgs': listArgs
                 }, listArgs);
             }
 
@@ -1238,7 +1263,8 @@
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': BuyerID().Get(),
+                    'listArgs': listArgs
                 }, listArgs);
             }
 
@@ -1285,13 +1311,12 @@
 
             function _listuserassignments(userGroupID, userID, page, pageSize) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups/assignments', {
-                    'buyerID': BuyerID().Get()
-                }, {
+                    'buyerID': BuyerID().Get(),
                     'userGroupID': userGroupID,
                     'userID': userID,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _deleteuserassignment(userGroupID, userID) {
@@ -1347,7 +1372,8 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/lineitems', {
                     'buyerID': BuyerID().Get(),
-                    'orderID': orderID
+                    'orderID': orderID,
+                    'listArgs': listArgs
                 }, listArgs);
             }
 
@@ -1424,6 +1450,8 @@
                 'GetProduct': _getproduct,
                 'ListSpecs': _listspecs,
                 'GetSpec': _getspec,
+                'ListOrders': _listorders,
+                'GetOrder': _getorder,
                 'CreateFromTempUser': _createfromtempuser
             };
 
@@ -1448,7 +1476,9 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/costcenters', null, listArgs);
+                return makeApiCall('GET', '/v1/me/costcenters', {
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _listusergroups(search, page, pageSize, searchOn, sortBy, filters) {
@@ -1460,7 +1490,9 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/usergroups', null, listArgs);
+                return makeApiCall('GET', '/v1/me/usergroups', {
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _listaddresses(search, page, pageSize, searchOn, sortBy, filters) {
@@ -1472,7 +1504,9 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/addresses', null, listArgs);
+                return makeApiCall('GET', '/v1/me/addresses', {
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _createaddress(address) {
@@ -1499,10 +1533,9 @@
 
             function _deleteaddress(addressID, overrideOrderConflict) {
                 return makeApiCall('DELETE', '/v1/me/addresses/:addressID', {
-                    'addressID': addressID
-                }, {
+                    'addressID': addressID,
                     'overrideOrderConflict': overrideOrderConflict
-                });
+                }, null);
             }
 
             function _createcreditcard(creditCard) {
@@ -1518,7 +1551,9 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/creditcards', null, listArgs);
+                return makeApiCall('GET', '/v1/me/creditcards', {
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _getcreditcard(creditcardID) {
@@ -1554,7 +1589,10 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/categories', null, listArgs);
+                return makeApiCall('GET', '/v1/me/categories', {
+                    'listArgs': listArgs,
+                    'depth': depth
+                }, listArgs);
             }
 
             function _listsubcategories(search, page, pageSize, searchOn, sortBy, filters, parentID, depth) {
@@ -1567,7 +1605,9 @@
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/me/categories/:parentID/categories', {
-                    'parentID': parentID
+                    'listArgs': listArgs,
+                    'parentID': parentID,
+                    'depth': depth
                 }, listArgs);
             }
 
@@ -1580,7 +1620,10 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/products', null, listArgs);
+                return makeApiCall('GET', '/v1/me/products', {
+                    'listArgs': listArgs,
+                    'categoryID': categoryID
+                }, listArgs);
             }
 
             function _getproduct(productID) {
@@ -1599,7 +1642,8 @@
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/me/products/:productID/specs', {
-                    'productID': productID
+                    'productID': productID,
+                    'listArgs': listArgs
                 }, listArgs);
             }
 
@@ -1610,15 +1654,40 @@
                 }, null);
             }
 
+            function _listorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
+                var listArgs = {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                };
+                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
+                return makeApiCall('GET', '/v1/me/orders', {
+                    'listArgs': listArgs,
+                    'from': from,
+                    'to': to
+                }, listArgs);
+            }
+
+            function _getorder(orderID) {
+                return makeApiCall('GET', '/v1/me/orders/:orderID', {
+                    'orderID': orderID
+                }, null);
+            }
+
             function _createfromtempuser(user, tempUserToken) {
-                return makeApiCall('PUT', '/v1/me', null, user, tempUserToken);
+                return makeApiCall('PUT', '/v1/me', {
+                    'tempUserToken': tempUserToken
+                }, user);
             }
         }
 
         function Orders() {
             return {
                 'Get': _get,
-                'List': _list,
+                'ListOutgoing': _listoutgoing,
+                'ListIncoming': _listincoming,
                 'Create': _create,
                 'Update': _update,
                 'Patch': _patch,
@@ -1649,7 +1718,7 @@
                 }, null);
             }
 
-            function _list(direction, from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+            function _listoutgoing(from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
                 var listArgs = {
                     'search': search,
                     'page': page,
@@ -1658,11 +1727,35 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                listArgs['direction'] = direction;
                 listArgs['buyerID'] = buyerID ? buyerID : BuyerID().Get();
                 listArgs['from'] = from;
                 listArgs['to'] = to;
-                return makeApiCall('GET', '/v1/orders', null, listArgs);
+                return makeApiCall('GET', '/v1/orders/outgoing', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'from': from,
+                    'to': to,
+                    'listArgs': listArgs
+                }, listArgs);
+            }
+
+            function _listincoming(from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                var listArgs = {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                };
+                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
+                listArgs['buyerID'] = buyerID ? buyerID : BuyerID().Get();
+                listArgs['from'] = from;
+                listArgs['to'] = to;
+                return makeApiCall('GET', '/v1/orders/incoming', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'from': from,
+                    'to': to,
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _create(order, buyerID) {
@@ -1702,19 +1795,17 @@
             function _approve(orderID, comments, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/approve', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
-                    'orderID': orderID
-                }, {
+                    'orderID': orderID,
                     'comments': comments
-                });
+                }, null);
             }
 
             function _decline(orderID, comments, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/decline', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
-                    'orderID': orderID
-                }, {
+                    'orderID': orderID,
                     'comments': comments
-                });
+                }, null);
             }
 
             function _cancel(orderID, buyerID) {
@@ -1761,10 +1852,9 @@
 
             function _transfertempuserorder(tempUserToken, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/orders', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get()
-                }, {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'tempUserToken': tempUserToken
-                });
+                }, null);
             }
         }
 
@@ -1798,10 +1888,10 @@
             };
 
             function _list(page, pageSize) {
-                return makeApiCall('GET', '/v1/priceschedules', null, {
+                return makeApiCall('GET', '/v1/priceschedules', {
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _get(priceScheduleID) {
@@ -1847,10 +1937,9 @@
 
             function _deletepricebreak(priceScheduleID, quantity) {
                 return makeApiCall('DELETE', '/v1/priceschedules/:priceScheduleID/PriceBreaks', {
-                    'priceScheduleID': priceScheduleID
-                }, {
+                    'priceScheduleID': priceScheduleID,
                     'quantity': quantity
-                });
+                }, null);
             }
         }
 
@@ -1882,13 +1971,12 @@
 
             function _list(orderID, search, page, pageSize) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/shipments', {
-                    'buyerID': BuyerID().Get()
-                }, {
+                    'buyerID': BuyerID().Get(),
                     'orderID': orderID,
                     'search': search,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _create(shipment) {
@@ -1957,7 +2045,8 @@
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': BuyerID().Get(),
+                    'listArgs': listArgs
                 }, listArgs);
             }
 
@@ -1997,15 +2086,14 @@
 
             function _listassignments(spendingAccountID, userID, userGroupID, level, page, pageSize) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts/assignments', {
-                    'buyerID': BuyerID().Get()
-                }, {
+                    'buyerID': BuyerID().Get(),
                     'spendingAccountID': spendingAccountID,
                     'userID': userID,
                     'userGroupID': userGroupID,
                     'level': level,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _saveassignment(assignment) {
@@ -2017,11 +2105,10 @@
             function _deleteassignment(spendingAccountID, userID, userGroupID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/spendingaccounts/:spendingAccountID/assignments', {
                     'buyerID': BuyerID().Get(),
-                    'spendingAccountID': spendingAccountID
-                }, {
+                    'spendingAccountID': spendingAccountID,
                     'userID': userID,
                     'userGroupID': userGroupID
-                });
+                }, null);
             }
         }
 
@@ -2056,7 +2143,9 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/products', null, listArgs);
+                return makeApiCall('GET', '/v1/products', {
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _get(productID) {
@@ -2096,28 +2185,25 @@
 
             function _generatevariants(productID, overwriteExisting) {
                 return makeApiCall('POST', '/v1/products/:productID/variants/generate', {
-                    'productID': productID
-                }, {
+                    'productID': productID,
                     'overwriteExisting': overwriteExisting
-                });
+                }, null);
             }
 
             function _listvariants(productID, page, pageSize) {
                 return makeApiCall('GET', '/v1/products/:productID/variants', {
-                    'productID': productID
-                }, {
+                    'productID': productID,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _listvariantinventory(productID, page, pageSize) {
                 return makeApiCall('GET', '/v1/products/:productID/variants/inventory', {
-                    'productID': productID
-                }, {
+                    'productID': productID,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _getvariantinventory(productID, variantID) {
@@ -2167,7 +2253,7 @@
             }
 
             function _listassignments(productID, userID, userGroupID, level, priceScheduleID, page, pageSize) {
-                return makeApiCall('GET', '/v1/products/assignments', null, {
+                return makeApiCall('GET', '/v1/products/assignments', {
                     'productID': productID,
                     'buyerID': BuyerID().Get(),
                     'userID': userID,
@@ -2176,17 +2262,16 @@
                     'priceScheduleID': priceScheduleID,
                     'page': page,
                     'pageSize': pageSize
-                });
+                }, null);
             }
 
             function _deleteassignment(productID, userID, userGroupID) {
                 return makeApiCall('DELETE', '/v1/products/:productID/assignments/:buyerID', {
                     'buyerID': BuyerID().Get(),
-                    'productID': productID
-                }, {
+                    'productID': productID,
                     'userID': userID,
                     'userGroupID': userGroupID
-                });
+                }, null);
             }
         }
 
@@ -2211,7 +2296,8 @@
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/buyers/:buyerID/users', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': BuyerID().Get(),
+                    'listArgs': listArgs
                 }, listArgs);
             }
 
