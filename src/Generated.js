@@ -823,7 +823,8 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'GetProduct': _getproduct,
 					'ListSpecs': _listspecs,
 					'GetSpec': _getspec,
-					'ListOrders': _listorders,
+					'ListOutgoingOrders': _listoutgoingorders,
+					'ListIncomingOrders': _listincomingorders,
 					'GetOrder': _getorder,
 					'CreateFromTempUser': _createfromtempuser
 					}
@@ -961,7 +962,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				function _getspec(productID, specID) {
 					return makeApiCall('GET', '/v1/me/products/:productID/specs/:specID', { 'productID': productID, 'specID': specID }, null);
 				}
-				function _listorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
+				function _listoutgoingorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
 					var listArgs = {
 						'search': search,
 						'page': page,
@@ -970,7 +971,18 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/me/orders', { 'listArgs': listArgs, 'from': from, 'to': to }, listArgs);
+					return makeApiCall('GET', '/v1/me/orders/outgoing', { 'listArgs': listArgs, 'from': from, 'to': to }, listArgs);
+				}
+				function _listincomingorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
+					var listArgs = {
+						'search': search,
+						'page': page,
+						'pageSize': pageSize,
+						'searchOn': searchOn,
+						'sortBy': sortBy
+						};
+					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
+					return makeApiCall('GET', '/v1/me/orders/incoming', { 'listArgs': listArgs, 'from': from, 'to': to }, listArgs);
 				}
 				function _getorder(orderID) {
 					return makeApiCall('GET', '/v1/me/orders/:orderID', { 'orderID': orderID }, null);
@@ -1106,8 +1118,16 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'DeletePriceBreak': _deletepricebreak
 					}
 				;
-				function _list(page, pageSize) {
-					return makeApiCall('GET', '/v1/priceschedules', { 'page': page, 'pageSize': pageSize }, null);
+				function _list(search, page, pageSize, searchOn, sortBy, filters) {
+					var listArgs = {
+						'search': search,
+						'page': page,
+						'pageSize': pageSize,
+						'searchOn': searchOn,
+						'sortBy': sortBy
+						};
+					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
+					return makeApiCall('GET', '/v1/priceschedules', { 'listArgs': listArgs }, listArgs);
 				}
 				function _get(priceScheduleID) {
 					if (!priceScheduleID) {

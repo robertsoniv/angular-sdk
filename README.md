@@ -71,7 +71,9 @@ An AngularJs SDK for OrderCloud API
 
   - [Get Spec](#get-spec)
 
-  - [List Orders](#list-orders)
+  - [List Outgoing Orders](#list-outgoing-orders)
+
+  - [List Incoming Orders](#list-incoming-orders)
 
   - [Get Order](#get-order)
 
@@ -583,14 +585,14 @@ OrderCloud.SecurityProfiles.Get(securityProfileID).then(successFn).catch(errorFn
   "ApprovalRuleAdmin": false,
   "ApprovalRuleReader": false,
   "PermissionAdmin": false,
+  "OrderAdmin": false,
   "OrderReader": false,
+  "UnsubmittedOrderReader": false,
   "MeAdmin": false,
   "MeXpAdmin": false,
   "MeAddressAdmin": false,
   "MeCreditCardAdmin": false,
   "OverrideUnitPrice": false,
-  "ChangeCreditCardOrders": false,
-  "ChangeNonCreditCardOrders": false,
   "OverrideShipping": false,
   "OverrideTax": false,
   "DevCenterSecurityProfileAdmin": false,
@@ -666,14 +668,14 @@ OrderCloud.SecurityProfiles.List(listArgs).then(successFn).catch(errorFn);
       "ApprovalRuleAdmin": false,
       "ApprovalRuleReader": false,
       "PermissionAdmin": false,
+      "OrderAdmin": false,
       "OrderReader": false,
+      "UnsubmittedOrderReader": false,
       "MeAdmin": false,
       "MeXpAdmin": false,
       "MeAddressAdmin": false,
       "MeCreditCardAdmin": false,
       "OverrideUnitPrice": false,
-      "ChangeCreditCardOrders": false,
-      "ChangeNonCreditCardOrders": false,
       "OverrideShipping": false,
       "OverrideTax": false,
       "DevCenterSecurityProfileAdmin": false,
@@ -927,7 +929,6 @@ OrderCloud.Me.ListAddresses(listArgs).then(successFn).catch(errorFn);
       "Shipping": false,
       "Billing": false,
       "Editable": false,
-      "DateCreated": null,
       "CompanyName": "…",
       "FirstName": "…",
       "LastName": "…",
@@ -991,7 +992,6 @@ OrderCloud.Me.GetAddress(addressID).then(successFn).catch(errorFn);
   "Shipping": false,
   "Billing": false,
   "Editable": false,
-  "DateCreated": null,
   "CompanyName": "…",
   "FirstName": "…",
   "LastName": "…",
@@ -1578,10 +1578,10 @@ OrderCloud.Me.GetSpec(productID,specID).then(successFn).catch(errorFn);
 }
 ```
 
-## List Orders
+## List Outgoing Orders
 
 ```js
-OrderCloud.Me.ListOrders(listArgs,from,to).then(successFn).catch(errorFn);
+OrderCloud.Me.ListOutgoingOrders(listArgs,from,to).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1619,7 +1619,81 @@ OrderCloud.Me.ListOrders(listArgs,from,to).then(successFn).catch(errorFn);
       "FromUserLastName": "…",
       "BillingAddress": {
         "ID": "…",
-        "DateCreated": null,
+        "CompanyName": "…",
+        "FirstName": "…",
+        "LastName": "…",
+        "Street1": "…",
+        "Street2": "…",
+        "City": "…",
+        "State": "…",
+        "Zip": "…",
+        "Country": "…",
+        "Phone": "…",
+        "AddressName": "…",
+        "xp": null
+      },
+      "ShippingAddressID": "…",
+      "Comments": "…",
+      "LineItemCount": 0,
+      "Status": "Unsubmitted",
+      "DateCreated": null,
+      "DateSubmitted": null,
+      "DateApproved": null,
+      "DateDeclined": null,
+      "DateCanceled": null,
+      "DateCompleted": null,
+      "Subtotal": 0.0,
+      "ShippingCost": null,
+      "TaxCost": null,
+      "CouponDiscount": 0.0,
+      "Total": 0.0,
+      "xp": null
+    }
+  ]
+}
+```
+
+## List Incoming Orders
+
+```js
+OrderCloud.Me.ListIncomingOrders(listArgs,from,to).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|from|date|Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).|
+|to|date|Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Type": "Standard",
+      "FromUserID": "…",
+      "FromUserFirstName": "…",
+      "FromUserLastName": "…",
+      "BillingAddress": {
+        "ID": "…",
         "CompanyName": "…",
         "FirstName": "…",
         "LastName": "…",
@@ -1676,7 +1750,6 @@ OrderCloud.Me.GetOrder(orderID).then(successFn).catch(errorFn);
   "FromUserLastName": "…",
   "BillingAddress": {
     "ID": "…",
-    "DateCreated": null,
     "CompanyName": "…",
     "FirstName": "…",
     "LastName": "…",
@@ -1768,7 +1841,6 @@ OrderCloud.Orders.Get(orderID).then(successFn).catch(errorFn);
   "FromUserLastName": "…",
   "BillingAddress": {
     "ID": "…",
-    "DateCreated": null,
     "CompanyName": "…",
     "FirstName": "…",
     "LastName": "…",
@@ -1902,7 +1974,6 @@ OrderCloud.Orders.ListOutgoing(from,to,listArgs).then(successFn).catch(errorFn);
       "FromUserLastName": "…",
       "BillingAddress": {
         "ID": "…",
-        "DateCreated": null,
         "CompanyName": "…",
         "FirstName": "…",
         "LastName": "…",
@@ -1978,7 +2049,6 @@ OrderCloud.Orders.ListIncoming(from,to,listArgs).then(successFn).catch(errorFn);
       "FromUserLastName": "…",
       "BillingAddress": {
         "ID": "…",
-        "DateCreated": null,
         "CompanyName": "…",
         "FirstName": "…",
         "LastName": "…",
@@ -2062,7 +2132,6 @@ OrderCloud.Orders.Submit(orderID).then(successFn).catch(errorFn);
   "FromUserLastName": "…",
   "BillingAddress": {
     "ID": "…",
-    "DateCreated": null,
     "CompanyName": "…",
     "FirstName": "…",
     "LastName": "…",
@@ -2118,7 +2187,6 @@ OrderCloud.Orders.Approve(orderID,comments).then(successFn).catch(errorFn);
   "FromUserLastName": "…",
   "BillingAddress": {
     "ID": "…",
-    "DateCreated": null,
     "CompanyName": "…",
     "FirstName": "…",
     "LastName": "…",
@@ -2174,7 +2242,6 @@ OrderCloud.Orders.Decline(orderID,comments).then(successFn).catch(errorFn);
   "FromUserLastName": "…",
   "BillingAddress": {
     "ID": "…",
-    "DateCreated": null,
     "CompanyName": "…",
     "FirstName": "…",
     "LastName": "…",
@@ -2229,7 +2296,6 @@ OrderCloud.Orders.Cancel(orderID).then(successFn).catch(errorFn);
   "FromUserLastName": "…",
   "BillingAddress": {
     "ID": "…",
-    "DateCreated": null,
     "CompanyName": "…",
     "FirstName": "…",
     "LastName": "…",
@@ -2285,7 +2351,7 @@ OrderCloud.Orders.Ship(orderID,shipment).then(successFn).catch(errorFn);
   "Items": [
     {
       "OrderID": "…",
-      "LineItemId": "…",
+      "LineItemID": "…",
       "QuantityShipped": 0
     }
   ],
@@ -2464,7 +2530,6 @@ OrderCloud.LineItems.Get(orderID,lineItemID).then(successFn).catch(errorFn);
   "ShippingAccount": "…",
   "ShippingAddress": {
     "ID": "…",
-    "DateCreated": null,
     "CompanyName": "…",
     "FirstName": "…",
     "LastName": "…",
@@ -2537,7 +2602,6 @@ OrderCloud.LineItems.List(orderID,listArgs).then(successFn).catch(errorFn);
       "ShippingAccount": "…",
       "ShippingAddress": {
         "ID": "…",
-        "DateCreated": null,
         "CompanyName": "…",
         "FirstName": "…",
         "LastName": "…",
@@ -3070,7 +3134,7 @@ OrderCloud.Shipments.Get(shipmentID).then(successFn).catch(errorFn);
   "Items": [
     {
       "OrderID": "…",
-      "LineItemId": "…",
+      "LineItemID": "…",
       "QuantityShipped": 0
     }
   ],
@@ -3116,7 +3180,7 @@ OrderCloud.Shipments.List(orderID,search,page,pageSize).then(successFn).catch(er
       "Items": [
         {
           "OrderID": "…",
-          "LineItemId": "…",
+          "LineItemID": "…",
           "QuantityShipped": 0
         }
       ],
@@ -3144,7 +3208,7 @@ OrderCloud.Shipments.Create(shipment).then(successFn).catch(errorFn);
   "Items": [
     {
       "OrderID": "…",
-      "LineItemId": "…",
+      "LineItemID": "…",
       "QuantityShipped": 0
     }
   ],
@@ -3175,7 +3239,7 @@ OrderCloud.Shipments.Update(shipmentID,shipment).then(successFn).catch(errorFn);
   "Items": [
     {
       "OrderID": "…",
-      "LineItemId": "…",
+      "LineItemID": "…",
       "QuantityShipped": 0
     }
   ],
@@ -3217,7 +3281,7 @@ OrderCloud.Shipments.Patch(shipmentID,shipment).then(successFn).catch(errorFn);
   "Items": [
     {
       "OrderID": "…",
-      "LineItemId": "…",
+      "LineItemID": "…",
       "QuantityShipped": 0
     }
   ],
@@ -3241,7 +3305,7 @@ OrderCloud.Shipments.SaveItem(shipmentID,item).then(successFn).catch(errorFn);
 ```json
 {
   "OrderID": "…",
-  "LineItemId": "…",
+  "LineItemID": "…",
   "QuantityShipped": 0
 }
 ```
@@ -3271,7 +3335,7 @@ OrderCloud.Shipments.DeleteItem(shipmentID,orderID,lineItemID).then(successFn).c
   "Items": [
     {
       "OrderID": "…",
-      "LineItemId": "…",
+      "LineItemID": "…",
       "QuantityShipped": 0
     }
   ],
@@ -4078,15 +4142,19 @@ OrderCloud.PriceSchedules.Get(priceScheduleID).then(successFn).catch(errorFn);
 ## Get a List of Price Schedules
 
 ```js
-OrderCloud.PriceSchedules.List(page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.PriceSchedules.List(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
@@ -4138,7 +4206,6 @@ OrderCloud.PriceSchedules.Create(priceSchedule).then(successFn).catch(errorFn);
   "Name": "…",
   "ApplyTax": false,
   "ApplyShipping": false,
-  "MinQuantity": null,
   "MaxQuantity": null,
   "UseCumulativeQuantity": false,
   "RestrictedQuantity": false,
@@ -4172,7 +4239,6 @@ OrderCloud.PriceSchedules.Update(priceScheduleID,priceSchedule).then(successFn).
   "Name": "…",
   "ApplyTax": false,
   "ApplyShipping": false,
-  "MinQuantity": null,
   "MaxQuantity": null,
   "UseCumulativeQuantity": false,
   "RestrictedQuantity": false,
@@ -4217,7 +4283,6 @@ OrderCloud.PriceSchedules.Patch(priceScheduleID,priceSchedule).then(successFn).c
   "Name": "…",
   "ApplyTax": false,
   "ApplyShipping": false,
-  "MinQuantity": null,
   "MaxQuantity": null,
   "UseCumulativeQuantity": false,
   "RestrictedQuantity": false,
@@ -5514,7 +5579,6 @@ OrderCloud.Addresses.Get(addressID).then(successFn).catch(errorFn);
 ```json
 {
   "ID": "…",
-  "DateCreated": null,
   "CompanyName": "…",
   "FirstName": "…",
   "LastName": "…",
@@ -5563,7 +5627,6 @@ OrderCloud.Addresses.List(listArgs).then(successFn).catch(errorFn);
   "Items": [
     {
       "ID": "…",
-      "DateCreated": null,
       "CompanyName": "…",
       "FirstName": "…",
       "LastName": "…",

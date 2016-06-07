@@ -1450,7 +1450,8 @@
                 'GetProduct': _getproduct,
                 'ListSpecs': _listspecs,
                 'GetSpec': _getspec,
-                'ListOrders': _listorders,
+                'ListOutgoingOrders': _listoutgoingorders,
+                'ListIncomingOrders': _listincomingorders,
                 'GetOrder': _getorder,
                 'CreateFromTempUser': _createfromtempuser
             };
@@ -1654,7 +1655,7 @@
                 }, null);
             }
 
-            function _listorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
+            function _listoutgoingorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
                 var listArgs = {
                     'search': search,
                     'page': page,
@@ -1663,7 +1664,23 @@
                     'sortBy': sortBy
                 };
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/orders', {
+                return makeApiCall('GET', '/v1/me/orders/outgoing', {
+                    'listArgs': listArgs,
+                    'from': from,
+                    'to': to
+                }, listArgs);
+            }
+
+            function _listincomingorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
+                var listArgs = {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                };
+                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
+                return makeApiCall('GET', '/v1/me/orders/incoming', {
                     'listArgs': listArgs,
                     'from': from,
                     'to': to
@@ -1887,11 +1904,18 @@
                 'DeletePriceBreak': _deletepricebreak
             };
 
-            function _list(page, pageSize) {
-                return makeApiCall('GET', '/v1/priceschedules', {
+            function _list(search, page, pageSize, searchOn, sortBy, filters) {
+                var listArgs = {
+                    'search': search,
                     'page': page,
-                    'pageSize': pageSize
-                }, null);
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                };
+                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
+                return makeApiCall('GET', '/v1/priceschedules', {
+                    'listArgs': listArgs
+                }, listArgs);
             }
 
             function _get(priceScheduleID) {
