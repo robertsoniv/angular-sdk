@@ -31,9 +31,21 @@ An AngularJs SDK for OrderCloud API
 
   - [Patch the Currently Authenticated User.](#patch-the-currently-authenticated-user.)
 
+  - [List Coupons](#list-coupons)
+
+  - [Get Coupon](#get-coupon)
+
+  - [Create From Temp User](#create-from-temp-user)
+
+- [CostCenters](#costcenters)
+
   - [List Cost Centers](#list-cost-centers)
 
+- [UserGroups](#usergroups)
+
   - [List User Groups](#list-user-groups)
+
+- [Addresses](#addresses)
 
   - [List Addresses](#list-addresses)
 
@@ -47,6 +59,8 @@ An AngularJs SDK for OrderCloud API
 
   - [Delete Address](#delete-address)
 
+- [CreditCards](#creditcards)
+
   - [Create Credit Card](#create-credit-card)
 
   - [List Credit Cards](#list-credit-cards)
@@ -59,9 +73,13 @@ An AngularJs SDK for OrderCloud API
 
   - [Delete Credit Card](#delete-credit-card)
 
+- [Categories](#categories)
+
   - [List Categories](#list-categories)
 
   - [List Subcategories](#list-subcategories)
+
+- [Products](#products)
 
   - [List Products](#list-products)
 
@@ -71,13 +89,13 @@ An AngularJs SDK for OrderCloud API
 
   - [Get Spec](#get-spec)
 
+- [Orders](#orders)
+
   - [List Outgoing Orders](#list-outgoing-orders)
 
   - [List Incoming Orders](#list-incoming-orders)
 
   - [Get Order](#get-order)
-
-  - [Create From Temp User](#create-from-temp-user)
 
 - [Orders](#orders)
 
@@ -287,6 +305,26 @@ An AngularJs SDK for OrderCloud API
 
   - [Delete Option](#delete-option)
 
+- [Coupons](#coupons)
+
+  - [Get a Single Coupon](#get-a-single-coupon)
+
+  - [Get a List of Coupons](#get-a-list-of-coupons)
+
+  - [Create New Coupon](#create-new-coupon)
+
+  - [Create or Update Coupon](#create-or-update-coupon)
+
+  - [Create or Update Coupon](#create-or-update-coupon)
+
+  - [Delete Coupon](#delete-coupon)
+
+  - [List Assignments](#list-assignments)
+
+  - [Save Assignment](#save-assignment)
+
+  - [Delete Assignment](#delete-assignment)
+
 - [Files](#files)
 
   - [Get a Single File](#get-a-single-file)
@@ -397,36 +435,6 @@ An AngularJs SDK for OrderCloud API
 
   - [Delete Assignment](#delete-assignment)
 
-- [Coupons](#coupons)
-
-  - [Get a Single Coupon](#get-a-single-coupon)
-
-  - [Get a List of Coupons](#get-a-list-of-coupons)
-
-  - [Create New Coupon](#create-new-coupon)
-
-  - [Create or Update Coupon](#create-or-update-coupon)
-
-  - [Delete Coupon](#delete-coupon)
-
-  - [List Product Assignments](#list-product-assignments)
-
-  - [Save Product Assignment](#save-product-assignment)
-
-  - [Delete Product Assignment](#delete-product-assignment)
-
-  - [List Category Assignments](#list-category-assignments)
-
-  - [Save Category Assignment](#save-category-assignment)
-
-  - [Delete Category Assignment](#delete-category-assignment)
-
-  - [List Assignments](#list-assignments)
-
-  - [Save Assignment](#save-assignment)
-
-  - [Delete Assignment](#delete-assignment)
-
 - [CostCenters](#costcenters)
 
   - [Get a Single Cost Center](#get-a-single-cost-center)
@@ -438,6 +446,8 @@ An AngularJs SDK for OrderCloud API
   - [Create or Update Cost Center](#create-or-update-cost-center)
 
   - [Delete Cost Center](#delete-cost-center)
+
+  - [Partially Update Cost Center](#partially-update-cost-center)
 
   - [List Assignments](#list-assignments)
 
@@ -812,10 +822,10 @@ OrderCloud.Me.Patch(user).then(successFn).catch(errorFn);
 }
 ```
 
-## List Cost Centers
+## List Coupons
 
 ```js
-OrderCloud.Me.ListCostCenters(listArgs).then(successFn).catch(errorFn);
+OrderCloud.Me.ListCoupons(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -845,17 +855,89 @@ OrderCloud.Me.ListCostCenters(listArgs).then(successFn).catch(errorFn);
   "Items": [
     {
       "ID": "…",
-      "Name": "…",
-      "Description": "…"
+      "Code": "…",
+      "UsagesRemaining": null,
+      "Description": "…",
+      "StartDate": null,
+      "ExpirationDate": null,
+      "EligibleExpression": "…",
+      "ValueExpression": "…",
+      "CanCombine": false,
+      "xp": null
     }
   ]
 }
 ```
 
-## List User Groups
+## Get Coupon
 
 ```js
-OrderCloud.Me.ListUserGroups(listArgs).then(successFn).catch(errorFn);
+OrderCloud.Me.GetCoupon(couponID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|couponID|string|ID of the coupon.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Code": "…",
+  "UsagesRemaining": null,
+  "Description": "…",
+  "StartDate": null,
+  "ExpirationDate": null,
+  "EligibleExpression": "…",
+  "ValueExpression": "…",
+  "CanCombine": false,
+  "xp": null
+}
+```
+
+## Create From Temp User
+
+```js
+OrderCloud.Me.CreateFromTempUser(user,tempUserToken).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|tempUserToken|string|Temp user token of the me.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Username": "…",
+  "Password": "…",
+  "FirstName": "…",
+  "LastName": "…",
+  "Email": "…",
+  "Phone": "…",
+  "TermsAccepted": null,
+  "Active": false,
+  "xp": null,
+  "SecurityProfileID": "…"
+}
+```
+
+# CostCenters
+
+```js
+angular.module('orderCloud.sdk).factory(CostCenters, CostCentersFactory)
+```
+
+"Me" is a container for read-only endpoints that return a filtered view of things that the current buyer user is allowed to see, i.e. things that they are assigned to either directly or as a member of a buyer organization or user group. It also provides ways for a user to update or change their own information.
+
+## List Cost Centers
+
+```js
+OrderCloud.CostCenters.ListCostCenters(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -893,10 +975,67 @@ OrderCloud.Me.ListUserGroups(listArgs).then(successFn).catch(errorFn);
 }
 ```
 
+# UserGroups
+
+```js
+angular.module('orderCloud.sdk).factory(UserGroups, UserGroupsFactory)
+```
+
+"Me" is a container for read-only endpoints that return a filtered view of things that the current buyer user is allowed to see, i.e. things that they are assigned to either directly or as a member of a buyer organization or user group. It also provides ways for a user to update or change their own information.
+
+## List User Groups
+
+```js
+OrderCloud.UserGroups.ListUserGroups(listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…",
+      "xp": null
+    }
+  ]
+}
+```
+
+# Addresses
+
+```js
+angular.module('orderCloud.sdk).factory(Addresses, AddressesFactory)
+```
+
+"Me" is a container for read-only endpoints that return a filtered view of things that the current buyer user is allowed to see, i.e. things that they are assigned to either directly or as a member of a buyer organization or user group. It also provides ways for a user to update or change their own information.
+
 ## List Addresses
 
 ```js
-OrderCloud.Me.ListAddresses(listArgs).then(successFn).catch(errorFn);
+OrderCloud.Addresses.ListAddresses(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -949,7 +1088,7 @@ OrderCloud.Me.ListAddresses(listArgs).then(successFn).catch(errorFn);
 ## Create Address
 
 ```js
-OrderCloud.Me.CreateAddress(address).then(successFn).catch(errorFn);
+OrderCloud.Addresses.CreateAddress(address).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -976,7 +1115,7 @@ OrderCloud.Me.CreateAddress(address).then(successFn).catch(errorFn);
 ## Get Address
 
 ```js
-OrderCloud.Me.GetAddress(addressID).then(successFn).catch(errorFn);
+OrderCloud.Addresses.GetAddress(addressID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1010,7 +1149,7 @@ OrderCloud.Me.GetAddress(addressID).then(successFn).catch(errorFn);
 ## Update Address
 
 ```js
-OrderCloud.Me.UpdateAddress(addressID,address).then(successFn).catch(errorFn);
+OrderCloud.Addresses.UpdateAddress(addressID,address).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1042,7 +1181,7 @@ OrderCloud.Me.UpdateAddress(addressID,address).then(successFn).catch(errorFn);
 ## Patch Address
 
 ```js
-OrderCloud.Me.PatchAddress(addressID,address).then(successFn).catch(errorFn);
+OrderCloud.Addresses.PatchAddress(addressID,address).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1074,7 +1213,7 @@ OrderCloud.Me.PatchAddress(addressID,address).then(successFn).catch(errorFn);
 ## Delete Address
 
 ```js
-OrderCloud.Me.DeleteAddress(addressID,overrideOrderConflict).then(successFn).catch(errorFn);
+OrderCloud.Addresses.DeleteAddress(addressID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1082,11 +1221,18 @@ OrderCloud.Me.DeleteAddress(addressID,overrideOrderConflict).then(successFn).cat
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |addressID|string|ID of the address.|
-|overrideOrderConflict|boolean|Override order conflict of the me.|
+# CreditCards
+
+```js
+angular.module('orderCloud.sdk).factory(CreditCards, CreditCardsFactory)
+```
+
+"Me" is a container for read-only endpoints that return a filtered view of things that the current buyer user is allowed to see, i.e. things that they are assigned to either directly or as a member of a buyer organization or user group. It also provides ways for a user to update or change their own information.
+
 ## Create Credit Card
 
 ```js
-OrderCloud.Me.CreateCreditCard(creditCard).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.CreateCreditCard(creditCard).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -1105,7 +1251,7 @@ OrderCloud.Me.CreateCreditCard(creditCard).then(successFn).catch(errorFn);
 ## List Credit Cards
 
 ```js
-OrderCloud.Me.ListCreditCards(listArgs).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.ListCreditCards(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1151,7 +1297,7 @@ OrderCloud.Me.ListCreditCards(listArgs).then(successFn).catch(errorFn);
 ## Get Credit Card
 
 ```js
-OrderCloud.Me.GetCreditCard(creditcardID).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.GetCreditCard(creditcardID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1178,7 +1324,7 @@ OrderCloud.Me.GetCreditCard(creditcardID).then(successFn).catch(errorFn);
 ## Update Credit Card
 
 ```js
-OrderCloud.Me.UpdateCreditCard(creditcardID,creditCard).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.UpdateCreditCard(creditcardID,creditCard).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1202,7 +1348,7 @@ OrderCloud.Me.UpdateCreditCard(creditcardID,creditCard).then(successFn).catch(er
 ## Patch Credit Card
 
 ```js
-OrderCloud.Me.PatchCreditCard(creditcardID,creditCard).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.PatchCreditCard(creditcardID,creditCard).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1226,7 +1372,7 @@ OrderCloud.Me.PatchCreditCard(creditcardID,creditCard).then(successFn).catch(err
 ## Delete Credit Card
 
 ```js
-OrderCloud.Me.DeleteCreditCard(creditcardID).then(successFn).catch(errorFn);
+OrderCloud.CreditCards.DeleteCreditCard(creditcardID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1234,17 +1380,25 @@ OrderCloud.Me.DeleteCreditCard(creditcardID).then(successFn).catch(errorFn);
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |creditcardID|string|ID of the creditcard.|
+# Categories
+
+```js
+angular.module('orderCloud.sdk).factory(Categories, CategoriesFactory)
+```
+
+"Me" is a container for read-only endpoints that return a filtered view of things that the current buyer user is allowed to see, i.e. things that they are assigned to either directly or as a member of a buyer organization or user group. It also provides ways for a user to update or change their own information.
+
 ## List Categories
 
 ```js
-OrderCloud.Me.ListCategories(listArgs,depth).then(successFn).catch(errorFn);
+OrderCloud.Categories.ListCategories(listArgs,depth).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|depth|string|Depth of the me.|
+|depth|string|Depth of the category.|
 |search|string|Word or phrase to search for.|
 |searchOn|string|Comma-delimited list of fields to search on.|
 |sortBy|string|Comma-delimited list of fields to sort by.|
@@ -1283,7 +1437,7 @@ OrderCloud.Me.ListCategories(listArgs,depth).then(successFn).catch(errorFn);
 ## List Subcategories
 
 ```js
-OrderCloud.Me.ListSubcategories(listArgs,parentID,depth).then(successFn).catch(errorFn);
+OrderCloud.Categories.ListSubcategories(listArgs,parentID,depth).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1291,7 +1445,7 @@ OrderCloud.Me.ListSubcategories(listArgs,parentID,depth).then(successFn).catch(e
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |parentID|string|ID of the parent.|
-|depth|string|Depth of the me.|
+|depth|string|Depth of the category.|
 |search|string|Word or phrase to search for.|
 |searchOn|string|Comma-delimited list of fields to search on.|
 |sortBy|string|Comma-delimited list of fields to sort by.|
@@ -1327,10 +1481,18 @@ OrderCloud.Me.ListSubcategories(listArgs,parentID,depth).then(successFn).catch(e
 }
 ```
 
+# Products
+
+```js
+angular.module('orderCloud.sdk).factory(Products, ProductsFactory)
+```
+
+"Me" is a container for read-only endpoints that return a filtered view of things that the current buyer user is allowed to see, i.e. things that they are assigned to either directly or as a member of a buyer organization or user group. It also provides ways for a user to update or change their own information.
+
 ## List Products
 
 ```js
-OrderCloud.Me.ListProducts(listArgs,categoryID).then(successFn).catch(errorFn);
+OrderCloud.Products.ListProducts(listArgs,categoryID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1418,7 +1580,7 @@ OrderCloud.Me.ListProducts(listArgs,categoryID).then(successFn).catch(errorFn);
 ## Get Product
 
 ```js
-OrderCloud.Me.GetProduct(productID).then(successFn).catch(errorFn);
+OrderCloud.Products.GetProduct(productID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1486,7 +1648,7 @@ OrderCloud.Me.GetProduct(productID).then(successFn).catch(errorFn);
 ## List Specs
 
 ```js
-OrderCloud.Me.ListSpecs(productID,listArgs).then(successFn).catch(errorFn);
+OrderCloud.Products.ListSpecs(productID,listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1543,7 +1705,7 @@ OrderCloud.Me.ListSpecs(productID,listArgs).then(successFn).catch(errorFn);
 ## Get Spec
 
 ```js
-OrderCloud.Me.GetSpec(productID,specID).then(successFn).catch(errorFn);
+OrderCloud.Products.GetSpec(productID,specID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1578,10 +1740,18 @@ OrderCloud.Me.GetSpec(productID,specID).then(successFn).catch(errorFn);
 }
 ```
 
+# Orders
+
+```js
+angular.module('orderCloud.sdk).factory(Orders, OrdersFactory)
+```
+
+"Me" is a container for read-only endpoints that return a filtered view of things that the current buyer user is allowed to see, i.e. things that they are assigned to either directly or as a member of a buyer organization or user group. It also provides ways for a user to update or change their own information.
+
 ## List Outgoing Orders
 
 ```js
-OrderCloud.Me.ListOutgoingOrders(listArgs,from,to).then(successFn).catch(errorFn);
+OrderCloud.Orders.ListOutgoingOrders(listArgs,from,to).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1656,7 +1826,7 @@ OrderCloud.Me.ListOutgoingOrders(listArgs,from,to).then(successFn).catch(errorFn
 ## List Incoming Orders
 
 ```js
-OrderCloud.Me.ListIncomingOrders(listArgs,from,to).then(successFn).catch(errorFn);
+OrderCloud.Orders.ListIncomingOrders(listArgs,from,to).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1731,7 +1901,7 @@ OrderCloud.Me.ListIncomingOrders(listArgs,from,to).then(successFn).catch(errorFn
 ## Get Order
 
 ```js
-OrderCloud.Me.GetOrder(orderID).then(successFn).catch(errorFn);
+OrderCloud.Orders.GetOrder(orderID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1779,35 +1949,6 @@ OrderCloud.Me.GetOrder(orderID).then(successFn).catch(errorFn);
   "CouponDiscount": 0.0,
   "Total": 0.0,
   "xp": null
-}
-```
-
-## Create From Temp User
-
-```js
-OrderCloud.Me.CreateFromTempUser(user,tempUserToken).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|tempUserToken|string|Temp user token of the me.|
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "Username": "…",
-  "Password": "…",
-  "FirstName": "…",
-  "LastName": "…",
-  "Email": "…",
-  "Phone": "…",
-  "TermsAccepted": null,
-  "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
 }
 ```
 
@@ -4720,6 +4861,251 @@ OrderCloud.Specs.DeleteOption(specID,optionID).then(successFn).catch(errorFn);
 | -------------- | ----------- | --------------- |
 |specID|string|ID of the spec.|
 |optionID|string|ID of the option.|
+# Coupons
+
+```js
+angular.module('orderCloud.sdk).factory(Coupons, CouponsFactory)
+```
+
+Coupons are used to reduce the cost of a line item or an order.  Coupons can have redemption rules that can be applied for available dates, occurences and value.
+Coupons can be assigned to Products, Categories, Buyers, UserGroups and Users for redemption.
+
+## Get a Single Coupon
+
+```js
+OrderCloud.Coupons.Get(couponID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|couponID|string|ID of the coupon.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Code": "…",
+  "UsagesRemaining": null,
+  "Description": "…",
+  "StartDate": null,
+  "ExpirationDate": null,
+  "EligibleExpression": "…",
+  "ValueExpression": "…",
+  "CanCombine": false,
+  "xp": null
+}
+```
+
+## Get a List of Coupons
+
+```js
+OrderCloud.Coupons.List(listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Code": "…",
+      "UsagesRemaining": null,
+      "Description": "…",
+      "StartDate": null,
+      "ExpirationDate": null,
+      "EligibleExpression": "…",
+      "ValueExpression": "…",
+      "CanCombine": false,
+      "xp": null
+    }
+  ]
+}
+```
+
+## Create New Coupon
+
+```js
+OrderCloud.Coupons.Create(coupon).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Code": "…",
+  "UsagesRemaining": null,
+  "Description": "…",
+  "StartDate": null,
+  "ExpirationDate": null,
+  "EligibleExpression": "…",
+  "ValueExpression": "…",
+  "CanCombine": false,
+  "xp": null
+}
+```
+
+## Create or Update Coupon
+
+```js
+OrderCloud.Coupons.Update(couponID,coupon).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|couponID|string|ID of the coupon.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Code": "…",
+  "UsagesRemaining": null,
+  "Description": "…",
+  "StartDate": null,
+  "ExpirationDate": null,
+  "EligibleExpression": "…",
+  "ValueExpression": "…",
+  "CanCombine": false,
+  "xp": null
+}
+```
+
+## Create or Update Coupon
+
+```js
+OrderCloud.Coupons.Update(couponID,coupon).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|couponID|string|ID of the coupon.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Code": "…",
+  "UsagesRemaining": null,
+  "Description": "…",
+  "StartDate": null,
+  "ExpirationDate": null,
+  "EligibleExpression": "…",
+  "ValueExpression": "…",
+  "CanCombine": false,
+  "xp": null
+}
+```
+
+## Delete Coupon
+
+```js
+OrderCloud.Coupons.Delete(couponID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|couponID|string|ID of the coupon.|
+## List Assignments
+
+```js
+OrderCloud.Coupons.ListAssignments(couponID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|couponID|string|ID of the coupon.|
+|userID|string|ID of the user.|
+|userGroupID|string|ID of the user group.|
+|level|string|Level of the coupon.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "CouponID": "…",
+      "BuyerID": "…",
+      "UserID": "…",
+      "UserGroupID": "…"
+    }
+  ]
+}
+```
+
+## Save Assignment
+
+```js
+OrderCloud.Coupons.SaveAssignment(assignment).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "CouponID": "…",
+  "BuyerID": "…",
+  "UserID": "…",
+  "UserGroupID": "…"
+}
+```
+
+## Delete Assignment
+
+```js
+OrderCloud.Coupons.DeleteAssignment(couponID,userID,userGroupID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|couponID|string|ID of the coupon.|
+|userID|string|ID of the user.|
+|userGroupID|string|ID of the user group.|
 # Files
 
 ```js
@@ -5485,7 +5871,7 @@ OrderCloud.Categories.DeleteProductAssignment(categoryID,productID).then(success
 ## List Assignments
 
 ```js
-OrderCloud.Categories.ListAssignments(categoryID,userID,userGroupID,level,listArgs).then(successFn).catch(errorFn);
+OrderCloud.Categories.ListAssignments(categoryID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5496,12 +5882,8 @@ OrderCloud.Categories.ListAssignments(categoryID,userID,userGroupID,level,listAr
 |userID|string|ID of the user.|
 |userGroupID|string|ID of the user group.|
 |level|string|Level of the category.|
-|search|string|Word or phrase to search for.|
-|searchOn|string|Comma-delimited list of fields to search on.|
-|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
@@ -5704,7 +6086,7 @@ OrderCloud.Addresses.Update(addressID,address).then(successFn).catch(errorFn);
 ## Delete Address
 
 ```js
-OrderCloud.Addresses.Delete(addressID,overrideOrderConflict).then(successFn).catch(errorFn);
+OrderCloud.Addresses.Delete(addressID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5712,7 +6094,6 @@ OrderCloud.Addresses.Delete(addressID,overrideOrderConflict).then(successFn).cat
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |addressID|string|ID of the address.|
-|overrideOrderConflict|boolean|Override order conflict of the address.|
 ## Partially Update Address
 
 ```js
@@ -5778,9 +6159,9 @@ OrderCloud.Addresses.ListAssignments(addressID,userID,userGroupID,level,isShippi
   },
   "Items": [
     {
+      "AddressID": "…",
       "UserID": "…",
       "UserGroupID": "…",
-      "AddressID": "…",
       "IsShipping": false,
       "IsBilling": false
     }
@@ -5811,9 +6192,9 @@ OrderCloud.Addresses.SaveAssignment(assignment).then(successFn).catch(errorFn);
 
 ```json
 {
+  "AddressID": "…",
   "UserID": "…",
   "UserGroupID": "…",
-  "AddressID": "…",
   "IsShipping": false,
   "IsBilling": false
 }
@@ -6030,372 +6411,6 @@ OrderCloud.SpendingAccounts.DeleteAssignment(spendingAccountID,userID,userGroupI
 |spendingAccountID|string|ID of the spending account.|
 |userID|string|ID of the user.|
 |userGroupID|string|ID of the user group.|
-# Coupons
-
-```js
-angular.module('orderCloud.sdk).factory(Coupons, CouponsFactory)
-```
-
-Coupons are used to reduce the cost of a line item or an order.  Coupons can have redemption rules that can be applied for available dates, occurences and value.
-Coupons can be assigned to Products, Categories, Buyers, UserGroups and Users for redemption.
-
-## Get a Single Coupon
-
-```js
-OrderCloud.Coupons.Get(couponID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
-### Response Body Sample
-
-```json
-{
-  "ID": "…",
-  "CouponCode": "…",
-  "Label": "…",
-  "Description": "…",
-  "DiscountAmountType": "FlatAmountPerOrder",
-  "Enabled": false,
-  "RedeemLimit": 0,
-  "StartDate": null,
-  "ExpirationDate": null,
-  "DiscountAmount": 0.0,
-  "MinimumPurchase": 0.0,
-  "CouponType": "Order",
-  "ApplyToSubtotal": false,
-  "ApplyToShipping": false,
-  "ApplyToTax": false,
-  "Status": "Active"
-}
-```
-
-## Get a List of Coupons
-
-```js
-OrderCloud.Coupons.List(search,page,pageSize).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|search|string|Word or phrase to search for.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "ID": "…",
-      "CouponCode": "…",
-      "Label": "…",
-      "Description": "…",
-      "DiscountAmountType": "FlatAmountPerOrder",
-      "Enabled": false,
-      "RedeemLimit": 0,
-      "StartDate": null,
-      "ExpirationDate": null,
-      "DiscountAmount": 0.0,
-      "MinimumPurchase": 0.0,
-      "CouponType": "Order",
-      "ApplyToSubtotal": false,
-      "ApplyToShipping": false,
-      "ApplyToTax": false,
-      "Status": "Active"
-    }
-  ]
-}
-```
-
-## Create New Coupon
-
-```js
-OrderCloud.Coupons.Create(coupon).then(successFn).catch(errorFn);
-```
-
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "CouponCode": "…",
-  "Label": "…",
-  "Description": "…",
-  "DiscountAmountType": "FlatAmountPerOrder",
-  "Enabled": false,
-  "RedeemLimit": 0,
-  "StartDate": null,
-  "ExpirationDate": null,
-  "DiscountAmount": 0.0,
-  "MinimumPurchase": 0.0,
-  "CouponType": "Order",
-  "ApplyToSubtotal": false,
-  "ApplyToShipping": false,
-  "ApplyToTax": false
-}
-```
-
-## Create or Update Coupon
-
-```js
-OrderCloud.Coupons.Update(couponID,coupon).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "CouponCode": "…",
-  "Label": "…",
-  "Description": "…",
-  "DiscountAmountType": "FlatAmountPerOrder",
-  "Enabled": false,
-  "RedeemLimit": 0,
-  "StartDate": null,
-  "ExpirationDate": null,
-  "DiscountAmount": 0.0,
-  "MinimumPurchase": 0.0,
-  "CouponType": "Order",
-  "ApplyToSubtotal": false,
-  "ApplyToShipping": false,
-  "ApplyToTax": false
-}
-```
-
-## Delete Coupon
-
-```js
-OrderCloud.Coupons.Delete(couponID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
-## List Product Assignments
-
-```js
-OrderCloud.Coupons.ListProductAssignments(couponID,productID,page,pageSize).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
-|productID|string|ID of the product.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "CouponID": "…",
-      "ProductID": "…",
-      "ListOrder": null
-    }
-  ]
-}
-```
-
-## Save Product Assignment
-
-```js
-OrderCloud.Coupons.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
-```
-
-### Request Body Sample
-
-```json
-{
-  "CouponID": "…",
-  "ProductID": "…",
-  "ListOrder": null
-}
-```
-
-## Delete Product Assignment
-
-```js
-OrderCloud.Coupons.DeleteProductAssignment(couponID,productID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
-|productID|string|ID of the product.|
-## List Category Assignments
-
-```js
-OrderCloud.Coupons.ListCategoryAssignments(couponID,categoryID,page,pageSize).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
-|categoryID|string|ID of the category.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "CouponID": "…",
-      "CategoryID": "…",
-      "ListOrder": null
-    }
-  ]
-}
-```
-
-## Save Category Assignment
-
-```js
-OrderCloud.Coupons.SaveCategoryAssignment(categoryAssignment).then(successFn).catch(errorFn);
-```
-
-### Request Body Sample
-
-```json
-{
-  "CouponID": "…",
-  "CategoryID": "…",
-  "ListOrder": null
-}
-```
-
-## Delete Category Assignment
-
-```js
-OrderCloud.Coupons.DeleteCategoryAssignment(couponID,categoryID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
-|categoryID|string|ID of the category.|
-## List Assignments
-
-```js
-OrderCloud.Coupons.ListAssignments(couponID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
-|userID|string|ID of the user.|
-|userGroupID|string|ID of the user group.|
-|level|string|Level of the coupon.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "CouponID": "…",
-      "UserID": "…",
-      "UserGroupID": "…"
-    }
-  ]
-}
-```
-
-## Save Assignment
-
-```js
-OrderCloud.Coupons.SaveAssignment(assignment).then(successFn).catch(errorFn);
-```
-
-### Request Body Sample
-
-```json
-{
-  "CouponID": "…",
-  "UserID": "…",
-  "UserGroupID": "…"
-}
-```
-
-## Delete Assignment
-
-```js
-OrderCloud.Coupons.DeleteAssignment(couponID,userID,userGroupID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
-|userID|string|ID of the user.|
-|userGroupID|string|ID of the user group.|
 # CostCenters
 
 ```js
@@ -6421,7 +6436,8 @@ OrderCloud.CostCenters.Get(costCenterID).then(successFn).catch(errorFn);
 {
   "ID": "…",
   "Name": "…",
-  "Description": "…"
+  "Description": "…",
+  "xp": null
 }
 ```
 
@@ -6459,7 +6475,8 @@ OrderCloud.CostCenters.List(listArgs).then(successFn).catch(errorFn);
     {
       "ID": "…",
       "Name": "…",
-      "Description": "…"
+      "Description": "…",
+      "xp": null
     }
   ]
 }
@@ -6477,7 +6494,8 @@ OrderCloud.CostCenters.Create(costCenter).then(successFn).catch(errorFn);
 {
   "ID": "…",
   "Name": "…",
-  "Description": "…"
+  "Description": "…",
+  "xp": null
 }
 ```
 
@@ -6498,7 +6516,8 @@ OrderCloud.CostCenters.Update(costCenterID,costCenter).then(successFn).catch(err
 {
   "ID": "…",
   "Name": "…",
-  "Description": "…"
+  "Description": "…",
+  "xp": null
 }
 ```
 
@@ -6513,10 +6532,32 @@ OrderCloud.CostCenters.Delete(costCenterID).then(successFn).catch(errorFn);
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |costCenterID|string|ID of the cost center.|
+## Partially Update Cost Center
+
+```js
+OrderCloud.CostCenters.Patch(costCenterID,costCenter).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|costCenterID|string|ID of the cost center.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "xp": null
+}
+```
+
 ## List Assignments
 
 ```js
-OrderCloud.CostCenters.ListAssignments(costCenterID,userID,userGroupID,level,listArgs).then(successFn).catch(errorFn);
+OrderCloud.CostCenters.ListAssignments(costCenterID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -6527,12 +6568,8 @@ OrderCloud.CostCenters.ListAssignments(costCenterID,userID,userGroupID,level,lis
 |userID|string|ID of the user.|
 |userGroupID|string|ID of the user group.|
 |level|string|Level of the cost center.|
-|search|string|Word or phrase to search for.|
-|searchOn|string|Comma-delimited list of fields to search on.|
-|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
