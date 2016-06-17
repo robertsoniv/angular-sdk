@@ -161,7 +161,7 @@
                 return makeApiCall('GET', '/v1/buyers/:buyerID/addresses', {
                     'buyerID': BuyerID().Get(),
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _get(addressID) {
@@ -281,7 +281,7 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/adminusers', {
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _delete(userID) {
@@ -317,7 +317,7 @@
                 return makeApiCall('GET', '/v1/buyers/:buyerID/approvalrules', {
                     'buyerID': BuyerID().Get(),
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _get(approvalRuleID) {
@@ -433,7 +433,7 @@
                     'listArgs': listArgs,
                     'parentID': parentID,
                     'depth': depth
-                }, listArgs);
+                }, null);
             }
 
             function _listchildren(parentID, search, depth, page, pageSize) {
@@ -565,7 +565,7 @@
                 return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters', {
                     'buyerID': BuyerID().Get(),
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _get(costCenterID) {
@@ -643,7 +643,7 @@
                 'Get': _get,
                 'Create': _create,
                 'Update': _update,
-                'Update': _update,
+                'Patch': _patch,
                 'Delete': _delete,
                 'ListAssignments': _listassignments,
                 'SaveAssignment': _saveassignment,
@@ -661,7 +661,7 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/coupons', {
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _get(couponID) {
@@ -687,7 +687,7 @@
                 }, coupon);
             }
 
-            function _update(couponID, partialCoupon) {
+            function _patch(couponID, partialCoupon) {
                 return makeApiCall('PATCH', '/v1/coupons/:couponID', {
                     'couponID': couponID
                 }, partialCoupon);
@@ -750,7 +750,7 @@
                 return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards', {
                     'buyerID': BuyerID().Get(),
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _get(creditCardID) {
@@ -917,7 +917,7 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/SecurityProfiles', {
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _get(securityProfileID) {
@@ -976,7 +976,7 @@
                     'buyerID': BuyerID().Get(),
                     'orderID': orderID,
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _create(orderID, payment) {
@@ -1076,7 +1076,7 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/specs', {
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _get(specID) {
@@ -1152,7 +1152,7 @@
                 return makeApiCall('GET', '/v1/specs/:specID/options', {
                     'specID': specID,
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _updateoption(specID, optionID, option) {
@@ -1209,7 +1209,7 @@
                 return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups', {
                     'buyerID': BuyerID().Get(),
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _get(userGroupID) {
@@ -1318,7 +1318,7 @@
                     'buyerID': BuyerID().Get(),
                     'orderID': orderID,
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _create(orderID, lineItem) {
@@ -1425,7 +1425,7 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/me/costcenters', {
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _listusergroups(search, page, pageSize, searchOn, sortBy, filters) {
@@ -1439,7 +1439,7 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/me/usergroups', {
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _listaddresses(search, page, pageSize, searchOn, sortBy, filters) {
@@ -1453,7 +1453,7 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/me/addresses', {
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _createaddress(address) {
@@ -1499,7 +1499,7 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/me/creditcards', {
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _getcreditcard(creditcardID) {
@@ -1538,7 +1538,7 @@
                 return makeApiCall('GET', '/v1/me/categories', {
                     'listArgs': listArgs,
                     'depth': depth
-                }, listArgs);
+                }, null);
             }
 
             function _listsubcategories(search, page, pageSize, searchOn, sortBy, filters, parentID, depth) {
@@ -1554,7 +1554,7 @@
                     'listArgs': listArgs,
                     'parentID': parentID,
                     'depth': depth
-                }, listArgs);
+                }, null);
             }
 
             function _listproducts(search, page, pageSize, searchOn, sortBy, filters, categoryID) {
@@ -1569,7 +1569,7 @@
                 return makeApiCall('GET', '/v1/me/products', {
                     'listArgs': listArgs,
                     'categoryID': categoryID
-                }, listArgs);
+                }, null);
             }
 
             function _getproduct(productID) {
@@ -1590,7 +1590,7 @@
                 return makeApiCall('GET', '/v1/me/products/:productID/specs', {
                     'productID': productID,
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _getspec(productID, specID) {
@@ -1613,7 +1613,7 @@
                     'listArgs': listArgs,
                     'from': from,
                     'to': to
-                }, listArgs);
+                }, null);
             }
 
             function _listincomingorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
@@ -1629,7 +1629,7 @@
                     'listArgs': listArgs,
                     'from': from,
                     'to': to
-                }, listArgs);
+                }, null);
             }
 
             function _getorder(orderID) {
@@ -1649,7 +1649,7 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/me/coupons', {
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _getcoupon(couponID) {
@@ -1717,7 +1717,7 @@
                     'from': from,
                     'to': to,
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _listincoming(from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
@@ -1737,7 +1737,7 @@
                     'from': from,
                     'to': to,
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _create(order, buyerID) {
@@ -1880,7 +1880,7 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/priceschedules', {
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _get(priceScheduleID) {
@@ -2036,7 +2036,7 @@
                 return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts', {
                     'buyerID': BuyerID().Get(),
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _get(spendingAccountID) {
@@ -2134,7 +2134,7 @@
                 if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
                 return makeApiCall('GET', '/v1/products', {
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _get(productID) {
@@ -2287,7 +2287,7 @@
                 return makeApiCall('GET', '/v1/buyers/:buyerID/users', {
                     'buyerID': BuyerID().Get(),
                     'listArgs': listArgs
-                }, listArgs);
+                }, null);
             }
 
             function _get(userID) {

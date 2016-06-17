@@ -51,7 +51,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/buyers/:buyerID/addresses', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/addresses', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, null);
 				}
 				function _get(addressID) {
 					if (!addressID) {
@@ -120,7 +120,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/adminusers', { 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/adminusers', { 'listArgs': listArgs }, null);
 				}
 				function _delete(userID) {
 					return makeApiCall('DELETE', '/v1/adminusers/:userID', { 'userID': userID }, null);
@@ -148,7 +148,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/buyers/:buyerID/approvalrules', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/approvalrules', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, null);
 				}
 				function _get(approvalRuleID) {
 					if (!approvalRuleID) {
@@ -224,7 +224,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/buyers/:buyerID/categories', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs, 'parentID': parentID, 'depth': depth }, listArgs);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/categories', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs, 'parentID': parentID, 'depth': depth }, null);
 				}
 				function _listchildren(parentID, search, depth, page, pageSize) {
 					return makeApiCall('GET', '/v1/buyers/:buyerID/categories/:parentID/categories', { 'buyerID': BuyerID().Get(), 'parentID': parentID, 'search': search, 'depth': depth, 'page': page, 'pageSize': pageSize }, null);
@@ -292,7 +292,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, null);
 				}
 				function _get(costCenterID) {
 					if (!costCenterID) {
@@ -332,7 +332,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'Get': _get,
 					'Create': _create,
 					'Update': _update,
-					'Update': _update,
+					'Patch': _patch,
 					'Delete': _delete,
 					'ListAssignments': _listassignments,
 					'SaveAssignment': _saveassignment,
@@ -348,7 +348,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/coupons', { 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/coupons', { 'listArgs': listArgs }, null);
 				}
 				function _get(couponID) {
 					if (!couponID) {
@@ -366,7 +366,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				function _update(couponID, coupon) {
 					return makeApiCall('PUT', '/v1/coupons/:couponID', { 'couponID': couponID }, coupon);
 				}
-				function _update(couponID, partialCoupon) {
+				function _patch(couponID, partialCoupon) {
 					return makeApiCall('PATCH', '/v1/coupons/:couponID', { 'couponID': couponID }, partialCoupon);
 				}
 				function _delete(couponID) {
@@ -404,7 +404,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, null);
 				}
 				function _get(creditCardID) {
 					if (!creditCardID) {
@@ -505,7 +505,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/SecurityProfiles', { 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/SecurityProfiles', { 'listArgs': listArgs }, null);
 				}
 				function _get(securityProfileID) {
 					if (!securityProfileID) {
@@ -551,7 +551,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/payments', { 'buyerID': BuyerID().Get(), 'orderID': orderID, 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/payments', { 'buyerID': BuyerID().Get(), 'orderID': orderID, 'listArgs': listArgs }, null);
 				}
 				function _create(orderID, payment) {
 					return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/payments', { 'buyerID': BuyerID().Get(), 'orderID': orderID }, payment);
@@ -606,7 +606,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/specs', { 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/specs', { 'listArgs': listArgs }, null);
 				}
 				function _get(specID) {
 					if (!specID) {
@@ -651,7 +651,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/specs/:specID/options', { 'specID': specID, 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/specs/:specID/options', { 'specID': specID, 'listArgs': listArgs }, null);
 				}
 				function _updateoption(specID, optionID, option) {
 					return makeApiCall('PUT', '/v1/specs/:specID/options/:optionID', { 'specID': specID, 'optionID': optionID }, option);
@@ -688,7 +688,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, null);
 				}
 				function _get(userGroupID) {
 					if (!userGroupID) {
@@ -753,7 +753,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/lineitems', { 'buyerID': BuyerID().Get(), 'orderID': orderID, 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/lineitems', { 'buyerID': BuyerID().Get(), 'orderID': orderID, 'listArgs': listArgs }, null);
 				}
 				function _create(orderID, lineItem) {
 					return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/lineitems', { 'buyerID': BuyerID().Get(), 'orderID': orderID }, lineItem);
@@ -825,7 +825,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/me/costcenters', { 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/me/costcenters', { 'listArgs': listArgs }, null);
 				}
 				function _listusergroups(search, page, pageSize, searchOn, sortBy, filters) {
 					var listArgs = {
@@ -836,7 +836,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/me/usergroups', { 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/me/usergroups', { 'listArgs': listArgs }, null);
 				}
 				function _listaddresses(search, page, pageSize, searchOn, sortBy, filters) {
 					var listArgs = {
@@ -847,7 +847,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/me/addresses', { 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/me/addresses', { 'listArgs': listArgs }, null);
 				}
 				function _createaddress(address) {
 					return makeApiCall('POST', '/v1/me/addresses', null, address);
@@ -876,7 +876,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/me/creditcards', { 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/me/creditcards', { 'listArgs': listArgs }, null);
 				}
 				function _getcreditcard(creditcardID) {
 					return makeApiCall('GET', '/v1/me/creditcards/:creditcardID', { 'creditcardID': creditcardID }, null);
@@ -899,7 +899,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/me/categories', { 'listArgs': listArgs, 'depth': depth }, listArgs);
+					return makeApiCall('GET', '/v1/me/categories', { 'listArgs': listArgs, 'depth': depth }, null);
 				}
 				function _listsubcategories(search, page, pageSize, searchOn, sortBy, filters, parentID, depth) {
 					var listArgs = {
@@ -910,7 +910,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/me/categories/:parentID/categories', { 'listArgs': listArgs, 'parentID': parentID, 'depth': depth }, listArgs);
+					return makeApiCall('GET', '/v1/me/categories/:parentID/categories', { 'listArgs': listArgs, 'parentID': parentID, 'depth': depth }, null);
 				}
 				function _listproducts(search, page, pageSize, searchOn, sortBy, filters, categoryID) {
 					var listArgs = {
@@ -921,7 +921,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/me/products', { 'listArgs': listArgs, 'categoryID': categoryID }, listArgs);
+					return makeApiCall('GET', '/v1/me/products', { 'listArgs': listArgs, 'categoryID': categoryID }, null);
 				}
 				function _getproduct(productID) {
 					return makeApiCall('GET', '/v1/me/products/:productID', { 'productID': productID }, null);
@@ -935,7 +935,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/me/products/:productID/specs', { 'productID': productID, 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/me/products/:productID/specs', { 'productID': productID, 'listArgs': listArgs }, null);
 				}
 				function _getspec(productID, specID) {
 					return makeApiCall('GET', '/v1/me/products/:productID/specs/:specID', { 'productID': productID, 'specID': specID }, null);
@@ -949,7 +949,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/me/orders/outgoing', { 'listArgs': listArgs, 'from': from, 'to': to }, listArgs);
+					return makeApiCall('GET', '/v1/me/orders/outgoing', { 'listArgs': listArgs, 'from': from, 'to': to }, null);
 				}
 				function _listincomingorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
 					var listArgs = {
@@ -960,7 +960,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/me/orders/incoming', { 'listArgs': listArgs, 'from': from, 'to': to }, listArgs);
+					return makeApiCall('GET', '/v1/me/orders/incoming', { 'listArgs': listArgs, 'from': from, 'to': to }, null);
 				}
 				function _getorder(orderID) {
 					return makeApiCall('GET', '/v1/me/orders/:orderID', { 'orderID': orderID }, null);
@@ -974,7 +974,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/me/coupons', { 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/me/coupons', { 'listArgs': listArgs }, null);
 				}
 				function _getcoupon(couponID) {
 					return makeApiCall('GET', '/v1/me/coupons/:couponID', { 'couponID': couponID }, null);
@@ -1026,7 +1026,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					listArgs['buyerID'] = buyerID ? buyerID : BuyerID().Get();
 					listArgs['from'] = from;
 					listArgs['to'] = to;
-					return makeApiCall('GET', '/v1/orders/outgoing', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'from': from, 'to': to, 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/orders/outgoing', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'from': from, 'to': to, 'listArgs': listArgs }, null);
 				}
 				function _listincoming(from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
 					var listArgs = {
@@ -1040,7 +1040,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					listArgs['buyerID'] = buyerID ? buyerID : BuyerID().Get();
 					listArgs['from'] = from;
 					listArgs['to'] = to;
-					return makeApiCall('GET', '/v1/orders/incoming', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'from': from, 'to': to, 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/orders/incoming', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'from': from, 'to': to, 'listArgs': listArgs }, null);
 				}
 				function _create(order, buyerID) {
 					return makeApiCall('POST', '/v1/buyers/:buyerID/orders', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, order);
@@ -1119,7 +1119,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/priceschedules', { 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/priceschedules', { 'listArgs': listArgs }, null);
 				}
 				function _get(priceScheduleID) {
 					if (!priceScheduleID) {
@@ -1215,7 +1215,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, null);
 				}
 				function _get(spendingAccountID) {
 					if (!spendingAccountID) {
@@ -1277,7 +1277,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/products', { 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/products', { 'listArgs': listArgs }, null);
 				}
 				function _get(productID) {
 					if (!productID) {
@@ -1358,7 +1358,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						'sortBy': sortBy
 						};
 					if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-					return makeApiCall('GET', '/v1/buyers/:buyerID/users', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, listArgs);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/users', { 'buyerID': BuyerID().Get(), 'listArgs': listArgs }, null);
 				}
 				function _get(userID) {
 					if (!userID) {

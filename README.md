@@ -315,9 +315,9 @@ An AngularJs SDK for OrderCloud API
 
   - [Create or Update Coupon](#create-or-update-coupon)
 
-  - [Create or Update Coupon](#create-or-update-coupon)
-
   - [Delete Coupon](#delete-coupon)
+
+  - [Partially Update Coupon](#partially-update-coupon)
 
   - [List Assignments](#list-assignments)
 
@@ -4996,10 +4996,21 @@ OrderCloud.Coupons.Update(couponID,coupon).then(successFn).catch(errorFn);
 }
 ```
 
-## Create or Update Coupon
+## Delete Coupon
 
 ```js
-OrderCloud.Coupons.Update(couponID,coupon).then(successFn).catch(errorFn);
+OrderCloud.Coupons.Delete(couponID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|couponID|string|ID of the coupon.|
+## Partially Update Coupon
+
+```js
+OrderCloud.Coupons.Patch(couponID,partialCoupon).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5024,17 +5035,6 @@ OrderCloud.Coupons.Update(couponID,coupon).then(successFn).catch(errorFn);
 }
 ```
 
-## Delete Coupon
-
-```js
-OrderCloud.Coupons.Delete(couponID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
 ## List Assignments
 
 ```js
