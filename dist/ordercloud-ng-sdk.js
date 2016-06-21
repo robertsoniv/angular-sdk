@@ -149,22 +149,19 @@
                 'SaveAssignment': _saveassignment
             };
 
-            function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+            function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/addresses', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/buyers/:buyerID/addresses', {
-                    'buyerID': BuyerID().Get(),
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
-            function _get(addressID) {
+            function _get(addressID, buyerID) {
                 if (!addressID) {
                     var errMessage = 'addressID is a required field for OrderCloud.Addresses.Get';
                     console.error(errMessage);
@@ -173,41 +170,41 @@
                     return dfd.promise;
                 }
                 return makeApiCall('GET', '/v1/buyers/:buyerID/addresses/:addressID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'addressID': addressID
                 }, null);
             }
 
-            function _create(address) {
+            function _create(address, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/addresses', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, address);
             }
 
-            function _update(addressID, address) {
+            function _update(addressID, address, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/addresses/:addressID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'addressID': addressID
                 }, address);
             }
 
-            function _patch(addressID, address) {
+            function _patch(addressID, address, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/addresses/:addressID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'addressID': addressID
                 }, address);
             }
 
-            function _delete(addressID) {
+            function _delete(addressID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/addresses/:addressID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'addressID': addressID
                 }, null);
             }
 
-            function _listassignments(addressID, userID, userGroupID, level, isShipping, isBilling, page, pageSize) {
+            function _listassignments(addressID, userID, userGroupID, level, isShipping, isBilling, page, pageSize, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/addresses/assignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'addressID': addressID,
                     'userID': userID,
                     'userGroupID': userGroupID,
@@ -219,18 +216,18 @@
                 }, null);
             }
 
-            function _deleteassignment(addressID, userID, userGroupID) {
+            function _deleteassignment(addressID, userID, userGroupID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/addresses/:addressID/assignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'addressID': addressID,
                     'userID': userID,
                     'userGroupID': userGroupID
                 }, null);
             }
 
-            function _saveassignment(assignment) {
+            function _saveassignment(assignment, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/addresses/assignments', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, assignment);
             }
         }
@@ -271,16 +268,13 @@
             }
 
             function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/adminusers', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/adminusers', {
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
@@ -305,22 +299,19 @@
                 'Delete': _delete
             };
 
-            function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+            function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/approvalrules', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/buyers/:buyerID/approvalrules', {
-                    'buyerID': BuyerID().Get(),
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
-            function _get(approvalRuleID) {
+            function _get(approvalRuleID, buyerID) {
                 if (!approvalRuleID) {
                     var errMessage = 'approvalRuleID is a required field for OrderCloud.ApprovalRules.Get';
                     console.error(errMessage);
@@ -329,34 +320,34 @@
                     return dfd.promise;
                 }
                 return makeApiCall('GET', '/v1/buyers/:buyerID/approvalrules/:approvalRuleID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'approvalRuleID': approvalRuleID
                 }, null);
             }
 
-            function _create(approvalRule) {
+            function _create(approvalRule, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/approvalrules', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, approvalRule);
             }
 
-            function _update(approvalRuleID, approvalRule) {
+            function _update(approvalRuleID, approvalRule, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/approvalrules/:approvalRuleID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'approvalRuleID': approvalRuleID
                 }, approvalRule);
             }
 
-            function _patch(approvalRuleID, partialApprovalRule) {
+            function _patch(approvalRuleID, partialApprovalRule, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/approvalrules/:approvalRuleID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'approvalRuleID': approvalRuleID
                 }, partialApprovalRule);
             }
 
-            function _delete(approvalRuleID) {
+            function _delete(approvalRuleID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/approvalrules/:approvalRuleID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'approvalRuleID': approvalRuleID
                 }, null);
             }
@@ -419,26 +410,23 @@
                 'SaveAssignment': _saveassignment
             };
 
-            function _list(search, page, pageSize, searchOn, sortBy, filters, parentID, depth) {
-                var listArgs = {
+            function _list(search, page, pageSize, searchOn, sortBy, filters, parentID, depth, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/categories', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/buyers/:buyerID/categories', {
-                    'buyerID': BuyerID().Get(),
-                    'listArgs': listArgs,
+                    'sortBy': sortBy,
+                    'filters': filters,
                     'parentID': parentID,
                     'depth': depth
                 }, null);
             }
 
-            function _listchildren(parentID, search, depth, page, pageSize) {
+            function _listchildren(parentID, search, depth, page, pageSize, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/categories/:parentID/categories', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'parentID': parentID,
                     'search': search,
                     'depth': depth,
@@ -447,7 +435,7 @@
                 }, null);
             }
 
-            function _get(categoryID) {
+            function _get(categoryID, buyerID) {
                 if (!categoryID) {
                     var errMessage = 'categoryID is a required field for OrderCloud.Categories.Get';
                     console.error(errMessage);
@@ -456,41 +444,41 @@
                     return dfd.promise;
                 }
                 return makeApiCall('GET', '/v1/buyers/:buyerID/categories/:categoryID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'categoryID': categoryID
                 }, null);
             }
 
-            function _create(category) {
+            function _create(category, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/categories', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, category);
             }
 
-            function _update(categoryID, category) {
+            function _update(categoryID, category, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/categories/:categoryID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'categoryID': categoryID
                 }, category);
             }
 
-            function _delete(categoryID) {
+            function _delete(categoryID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/categories/:categoryID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'categoryID': categoryID
                 }, null);
             }
 
-            function _patch(categoryID, category) {
+            function _patch(categoryID, category, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/categories/:categoryID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'categoryID': categoryID
                 }, category);
             }
 
-            function _listproductassignments(categoryID, productID, page, pageSize) {
+            function _listproductassignments(categoryID, productID, page, pageSize, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/categories/productassignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'categoryID': categoryID,
                     'productID': productID,
                     'page': page,
@@ -498,23 +486,23 @@
                 }, null);
             }
 
-            function _saveproductassignment(productAssignment) {
+            function _saveproductassignment(productAssignment, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/categories/productassignments', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, productAssignment);
             }
 
-            function _deleteproductassignment(categoryID, productID) {
+            function _deleteproductassignment(categoryID, productID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/categories/:categoryID/productassignments/:productID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'categoryID': categoryID,
                     'productID': productID
                 }, null);
             }
 
-            function _listassignments(categoryID, userID, userGroupID, level, page, pageSize) {
+            function _listassignments(categoryID, userID, userGroupID, level, page, pageSize, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/categories/assignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'categoryID': categoryID,
                     'userID': userID,
                     'userGroupID': userGroupID,
@@ -524,18 +512,18 @@
                 }, null);
             }
 
-            function _deleteassignment(categoryID, userID, userGroupID) {
+            function _deleteassignment(categoryID, userID, userGroupID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/categories/:categoryID/assignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'categoryID': categoryID,
                     'userID': userID,
                     'userGroupID': userGroupID
                 }, null);
             }
 
-            function _saveassignment(categoryAssignment) {
+            function _saveassignment(categoryAssignment, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/categories/assignments', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, categoryAssignment);
             }
         }
@@ -553,22 +541,19 @@
                 'SaveAssignment': _saveassignment
             };
 
-            function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+            function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters', {
-                    'buyerID': BuyerID().Get(),
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
-            function _get(costCenterID) {
+            function _get(costCenterID, buyerID) {
                 if (!costCenterID) {
                     var errMessage = 'costCenterID is a required field for OrderCloud.CostCenters.Get';
                     console.error(errMessage);
@@ -577,41 +562,41 @@
                     return dfd.promise;
                 }
                 return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters/:costCenterID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'costCenterID': costCenterID
                 }, null);
             }
 
-            function _create(costCenter) {
+            function _create(costCenter, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/costcenters', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, costCenter);
             }
 
-            function _update(costCenterID, costCenter) {
+            function _update(costCenterID, costCenter, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/costcenters/:costCenterID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'costCenterID': costCenterID
                 }, costCenter);
             }
 
-            function _patch(costCenterID, costCenter) {
+            function _patch(costCenterID, costCenter, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/costcenters/:costCenterID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'costCenterID': costCenterID
                 }, costCenter);
             }
 
-            function _delete(costCenterID) {
+            function _delete(costCenterID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/costcenters/:costCenterID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'costCenterID': costCenterID
                 }, null);
             }
 
-            function _listassignments(costCenterID, userID, userGroupID, level, page, pageSize) {
+            function _listassignments(costCenterID, userID, userGroupID, level, page, pageSize, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters/assignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'costCenterID': costCenterID,
                     'userID': userID,
                     'userGroupID': userGroupID,
@@ -621,18 +606,18 @@
                 }, null);
             }
 
-            function _deleteassignment(costCenterID, userID, userGroupID) {
+            function _deleteassignment(costCenterID, userID, userGroupID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/costcenters/:costCenterID/assignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'costCenterID': costCenterID,
                     'userID': userID,
                     'userGroupID': userGroupID
                 }, null);
             }
 
-            function _saveassignment(assignment) {
+            function _saveassignment(assignment, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/costcenters/assignments', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, assignment);
             }
         }
@@ -651,16 +636,13 @@
             };
 
             function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/coupons', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/coupons', {
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
@@ -699,9 +681,9 @@
                 }, null);
             }
 
-            function _listassignments(couponID, userID, userGroupID, level, page, pageSize) {
+            function _listassignments(couponID, userID, userGroupID, level, page, pageSize, buyerID) {
                 return makeApiCall('GET', '/v1/coupons/assignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'couponID': couponID,
                     'userID': userID,
                     'userGroupID': userGroupID,
@@ -715,10 +697,10 @@
                 return makeApiCall('POST', '/v1/coupons/assignments', null, assignment);
             }
 
-            function _deleteassignment(couponID, userID, userGroupID) {
+            function _deleteassignment(couponID, userID, userGroupID, buyerID) {
                 return makeApiCall('DELETE', '/v1/coupons/:couponID/assignments', {
                     'couponID': couponID,
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userID': userID,
                     'userGroupID': userGroupID
                 }, null);
@@ -738,22 +720,19 @@
                 'DeleteAssignment': _deleteassignment
             };
 
-            function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+            function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards', {
-                    'buyerID': BuyerID().Get(),
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
-            function _get(creditCardID) {
+            function _get(creditCardID, buyerID) {
                 if (!creditCardID) {
                     var errMessage = 'creditCardID is a required field for OrderCloud.CreditCards.Get';
                     console.error(errMessage);
@@ -762,41 +741,41 @@
                     return dfd.promise;
                 }
                 return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards/:creditCardID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'creditCardID': creditCardID
                 }, null);
             }
 
-            function _create(card) {
+            function _create(card, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/creditcards', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, card);
             }
 
-            function _update(creditCardID, card) {
+            function _update(creditCardID, card, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/creditcards/:creditCardID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'creditCardID': creditCardID
                 }, card);
             }
 
-            function _patch(creditCardID, card) {
+            function _patch(creditCardID, card, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/creditcards/:creditCardID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'creditCardID': creditCardID
                 }, card);
             }
 
-            function _delete(creditCardID) {
+            function _delete(creditCardID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/creditcards/:creditCardID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'creditCardID': creditCardID
                 }, null);
             }
 
-            function _listassignments(creditCardID, userID, userGroupID, level, page, pageSize) {
+            function _listassignments(creditCardID, userID, userGroupID, level, page, pageSize, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards/assignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'creditCardID': creditCardID,
                     'userID': userID,
                     'userGroupID': userGroupID,
@@ -806,15 +785,15 @@
                 }, null);
             }
 
-            function _saveassignment(assignment) {
+            function _saveassignment(assignment, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/creditcards/assignments', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, assignment);
             }
 
-            function _deleteassignment(creditCardID, userID, userGroupID) {
+            function _deleteassignment(creditCardID, userID, userGroupID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/creditcards/:creditCardID/assignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'creditCardID': creditCardID,
                     'userID': userID,
                     'userGroupID': userGroupID
@@ -830,7 +809,7 @@
                 'ResetToDefault': _resettodefault
             };
 
-            function _get(emailTemplateType) {
+            function _get(emailTemplateType, buyerID) {
                 if (!emailTemplateType) {
                     var errMessage = 'emailTemplateType is a required field for OrderCloud.EmailTemplates.Get';
                     console.error(errMessage);
@@ -839,28 +818,28 @@
                     return dfd.promise;
                 }
                 return makeApiCall('GET', '/v1/buyers/:buyerID/emailtemplates/:emailTemplateType', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'emailTemplateType': emailTemplateType
                 }, null);
             }
 
-            function _update(emailTemplateType, emailTemplate) {
+            function _update(emailTemplateType, emailTemplate, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/emailtemplates/:emailTemplateType', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'emailTemplateType': emailTemplateType
                 }, emailTemplate);
             }
 
-            function _patch(emailTemplateType, emailTemplate) {
+            function _patch(emailTemplateType, emailTemplate, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/emailtemplates/:emailTemplateType', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'emailTemplateType': emailTemplateType
                 }, emailTemplate);
             }
 
-            function _resettodefault(emailTemplateType) {
+            function _resettodefault(emailTemplateType, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/emailtemplates/:emailTemplateType', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'emailTemplateType': emailTemplateType
                 }, null);
             }
@@ -907,16 +886,13 @@
             };
 
             function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/SecurityProfiles', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/SecurityProfiles', {
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
@@ -948,7 +924,7 @@
                 'DeleteTransacion': _deletetransacion
             };
 
-            function _get(orderID, paymentID) {
+            function _get(orderID, paymentID, buyerID) {
                 if (!orderID || !paymentID) {
                     var errMessage = 'orderID and paymentID are required fields for OrderCloud.Payments.Get';
                     console.error(errMessage);
@@ -957,88 +933,85 @@
                     return dfd.promise;
                 }
                 return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'paymentID': paymentID
                 }, null);
             }
 
-            function _list(orderID, search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+            function _list(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/payments', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'orderID': orderID,
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/payments', {
-                    'buyerID': BuyerID().Get(),
-                    'orderID': orderID,
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
-            function _create(orderID, payment) {
+            function _create(orderID, payment, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/payments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
                 }, payment);
             }
 
-            function _update(orderID, paymentID, payment) {
+            function _update(orderID, paymentID, payment, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'paymentID': paymentID
                 }, payment);
             }
 
-            function _patch(orderID, paymentID, partialPayment) {
+            function _patch(orderID, paymentID, partialPayment, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'paymentID': paymentID
                 }, partialPayment);
             }
 
-            function _delete(orderID, paymentID) {
+            function _delete(orderID, paymentID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'paymentID': paymentID
                 }, null);
             }
 
-            function _createtransaction(orderID, paymentID, transaction) {
+            function _createtransaction(orderID, paymentID, transaction, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID/transactions', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'paymentID': paymentID
                 }, transaction);
             }
 
-            function _updatetransaction(orderID, paymentID, transactionID, transaction) {
+            function _updatetransaction(orderID, paymentID, transactionID, transaction, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID/transactions/:transactionID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'paymentID': paymentID,
                     'transactionID': transactionID
                 }, transaction);
             }
 
-            function _patchtransaction(orderID, paymentID, transactionID, partialTransaction) {
+            function _patchtransaction(orderID, paymentID, transactionID, partialTransaction, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID/transactions/:transactionID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'paymentID': paymentID,
                     'transactionID': transactionID
                 }, partialTransaction);
             }
 
-            function _deletetransacion(orderID, paymentID, transactionID) {
+            function _deletetransacion(orderID, paymentID, transactionID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID/transactions/:transactionID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'paymentID': paymentID,
                     'transactionID': transactionID
@@ -1066,16 +1039,13 @@
             };
 
             function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/specs', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/specs', {
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
@@ -1141,17 +1111,14 @@
             }
 
             function _listoptions(specID, search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/specs/:specID/options', {
+                    'specID': specID,
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/specs/:specID/options', {
-                    'specID': specID,
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
@@ -1197,22 +1164,19 @@
                 'SaveUserAssignment': _saveuserassignment
             };
 
-            function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+            function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups', {
-                    'buyerID': BuyerID().Get(),
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
-            function _get(userGroupID) {
+            function _get(userGroupID, buyerID) {
                 if (!userGroupID) {
                     var errMessage = 'userGroupID is a required field for OrderCloud.UserGroups.Get';
                     console.error(errMessage);
@@ -1221,41 +1185,41 @@
                     return dfd.promise;
                 }
                 return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups/:userGroupID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userGroupID': userGroupID
                 }, null);
             }
 
-            function _update(userGroupID, group) {
+            function _update(userGroupID, group, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/usergroups/:userGroupID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userGroupID': userGroupID
                 }, group);
             }
 
-            function _patch(userGroupID, group) {
+            function _patch(userGroupID, group, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/usergroups/:userGroupID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userGroupID': userGroupID
                 }, group);
             }
 
-            function _create(group) {
+            function _create(group, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/usergroups', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, group);
             }
 
-            function _delete(userGroupID) {
+            function _delete(userGroupID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/usergroups/:userGroupID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userGroupID': userGroupID
                 }, null);
             }
 
-            function _listuserassignments(userGroupID, userID, page, pageSize) {
+            function _listuserassignments(userGroupID, userID, page, pageSize, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups/assignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userGroupID': userGroupID,
                     'userID': userID,
                     'page': page,
@@ -1263,17 +1227,17 @@
                 }, null);
             }
 
-            function _deleteuserassignment(userGroupID, userID) {
+            function _deleteuserassignment(userGroupID, userID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/usergroups/:userGroupID/assignments/:userID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userGroupID': userGroupID,
                     'userID': userID
                 }, null);
             }
 
-            function _saveuserassignment(userGroupAssignment) {
+            function _saveuserassignment(userGroupAssignment, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/usergroups/assignments', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, userGroupAssignment);
             }
         }
@@ -1290,7 +1254,7 @@
                 'PatchShippingAddress': _patchshippingaddress
             };
 
-            function _get(orderID, lineItemID) {
+            function _get(orderID, lineItemID, buyerID) {
                 if (!orderID || !lineItemID) {
                     var errMessage = 'orderID and lineItemID are required fields for OrderCloud.LineItems.Get';
                     console.error(errMessage);
@@ -1299,70 +1263,67 @@
                     return dfd.promise;
                 }
                 return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'lineItemID': lineItemID
                 }, null);
             }
 
-            function _list(orderID, search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+            function _list(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/lineitems', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'orderID': orderID,
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/lineitems', {
-                    'buyerID': BuyerID().Get(),
-                    'orderID': orderID,
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
-            function _create(orderID, lineItem) {
+            function _create(orderID, lineItem, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/lineitems', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID
                 }, lineItem);
             }
 
-            function _update(orderID, lineItemID, lineItem) {
+            function _update(orderID, lineItemID, lineItem, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'lineItemID': lineItemID
                 }, lineItem);
             }
 
-            function _patch(orderID, lineItemID, partialLineItem) {
+            function _patch(orderID, lineItemID, partialLineItem, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'lineItemID': lineItemID
                 }, partialLineItem);
             }
 
-            function _delete(orderID, lineItemID) {
+            function _delete(orderID, lineItemID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'lineItemID': lineItemID
                 }, null);
             }
 
-            function _setshippingaddress(orderID, lineItemID, address) {
+            function _setshippingaddress(orderID, lineItemID, address, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID/shipto', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'lineItemID': lineItemID
                 }, address);
             }
 
-            function _patchshippingaddress(orderID, lineItemID, address) {
+            function _patchshippingaddress(orderID, lineItemID, address, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID/shipto', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'lineItemID': lineItemID
                 }, address);
@@ -1415,44 +1376,35 @@
             }
 
             function _listcostcenters(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/me/costcenters', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/costcenters', {
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
             function _listusergroups(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/me/usergroups', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/usergroups', {
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
             function _listaddresses(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/me/addresses', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/addresses', {
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
@@ -1489,16 +1441,13 @@
             }
 
             function _listcreditcards(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/me/creditcards', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/creditcards', {
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
@@ -1527,47 +1476,38 @@
             }
 
             function _listcategories(search, page, pageSize, searchOn, sortBy, filters, depth) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/me/categories', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/categories', {
-                    'listArgs': listArgs,
+                    'sortBy': sortBy,
+                    'filters': filters,
                     'depth': depth
                 }, null);
             }
 
             function _listsubcategories(search, page, pageSize, searchOn, sortBy, filters, parentID, depth) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/me/categories/:parentID/categories', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/categories/:parentID/categories', {
-                    'listArgs': listArgs,
+                    'sortBy': sortBy,
+                    'filters': filters,
                     'parentID': parentID,
                     'depth': depth
                 }, null);
             }
 
             function _listproducts(search, page, pageSize, searchOn, sortBy, filters, categoryID) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/me/products', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/products', {
-                    'listArgs': listArgs,
+                    'sortBy': sortBy,
+                    'filters': filters,
                     'categoryID': categoryID
                 }, null);
             }
@@ -1579,17 +1519,14 @@
             }
 
             function _listspecs(productID, search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/me/products/:productID/specs', {
+                    'productID': productID,
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/products/:productID/specs', {
-                    'productID': productID,
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
@@ -1601,32 +1538,26 @@
             }
 
             function _listoutgoingorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/me/orders/outgoing', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/orders/outgoing', {
-                    'listArgs': listArgs,
+                    'sortBy': sortBy,
+                    'filters': filters,
                     'from': from,
                     'to': to
                 }, null);
             }
 
             function _listincomingorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/me/orders/incoming', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/orders/incoming', {
-                    'listArgs': listArgs,
+                    'sortBy': sortBy,
+                    'filters': filters,
                     'from': from,
                     'to': to
                 }, null);
@@ -1639,16 +1570,13 @@
             }
 
             function _listcoupons(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/me/coupons', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/me/coupons', {
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
@@ -1701,42 +1629,30 @@
             }
 
             function _listoutgoing(from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-                var listArgs = {
-                    'search': search,
-                    'page': page,
-                    'pageSize': pageSize,
-                    'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                listArgs['buyerID'] = buyerID ? buyerID : BuyerID().Get();
-                listArgs['from'] = from;
-                listArgs['to'] = to;
                 return makeApiCall('GET', '/v1/orders/outgoing', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'from': from,
                     'to': to,
-                    'listArgs': listArgs
-                }, null);
-            }
-
-            function _listincoming(from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-                var listArgs = {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                listArgs['buyerID'] = buyerID ? buyerID : BuyerID().Get();
-                listArgs['from'] = from;
-                listArgs['to'] = to;
+                    'sortBy': sortBy,
+                    'filters': filters
+                }, null);
+            }
+
+            function _listincoming(from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
                 return makeApiCall('GET', '/v1/orders/incoming', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'from': from,
                     'to': to,
-                    'listArgs': listArgs
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
@@ -1870,16 +1786,13 @@
             };
 
             function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/priceschedules', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/priceschedules', {
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
@@ -1944,7 +1857,7 @@
                 'DeleteItem': _deleteitem
             };
 
-            function _get(shipmentID) {
+            function _get(shipmentID, buyerID) {
                 if (!shipmentID) {
                     var errMessage = 'shipmentID is a required field for OrderCloud.Shipments.Get';
                     console.error(errMessage);
@@ -1953,14 +1866,14 @@
                     return dfd.promise;
                 }
                 return makeApiCall('GET', '/v1/buyers/:buyerID/shipments/:shipmentID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'shipmentID': shipmentID
                 }, null);
             }
 
-            function _list(orderID, search, page, pageSize) {
+            function _list(orderID, search, page, pageSize, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/shipments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'search': search,
                     'page': page,
@@ -1968,43 +1881,43 @@
                 }, null);
             }
 
-            function _create(shipment) {
+            function _create(shipment, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/shipments', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, shipment);
             }
 
-            function _update(shipmentID, shipment) {
+            function _update(shipmentID, shipment, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/shipments/:shipmentID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'shipmentID': shipmentID
                 }, shipment);
             }
 
-            function _patch(shipmentID, shipment) {
+            function _patch(shipmentID, shipment, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/shipments/:shipmentID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'shipmentID': shipmentID
                 }, shipment);
             }
 
-            function _delete(shipmentID) {
+            function _delete(shipmentID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/shipments/:shipmentID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'shipmentID': shipmentID
                 }, null);
             }
 
-            function _saveitem(shipmentID, item) {
+            function _saveitem(shipmentID, item, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/shipments/:shipmentID/items', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'shipmentID': shipmentID
                 }, item);
             }
 
-            function _deleteitem(shipmentID, orderID, lineItemID) {
+            function _deleteitem(shipmentID, orderID, lineItemID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/shipments/:shipmentID/items/:orderID/:lineItemID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'shipmentID': shipmentID,
                     'orderID': orderID,
                     'lineItemID': lineItemID
@@ -2024,22 +1937,19 @@
                 'DeleteAssignment': _deleteassignment
             };
 
-            function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+            function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts', {
-                    'buyerID': BuyerID().Get(),
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
-            function _get(spendingAccountID) {
+            function _get(spendingAccountID, buyerID) {
                 if (!spendingAccountID) {
                     var errMessage = 'spendingAccountID is a required field for OrderCloud.SpendingAccounts.Get';
                     console.error(errMessage);
@@ -2048,34 +1958,34 @@
                     return dfd.promise;
                 }
                 return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts/:spendingAccountID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'spendingAccountID': spendingAccountID
                 }, null);
             }
 
-            function _create(spendingAccount) {
+            function _create(spendingAccount, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/spendingaccounts', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, spendingAccount);
             }
 
-            function _update(spendingAccountID, spendingAccount) {
+            function _update(spendingAccountID, spendingAccount, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/spendingaccounts/:spendingAccountID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'spendingAccountID': spendingAccountID
                 }, spendingAccount);
             }
 
-            function _delete(spendingAccountID) {
+            function _delete(spendingAccountID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/spendingaccounts/:spendingAccountID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'spendingAccountID': spendingAccountID
                 }, null);
             }
 
-            function _listassignments(spendingAccountID, userID, userGroupID, level, page, pageSize) {
+            function _listassignments(spendingAccountID, userID, userGroupID, level, page, pageSize, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts/assignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'spendingAccountID': spendingAccountID,
                     'userID': userID,
                     'userGroupID': userGroupID,
@@ -2085,15 +1995,15 @@
                 }, null);
             }
 
-            function _saveassignment(assignment) {
+            function _saveassignment(assignment, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/spendingaccounts/assignments', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, assignment);
             }
 
-            function _deleteassignment(spendingAccountID, userID, userGroupID) {
+            function _deleteassignment(spendingAccountID, userID, userGroupID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/spendingaccounts/:spendingAccountID/assignments', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'spendingAccountID': spendingAccountID,
                     'userID': userID,
                     'userGroupID': userGroupID
@@ -2124,16 +2034,13 @@
             };
 
             function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+                return makeApiCall('GET', '/v1/products', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/products', {
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
@@ -2241,10 +2148,10 @@
                 return makeApiCall('POST', '/v1/products/assignments', null, productAssignment);
             }
 
-            function _listassignments(productID, userID, userGroupID, level, priceScheduleID, page, pageSize) {
+            function _listassignments(productID, userID, userGroupID, level, priceScheduleID, page, pageSize, buyerID) {
                 return makeApiCall('GET', '/v1/products/assignments', {
                     'productID': productID,
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userID': userID,
                     'userGroupID': userGroupID,
                     'level': level,
@@ -2254,9 +2161,9 @@
                 }, null);
             }
 
-            function _deleteassignment(productID, userID, userGroupID) {
+            function _deleteassignment(productID, userID, userGroupID, buyerID) {
                 return makeApiCall('DELETE', '/v1/products/:productID/assignments/:buyerID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'productID': productID,
                     'userID': userID,
                     'userGroupID': userGroupID
@@ -2275,22 +2182,19 @@
                 'GetAccessToken': _getaccesstoken
             };
 
-            function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                var listArgs = {
+            function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/users', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy
-                };
-                if (filters && typeof(filters) == 'object') listArgs = angular.extend({}, filters, listArgs);
-                return makeApiCall('GET', '/v1/buyers/:buyerID/users', {
-                    'buyerID': BuyerID().Get(),
-                    'listArgs': listArgs
+                    'sortBy': sortBy,
+                    'filters': filters
                 }, null);
             }
 
-            function _get(userID) {
+            function _get(userID, buyerID) {
                 if (!userID) {
                     var errMessage = 'userID is a required field for OrderCloud.Users.Get';
                     console.error(errMessage);
@@ -2299,41 +2203,41 @@
                     return dfd.promise;
                 }
                 return makeApiCall('GET', '/v1/buyers/:buyerID/users/:userID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userID': userID
                 }, null);
             }
 
-            function _update(userID, user) {
+            function _update(userID, user, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/users/:userID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userID': userID
                 }, user);
             }
 
-            function _create(user) {
+            function _create(user, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/users', {
-                    'buyerID': BuyerID().Get()
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, user);
             }
 
-            function _delete(userID) {
+            function _delete(userID, buyerID) {
                 return makeApiCall('DELETE', '/v1/buyers/:buyerID/users/:userID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userID': userID
                 }, null);
             }
 
-            function _patch(userID, user) {
+            function _patch(userID, user, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/users/:userID', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userID': userID
                 }, user);
             }
 
-            function _getaccesstoken(userID, tokenRequest) {
+            function _getaccesstoken(userID, tokenRequest, buyerID) {
                 return makeApiCall('POST', '/v1/buyers/:buyerID/users/:userID/accesstoken', {
-                    'buyerID': BuyerID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userID': userID
                 }, tokenRequest);
             }
