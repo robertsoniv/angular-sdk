@@ -156,9 +156,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _get(addressID, buyerID) {
@@ -273,9 +272,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _delete(userID) {
@@ -306,9 +304,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _get(approvalRuleID, buyerID) {
@@ -418,10 +415,9 @@
                     'pageSize': pageSize,
                     'searchOn': searchOn,
                     'sortBy': sortBy,
-                    'filters': filters,
                     'parentID': parentID,
                     'depth': depth
-                }, null);
+                }, filters);
             }
 
             function _listchildren(parentID, search, depth, page, pageSize, buyerID) {
@@ -548,9 +544,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _get(costCenterID, buyerID) {
@@ -641,9 +636,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _get(couponID) {
@@ -727,9 +721,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _get(creditCardID, buyerID) {
@@ -891,9 +884,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _get(securityProfileID) {
@@ -947,9 +939,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _create(orderID, payment, buyerID) {
@@ -1044,9 +1035,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _get(specID) {
@@ -1117,9 +1107,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _updateoption(specID, optionID, option) {
@@ -1171,9 +1160,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _get(userGroupID, buyerID) {
@@ -1277,9 +1265,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _create(orderID, lineItem, buyerID) {
@@ -1381,9 +1368,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _listusergroups(search, page, pageSize, searchOn, sortBy, filters) {
@@ -1392,9 +1378,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _listaddresses(search, page, pageSize, searchOn, sortBy, filters) {
@@ -1403,9 +1388,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _createaddress(address) {
@@ -1446,9 +1430,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _getcreditcard(creditcardID) {
@@ -1482,9 +1465,8 @@
                     'pageSize': pageSize,
                     'searchOn': searchOn,
                     'sortBy': sortBy,
-                    'filters': filters,
                     'depth': depth
-                }, null);
+                }, filters);
             }
 
             function _listsubcategories(search, page, pageSize, searchOn, sortBy, filters, parentID, depth) {
@@ -1494,10 +1476,9 @@
                     'pageSize': pageSize,
                     'searchOn': searchOn,
                     'sortBy': sortBy,
-                    'filters': filters,
                     'parentID': parentID,
                     'depth': depth
-                }, null);
+                }, filters);
             }
 
             function _listproducts(search, page, pageSize, searchOn, sortBy, filters, categoryID) {
@@ -1507,9 +1488,8 @@
                     'pageSize': pageSize,
                     'searchOn': searchOn,
                     'sortBy': sortBy,
-                    'filters': filters,
                     'categoryID': categoryID
-                }, null);
+                }, filters);
             }
 
             function _getproduct(productID) {
@@ -1525,9 +1505,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _getspec(productID, specID) {
@@ -1544,10 +1523,9 @@
                     'pageSize': pageSize,
                     'searchOn': searchOn,
                     'sortBy': sortBy,
-                    'filters': filters,
                     'from': from,
                     'to': to
-                }, null);
+                }, filters);
             }
 
             function _listincomingorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
@@ -1557,10 +1535,9 @@
                     'pageSize': pageSize,
                     'searchOn': searchOn,
                     'sortBy': sortBy,
-                    'filters': filters,
                     'from': from,
                     'to': to
-                }, null);
+                }, filters);
             }
 
             function _getorder(orderID) {
@@ -1575,9 +1552,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _getcoupon(couponID) {
@@ -1611,6 +1587,9 @@
                 'PatchShippingAddress': _patchshippingaddress,
                 'SetBillingAddress': _setbillingaddress,
                 'PatchBillingAddress': _patchbillingaddress,
+                'AddCoupon': _addcoupon,
+                'ListCoupons': _listcoupons,
+                'RemoveCoupon': _removecoupon,
                 'TransferTempUserOrder': _transfertempuserorder
             };
 
@@ -1637,9 +1616,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _listincoming(from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
@@ -1651,9 +1629,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _create(order, buyerID) {
@@ -1748,6 +1725,34 @@
                 }, address);
             }
 
+            function _addcoupon(orderID, couponCode, buyerID) {
+                return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/coupons/:couponCode', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'orderID': orderID,
+                    'couponCode': couponCode
+                }, null);
+            }
+
+            function _listcoupons(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/coupons', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'orderID': orderID,
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                }, filters);
+            }
+
+            function _removecoupon(orderID, couponCode, buyerID) {
+                return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID/coupons/:couponCode', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'orderID': orderID,
+                    'couponCode': couponCode
+                }, null);
+            }
+
             function _transfertempuserorder(tempUserToken, buyerID) {
                 return makeApiCall('PUT', '/v1/buyers/:buyerID/orders', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
@@ -1791,9 +1796,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _get(priceScheduleID) {
@@ -1944,9 +1948,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _get(spendingAccountID, buyerID) {
@@ -2021,11 +2024,13 @@
                 'Delete': _delete,
                 'GenerateVariants': _generatevariants,
                 'ListVariants': _listvariants,
+                'UpdateVariant': _updatevariant,
+                'PatchVariant': _patchvariant,
+                'GetVariant': _getvariant,
                 'ListVariantInventory': _listvariantinventory,
                 'GetVariantInventory': _getvariantinventory,
                 'UpdateVariantInventory': _updatevariantinventory,
-                'UpdateVariant': _updatevariant,
-                'GetVariant': _getvariant,
+                'ListInventory': _listinventory,
                 'GetInventory': _getinventory,
                 'UpdateInventory': _updateinventory,
                 'SaveAssignment': _saveassignment,
@@ -2039,9 +2044,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _get(productID) {
@@ -2086,20 +2090,47 @@
                 }, null);
             }
 
-            function _listvariants(productID, page, pageSize) {
+            function _listvariants(productID, search, page, pageSize, searchOn, sortBy, filters) {
                 return makeApiCall('GET', '/v1/products/:productID/variants', {
                     'productID': productID,
+                    'search': search,
                     'page': page,
-                    'pageSize': pageSize
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                }, filters);
+            }
+
+            function _updatevariant(productID, variantID, variant) {
+                return makeApiCall('PUT', '/v1/products/:productID/variants/:variantID', {
+                    'productID': productID,
+                    'variantID': variantID
+                }, variant);
+            }
+
+            function _patchvariant(productID, variantID, variant) {
+                return makeApiCall('PATCH', '/v1/products/:productID/variants/:variantID', {
+                    'productID': productID,
+                    'variantID': variantID
+                }, variant);
+            }
+
+            function _getvariant(productID, variantID) {
+                return makeApiCall('GET', '/v1/products/:productID/variants/:variantID', {
+                    'productID': productID,
+                    'variantID': variantID
                 }, null);
             }
 
-            function _listvariantinventory(productID, page, pageSize) {
+            function _listvariantinventory(productID, search, page, pageSize, searchOn, sortBy, filters) {
                 return makeApiCall('GET', '/v1/products/:productID/variants/inventory', {
                     'productID': productID,
+                    'search': search,
                     'page': page,
-                    'pageSize': pageSize
-                }, null);
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _getvariantinventory(productID, variantID) {
@@ -2117,18 +2148,14 @@
                 }, null);
             }
 
-            function _updatevariant(productID, variantID, variant) {
-                return makeApiCall('PUT', '/v1/products/:productID/variants/:variantID', {
-                    'productID': productID,
-                    'variantID': variantID
-                }, variant);
-            }
-
-            function _getvariant(productID, variantID) {
-                return makeApiCall('GET', '/v1/products/:productID/variants/:variantID', {
-                    'productID': productID,
-                    'variantID': variantID
-                }, null);
+            function _listinventory(search, page, pageSize, searchOn, sortBy, filters) {
+                return makeApiCall('GET', '/v1/products/inventory', {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _getinventory(productID) {
@@ -2189,9 +2216,8 @@
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'filters': filters
-                }, null);
+                    'sortBy': sortBy
+                }, filters);
             }
 
             function _get(userID, buyerID) {

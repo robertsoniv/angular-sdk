@@ -43,7 +43,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/addresses', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/addresses', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(addressID, buyerID) {
 					if (!addressID) {
@@ -104,7 +104,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('PATCH', '/v1/adminusers/:userID', { 'userID': userID }, user);
 				}
 				function _list(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/adminusers', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/adminusers', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _delete(userID) {
 					return makeApiCall('DELETE', '/v1/adminusers/:userID', { 'userID': userID }, null);
@@ -124,7 +124,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/approvalrules', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/approvalrules', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(approvalRuleID, buyerID) {
 					if (!approvalRuleID) {
@@ -192,7 +192,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters, parentID, depth, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/categories', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters, 'parentID': parentID, 'depth': depth }, null);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/categories', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'parentID': parentID, 'depth': depth }, filters);
 				}
 				function _listchildren(parentID, search, depth, page, pageSize, buyerID) {
 					return makeApiCall('GET', '/v1/buyers/:buyerID/categories/:parentID/categories', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'parentID': parentID, 'search': search, 'depth': depth, 'page': page, 'pageSize': pageSize }, null);
@@ -252,7 +252,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/costcenters', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(costCenterID, buyerID) {
 					if (!costCenterID) {
@@ -300,7 +300,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/coupons', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/coupons', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(couponID) {
 					if (!couponID) {
@@ -348,7 +348,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/creditcards', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(creditCardID, buyerID) {
 					if (!creditCardID) {
@@ -441,7 +441,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/SecurityProfiles', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/SecurityProfiles', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(securityProfileID) {
 					if (!securityProfileID) {
@@ -479,7 +479,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'paymentID': paymentID }, null);
 				}
 				function _list(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/payments', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/payments', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _create(orderID, payment, buyerID) {
 					return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/payments', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID }, payment);
@@ -526,7 +526,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/specs', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/specs', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(specID) {
 					if (!specID) {
@@ -563,7 +563,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('POST', '/v1/specs/:specID/options', { 'specID': specID }, option);
 				}
 				function _listoptions(specID, search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/specs/:specID/options', { 'specID': specID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/specs/:specID/options', { 'specID': specID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _updateoption(specID, optionID, option) {
 					return makeApiCall('PUT', '/v1/specs/:specID/options/:optionID', { 'specID': specID, 'optionID': optionID }, option);
@@ -592,7 +592,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/usergroups', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(userGroupID, buyerID) {
 					if (!userGroupID) {
@@ -649,7 +649,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'lineItemID': lineItemID }, null);
 				}
 				function _list(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/lineitems', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/lineitems', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _create(orderID, lineItem, buyerID) {
 					return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/lineitems', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID }, lineItem);
@@ -713,13 +713,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('PATCH', '/v1/me', null, user);
 				}
 				function _listcostcenters(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/me/costcenters', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/me/costcenters', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _listusergroups(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/me/usergroups', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/me/usergroups', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _listaddresses(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/me/addresses', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/me/addresses', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _createaddress(address) {
 					return makeApiCall('POST', '/v1/me/addresses', null, address);
@@ -740,7 +740,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('POST', '/v1/me/creditcards', null, creditCard);
 				}
 				function _listcreditcards(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/me/creditcards', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/me/creditcards', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _getcreditcard(creditcardID) {
 					return makeApiCall('GET', '/v1/me/creditcards/:creditcardID', { 'creditcardID': creditcardID }, null);
@@ -755,34 +755,34 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('DELETE', '/v1/me/creditcards/:creditcardID', { 'creditcardID': creditcardID }, null);
 				}
 				function _listcategories(search, page, pageSize, searchOn, sortBy, filters, depth) {
-					return makeApiCall('GET', '/v1/me/categories', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters, 'depth': depth }, null);
+					return makeApiCall('GET', '/v1/me/categories', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'depth': depth }, filters);
 				}
 				function _listsubcategories(search, page, pageSize, searchOn, sortBy, filters, parentID, depth) {
-					return makeApiCall('GET', '/v1/me/categories/:parentID/categories', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters, 'parentID': parentID, 'depth': depth }, null);
+					return makeApiCall('GET', '/v1/me/categories/:parentID/categories', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'parentID': parentID, 'depth': depth }, filters);
 				}
 				function _listproducts(search, page, pageSize, searchOn, sortBy, filters, categoryID) {
-					return makeApiCall('GET', '/v1/me/products', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters, 'categoryID': categoryID }, null);
+					return makeApiCall('GET', '/v1/me/products', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'categoryID': categoryID }, filters);
 				}
 				function _getproduct(productID) {
 					return makeApiCall('GET', '/v1/me/products/:productID', { 'productID': productID }, null);
 				}
 				function _listspecs(productID, search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/me/products/:productID/specs', { 'productID': productID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/me/products/:productID/specs', { 'productID': productID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _getspec(productID, specID) {
 					return makeApiCall('GET', '/v1/me/products/:productID/specs/:specID', { 'productID': productID, 'specID': specID }, null);
 				}
 				function _listoutgoingorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
-					return makeApiCall('GET', '/v1/me/orders/outgoing', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters, 'from': from, 'to': to }, null);
+					return makeApiCall('GET', '/v1/me/orders/outgoing', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'from': from, 'to': to }, filters);
 				}
 				function _listincomingorders(search, page, pageSize, searchOn, sortBy, filters, from, to) {
-					return makeApiCall('GET', '/v1/me/orders/incoming', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters, 'from': from, 'to': to }, null);
+					return makeApiCall('GET', '/v1/me/orders/incoming', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'from': from, 'to': to }, filters);
 				}
 				function _getorder(orderID) {
 					return makeApiCall('GET', '/v1/me/orders/:orderID', { 'orderID': orderID }, null);
 				}
 				function _listcoupons(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/me/coupons', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/me/coupons', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _getcoupon(couponID) {
 					return makeApiCall('GET', '/v1/me/coupons/:couponID', { 'couponID': couponID }, null);
@@ -809,6 +809,9 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'PatchShippingAddress': _patchshippingaddress,
 					'SetBillingAddress': _setbillingaddress,
 					'PatchBillingAddress': _patchbillingaddress,
+					'AddCoupon': _addcoupon,
+					'ListCoupons': _listcoupons,
+					'RemoveCoupon': _removecoupon,
 					'TransferTempUserOrder': _transfertempuserorder
 					}
 				;
@@ -823,10 +826,10 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID }, null);
 				}
 				function _listoutgoing(from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/orders/outgoing', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'from': from, 'to': to, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/orders/outgoing', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'from': from, 'to': to, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _listincoming(from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/orders/incoming', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'from': from, 'to': to, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/orders/incoming', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'from': from, 'to': to, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _create(order, buyerID) {
 					return makeApiCall('POST', '/v1/buyers/:buyerID/orders', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, order);
@@ -867,6 +870,15 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				function _patchbillingaddress(orderID, address, buyerID) {
 					return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/billto', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID }, address);
 				}
+				function _addcoupon(orderID, couponCode, buyerID) {
+					return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/coupons/:couponCode', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'couponCode': couponCode }, null);
+				}
+				function _listcoupons(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/coupons', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
+				}
+				function _removecoupon(orderID, couponCode, buyerID) {
+					return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID/coupons/:couponCode', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'couponCode': couponCode }, null);
+				}
 				function _transfertempuserorder(tempUserToken, buyerID) {
 					return makeApiCall('PUT', '/v1/buyers/:buyerID/orders', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'tempUserToken': tempUserToken }, null);
 				}
@@ -897,7 +909,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/priceschedules', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/priceschedules', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(priceScheduleID) {
 					if (!priceScheduleID) {
@@ -985,7 +997,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/spendingaccounts', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(spendingAccountID, buyerID) {
 					if (!spendingAccountID) {
@@ -1026,11 +1038,13 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'Delete': _delete,
 					'GenerateVariants': _generatevariants,
 					'ListVariants': _listvariants,
+					'UpdateVariant': _updatevariant,
+					'PatchVariant': _patchvariant,
+					'GetVariant': _getvariant,
 					'ListVariantInventory': _listvariantinventory,
 					'GetVariantInventory': _getvariantinventory,
 					'UpdateVariantInventory': _updatevariantinventory,
-					'UpdateVariant': _updatevariant,
-					'GetVariant': _getvariant,
+					'ListInventory': _listinventory,
 					'GetInventory': _getinventory,
 					'UpdateInventory': _updateinventory,
 					'SaveAssignment': _saveassignment,
@@ -1039,7 +1053,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/products', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/products', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(productID) {
 					if (!productID) {
@@ -1066,11 +1080,20 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				function _generatevariants(productID, overwriteExisting) {
 					return makeApiCall('POST', '/v1/products/:productID/variants/generate', { 'productID': productID, 'overwriteExisting': overwriteExisting }, null);
 				}
-				function _listvariants(productID, page, pageSize) {
-					return makeApiCall('GET', '/v1/products/:productID/variants', { 'productID': productID, 'page': page, 'pageSize': pageSize }, null);
+				function _listvariants(productID, search, page, pageSize, searchOn, sortBy, filters) {
+					return makeApiCall('GET', '/v1/products/:productID/variants', { 'productID': productID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
-				function _listvariantinventory(productID, page, pageSize) {
-					return makeApiCall('GET', '/v1/products/:productID/variants/inventory', { 'productID': productID, 'page': page, 'pageSize': pageSize }, null);
+				function _updatevariant(productID, variantID, variant) {
+					return makeApiCall('PUT', '/v1/products/:productID/variants/:variantID', { 'productID': productID, 'variantID': variantID }, variant);
+				}
+				function _patchvariant(productID, variantID, variant) {
+					return makeApiCall('PATCH', '/v1/products/:productID/variants/:variantID', { 'productID': productID, 'variantID': variantID }, variant);
+				}
+				function _getvariant(productID, variantID) {
+					return makeApiCall('GET', '/v1/products/:productID/variants/:variantID', { 'productID': productID, 'variantID': variantID }, null);
+				}
+				function _listvariantinventory(productID, search, page, pageSize, searchOn, sortBy, filters) {
+					return makeApiCall('GET', '/v1/products/:productID/variants/inventory', { 'productID': productID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _getvariantinventory(productID, variantID) {
 					return makeApiCall('GET', '/v1/products/:productID/variants/inventory/:variantID', { 'productID': productID, 'variantID': variantID }, null);
@@ -1078,11 +1101,8 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				function _updatevariantinventory(productID, variantID, inventory) {
 					return makeApiCall('PUT', '/v1/products/:productID/variants/inventory/:variantID/:inventory', { 'productID': productID, 'variantID': variantID, 'inventory': inventory }, null);
 				}
-				function _updatevariant(productID, variantID, variant) {
-					return makeApiCall('PUT', '/v1/products/:productID/variants/:variantID', { 'productID': productID, 'variantID': variantID }, variant);
-				}
-				function _getvariant(productID, variantID) {
-					return makeApiCall('GET', '/v1/products/:productID/variants/:variantID', { 'productID': productID, 'variantID': variantID }, null);
+				function _listinventory(search, page, pageSize, searchOn, sortBy, filters) {
+					return makeApiCall('GET', '/v1/products/inventory', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _getinventory(productID) {
 					return makeApiCall('GET', '/v1/products/:productID/inventory', { 'productID': productID }, null);
@@ -1112,7 +1132,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/users', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'filters': filters }, null);
+					return makeApiCall('GET', '/v1/buyers/:buyerID/users', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(userID, buyerID) {
 					if (!userID) {

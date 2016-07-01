@@ -131,6 +131,12 @@ An AngularJs SDK for OrderCloud API
 
   - [Patch Billing Address](#patch-billing-address)
 
+  - [Add Coupon](#add-coupon)
+
+  - [List Coupons](#list-coupons)
+
+  - [Remove Coupon](#remove-coupon)
+
   - [Transfer Temp User Order](#transfer-temp-user-order)
 
 - [LineItems](#lineitems)
@@ -235,15 +241,19 @@ An AngularJs SDK for OrderCloud API
 
   - [List Variants](#list-variants)
 
+  - [Update Variant](#update-variant)
+
+  - [Patch Variant](#patch-variant)
+
+  - [Get Variant](#get-variant)
+
   - [List Variant Inventory](#list-variant-inventory)
 
   - [Get Variant Inventory](#get-variant-inventory)
 
   - [Update Variant Inventory](#update-variant-inventory)
 
-  - [Update Variant](#update-variant)
-
-  - [Get Variant](#get-variant)
+  - [List Inventory](#list-inventory)
 
   - [Get Inventory](#get-inventory)
 
@@ -856,8 +866,10 @@ OrderCloud.Me.ListCoupons(listArgs).then(successFn).catch(errorFn);
     {
       "ID": "…",
       "Code": "…",
+      "Name": "…",
       "UsagesRemaining": null,
       "Description": "…",
+      "FinePrint": "…",
       "StartDate": null,
       "ExpirationDate": null,
       "EligibleExpression": "…",
@@ -886,8 +898,10 @@ OrderCloud.Me.GetCoupon(couponID).then(successFn).catch(errorFn);
 {
   "ID": "…",
   "Code": "…",
+  "Name": "…",
   "UsagesRemaining": null,
   "Description": "…",
+  "FinePrint": "…",
   "StartDate": null,
   "ExpirationDate": null,
   "EligibleExpression": "…",
@@ -1571,7 +1585,8 @@ OrderCloud.Products.ListProducts(listArgs,categoryID).then(successFn).catch(erro
       "SpecCount": 0,
       "xp": null,
       "AllowOrderExceedInventory": false,
-      "InventoryVisible": false
+      "InventoryVisible": false,
+      "VariantCount": 0
     }
   ]
 }
@@ -1641,7 +1656,8 @@ OrderCloud.Products.GetProduct(productID).then(successFn).catch(errorFn);
   "SpecCount": 0,
   "xp": null,
   "AllowOrderExceedInventory": false,
-  "InventoryVisible": false
+  "InventoryVisible": false,
+  "VariantCount": 0
 }
 ```
 
@@ -1689,6 +1705,7 @@ OrderCloud.Products.ListSpecs(productID,listArgs).then(successFn).catch(errorFn)
           "xp": null
         }
       ],
+      "DefinesVariant": false,
       "ID": "…",
       "ListOrder": 0,
       "Name": "…",
@@ -1729,6 +1746,7 @@ OrderCloud.Products.GetSpec(productID,specID).then(successFn).catch(errorFn);
       "xp": null
     }
   ],
+  "DefinesVariant": false,
   "ID": "…",
   "ListOrder": 0,
   "Name": "…",
@@ -1817,6 +1835,7 @@ OrderCloud.Orders.ListOutgoingOrders(listArgs,from,to).then(successFn).catch(err
       "TaxCost": null,
       "CouponDiscount": 0.0,
       "Total": 0.0,
+      "IsSubmitted": false,
       "xp": null
     }
   ]
@@ -1892,6 +1911,7 @@ OrderCloud.Orders.ListIncomingOrders(listArgs,from,to).then(successFn).catch(err
       "TaxCost": null,
       "CouponDiscount": 0.0,
       "Total": 0.0,
+      "IsSubmitted": false,
       "xp": null
     }
   ]
@@ -1948,6 +1968,7 @@ OrderCloud.Orders.GetOrder(orderID).then(successFn).catch(errorFn);
   "TaxCost": null,
   "CouponDiscount": 0.0,
   "Total": 0.0,
+  "IsSubmitted": false,
   "xp": null
 }
 ```
@@ -2010,6 +2031,7 @@ OrderCloud.Orders.Get(orderID).then(successFn).catch(errorFn);
   "TaxCost": null,
   "CouponDiscount": 0.0,
   "Total": 0.0,
+  "IsSubmitted": false,
   "xp": null
 }
 ```
@@ -2143,6 +2165,7 @@ OrderCloud.Orders.ListOutgoing(from,to,listArgs).then(successFn).catch(errorFn);
       "TaxCost": null,
       "CouponDiscount": 0.0,
       "Total": 0.0,
+      "IsSubmitted": false,
       "xp": null
     }
   ]
@@ -2218,6 +2241,7 @@ OrderCloud.Orders.ListIncoming(from,to,listArgs).then(successFn).catch(errorFn);
       "TaxCost": null,
       "CouponDiscount": 0.0,
       "Total": 0.0,
+      "IsSubmitted": false,
       "xp": null
     }
   ]
@@ -2301,6 +2325,7 @@ OrderCloud.Orders.Submit(orderID).then(successFn).catch(errorFn);
   "TaxCost": null,
   "CouponDiscount": 0.0,
   "Total": 0.0,
+  "IsSubmitted": false,
   "xp": null
 }
 ```
@@ -2356,6 +2381,7 @@ OrderCloud.Orders.Approve(orderID,comments).then(successFn).catch(errorFn);
   "TaxCost": null,
   "CouponDiscount": 0.0,
   "Total": 0.0,
+  "IsSubmitted": false,
   "xp": null
 }
 ```
@@ -2411,6 +2437,7 @@ OrderCloud.Orders.Decline(orderID,comments).then(successFn).catch(errorFn);
   "TaxCost": null,
   "CouponDiscount": 0.0,
   "Total": 0.0,
+  "IsSubmitted": false,
   "xp": null
 }
 ```
@@ -2465,6 +2492,7 @@ OrderCloud.Orders.Cancel(orderID).then(successFn).catch(errorFn);
   "TaxCost": null,
   "CouponDiscount": 0.0,
   "Total": 0.0,
+  "IsSubmitted": false,
   "xp": null
 }
 ```
@@ -2624,6 +2652,144 @@ OrderCloud.Orders.PatchBillingAddress(orderID,address).then(successFn).catch(err
 }
 ```
 
+## Add Coupon
+
+```js
+OrderCloud.Orders.AddCoupon(orderID,couponCode).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|couponCode|string|Coupon code of the order.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Code": "…",
+  "Name": "…",
+  "UsagesRemaining": null,
+  "Description": "…",
+  "FinePrint": "…",
+  "StartDate": null,
+  "ExpirationDate": null,
+  "EligibleExpression": "…",
+  "ValueExpression": "…",
+  "CanCombine": false,
+  "xp": null
+}
+```
+
+## List Coupons
+
+```js
+OrderCloud.Orders.ListCoupons(orderID,listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "Amount": 0.0,
+      "ID": "…",
+      "Code": "…",
+      "Name": "…",
+      "UsagesRemaining": null,
+      "Description": "…",
+      "FinePrint": "…",
+      "StartDate": null,
+      "ExpirationDate": null,
+      "EligibleExpression": "…",
+      "ValueExpression": "…",
+      "CanCombine": false,
+      "xp": null
+    }
+  ]
+}
+```
+
+## Remove Coupon
+
+```js
+OrderCloud.Orders.RemoveCoupon(orderID,couponCode).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|couponCode|string|Coupon code of the order.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Type": "Standard",
+  "FromUserID": "…",
+  "FromUserFirstName": "…",
+  "FromUserLastName": "…",
+  "BillingAddress": {
+    "ID": "…",
+    "CompanyName": "…",
+    "FirstName": "…",
+    "LastName": "…",
+    "Street1": "…",
+    "Street2": "…",
+    "City": "…",
+    "State": "…",
+    "Zip": "…",
+    "Country": "…",
+    "Phone": "…",
+    "AddressName": "…",
+    "xp": null
+  },
+  "ShippingAddressID": "…",
+  "Comments": "…",
+  "LineItemCount": 0,
+  "Status": "Unsubmitted",
+  "DateCreated": null,
+  "DateSubmitted": null,
+  "DateApproved": null,
+  "DateDeclined": null,
+  "DateCanceled": null,
+  "DateCompleted": null,
+  "Subtotal": 0.0,
+  "ShippingCost": null,
+  "TaxCost": null,
+  "CouponDiscount": 0.0,
+  "Total": 0.0,
+  "IsSubmitted": false,
+  "xp": null
+}
+```
+
 ## Transfer Temp User Order
 
 ```js
@@ -2670,6 +2836,21 @@ OrderCloud.LineItems.Get(orderID,lineItemID).then(successFn).catch(errorFn);
   "DateNeeded": null,
   "ShippingAccount": "…",
   "ShippingAddress": {
+    "ID": "…",
+    "CompanyName": "…",
+    "FirstName": "…",
+    "LastName": "…",
+    "Street1": "…",
+    "Street2": "…",
+    "City": "…",
+    "State": "…",
+    "Zip": "…",
+    "Country": "…",
+    "Phone": "…",
+    "AddressName": "…",
+    "xp": null
+  },
+  "ShipfromAddress": {
     "ID": "…",
     "CompanyName": "…",
     "FirstName": "…",
@@ -2756,6 +2937,21 @@ OrderCloud.LineItems.List(orderID,listArgs).then(successFn).catch(errorFn);
         "AddressName": "…",
         "xp": null
       },
+      "ShipfromAddress": {
+        "ID": "…",
+        "CompanyName": "…",
+        "FirstName": "…",
+        "LastName": "…",
+        "Street1": "…",
+        "Street2": "…",
+        "City": "…",
+        "State": "…",
+        "Zip": "…",
+        "Country": "…",
+        "Phone": "…",
+        "AddressName": "…",
+        "xp": null
+      },
       "ShipperID": "…",
       "ShipperName": "…",
       "Specs": [
@@ -2795,6 +2991,7 @@ OrderCloud.LineItems.Create(orderID,lineItem).then(successFn).catch(errorFn);
   "DateNeeded": null,
   "ShippingAccount": "…",
   "ShippingAddressID": "…",
+  "ShipfromAddressID": "…",
   "ShipperID": "…",
   "Specs": [
     {
@@ -2831,6 +3028,7 @@ OrderCloud.LineItems.Update(orderID,lineItemID,lineItem).then(successFn).catch(e
   "DateNeeded": null,
   "ShippingAccount": "…",
   "ShippingAddressID": "…",
+  "ShipfromAddressID": "…",
   "ShipperID": "…",
   "Specs": [
     {
@@ -2879,6 +3077,7 @@ OrderCloud.LineItems.Patch(orderID,lineItemID,partialLineItem).then(successFn).c
   "DateNeeded": null,
   "ShippingAccount": "…",
   "ShippingAddressID": "…",
+  "ShipfromAddressID": "…",
   "ShipperID": "…",
   "Specs": [
     {
@@ -3801,7 +4000,8 @@ OrderCloud.Products.Get(productID).then(successFn).catch(errorFn);
   "SpecCount": 0,
   "xp": null,
   "AllowOrderExceedInventory": false,
-  "InventoryVisible": false
+  "InventoryVisible": false,
+  "VariantCount": 0
 }
 ```
 
@@ -3850,7 +4050,8 @@ OrderCloud.Products.List(listArgs).then(successFn).catch(errorFn);
       "SpecCount": 0,
       "xp": null,
       "AllowOrderExceedInventory": false,
-      "InventoryVisible": false
+      "InventoryVisible": false,
+      "VariantCount": 0
     }
   ]
 }
@@ -3967,10 +4168,32 @@ OrderCloud.Products.GenerateVariants(productID,overwriteExisting).then(successFn
 | -------------- | ----------- | --------------- |
 |productID|string|ID of the product.|
 |overwriteExisting|boolean|Overwrite existing of the product.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "QuantityMultiplier": 0,
+  "ShipWeight": null,
+  "Active": false,
+  "Type": "Static",
+  "InventoryEnabled": false,
+  "InventoryNotificationPoint": null,
+  "VariantLevelInventory": false,
+  "SpecCount": 0,
+  "xp": null,
+  "AllowOrderExceedInventory": false,
+  "InventoryVisible": false,
+  "VariantCount": 0
+}
+```
+
 ## List Variants
 
 ```js
-OrderCloud.Products.ListVariants(productID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Products.ListVariants(productID,listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3978,8 +4201,12 @@ OrderCloud.Products.ListVariants(productID,page,pageSize).then(successFn).catch(
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |productID|string|ID of the product.|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
@@ -3999,16 +4226,17 @@ OrderCloud.Products.ListVariants(productID,page,pageSize).then(successFn).catch(
       "ID": "…",
       "Name": "…",
       "Description": "…",
-      "Active": false
+      "Active": false,
+      "xp": null
     }
   ]
 }
 ```
 
-## List Variant Inventory
+## Update Variant
 
 ```js
-OrderCloud.Products.ListVariantInventory(productID,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Products.UpdateVariant(productID,variantID,variant).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -4016,8 +4244,84 @@ OrderCloud.Products.ListVariantInventory(productID,page,pageSize).then(successFn
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |productID|string|ID of the product.|
+|variantID|string|ID of the variant.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "Active": false,
+  "xp": null
+}
+```
+
+## Patch Variant
+
+```js
+OrderCloud.Products.PatchVariant(productID,variantID,variant).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|productID|string|ID of the product.|
+|variantID|string|ID of the variant.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "Active": false,
+  "xp": null
+}
+```
+
+## Get Variant
+
+```js
+OrderCloud.Products.GetVariant(productID,variantID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|productID|string|ID of the product.|
+|variantID|string|ID of the variant.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "Active": false,
+  "xp": null
+}
+```
+
+## List Variant Inventory
+
+```js
+OrderCloud.Products.ListVariantInventory(productID,listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|productID|string|ID of the product.|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
@@ -4081,49 +4385,57 @@ OrderCloud.Products.UpdateVariantInventory(productID,variantID,inventory).then(s
 |productID|string|ID of the product.|
 |variantID|string|ID of the variant.|
 |inventory|integer|Inventory of the product.|
-## Update Variant
-
-```js
-OrderCloud.Products.UpdateVariant(productID,variantID,variant).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|productID|string|ID of the product.|
-|variantID|string|ID of the variant.|
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "Name": "…",
-  "Description": "…",
-  "Active": false
-}
-```
-
-## Get Variant
-
-```js
-OrderCloud.Products.GetVariant(productID,variantID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|productID|string|ID of the product.|
-|variantID|string|ID of the variant.|
 ### Response Body Sample
 
 ```json
 {
   "ID": "…",
   "Name": "…",
-  "Description": "…",
-  "Active": false
+  "Available": null,
+  "Reserved": null,
+  "LastUpdated": null
+}
+```
+
+## List Inventory
+
+```js
+OrderCloud.Products.ListInventory(listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Available": null,
+      "Reserved": null,
+      "LastUpdated": null
+    }
+  ]
 }
 ```
 
@@ -4162,6 +4474,18 @@ OrderCloud.Products.UpdateInventory(productID,inventory).then(successFn).catch(e
 | -------------- | ----------- | --------------- |
 |productID|string|ID of the product.|
 |inventory|integer|Inventory of the product.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Available": null,
+  "Reserved": null,
+  "LastUpdated": null
+}
+```
+
 ## Save Assignment
 
 ```js
@@ -4887,8 +5211,10 @@ OrderCloud.Coupons.Get(couponID).then(successFn).catch(errorFn);
 {
   "ID": "…",
   "Code": "…",
+  "Name": "…",
   "UsagesRemaining": null,
   "Description": "…",
+  "FinePrint": "…",
   "StartDate": null,
   "ExpirationDate": null,
   "EligibleExpression": "…",
@@ -4932,8 +5258,10 @@ OrderCloud.Coupons.List(listArgs).then(successFn).catch(errorFn);
     {
       "ID": "…",
       "Code": "…",
+      "Name": "…",
       "UsagesRemaining": null,
       "Description": "…",
+      "FinePrint": "…",
       "StartDate": null,
       "ExpirationDate": null,
       "EligibleExpression": "…",
@@ -4957,8 +5285,10 @@ OrderCloud.Coupons.Create(coupon).then(successFn).catch(errorFn);
 {
   "ID": "…",
   "Code": "…",
+  "Name": "…",
   "UsagesRemaining": null,
   "Description": "…",
+  "FinePrint": "…",
   "StartDate": null,
   "ExpirationDate": null,
   "EligibleExpression": "…",
@@ -4985,8 +5315,10 @@ OrderCloud.Coupons.Update(couponID,coupon).then(successFn).catch(errorFn);
 {
   "ID": "…",
   "Code": "…",
+  "Name": "…",
   "UsagesRemaining": null,
   "Description": "…",
+  "FinePrint": "…",
   "StartDate": null,
   "ExpirationDate": null,
   "EligibleExpression": "…",
@@ -5024,8 +5356,10 @@ OrderCloud.Coupons.Patch(couponID,partialCoupon).then(successFn).catch(errorFn);
 {
   "ID": "…",
   "Code": "…",
+  "Name": "…",
   "UsagesRemaining": null,
   "Description": "…",
+  "FinePrint": "…",
   "StartDate": null,
   "ExpirationDate": null,
   "EligibleExpression": "…",
