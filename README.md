@@ -31,10 +31,6 @@ An AngularJs SDK for OrderCloud API
 
   - [Patch the Currently Authenticated User.](#patch-the-currently-authenticated-user.)
 
-  - [List Coupons](#list-coupons)
-
-  - [Get Coupon](#get-coupon)
-
   - [Create From Temp User](#create-from-temp-user)
 
 - [CostCenters](#costcenters)
@@ -97,6 +93,12 @@ An AngularJs SDK for OrderCloud API
 
   - [Get Order](#get-order)
 
+- [Coupons](#coupons)
+
+  - [List Coupons](#list-coupons)
+
+  - [Get Coupon](#get-coupon)
+
 - [Orders](#orders)
 
   - [Get a Single Order](#get-a-single-order)
@@ -110,6 +112,8 @@ An AngularJs SDK for OrderCloud API
   - [List Outgoing](#list-outgoing)
 
   - [List Incoming](#list-incoming)
+
+  - [List Approvals](#list-approvals)
 
   - [Partially Update Order](#partially-update-order)
 
@@ -177,7 +181,7 @@ An AngularJs SDK for OrderCloud API
 
   - [Patch Transaction](#patch-transaction)
 
-  - [Delete Transacion](#delete-transacion)
+  - [Delete Transaction](#delete-transaction)
 
 - [Shipments](#shipments)
 
@@ -438,6 +442,8 @@ An AngularJs SDK for OrderCloud API
   - [Create or Update Spending Account](#create-or-update-spending-account)
 
   - [Delete Spending Account](#delete-spending-account)
+
+  - [Partially Update Spending Account](#partially-update-spending-account)
 
   - [List Assignments](#list-assignments)
 
@@ -829,85 +835,6 @@ OrderCloud.Me.Patch(user).then(successFn).catch(errorFn);
   "Active": false,
   "xp": null,
   "SecurityProfileID": "…"
-}
-```
-
-## List Coupons
-
-```js
-OrderCloud.Me.ListCoupons(listArgs).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|search|string|Word or phrase to search for.|
-|searchOn|string|Comma-delimited list of fields to search on.|
-|sortBy|string|Comma-delimited list of fields to sort by.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "ID": "…",
-      "Code": "…",
-      "Name": "…",
-      "UsagesRemaining": null,
-      "Description": "…",
-      "FinePrint": "…",
-      "StartDate": null,
-      "ExpirationDate": null,
-      "EligibleExpression": "…",
-      "ValueExpression": "…",
-      "CanCombine": false,
-      "xp": null
-    }
-  ]
-}
-```
-
-## Get Coupon
-
-```js
-OrderCloud.Me.GetCoupon(couponID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
-### Response Body Sample
-
-```json
-{
-  "ID": "…",
-  "Code": "…",
-  "Name": "…",
-  "UsagesRemaining": null,
-  "Description": "…",
-  "FinePrint": "…",
-  "StartDate": null,
-  "ExpirationDate": null,
-  "EligibleExpression": "…",
-  "ValueExpression": "…",
-  "CanCombine": false,
-  "xp": null
 }
 ```
 
@@ -1973,6 +1900,93 @@ OrderCloud.Orders.GetOrder(orderID).then(successFn).catch(errorFn);
 }
 ```
 
+# Coupons
+
+```js
+angular.module('orderCloud.sdk).factory(Coupons, CouponsFactory)
+```
+
+"Me" is a container for read-only endpoints that return a filtered view of things that the current buyer user is allowed to see, i.e. things that they are assigned to either directly or as a member of a buyer organization or user group. It also provides ways for a user to update or change their own information.
+
+## List Coupons
+
+```js
+OrderCloud.Coupons.ListCoupons(listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Code": "…",
+      "Name": "…",
+      "UsagesRemaining": null,
+      "Description": "…",
+      "FinePrint": "…",
+      "StartDate": null,
+      "ExpirationDate": null,
+      "EligibleExpression": "…",
+      "ValueExpression": "…",
+      "CanCombine": false,
+      "xp": null
+    }
+  ]
+}
+```
+
+## Get Coupon
+
+```js
+OrderCloud.Coupons.GetCoupon(couponID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|couponID|string|ID of the coupon.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Code": "…",
+  "Name": "…",
+  "UsagesRemaining": null,
+  "Description": "…",
+  "FinePrint": "…",
+  "StartDate": null,
+  "ExpirationDate": null,
+  "EligibleExpression": "…",
+  "ValueExpression": "…",
+  "CanCombine": false,
+  "xp": null
+}
+```
+
 # Orders
 
 ```js
@@ -2243,6 +2257,52 @@ OrderCloud.Orders.ListIncoming(from,to,listArgs).then(successFn).catch(errorFn);
       "Total": 0.0,
       "IsSubmitted": false,
       "xp": null
+    }
+  ]
+}
+```
+
+## List Approvals
+
+```js
+OrderCloud.Orders.ListApprovals(orderID,listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ApprovalRuleID": "…",
+      "ApprovingGroupID": "…",
+      "Status": "Pending",
+      "DateCreated": "0001-01-01T00:00:00+00:00",
+      "DateCompleted": null,
+      "ApproverID": "…",
+      "ApproverUserName": "…",
+      "ApproverEmail": "…"
     }
   ]
 }
@@ -3430,10 +3490,10 @@ OrderCloud.Payments.PatchTransaction(orderID,paymentID,transactionID,partialTran
 }
 ```
 
-## Delete Transacion
+## Delete Transaction
 
 ```js
-OrderCloud.Payments.DeleteTransacion(orderID,paymentID,transactionID).then(successFn).catch(errorFn);
+OrderCloud.Payments.DeleteTransaction(orderID,paymentID,transactionID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5564,13 +5624,14 @@ OrderCloud.Users.Get(userID).then(successFn).catch(errorFn);
 ## Get a List of Users
 
 ```js
-OrderCloud.Users.List(listArgs).then(successFn).catch(errorFn);
+OrderCloud.Users.List(userGroupID,listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
+|userGroupID|string|ID of the user group.|
 |search|string|Word or phrase to search for.|
 |searchOn|string|Comma-delimited list of fields to search on.|
 |sortBy|string|Comma-delimited list of fields to sort by.|
@@ -6674,6 +6735,32 @@ OrderCloud.SpendingAccounts.Delete(spendingAccountID).then(successFn).catch(erro
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |spendingAccountID|string|ID of the spending account.|
+## Partially Update Spending Account
+
+```js
+OrderCloud.SpendingAccounts.Patch(spendingAccountID,spendingAccount).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|spendingAccountID|string|ID of the spending account.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Balance": 0.0,
+  "AllowAsPaymentMethod": false,
+  "RedemptionCode": "…",
+  "StartDate": null,
+  "EndDate": null,
+  "xp": null
+}
+```
+
 ## List Assignments
 
 ```js
@@ -6981,6 +7068,8 @@ OrderCloud.ApprovalRules.Get(approvalRuleID).then(successFn).catch(errorFn);
 ```json
 {
   "ID": "…",
+  "Name": "…",
+  "Description": "…",
   "ApprovingGroupID": "…",
   "RuleExpression": "…",
   "Scope": "PerOrder",
@@ -6989,7 +7078,8 @@ OrderCloud.ApprovalRules.Get(approvalRuleID).then(successFn).catch(errorFn);
   "ScopeStartDate": null,
   "ExpireAfterTimeUnit": null,
   "ExpireAfterNumber": null,
-  "ApproveOnExpire": false
+  "ApproveOnExpire": false,
+  "xp": null
 }
 ```
 
@@ -7026,6 +7116,8 @@ OrderCloud.ApprovalRules.List(listArgs).then(successFn).catch(errorFn);
   "Items": [
     {
       "ID": "…",
+      "Name": "…",
+      "Description": "…",
       "ApprovingGroupID": "…",
       "RuleExpression": "…",
       "Scope": "PerOrder",
@@ -7034,7 +7126,8 @@ OrderCloud.ApprovalRules.List(listArgs).then(successFn).catch(errorFn);
       "ScopeStartDate": null,
       "ExpireAfterTimeUnit": null,
       "ExpireAfterNumber": null,
-      "ApproveOnExpire": false
+      "ApproveOnExpire": false,
+      "xp": null
     }
   ]
 }
@@ -7051,6 +7144,8 @@ OrderCloud.ApprovalRules.Create(approvalRule).then(successFn).catch(errorFn);
 ```json
 {
   "ID": "…",
+  "Name": "…",
+  "Description": "…",
   "ApprovingGroupID": "…",
   "RuleExpression": "…",
   "Scope": "PerOrder",
@@ -7059,7 +7154,8 @@ OrderCloud.ApprovalRules.Create(approvalRule).then(successFn).catch(errorFn);
   "ScopeStartDate": null,
   "ExpireAfterTimeUnit": null,
   "ExpireAfterNumber": null,
-  "ApproveOnExpire": false
+  "ApproveOnExpire": false,
+  "xp": null
 }
 ```
 
@@ -7079,6 +7175,8 @@ OrderCloud.ApprovalRules.Update(approvalRuleID,approvalRule).then(successFn).cat
 ```json
 {
   "ID": "…",
+  "Name": "…",
+  "Description": "…",
   "ApprovingGroupID": "…",
   "RuleExpression": "…",
   "Scope": "PerOrder",
@@ -7087,7 +7185,8 @@ OrderCloud.ApprovalRules.Update(approvalRuleID,approvalRule).then(successFn).cat
   "ScopeStartDate": null,
   "ExpireAfterTimeUnit": null,
   "ExpireAfterNumber": null,
-  "ApproveOnExpire": false
+  "ApproveOnExpire": false,
+  "xp": null
 }
 ```
 
@@ -7118,6 +7217,8 @@ OrderCloud.ApprovalRules.Patch(approvalRuleID,partialApprovalRule).then(successF
 ```json
 {
   "ID": "…",
+  "Name": "…",
+  "Description": "…",
   "ApprovingGroupID": "…",
   "RuleExpression": "…",
   "Scope": "PerOrder",
@@ -7126,7 +7227,8 @@ OrderCloud.ApprovalRules.Patch(approvalRuleID,partialApprovalRule).then(successF
   "ScopeStartDate": null,
   "ExpireAfterTimeUnit": null,
   "ExpireAfterNumber": null,
-  "ApproveOnExpire": false
+  "ApproveOnExpire": false,
+  "xp": null
 }
 ```
 

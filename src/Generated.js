@@ -465,7 +465,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'CreateTransaction': _createtransaction,
 					'UpdateTransaction': _updatetransaction,
 					'PatchTransaction': _patchtransaction,
-					'DeleteTransacion': _deletetransacion
+					'DeleteTransaction': _deletetransaction
 					}
 				;
 				function _get(orderID, paymentID, buyerID) {
@@ -502,7 +502,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				function _patchtransaction(orderID, paymentID, transactionID, partialTransaction, buyerID) {
 					return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID/transactions/:transactionID', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'paymentID': paymentID, 'transactionID': transactionID }, partialTransaction);
 				}
-				function _deletetransacion(orderID, paymentID, transactionID, buyerID) {
+				function _deletetransaction(orderID, paymentID, transactionID, buyerID) {
 					return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID/payments/:paymentID/transactions/:transactionID', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'paymentID': paymentID, 'transactionID': transactionID }, null);
 				}
 			}
@@ -796,6 +796,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'Get': _get,
 					'ListOutgoing': _listoutgoing,
 					'ListIncoming': _listincoming,
+					'ListApprovals': _listapprovals,
 					'Create': _create,
 					'Update': _update,
 					'Patch': _patch,
@@ -830,6 +831,9 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				}
 				function _listincoming(from, to, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
 					return makeApiCall('GET', '/v1/orders/incoming', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'from': from, 'to': to, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
+				}
+				function _listapprovals(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/approvals', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _create(order, buyerID) {
 					return makeApiCall('POST', '/v1/buyers/:buyerID/orders', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, order);
@@ -990,6 +994,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'Get': _get,
 					'Create': _create,
 					'Update': _update,
+					'Patch': _patch,
 					'Delete': _delete,
 					'ListAssignments': _listassignments,
 					'SaveAssignment': _saveassignment,
@@ -1014,6 +1019,9 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				}
 				function _update(spendingAccountID, spendingAccount, buyerID) {
 					return makeApiCall('PUT', '/v1/buyers/:buyerID/spendingaccounts/:spendingAccountID', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'spendingAccountID': spendingAccountID }, spendingAccount);
+				}
+				function _patch(spendingAccountID, spendingAccount, buyerID) {
+					return makeApiCall('PATCH', '/v1/buyers/:buyerID/spendingaccounts/:spendingAccountID', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'spendingAccountID': spendingAccountID }, spendingAccount);
 				}
 				function _delete(spendingAccountID, buyerID) {
 					return makeApiCall('DELETE', '/v1/buyers/:buyerID/spendingaccounts/:spendingAccountID', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'spendingAccountID': spendingAccountID }, null);
@@ -1131,8 +1139,8 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'GetAccessToken': _getaccesstoken
 					}
 				;
-				function _list(search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/users', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
+				function _list(userGroupID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+					return makeApiCall('GET', '/v1/buyers/:buyerID/users', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'userGroupID': userGroupID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(userID, buyerID) {
 					if (!userID) {
