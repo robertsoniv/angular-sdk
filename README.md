@@ -93,11 +93,11 @@ An AngularJs SDK for OrderCloud API
 
   - [Get Order](#get-order)
 
-- [Coupons](#coupons)
+- [Promotions](#promotions)
 
-  - [List Coupons](#list-coupons)
+  - [List Promotions](#list-promotions)
 
-  - [Get Coupon](#get-coupon)
+  - [Get Promotion](#get-promotion)
 
 - [Orders](#orders)
 
@@ -114,6 +114,8 @@ An AngularJs SDK for OrderCloud API
   - [List Incoming](#list-incoming)
 
   - [List Approvals](#list-approvals)
+
+  - [List Eligible Approvers](#list-eligible-approvers)
 
   - [Partially Update Order](#partially-update-order)
 
@@ -135,11 +137,11 @@ An AngularJs SDK for OrderCloud API
 
   - [Patch Billing Address](#patch-billing-address)
 
-  - [Add Coupon](#add-coupon)
+  - [Add Promotion](#add-promotion)
 
-  - [List Coupons](#list-coupons)
+  - [List Promotions](#list-promotions)
 
-  - [Remove Coupon](#remove-coupon)
+  - [Remove Promotion](#remove-promotion)
 
   - [Transfer Temp User Order](#transfer-temp-user-order)
 
@@ -319,19 +321,19 @@ An AngularJs SDK for OrderCloud API
 
   - [Delete Option](#delete-option)
 
-- [Coupons](#coupons)
+- [Promotions](#promotions)
 
-  - [Get a Single Coupon](#get-a-single-coupon)
+  - [Get a Single Promotion](#get-a-single-promotion)
 
-  - [Get a List of Coupons](#get-a-list-of-coupons)
+  - [Get a List of Promotions](#get-a-list-of-promotions)
 
-  - [Create New Coupon](#create-new-coupon)
+  - [Create New Promotion](#create-new-promotion)
 
-  - [Create or Update Coupon](#create-or-update-coupon)
+  - [Create or Update Promotion](#create-or-update-promotion)
 
-  - [Delete Coupon](#delete-coupon)
+  - [Delete Promotion](#delete-promotion)
 
-  - [Partially Update Coupon](#partially-update-coupon)
+  - [Partially Update Promotion](#partially-update-promotion)
 
   - [List Assignments](#list-assignments)
 
@@ -594,8 +596,8 @@ OrderCloud.SecurityProfiles.Get(securityProfileID).then(successFn).catch(errorFn
   "AddressReader": false,
   "CostCenterAdmin": false,
   "CostCenterReader": false,
-  "CouponAdmin": false,
-  "CouponReader": false,
+  "PromotionAdmin": false,
+  "PromotionReader": false,
   "CreditCardAdmin": false,
   "CreditCardReader": false,
   "EmailTemplateAdmin": false,
@@ -677,8 +679,8 @@ OrderCloud.SecurityProfiles.List(listArgs).then(successFn).catch(errorFn);
       "AddressReader": false,
       "CostCenterAdmin": false,
       "CostCenterReader": false,
-      "CouponAdmin": false,
-      "CouponReader": false,
+      "PromotionAdmin": false,
+      "PromotionReader": false,
       "CreditCardAdmin": false,
       "CreditCardReader": false,
       "EmailTemplateAdmin": false,
@@ -1758,9 +1760,9 @@ OrderCloud.Orders.ListOutgoingOrders(listArgs,from,to).then(successFn).catch(err
       "DateCanceled": null,
       "DateCompleted": null,
       "Subtotal": 0.0,
-      "ShippingCost": null,
-      "TaxCost": null,
-      "CouponDiscount": 0.0,
+      "ShippingCost": 0.0,
+      "TaxCost": 0.0,
+      "PromotionDiscount": 0.0,
       "Total": 0.0,
       "IsSubmitted": false,
       "xp": null
@@ -1834,9 +1836,9 @@ OrderCloud.Orders.ListIncomingOrders(listArgs,from,to).then(successFn).catch(err
       "DateCanceled": null,
       "DateCompleted": null,
       "Subtotal": 0.0,
-      "ShippingCost": null,
-      "TaxCost": null,
-      "CouponDiscount": 0.0,
+      "ShippingCost": 0.0,
+      "TaxCost": 0.0,
+      "PromotionDiscount": 0.0,
       "Total": 0.0,
       "IsSubmitted": false,
       "xp": null
@@ -1891,27 +1893,27 @@ OrderCloud.Orders.GetOrder(orderID).then(successFn).catch(errorFn);
   "DateCanceled": null,
   "DateCompleted": null,
   "Subtotal": 0.0,
-  "ShippingCost": null,
-  "TaxCost": null,
-  "CouponDiscount": 0.0,
+  "ShippingCost": 0.0,
+  "TaxCost": 0.0,
+  "PromotionDiscount": 0.0,
   "Total": 0.0,
   "IsSubmitted": false,
   "xp": null
 }
 ```
 
-# Coupons
+# Promotions
 
 ```js
-angular.module('orderCloud.sdk).factory(Coupons, CouponsFactory)
+angular.module('orderCloud.sdk).factory(Promotions, PromotionsFactory)
 ```
 
 "Me" is a container for read-only endpoints that return a filtered view of things that the current buyer user is allowed to see, i.e. things that they are assigned to either directly or as a member of a buyer organization or user group. It also provides ways for a user to update or change their own information.
 
-## List Coupons
+## List Promotions
 
 ```js
-OrderCloud.Coupons.ListCoupons(listArgs).then(successFn).catch(errorFn);
+OrderCloud.Promotions.ListPromotions(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1957,17 +1959,17 @@ OrderCloud.Coupons.ListCoupons(listArgs).then(successFn).catch(errorFn);
 }
 ```
 
-## Get Coupon
+## Get Promotion
 
 ```js
-OrderCloud.Coupons.GetCoupon(couponID).then(successFn).catch(errorFn);
+OrderCloud.Promotions.GetPromotion(promotionID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
+|promotionID|string|ID of the promotion.|
 ### Response Body Sample
 
 ```json
@@ -2041,9 +2043,9 @@ OrderCloud.Orders.Get(orderID).then(successFn).catch(errorFn);
   "DateCanceled": null,
   "DateCompleted": null,
   "Subtotal": 0.0,
-  "ShippingCost": null,
-  "TaxCost": null,
-  "CouponDiscount": 0.0,
+  "ShippingCost": 0.0,
+  "TaxCost": 0.0,
+  "PromotionDiscount": 0.0,
   "Total": 0.0,
   "IsSubmitted": false,
   "xp": null
@@ -2066,8 +2068,8 @@ OrderCloud.Orders.Create(order).then(successFn).catch(errorFn);
   "BillingAddressID": "…",
   "ShippingAddressID": "…",
   "Comments": "…",
-  "ShippingCost": null,
-  "TaxCost": null,
+  "ShippingCost": 0.0,
+  "TaxCost": 0.0,
   "xp": null
 }
 ```
@@ -2093,8 +2095,8 @@ OrderCloud.Orders.Update(orderID,order).then(successFn).catch(errorFn);
   "BillingAddressID": "…",
   "ShippingAddressID": "…",
   "Comments": "…",
-  "ShippingCost": null,
-  "TaxCost": null,
+  "ShippingCost": 0.0,
+  "TaxCost": 0.0,
   "xp": null
 }
 ```
@@ -2175,9 +2177,9 @@ OrderCloud.Orders.ListOutgoing(from,to,listArgs).then(successFn).catch(errorFn);
       "DateCanceled": null,
       "DateCompleted": null,
       "Subtotal": 0.0,
-      "ShippingCost": null,
-      "TaxCost": null,
-      "CouponDiscount": 0.0,
+      "ShippingCost": 0.0,
+      "TaxCost": 0.0,
+      "PromotionDiscount": 0.0,
       "Total": 0.0,
       "IsSubmitted": false,
       "xp": null
@@ -2251,9 +2253,9 @@ OrderCloud.Orders.ListIncoming(from,to,listArgs).then(successFn).catch(errorFn);
       "DateCanceled": null,
       "DateCompleted": null,
       "Subtotal": 0.0,
-      "ShippingCost": null,
-      "TaxCost": null,
-      "CouponDiscount": 0.0,
+      "ShippingCost": 0.0,
+      "TaxCost": 0.0,
+      "PromotionDiscount": 0.0,
       "Total": 0.0,
       "IsSubmitted": false,
       "xp": null
@@ -2302,7 +2304,56 @@ OrderCloud.Orders.ListApprovals(orderID,listArgs).then(successFn).catch(errorFn)
       "DateCompleted": null,
       "ApproverID": "…",
       "ApproverUserName": "…",
-      "ApproverEmail": "…"
+      "ApproverEmail": "…",
+      "Comments": "…"
+    }
+  ]
+}
+```
+
+## List Eligible Approvers
+
+```js
+OrderCloud.Orders.ListEligibleApprovers(orderID,listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|orderID|string|ID of the order.|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Username": "…",
+      "FirstName": "…",
+      "LastName": "…",
+      "Email": "…",
+      "Phone": "…",
+      "TermsAccepted": null,
+      "Active": false,
+      "xp": null,
+      "SecurityProfileID": "…"
     }
   ]
 }
@@ -2329,8 +2380,8 @@ OrderCloud.Orders.Patch(orderID,partialOrder).then(successFn).catch(errorFn);
   "BillingAddressID": "…",
   "ShippingAddressID": "…",
   "Comments": "…",
-  "ShippingCost": null,
-  "TaxCost": null,
+  "ShippingCost": 0.0,
+  "TaxCost": 0.0,
   "xp": null
 }
 ```
@@ -2381,9 +2432,9 @@ OrderCloud.Orders.Submit(orderID).then(successFn).catch(errorFn);
   "DateCanceled": null,
   "DateCompleted": null,
   "Subtotal": 0.0,
-  "ShippingCost": null,
-  "TaxCost": null,
-  "CouponDiscount": 0.0,
+  "ShippingCost": 0.0,
+  "TaxCost": 0.0,
+  "PromotionDiscount": 0.0,
   "Total": 0.0,
   "IsSubmitted": false,
   "xp": null
@@ -2437,9 +2488,9 @@ OrderCloud.Orders.Approve(orderID,comments).then(successFn).catch(errorFn);
   "DateCanceled": null,
   "DateCompleted": null,
   "Subtotal": 0.0,
-  "ShippingCost": null,
-  "TaxCost": null,
-  "CouponDiscount": 0.0,
+  "ShippingCost": 0.0,
+  "TaxCost": 0.0,
+  "PromotionDiscount": 0.0,
   "Total": 0.0,
   "IsSubmitted": false,
   "xp": null
@@ -2493,9 +2544,9 @@ OrderCloud.Orders.Decline(orderID,comments).then(successFn).catch(errorFn);
   "DateCanceled": null,
   "DateCompleted": null,
   "Subtotal": 0.0,
-  "ShippingCost": null,
-  "TaxCost": null,
-  "CouponDiscount": 0.0,
+  "ShippingCost": 0.0,
+  "TaxCost": 0.0,
+  "PromotionDiscount": 0.0,
   "Total": 0.0,
   "IsSubmitted": false,
   "xp": null
@@ -2548,9 +2599,9 @@ OrderCloud.Orders.Cancel(orderID).then(successFn).catch(errorFn);
   "DateCanceled": null,
   "DateCompleted": null,
   "Subtotal": 0.0,
-  "ShippingCost": null,
-  "TaxCost": null,
-  "CouponDiscount": 0.0,
+  "ShippingCost": 0.0,
+  "TaxCost": 0.0,
+  "PromotionDiscount": 0.0,
   "Total": 0.0,
   "IsSubmitted": false,
   "xp": null
@@ -2712,10 +2763,10 @@ OrderCloud.Orders.PatchBillingAddress(orderID,address).then(successFn).catch(err
 }
 ```
 
-## Add Coupon
+## Add Promotion
 
 ```js
-OrderCloud.Orders.AddCoupon(orderID,couponCode).then(successFn).catch(errorFn);
+OrderCloud.Orders.AddPromotion(orderID,promoCode).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2723,7 +2774,7 @@ OrderCloud.Orders.AddCoupon(orderID,couponCode).then(successFn).catch(errorFn);
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |orderID|string|ID of the order.|
-|couponCode|string|Coupon code of the order.|
+|promoCode|string|Promo code of the order.|
 ### Response Body Sample
 
 ```json
@@ -2743,10 +2794,10 @@ OrderCloud.Orders.AddCoupon(orderID,couponCode).then(successFn).catch(errorFn);
 }
 ```
 
-## List Coupons
+## List Promotions
 
 ```js
-OrderCloud.Orders.ListCoupons(orderID,listArgs).then(successFn).catch(errorFn);
+OrderCloud.Orders.ListPromotions(orderID,listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2794,10 +2845,10 @@ OrderCloud.Orders.ListCoupons(orderID,listArgs).then(successFn).catch(errorFn);
 }
 ```
 
-## Remove Coupon
+## Remove Promotion
 
 ```js
-OrderCloud.Orders.RemoveCoupon(orderID,couponCode).then(successFn).catch(errorFn);
+OrderCloud.Orders.RemovePromotion(orderID,promoCode).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -2805,7 +2856,7 @@ OrderCloud.Orders.RemoveCoupon(orderID,couponCode).then(successFn).catch(errorFn
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |orderID|string|ID of the order.|
-|couponCode|string|Coupon code of the order.|
+|promoCode|string|Promo code of the order.|
 ### Response Body Sample
 
 ```json
@@ -2841,9 +2892,9 @@ OrderCloud.Orders.RemoveCoupon(orderID,couponCode).then(successFn).catch(errorFn
   "DateCanceled": null,
   "DateCompleted": null,
   "Subtotal": 0.0,
-  "ShippingCost": null,
-  "TaxCost": null,
-  "CouponDiscount": 0.0,
+  "ShippingCost": 0.0,
+  "TaxCost": 0.0,
+  "PromotionDiscount": 0.0,
   "Total": 0.0,
   "IsSubmitted": false,
   "xp": null
@@ -2910,7 +2961,7 @@ OrderCloud.LineItems.Get(orderID,lineItemID).then(successFn).catch(errorFn);
     "AddressName": "…",
     "xp": null
   },
-  "ShipfromAddress": {
+  "ShipFromAddress": {
     "ID": "…",
     "CompanyName": "…",
     "FirstName": "…",
@@ -2997,7 +3048,7 @@ OrderCloud.LineItems.List(orderID,listArgs).then(successFn).catch(errorFn);
         "AddressName": "…",
         "xp": null
       },
-      "ShipfromAddress": {
+      "ShipFromAddress": {
         "ID": "…",
         "CompanyName": "…",
         "FirstName": "…",
@@ -3051,7 +3102,7 @@ OrderCloud.LineItems.Create(orderID,lineItem).then(successFn).catch(errorFn);
   "DateNeeded": null,
   "ShippingAccount": "…",
   "ShippingAddressID": "…",
-  "ShipfromAddressID": "…",
+  "ShipFromAddressID": "…",
   "ShipperID": "…",
   "Specs": [
     {
@@ -3088,7 +3139,7 @@ OrderCloud.LineItems.Update(orderID,lineItemID,lineItem).then(successFn).catch(e
   "DateNeeded": null,
   "ShippingAccount": "…",
   "ShippingAddressID": "…",
-  "ShipfromAddressID": "…",
+  "ShipFromAddressID": "…",
   "ShipperID": "…",
   "Specs": [
     {
@@ -3137,7 +3188,7 @@ OrderCloud.LineItems.Patch(orderID,lineItemID,partialLineItem).then(successFn).c
   "DateNeeded": null,
   "ShippingAccount": "…",
   "ShippingAddressID": "…",
-  "ShipfromAddressID": "…",
+  "ShipFromAddressID": "…",
   "ShipperID": "…",
   "Specs": [
     {
@@ -3185,7 +3236,7 @@ OrderCloud.LineItems.SetShippingAddress(orderID,lineItemID,address).then(success
 ## Patch Shipping Address
 
 ```js
-OrderCloud.LineItems.PatchShippingAddress(orderID,lineItemID,address).then(successFn).catch(errorFn);
+OrderCloud.LineItems.PatchShippingAddress(orderID,lineItemID,partialAddress).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3545,7 +3596,7 @@ OrderCloud.Shipments.Get(shipmentID).then(successFn).catch(errorFn);
 ## Get a List of Shipments
 
 ```js
-OrderCloud.Shipments.List(orderID,search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Shipments.List(listArgs,orderID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3554,8 +3605,11 @@ OrderCloud.Shipments.List(orderID,search,page,pageSize).then(successFn).catch(er
 | -------------- | ----------- | --------------- |
 |orderID|string|ID of the order.|
 |search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
@@ -5245,26 +5299,26 @@ OrderCloud.Specs.DeleteOption(specID,optionID).then(successFn).catch(errorFn);
 | -------------- | ----------- | --------------- |
 |specID|string|ID of the spec.|
 |optionID|string|ID of the option.|
-# Coupons
+# Promotions
 
 ```js
-angular.module('orderCloud.sdk).factory(Coupons, CouponsFactory)
+angular.module('orderCloud.sdk).factory(Promotions, PromotionsFactory)
 ```
 
-Coupons are used to reduce the cost of a line item or an order.  Coupons can have redemption rules that can be applied for available dates, occurences and value.
-Coupons can be assigned to Products, Categories, Buyers, UserGroups and Users for redemption.
+Promotions are used to reduce the cost of a line item or an order.  Promotions can have redemption rules that can be applied for available dates, occurences and value.
+Promotions can be assigned to Products, Categories, Buyers, UserGroups and Users for redemption.
 
-## Get a Single Coupon
+## Get a Single Promotion
 
 ```js
-OrderCloud.Coupons.Get(couponID).then(successFn).catch(errorFn);
+OrderCloud.Promotions.Get(promotionID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
+|promotionID|string|ID of the promotion.|
 ### Response Body Sample
 
 ```json
@@ -5284,10 +5338,10 @@ OrderCloud.Coupons.Get(couponID).then(successFn).catch(errorFn);
 }
 ```
 
-## Get a List of Coupons
+## Get a List of Promotions
 
 ```js
-OrderCloud.Coupons.List(listArgs).then(successFn).catch(errorFn);
+OrderCloud.Promotions.List(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5333,10 +5387,10 @@ OrderCloud.Coupons.List(listArgs).then(successFn).catch(errorFn);
 }
 ```
 
-## Create New Coupon
+## Create New Promotion
 
 ```js
-OrderCloud.Coupons.Create(coupon).then(successFn).catch(errorFn);
+OrderCloud.Promotions.Create(promo).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
@@ -5358,17 +5412,17 @@ OrderCloud.Coupons.Create(coupon).then(successFn).catch(errorFn);
 }
 ```
 
-## Create or Update Coupon
+## Create or Update Promotion
 
 ```js
-OrderCloud.Coupons.Update(couponID,coupon).then(successFn).catch(errorFn);
+OrderCloud.Promotions.Update(promotionID,promo).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
+|promotionID|string|ID of the promotion.|
 ### Request Body Sample
 
 ```json
@@ -5388,28 +5442,28 @@ OrderCloud.Coupons.Update(couponID,coupon).then(successFn).catch(errorFn);
 }
 ```
 
-## Delete Coupon
+## Delete Promotion
 
 ```js
-OrderCloud.Coupons.Delete(couponID).then(successFn).catch(errorFn);
+OrderCloud.Promotions.Delete(promotionID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
-## Partially Update Coupon
+|promotionID|string|ID of the promotion.|
+## Partially Update Promotion
 
 ```js
-OrderCloud.Coupons.Patch(couponID,partialCoupon).then(successFn).catch(errorFn);
+OrderCloud.Promotions.Patch(promotionID,partialPromotion).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
+|promotionID|string|ID of the promotion.|
 ### Request Body Sample
 
 ```json
@@ -5432,17 +5486,17 @@ OrderCloud.Coupons.Patch(couponID,partialCoupon).then(successFn).catch(errorFn);
 ## List Assignments
 
 ```js
-OrderCloud.Coupons.ListAssignments(couponID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Promotions.ListAssignments(promotionID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
+|promotionID|string|ID of the promotion.|
 |userID|string|ID of the user.|
 |userGroupID|string|ID of the user group.|
-|level|string|Level of the coupon.|
+|level|string|Level of the promotion.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
 ### Response Body Sample
@@ -5461,7 +5515,7 @@ OrderCloud.Coupons.ListAssignments(couponID,userID,userGroupID,level,page,pageSi
   },
   "Items": [
     {
-      "CouponID": "…",
+      "PromotionID": "…",
       "BuyerID": "…",
       "UserID": "…",
       "UserGroupID": "…"
@@ -5473,14 +5527,14 @@ OrderCloud.Coupons.ListAssignments(couponID,userID,userGroupID,level,page,pageSi
 ## Save Assignment
 
 ```js
-OrderCloud.Coupons.SaveAssignment(assignment).then(successFn).catch(errorFn);
+OrderCloud.Promotions.SaveAssignment(assignment).then(successFn).catch(errorFn);
 ```
 
 ### Request Body Sample
 
 ```json
 {
-  "CouponID": "…",
+  "PromotionID": "…",
   "BuyerID": "…",
   "UserID": "…",
   "UserGroupID": "…"
@@ -5490,14 +5544,14 @@ OrderCloud.Coupons.SaveAssignment(assignment).then(successFn).catch(errorFn);
 ## Delete Assignment
 
 ```js
-OrderCloud.Coupons.DeleteAssignment(couponID,userID,userGroupID).then(successFn).catch(errorFn);
+OrderCloud.Promotions.DeleteAssignment(promotionID,userID,userGroupID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|couponID|string|ID of the coupon.|
+|promotionID|string|ID of the promotion.|
 |userID|string|ID of the user.|
 |userGroupID|string|ID of the user group.|
 # Files

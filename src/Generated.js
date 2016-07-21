@@ -10,7 +10,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 			'Buyers': Buyers(),
 			'Categories': Categories(),
 			'CostCenters': CostCenters(),
-			'Coupons': Coupons(),
+			'Promotions': Promotions(),
 			'CreditCards': CreditCards(),
 			'EmailTemplates': EmailTemplates(),
 			'Files': Files(),
@@ -286,7 +286,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					return makeApiCall('POST', '/v1/buyers/:buyerID/costcenters/assignments', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, assignment);
 				}
 			}
-			function Coupons() {
+			function Promotions() {
 				return {
 					'List': _list,
 					'Get': _get,
@@ -300,38 +300,38 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/coupons', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
+					return makeApiCall('GET', '/v1/promotions', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
-				function _get(couponID) {
-					if (!couponID) {
-						var errMessage = 'couponID is a required field for OrderCloud.Coupons.Get';
+				function _get(promotionID) {
+					if (!promotionID) {
+						var errMessage = 'promotionID is a required field for OrderCloud.Promotions.Get';
 						console.error(errMessage);
 						var dfd = $q.defer();
 						dfd.reject(errMessage);
 						return dfd.promise;
 					}
-					return makeApiCall('GET', '/v1/coupons/:couponID', { 'couponID': couponID }, null);
+					return makeApiCall('GET', '/v1/promotions/:promotionID', { 'promotionID': promotionID }, null);
 				}
-				function _create(coupon) {
-					return makeApiCall('POST', '/v1/coupons', null, coupon);
+				function _create(promo) {
+					return makeApiCall('POST', '/v1/promotions', null, promo);
 				}
-				function _update(couponID, coupon) {
-					return makeApiCall('PUT', '/v1/coupons/:couponID', { 'couponID': couponID }, coupon);
+				function _update(promotionID, promo) {
+					return makeApiCall('PUT', '/v1/promotions/:promotionID', { 'promotionID': promotionID }, promo);
 				}
-				function _patch(couponID, partialCoupon) {
-					return makeApiCall('PATCH', '/v1/coupons/:couponID', { 'couponID': couponID }, partialCoupon);
+				function _patch(promotionID, partialPromotion) {
+					return makeApiCall('PATCH', '/v1/promotions/:promotionID', { 'promotionID': promotionID }, partialPromotion);
 				}
-				function _delete(couponID) {
-					return makeApiCall('DELETE', '/v1/coupons/:couponID', { 'couponID': couponID }, null);
+				function _delete(promotionID) {
+					return makeApiCall('DELETE', '/v1/promotions/:promotionID', { 'promotionID': promotionID }, null);
 				}
-				function _listassignments(couponID, userID, userGroupID, level, page, pageSize, buyerID) {
-					return makeApiCall('GET', '/v1/coupons/assignments', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'couponID': couponID, 'userID': userID, 'userGroupID': userGroupID, 'level': level, 'page': page, 'pageSize': pageSize }, null);
+				function _listassignments(promotionID, userID, userGroupID, level, page, pageSize, buyerID) {
+					return makeApiCall('GET', '/v1/promotions/assignments', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'promotionID': promotionID, 'userID': userID, 'userGroupID': userGroupID, 'level': level, 'page': page, 'pageSize': pageSize }, null);
 				}
 				function _saveassignment(assignment) {
-					return makeApiCall('POST', '/v1/coupons/assignments', null, assignment);
+					return makeApiCall('POST', '/v1/promotions/assignments', null, assignment);
 				}
-				function _deleteassignment(couponID, userID, userGroupID, buyerID) {
-					return makeApiCall('DELETE', '/v1/coupons/:couponID/assignments', { 'couponID': couponID, 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'userID': userID, 'userGroupID': userGroupID }, null);
+				function _deleteassignment(promotionID, userID, userGroupID, buyerID) {
+					return makeApiCall('DELETE', '/v1/promotions/:promotionID/assignments', { 'promotionID': promotionID, 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'userID': userID, 'userGroupID': userGroupID }, null);
 				}
 			}
 			function CreditCards() {
@@ -666,8 +666,8 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				function _setshippingaddress(orderID, lineItemID, address, buyerID) {
 					return makeApiCall('PUT', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID/shipto', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'lineItemID': lineItemID }, address);
 				}
-				function _patchshippingaddress(orderID, lineItemID, address, buyerID) {
-					return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID/shipto', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'lineItemID': lineItemID }, address);
+				function _patchshippingaddress(orderID, lineItemID, partialAddress, buyerID) {
+					return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID/shipto', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'lineItemID': lineItemID }, partialAddress);
 				}
 			}
 			function Me() {
@@ -698,8 +698,8 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'ListOutgoingOrders': _listoutgoingorders,
 					'ListIncomingOrders': _listincomingorders,
 					'GetOrder': _getorder,
-					'ListCoupons': _listcoupons,
-					'GetCoupon': _getcoupon,
+					'ListPromotions': _listpromotions,
+					'GetPromotion': _getpromotion,
 					'CreateFromTempUser': _createfromtempuser
 					}
 				;
@@ -781,11 +781,11 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				function _getorder(orderID) {
 					return makeApiCall('GET', '/v1/me/orders/:orderID', { 'orderID': orderID }, null);
 				}
-				function _listcoupons(search, page, pageSize, searchOn, sortBy, filters) {
-					return makeApiCall('GET', '/v1/me/coupons', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
+				function _listpromotions(search, page, pageSize, searchOn, sortBy, filters) {
+					return makeApiCall('GET', '/v1/me/promotions', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
-				function _getcoupon(couponID) {
-					return makeApiCall('GET', '/v1/me/coupons/:couponID', { 'couponID': couponID }, null);
+				function _getpromotion(promotionID) {
+					return makeApiCall('GET', '/v1/me/promotions/:promotionID', { 'promotionID': promotionID }, null);
 				}
 				function _createfromtempuser(user, tempUserToken) {
 					return makeApiCall('PUT', '/v1/me', { 'tempUserToken': tempUserToken }, user);
@@ -797,6 +797,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'ListOutgoing': _listoutgoing,
 					'ListIncoming': _listincoming,
 					'ListApprovals': _listapprovals,
+					'ListEligibleApprovers': _listeligibleapprovers,
 					'Create': _create,
 					'Update': _update,
 					'Patch': _patch,
@@ -810,9 +811,9 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'PatchShippingAddress': _patchshippingaddress,
 					'SetBillingAddress': _setbillingaddress,
 					'PatchBillingAddress': _patchbillingaddress,
-					'AddCoupon': _addcoupon,
-					'ListCoupons': _listcoupons,
-					'RemoveCoupon': _removecoupon,
+					'AddPromotion': _addpromotion,
+					'ListPromotions': _listpromotions,
+					'RemovePromotion': _removepromotion,
 					'TransferTempUserOrder': _transfertempuserorder
 					}
 				;
@@ -834,6 +835,9 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				}
 				function _listapprovals(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
 					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/approvals', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
+				}
+				function _listeligibleapprovers(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/eligibleapprovers', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _create(order, buyerID) {
 					return makeApiCall('POST', '/v1/buyers/:buyerID/orders', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, order);
@@ -874,14 +878,14 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				function _patchbillingaddress(orderID, address, buyerID) {
 					return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/billto', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID }, address);
 				}
-				function _addcoupon(orderID, couponCode, buyerID) {
-					return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/coupons/:couponCode', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'couponCode': couponCode }, null);
+				function _addpromotion(orderID, promoCode, buyerID) {
+					return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/promotions/:promoCode', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'promoCode': promoCode }, null);
 				}
-				function _listcoupons(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/coupons', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
+				function _listpromotions(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+					return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/promotions', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
-				function _removecoupon(orderID, couponCode, buyerID) {
-					return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID/coupons/:couponCode', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'couponCode': couponCode }, null);
+				function _removepromotion(orderID, promoCode, buyerID) {
+					return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID/promotions/:promoCode', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'promoCode': promoCode }, null);
 				}
 				function _transfertempuserorder(tempUserToken, buyerID) {
 					return makeApiCall('PUT', '/v1/buyers/:buyerID/orders', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'tempUserToken': tempUserToken }, null);
@@ -966,8 +970,8 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/shipments/:shipmentID', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'shipmentID': shipmentID }, null);
 				}
-				function _list(orderID, search, page, pageSize, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/shipments', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'search': search, 'page': page, 'pageSize': pageSize }, null);
+				function _list(search, page, pageSize, searchOn, sortBy, filters, orderID, buyerID) {
+					return makeApiCall('GET', '/v1/buyers/:buyerID/shipments', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID }, filters);
 				}
 				function _create(shipment, buyerID) {
 					return makeApiCall('POST', '/v1/buyers/:buyerID/shipments', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, shipment);

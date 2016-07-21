@@ -18,7 +18,7 @@
             'Buyers': Buyers(),
             'Categories': Categories(),
             'CostCenters': CostCenters(),
-            'Coupons': Coupons(),
+            'Promotions': Promotions(),
             'CreditCards': CreditCards(),
             'EmailTemplates': EmailTemplates(),
             'Files': Files(),
@@ -617,7 +617,7 @@
             }
         }
 
-        function Coupons() {
+        function Promotions() {
             return {
                 'List': _list,
                 'Get': _get,
@@ -631,7 +631,7 @@
             };
 
             function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                return makeApiCall('GET', '/v1/coupons', {
+                return makeApiCall('GET', '/v1/promotions', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
@@ -640,45 +640,45 @@
                 }, filters);
             }
 
-            function _get(couponID) {
-                if (!couponID) {
-                    var errMessage = 'couponID is a required field for OrderCloud.Coupons.Get';
+            function _get(promotionID) {
+                if (!promotionID) {
+                    var errMessage = 'promotionID is a required field for OrderCloud.Promotions.Get';
                     console.error(errMessage);
                     var dfd = $q.defer();
                     dfd.reject(errMessage);
                     return dfd.promise;
                 }
-                return makeApiCall('GET', '/v1/coupons/:couponID', {
-                    'couponID': couponID
+                return makeApiCall('GET', '/v1/promotions/:promotionID', {
+                    'promotionID': promotionID
                 }, null);
             }
 
-            function _create(coupon) {
-                return makeApiCall('POST', '/v1/coupons', null, coupon);
+            function _create(promo) {
+                return makeApiCall('POST', '/v1/promotions', null, promo);
             }
 
-            function _update(couponID, coupon) {
-                return makeApiCall('PUT', '/v1/coupons/:couponID', {
-                    'couponID': couponID
-                }, coupon);
+            function _update(promotionID, promo) {
+                return makeApiCall('PUT', '/v1/promotions/:promotionID', {
+                    'promotionID': promotionID
+                }, promo);
             }
 
-            function _patch(couponID, partialCoupon) {
-                return makeApiCall('PATCH', '/v1/coupons/:couponID', {
-                    'couponID': couponID
-                }, partialCoupon);
+            function _patch(promotionID, partialPromotion) {
+                return makeApiCall('PATCH', '/v1/promotions/:promotionID', {
+                    'promotionID': promotionID
+                }, partialPromotion);
             }
 
-            function _delete(couponID) {
-                return makeApiCall('DELETE', '/v1/coupons/:couponID', {
-                    'couponID': couponID
+            function _delete(promotionID) {
+                return makeApiCall('DELETE', '/v1/promotions/:promotionID', {
+                    'promotionID': promotionID
                 }, null);
             }
 
-            function _listassignments(couponID, userID, userGroupID, level, page, pageSize, buyerID) {
-                return makeApiCall('GET', '/v1/coupons/assignments', {
+            function _listassignments(promotionID, userID, userGroupID, level, page, pageSize, buyerID) {
+                return makeApiCall('GET', '/v1/promotions/assignments', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
-                    'couponID': couponID,
+                    'promotionID': promotionID,
                     'userID': userID,
                     'userGroupID': userGroupID,
                     'level': level,
@@ -688,12 +688,12 @@
             }
 
             function _saveassignment(assignment) {
-                return makeApiCall('POST', '/v1/coupons/assignments', null, assignment);
+                return makeApiCall('POST', '/v1/promotions/assignments', null, assignment);
             }
 
-            function _deleteassignment(couponID, userID, userGroupID, buyerID) {
-                return makeApiCall('DELETE', '/v1/coupons/:couponID/assignments', {
-                    'couponID': couponID,
+            function _deleteassignment(promotionID, userID, userGroupID, buyerID) {
+                return makeApiCall('DELETE', '/v1/promotions/:promotionID/assignments', {
+                    'promotionID': promotionID,
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userID': userID,
                     'userGroupID': userGroupID
@@ -1308,12 +1308,12 @@
                 }, address);
             }
 
-            function _patchshippingaddress(orderID, lineItemID, address, buyerID) {
+            function _patchshippingaddress(orderID, lineItemID, partialAddress, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/orders/:orderID/lineitems/:lineItemID/shipto', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'lineItemID': lineItemID
-                }, address);
+                }, partialAddress);
             }
         }
 
@@ -1345,8 +1345,8 @@
                 'ListOutgoingOrders': _listoutgoingorders,
                 'ListIncomingOrders': _listincomingorders,
                 'GetOrder': _getorder,
-                'ListCoupons': _listcoupons,
-                'GetCoupon': _getcoupon,
+                'ListPromotions': _listpromotions,
+                'GetPromotion': _getpromotion,
                 'CreateFromTempUser': _createfromtempuser
             };
 
@@ -1546,8 +1546,8 @@
                 }, null);
             }
 
-            function _listcoupons(search, page, pageSize, searchOn, sortBy, filters) {
-                return makeApiCall('GET', '/v1/me/coupons', {
+            function _listpromotions(search, page, pageSize, searchOn, sortBy, filters) {
+                return makeApiCall('GET', '/v1/me/promotions', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
@@ -1556,9 +1556,9 @@
                 }, filters);
             }
 
-            function _getcoupon(couponID) {
-                return makeApiCall('GET', '/v1/me/coupons/:couponID', {
-                    'couponID': couponID
+            function _getpromotion(promotionID) {
+                return makeApiCall('GET', '/v1/me/promotions/:promotionID', {
+                    'promotionID': promotionID
                 }, null);
             }
 
@@ -1575,6 +1575,7 @@
                 'ListOutgoing': _listoutgoing,
                 'ListIncoming': _listincoming,
                 'ListApprovals': _listapprovals,
+                'ListEligibleApprovers': _listeligibleapprovers,
                 'Create': _create,
                 'Update': _update,
                 'Patch': _patch,
@@ -1588,9 +1589,9 @@
                 'PatchShippingAddress': _patchshippingaddress,
                 'SetBillingAddress': _setbillingaddress,
                 'PatchBillingAddress': _patchbillingaddress,
-                'AddCoupon': _addcoupon,
-                'ListCoupons': _listcoupons,
-                'RemoveCoupon': _removecoupon,
+                'AddPromotion': _addpromotion,
+                'ListPromotions': _listpromotions,
+                'RemovePromotion': _removepromotion,
                 'TransferTempUserOrder': _transfertempuserorder
             };
 
@@ -1636,6 +1637,18 @@
 
             function _listapprovals(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/approvals', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'orderID': orderID,
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                }, filters);
+            }
+
+            function _listeligibleapprovers(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/eligibleapprovers', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'search': search,
@@ -1738,16 +1751,16 @@
                 }, address);
             }
 
-            function _addcoupon(orderID, couponCode, buyerID) {
-                return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/coupons/:couponCode', {
+            function _addpromotion(orderID, promoCode, buyerID) {
+                return makeApiCall('POST', '/v1/buyers/:buyerID/orders/:orderID/promotions/:promoCode', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
-                    'couponCode': couponCode
+                    'promoCode': promoCode
                 }, null);
             }
 
-            function _listcoupons(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
-                return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/coupons', {
+            function _listpromotions(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/orders/:orderID/promotions', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
                     'search': search,
@@ -1758,11 +1771,11 @@
                 }, filters);
             }
 
-            function _removecoupon(orderID, couponCode, buyerID) {
-                return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID/coupons/:couponCode', {
+            function _removepromotion(orderID, promoCode, buyerID) {
+                return makeApiCall('DELETE', '/v1/buyers/:buyerID/orders/:orderID/promotions/:promoCode', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'orderID': orderID,
-                    'couponCode': couponCode
+                    'promoCode': promoCode
                 }, null);
             }
 
@@ -1888,14 +1901,16 @@
                 }, null);
             }
 
-            function _list(orderID, search, page, pageSize, buyerID) {
+            function _list(search, page, pageSize, searchOn, sortBy, filters, orderID, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/shipments', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
-                    'orderID': orderID,
                     'search': search,
                     'page': page,
-                    'pageSize': pageSize
-                }, null);
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy,
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'orderID': orderID
+                }, filters);
             }
 
             function _create(shipment, buyerID) {
