@@ -17,6 +17,12 @@ An AngularJs SDK for OrderCloud API
 
   - [Get a List of Security Profiles](#get-a-list-of-security-profiles)
 
+  - [List Assignments](#list-assignments)
+
+  - [Delete Assignment](#delete-assignment)
+
+  - [Save Assignment](#save-assignment)
+
 - [ForgottenPassword](#forgottenpassword)
 
   - [Send Verification Code](#send-verification-code)
@@ -72,8 +78,6 @@ An AngularJs SDK for OrderCloud API
 - [Categories](#categories)
 
   - [List Categories](#list-categories)
-
-  - [List Subcategories](#list-subcategories)
 
 - [Products](#products)
 
@@ -215,6 +219,8 @@ An AngularJs SDK for OrderCloud API
 
   - [Delete Buyer](#delete-buyer)
 
+  - [Partially Update Buyer](#partially-update-buyer)
+
 - [AdminUsers](#adminusers)
 
   - [Get a Single Admin User](#get-a-single-admin-user)
@@ -349,6 +355,20 @@ An AngularJs SDK for OrderCloud API
 
   - [Post File Data](#post-file-data)
 
+- [AdminAddresses](#adminaddresses)
+
+  - [Get a Single Admin Address](#get-a-single-admin-address)
+
+  - [Get a List of Admin Addresses](#get-a-list-of-admin-addresses)
+
+  - [Create New Admin Address](#create-new-admin-address)
+
+  - [Create or Update Admin Address](#create-or-update-admin-address)
+
+  - [Delete Admin Address](#delete-admin-address)
+
+  - [Partially Update Admin Address](#partially-update-admin-address)
+
 - [Users](#users)
 
   - [Get a Single User](#get-a-single-user)
@@ -396,8 +416,6 @@ An AngularJs SDK for OrderCloud API
   - [Create or Update Category](#create-or-update-category)
 
   - [Delete Category](#delete-category)
-
-  - [List Children](#list-children)
 
   - [Partially Update Category](#partially-update-category)
 
@@ -583,51 +601,9 @@ OrderCloud.SecurityProfiles.Get(securityProfileID).then(successFn).catch(errorFn
   "ID": "…",
   "IsDevProfile": false,
   "Name": "…",
-  "FullAccess": false,
-  "ProductAdmin": false,
-  "ProductReader": false,
-  "InventoryAdmin": false,
-  "ProductAssignmentAdmin": false,
-  "BuyerAdmin": false,
-  "BuyerReader": false,
-  "CategoryAdmin": false,
-  "CategoryReader": false,
-  "AddressAdmin": false,
-  "AddressReader": false,
-  "CostCenterAdmin": false,
-  "CostCenterReader": false,
-  "PromotionAdmin": false,
-  "PromotionReader": false,
-  "CreditCardAdmin": false,
-  "CreditCardReader": false,
-  "EmailTemplateAdmin": false,
-  "EmailTemplateReader": false,
-  "PriceScheduleAdmin": false,
-  "PriceScheduleReader": false,
-  "SpendingAccountAdmin": false,
-  "SpendingAccountReader": false,
-  "BuyerUserAdmin": false,
-  "BuyerUserReader": false,
-  "UserGroupAdmin": false,
-  "UserGroupReader": false,
-  "ApprovalRuleAdmin": false,
-  "ApprovalRuleReader": false,
-  "PermissionAdmin": false,
-  "OrderAdmin": false,
-  "OrderReader": false,
-  "UnsubmittedOrderReader": false,
-  "MeAdmin": false,
-  "MeXpAdmin": false,
-  "MeAddressAdmin": false,
-  "MeCreditCardAdmin": false,
-  "OverrideUnitPrice": false,
-  "OverrideShipping": false,
-  "OverrideTax": false,
-  "DevCenterSecurityProfileAdmin": false,
-  "DevCenterDevAccessAdmin": false,
-  "DevCenterApiClientAdmin": false,
-  "SetSecurityProfile": false,
-  "DevCenterWebHookAdmin": false
+  "Roles": [
+    "…"
+  ]
 }
 ```
 
@@ -666,53 +642,82 @@ OrderCloud.SecurityProfiles.List(listArgs).then(successFn).catch(errorFn);
       "ID": "…",
       "IsDevProfile": false,
       "Name": "…",
-      "FullAccess": false,
-      "ProductAdmin": false,
-      "ProductReader": false,
-      "InventoryAdmin": false,
-      "ProductAssignmentAdmin": false,
-      "BuyerAdmin": false,
-      "BuyerReader": false,
-      "CategoryAdmin": false,
-      "CategoryReader": false,
-      "AddressAdmin": false,
-      "AddressReader": false,
-      "CostCenterAdmin": false,
-      "CostCenterReader": false,
-      "PromotionAdmin": false,
-      "PromotionReader": false,
-      "CreditCardAdmin": false,
-      "CreditCardReader": false,
-      "EmailTemplateAdmin": false,
-      "EmailTemplateReader": false,
-      "PriceScheduleAdmin": false,
-      "PriceScheduleReader": false,
-      "SpendingAccountAdmin": false,
-      "SpendingAccountReader": false,
-      "BuyerUserAdmin": false,
-      "BuyerUserReader": false,
-      "UserGroupAdmin": false,
-      "UserGroupReader": false,
-      "ApprovalRuleAdmin": false,
-      "ApprovalRuleReader": false,
-      "PermissionAdmin": false,
-      "OrderAdmin": false,
-      "OrderReader": false,
-      "UnsubmittedOrderReader": false,
-      "MeAdmin": false,
-      "MeXpAdmin": false,
-      "MeAddressAdmin": false,
-      "MeCreditCardAdmin": false,
-      "OverrideUnitPrice": false,
-      "OverrideShipping": false,
-      "OverrideTax": false,
-      "DevCenterSecurityProfileAdmin": false,
-      "DevCenterDevAccessAdmin": false,
-      "DevCenterApiClientAdmin": false,
-      "SetSecurityProfile": false,
-      "DevCenterWebHookAdmin": false
+      "Roles": [
+        "…"
+      ]
     }
   ]
+}
+```
+
+## List Assignments
+
+```js
+OrderCloud.SecurityProfiles.ListAssignments(securityProfileID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|securityProfileID|string|ID of the security profile.|
+|userID|string|ID of the user.|
+|userGroupID|string|ID of the user group.|
+|level|string|Level of the security profile.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "SecurityProfileID": "…",
+      "BuyerID": "…",
+      "UserID": "…",
+      "UserGroupID": "…"
+    }
+  ]
+}
+```
+
+## Delete Assignment
+
+```js
+OrderCloud.SecurityProfiles.DeleteAssignment(securityProfileID,userID,userGroupID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|securityProfileID|string|ID of the security profile.|
+|userID|string|ID of the user.|
+|userGroupID|string|ID of the user group.|
+## Save Assignment
+
+```js
+OrderCloud.SecurityProfiles.SaveAssignment(assignment).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "SecurityProfileID": "…",
+  "BuyerID": "…",
+  "UserID": "…",
+  "UserGroupID": "…"
 }
 ```
 
@@ -787,8 +792,7 @@ OrderCloud.Me.Get().then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
+  "xp": null
 }
 ```
 
@@ -811,8 +815,7 @@ OrderCloud.Me.Update(user).then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
+  "xp": null
 }
 ```
 
@@ -835,8 +838,7 @@ OrderCloud.Me.Patch(user).then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
+  "xp": null
 }
 ```
 
@@ -864,8 +866,7 @@ OrderCloud.Me.CreateFromTempUser(user,tempUserToken).then(successFn).catch(error
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
+  "xp": null
 }
 ```
 
@@ -1341,53 +1342,6 @@ OrderCloud.Categories.ListCategories(listArgs,depth).then(successFn).catch(error
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|depth|string|Depth of the category.|
-|search|string|Word or phrase to search for.|
-|searchOn|string|Comma-delimited list of fields to search on.|
-|sortBy|string|Comma-delimited list of fields to sort by.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "ID": "…",
-      "Name": "…",
-      "Description": "…",
-      "xp": null,
-      "ListOrder": 1,
-      "Active": false,
-      "ParentID": "…",
-      "ChildCount": 0
-    }
-  ]
-}
-```
-
-## List Subcategories
-
-```js
-OrderCloud.Categories.ListSubcategories(listArgs,parentID,depth).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|parentID|string|ID of the parent.|
 |depth|string|Depth of the category.|
 |search|string|Word or phrase to search for.|
 |searchOn|string|Comma-delimited list of fields to search on.|
@@ -1945,7 +1899,9 @@ OrderCloud.Promotions.ListPromotions(listArgs).then(successFn).catch(errorFn);
       "ID": "…",
       "Code": "…",
       "Name": "…",
-      "UsagesRemaining": null,
+      "RedemptionLimit": null,
+      "RedemptionLimitPerUser": null,
+      "RedemptionCount": 0,
       "Description": "…",
       "FinePrint": "…",
       "StartDate": null,
@@ -1977,7 +1933,9 @@ OrderCloud.Promotions.GetPromotion(promotionID).then(successFn).catch(errorFn);
   "ID": "…",
   "Code": "…",
   "Name": "…",
-  "UsagesRemaining": null,
+  "RedemptionLimit": null,
+  "RedemptionLimitPerUser": null,
+  "RedemptionCount": 0,
   "Description": "…",
   "FinePrint": "…",
   "StartDate": null,
@@ -2352,8 +2310,7 @@ OrderCloud.Orders.ListEligibleApprovers(orderID,listArgs).then(successFn).catch(
       "Phone": "…",
       "TermsAccepted": null,
       "Active": false,
-      "xp": null,
-      "SecurityProfileID": "…"
+      "xp": null
     }
   ]
 }
@@ -2782,7 +2739,9 @@ OrderCloud.Orders.AddPromotion(orderID,promoCode).then(successFn).catch(errorFn)
   "ID": "…",
   "Code": "…",
   "Name": "…",
-  "UsagesRemaining": null,
+  "RedemptionLimit": null,
+  "RedemptionLimitPerUser": null,
+  "RedemptionCount": 0,
   "Description": "…",
   "FinePrint": "…",
   "StartDate": null,
@@ -2831,7 +2790,9 @@ OrderCloud.Orders.ListPromotions(orderID,listArgs).then(successFn).catch(errorFn
       "ID": "…",
       "Code": "…",
       "Name": "…",
-      "UsagesRemaining": null,
+      "RedemptionLimit": null,
+      "RedemptionLimitPerUser": null,
+      "RedemptionCount": 0,
       "Description": "…",
       "FinePrint": "…",
       "StartDate": null,
@@ -2976,8 +2937,6 @@ OrderCloud.LineItems.Get(orderID,lineItemID).then(successFn).catch(errorFn);
     "AddressName": "…",
     "xp": null
   },
-  "ShipperID": "…",
-  "ShipperName": "…",
   "Specs": [
     {
       "SpecID": "…",
@@ -3063,8 +3022,6 @@ OrderCloud.LineItems.List(orderID,listArgs).then(successFn).catch(errorFn);
         "AddressName": "…",
         "xp": null
       },
-      "ShipperID": "…",
-      "ShipperName": "…",
       "Specs": [
         {
           "SpecID": "…",
@@ -3103,7 +3060,6 @@ OrderCloud.LineItems.Create(orderID,lineItem).then(successFn).catch(errorFn);
   "ShippingAccount": "…",
   "ShippingAddressID": "…",
   "ShipFromAddressID": "…",
-  "ShipperID": "…",
   "Specs": [
     {
       "SpecID": "…",
@@ -3140,7 +3096,6 @@ OrderCloud.LineItems.Update(orderID,lineItemID,lineItem).then(successFn).catch(e
   "ShippingAccount": "…",
   "ShippingAddressID": "…",
   "ShipFromAddressID": "…",
-  "ShipperID": "…",
   "Specs": [
     {
       "SpecID": "…",
@@ -3189,7 +3144,6 @@ OrderCloud.LineItems.Patch(orderID,lineItemID,partialLineItem).then(successFn).c
   "ShippingAccount": "…",
   "ShippingAddressID": "…",
   "ShipFromAddressID": "…",
-  "ShipperID": "…",
   "Specs": [
     {
       "SpecID": "…",
@@ -3825,7 +3779,7 @@ OrderCloud.Buyers.Get().then(successFn).catch(errorFn);
 ## Get a List of Buyers
 
 ```js
-OrderCloud.Buyers.List(search,page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.Buyers.List(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -3833,8 +3787,11 @@ OrderCloud.Buyers.List(search,page,pageSize).then(successFn).catch(errorFn);
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
@@ -3900,6 +3857,23 @@ OrderCloud.Buyers.Update(company).then(successFn).catch(errorFn);
 OrderCloud.Buyers.Delete().then(successFn).catch(errorFn);
 ```
 
+## Partially Update Buyer
+
+```js
+OrderCloud.Buyers.Patch(company).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Active": false,
+  "xp": null
+}
+```
+
 # AdminUsers
 
 ```js
@@ -3931,8 +3905,7 @@ OrderCloud.AdminUsers.Get(userID).then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
+  "xp": null
 }
 ```
 
@@ -3976,8 +3949,7 @@ OrderCloud.AdminUsers.List(listArgs).then(successFn).catch(errorFn);
       "Phone": "…",
       "TermsAccepted": null,
       "Active": false,
-      "xp": null,
-      "SecurityProfileID": "…"
+      "xp": null
     }
   ]
 }
@@ -4002,8 +3974,7 @@ OrderCloud.AdminUsers.Create(user).then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
+  "xp": null
 }
 ```
 
@@ -4031,8 +4002,7 @@ OrderCloud.AdminUsers.Update(userID,user).then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
+  "xp": null
 }
 ```
 
@@ -4071,8 +4041,7 @@ OrderCloud.AdminUsers.Patch(userID,user).then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
+  "xp": null
 }
 ```
 
@@ -5326,7 +5295,9 @@ OrderCloud.Promotions.Get(promotionID).then(successFn).catch(errorFn);
   "ID": "…",
   "Code": "…",
   "Name": "…",
-  "UsagesRemaining": null,
+  "RedemptionLimit": null,
+  "RedemptionLimitPerUser": null,
+  "RedemptionCount": 0,
   "Description": "…",
   "FinePrint": "…",
   "StartDate": null,
@@ -5373,7 +5344,9 @@ OrderCloud.Promotions.List(listArgs).then(successFn).catch(errorFn);
       "ID": "…",
       "Code": "…",
       "Name": "…",
-      "UsagesRemaining": null,
+      "RedemptionLimit": null,
+      "RedemptionLimitPerUser": null,
+      "RedemptionCount": 0,
       "Description": "…",
       "FinePrint": "…",
       "StartDate": null,
@@ -5400,7 +5373,8 @@ OrderCloud.Promotions.Create(promo).then(successFn).catch(errorFn);
   "ID": "…",
   "Code": "…",
   "Name": "…",
-  "UsagesRemaining": null,
+  "RedemptionLimit": null,
+  "RedemptionLimitPerUser": null,
   "Description": "…",
   "FinePrint": "…",
   "StartDate": null,
@@ -5430,7 +5404,8 @@ OrderCloud.Promotions.Update(promotionID,promo).then(successFn).catch(errorFn);
   "ID": "…",
   "Code": "…",
   "Name": "…",
-  "UsagesRemaining": null,
+  "RedemptionLimit": null,
+  "RedemptionLimitPerUser": null,
   "Description": "…",
   "FinePrint": "…",
   "StartDate": null,
@@ -5471,7 +5446,8 @@ OrderCloud.Promotions.Patch(promotionID,partialPromotion).then(successFn).catch(
   "ID": "…",
   "Code": "…",
   "Name": "…",
-  "UsagesRemaining": null,
+  "RedemptionLimit": null,
+  "RedemptionLimitPerUser": null,
   "Description": "…",
   "FinePrint": "…",
   "StartDate": null,
@@ -5639,6 +5615,193 @@ OrderCloud.Files.PostFileData(filename).then(successFn).catch(errorFn);
 }
 ```
 
+# AdminAddresses
+
+```js
+angular.module('orderCloud.sdk).factory(AdminAddresses, AdminAddressesFactory)
+```
+
+
+## Get a Single Admin Address
+
+```js
+OrderCloud.AdminAddresses.Get(addressID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|addressID|string|ID of the address.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "CompanyName": "…",
+  "FirstName": "…",
+  "LastName": "…",
+  "Street1": "…",
+  "Street2": "…",
+  "City": "…",
+  "State": "…",
+  "Zip": "…",
+  "Country": "…",
+  "Phone": "…",
+  "AddressName": "…",
+  "xp": null
+}
+```
+
+## Get a List of Admin Addresses
+
+```js
+OrderCloud.AdminAddresses.List(listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "CompanyName": "…",
+      "FirstName": "…",
+      "LastName": "…",
+      "Street1": "…",
+      "Street2": "…",
+      "City": "…",
+      "State": "…",
+      "Zip": "…",
+      "Country": "…",
+      "Phone": "…",
+      "AddressName": "…",
+      "xp": null
+    }
+  ]
+}
+```
+
+## Create New Admin Address
+
+```js
+OrderCloud.AdminAddresses.Create(address).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "CompanyName": "…",
+  "FirstName": "…",
+  "LastName": "…",
+  "Street1": "…",
+  "Street2": "…",
+  "City": "…",
+  "State": "…",
+  "Zip": "…",
+  "Country": "…",
+  "Phone": "…",
+  "AddressName": "…",
+  "xp": null
+}
+```
+
+## Create or Update Admin Address
+
+```js
+OrderCloud.AdminAddresses.Update(addressID,address).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|addressID|string|ID of the address.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "CompanyName": "…",
+  "FirstName": "…",
+  "LastName": "…",
+  "Street1": "…",
+  "Street2": "…",
+  "City": "…",
+  "State": "…",
+  "Zip": "…",
+  "Country": "…",
+  "Phone": "…",
+  "AddressName": "…",
+  "xp": null
+}
+```
+
+## Delete Admin Address
+
+```js
+OrderCloud.AdminAddresses.Delete(addressID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|addressID|string|ID of the address.|
+## Partially Update Admin Address
+
+```js
+OrderCloud.AdminAddresses.Patch(addressID,address).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|addressID|string|ID of the address.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "CompanyName": "…",
+  "FirstName": "…",
+  "LastName": "…",
+  "Street1": "…",
+  "Street2": "…",
+  "City": "…",
+  "State": "…",
+  "Zip": "…",
+  "Country": "…",
+  "Phone": "…",
+  "AddressName": "…",
+  "xp": null
+}
+```
+
 # Users
 
 ```js
@@ -5670,8 +5833,7 @@ OrderCloud.Users.Get(userID).then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
+  "xp": null
 }
 ```
 
@@ -5716,8 +5878,7 @@ OrderCloud.Users.List(userGroupID,listArgs).then(successFn).catch(errorFn);
       "Phone": "…",
       "TermsAccepted": null,
       "Active": false,
-      "xp": null,
-      "SecurityProfileID": "…"
+      "xp": null
     }
   ]
 }
@@ -5742,8 +5903,7 @@ OrderCloud.Users.Create(user).then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
+  "xp": null
 }
 ```
 
@@ -5771,8 +5931,7 @@ OrderCloud.Users.Update(userID,user).then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
+  "xp": null
 }
 ```
 
@@ -5811,8 +5970,7 @@ OrderCloud.Users.Patch(userID,user).then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null,
-  "SecurityProfileID": "…"
+  "xp": null
 }
 ```
 
@@ -6082,14 +6240,13 @@ OrderCloud.Categories.Get(categoryID).then(successFn).catch(errorFn);
 ## Get a List of Categories
 
 ```js
-OrderCloud.Categories.List(listArgs,parentID,depth).then(successFn).catch(errorFn);
+OrderCloud.Categories.List(listArgs,depth).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|parentID|string|ID of the parent.|
 |depth|string|Depth of the category.|
 |search|string|Word or phrase to search for.|
 |searchOn|string|Comma-delimited list of fields to search on.|
@@ -6182,50 +6339,6 @@ OrderCloud.Categories.Delete(categoryID).then(successFn).catch(errorFn);
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |categoryID|string|ID of the category.|
-## List Children
-
-```js
-OrderCloud.Categories.ListChildren(parentID,search,depth,page,pageSize).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|parentID|string|ID of the parent.|
-|search|string|Word or phrase to search for.|
-|depth|string|Depth of the category.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "ID": "…",
-      "Name": "…",
-      "Description": "…",
-      "xp": null,
-      "ListOrder": 1,
-      "Active": false,
-      "ParentID": "…",
-      "ChildCount": 0
-    }
-  ]
-}
-```
-
 ## Partially Update Category
 
 ```js

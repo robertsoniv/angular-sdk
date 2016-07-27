@@ -5,6 +5,7 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 	return {
 		/* INSERT FUNCTION DECLARATIONS HERE */
 			'Addresses': Addresses(),
+			'AdminAddresses': AdminAddresses(),
 			'AdminUsers': AdminUsers(),
 			'ApprovalRules': ApprovalRules(),
 			'Buyers': Buyers(),
@@ -75,6 +76,42 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				}
 				function _saveassignment(assignment, buyerID) {
 					return makeApiCall('POST', '/v1/buyers/:buyerID/addresses/assignments', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, assignment);
+				}
+			}
+			function AdminAddresses() {
+				return {
+					'List': _list,
+					'Get': _get,
+					'Create': _create,
+					'Update': _update,
+					'Patch': _patch,
+					'Delete': _delete
+					}
+				;
+				function _list(search, page, pageSize, searchOn, sortBy, filters) {
+					return makeApiCall('GET', '/v1/addresses', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
+				}
+				function _get(addressID) {
+					if (!addressID) {
+						var errMessage = 'addressID is a required field for OrderCloud.AdminAddresses.Get';
+						console.error(errMessage);
+						var dfd = $q.defer();
+						dfd.reject(errMessage);
+						return dfd.promise;
+					}
+					return makeApiCall('GET', '/v1/addresses/:addressID', { 'addressID': addressID }, null);
+				}
+				function _create(address) {
+					return makeApiCall('POST', '/v1/addresses', null, address);
+				}
+				function _update(addressID, address) {
+					return makeApiCall('PUT', '/v1/addresses/:addressID', { 'addressID': addressID }, address);
+				}
+				function _patch(addressID, address) {
+					return makeApiCall('PATCH', '/v1/addresses/:addressID', { 'addressID': addressID }, address);
+				}
+				function _delete(addressID) {
+					return makeApiCall('DELETE', '/v1/addresses/:addressID', { 'addressID': addressID }, null);
 				}
 			}
 			function AdminUsers() {
@@ -155,11 +192,12 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'Get': _get,
 					'Delete': _delete,
 					'Create': _create,
+					'Patch': _patch,
 					'Update': _update
 					}
 				;
-				function _list(search, page, pageSize) {
-					return makeApiCall('GET', '/v1/buyers', { 'search': search, 'page': page, 'pageSize': pageSize }, null);
+				function _list(search, page, pageSize, searchOn, sortBy, filters) {
+					return makeApiCall('GET', '/v1/buyers', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _get(buyerID) {
 					return makeApiCall('GET', '/v1/buyers/:buyerID', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, null);
@@ -170,6 +208,9 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				function _create(company) {
 					return makeApiCall('POST', '/v1/buyers', null, company);
 				}
+				function _patch(company, buyerID) {
+					return makeApiCall('PATCH', '/v1/buyers/:buyerID', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, company);
+				}
 				function _update(company, buyerID) {
 					return makeApiCall('PUT', '/v1/buyers/:buyerID', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, company);
 				}
@@ -177,7 +218,6 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 			function Categories() {
 				return {
 					'List': _list,
-					'ListChildren': _listchildren,
 					'Get': _get,
 					'Create': _create,
 					'Update': _update,
@@ -191,11 +231,8 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'SaveAssignment': _saveassignment
 					}
 				;
-				function _list(search, page, pageSize, searchOn, sortBy, filters, parentID, depth, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/categories', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'parentID': parentID, 'depth': depth }, filters);
-				}
-				function _listchildren(parentID, search, depth, page, pageSize, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/categories/:parentID/categories', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'parentID': parentID, 'search': search, 'depth': depth, 'page': page, 'pageSize': pageSize }, null);
+				function _list(search, page, pageSize, searchOn, sortBy, filters, depth, buyerID) {
+					return makeApiCall('GET', '/v1/buyers/:buyerID/categories', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'depth': depth }, filters);
 				}
 				function _get(categoryID, buyerID) {
 					if (!categoryID) {
@@ -437,7 +474,10 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 			function SecurityProfiles() {
 				return {
 					'List': _list,
-					'Get': _get
+					'Get': _get,
+					'ListAssignments': _listassignments,
+					'DeleteAssignment': _deleteassignment,
+					'SaveAssignment': _saveassignment
 					}
 				;
 				function _list(search, page, pageSize, searchOn, sortBy, filters) {
@@ -452,6 +492,15 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 						return dfd.promise;
 					}
 					return makeApiCall('GET', '/v1/SecurityProfiles/:securityProfileID', { 'securityProfileID': securityProfileID }, null);
+				}
+				function _listassignments(securityProfileID, userID, userGroupID, level, page, pageSize, buyerID) {
+					return makeApiCall('GET', '/v1/SecurityProfiles/assignments', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'securityProfileID': securityProfileID, 'userID': userID, 'userGroupID': userGroupID, 'level': level, 'page': page, 'pageSize': pageSize }, null);
+				}
+				function _deleteassignment(securityProfileID, userID, userGroupID, buyerID) {
+					return makeApiCall('DELETE', '/v1/SecurityProfiles/:securityProfileID/assignments', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'securityProfileID': securityProfileID, 'userID': userID, 'userGroupID': userGroupID }, null);
+				}
+				function _saveassignment(assignment) {
+					return makeApiCall('POST', '/v1/SecurityProfiles/assignments', null, assignment);
 				}
 			}
 			function Payments() {
@@ -690,7 +739,6 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 					'PatchCreditCard': _patchcreditcard,
 					'DeleteCreditCard': _deletecreditcard,
 					'ListCategories': _listcategories,
-					'ListSubcategories': _listsubcategories,
 					'ListProducts': _listproducts,
 					'GetProduct': _getproduct,
 					'ListSpecs': _listspecs,
@@ -756,9 +804,6 @@ function orderCloud( $q, $resource, $cookieStore, appname, apiurl, authurl, ocsc
 				}
 				function _listcategories(search, page, pageSize, searchOn, sortBy, filters, depth) {
 					return makeApiCall('GET', '/v1/me/categories', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'depth': depth }, filters);
-				}
-				function _listsubcategories(search, page, pageSize, searchOn, sortBy, filters, parentID, depth) {
-					return makeApiCall('GET', '/v1/me/categories/:parentID/categories', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'parentID': parentID, 'depth': depth }, filters);
 				}
 				function _listproducts(search, page, pageSize, searchOn, sortBy, filters, categoryID) {
 					return makeApiCall('GET', '/v1/me/products', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'categoryID': categoryID }, filters);
