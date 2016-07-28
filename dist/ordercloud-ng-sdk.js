@@ -1,12 +1,14 @@
 (function() {
     'use strict';
 
-    orderCloud.$inject = ["$q", "$resource", "$cookieStore", "appname", "apiurl", "authurl", "ocscope", "clientid"];
+    orderCloud.$inject = ["$q", "$resource", "$cookieStore", "$injector", "appname", "apiurl", "authurl", "clientid"];
     angular.module('orderCloud.sdk', ['ngResource', 'ngCookies'])
         .factory('OrderCloud', orderCloud);
 
-    function orderCloud($q, $resource, $cookieStore, appname, apiurl, authurl, ocscope, clientid) {
+    function orderCloud($q, $resource, $cookieStore, $injector, appname, apiurl, authurl, clientid) {
         var impersonating = false;
+        var scope = $injector.has('scope') ? $injector.get('scope') : null;
+        var ocscope = $injector.has('ocscope') ? $injector.get('ocscope') : null;
         return {
             'As': As,
             'Auth': Auth(),
@@ -61,7 +63,7 @@
 
             function _getToken(credentials) {
                 var params = {
-                    scope: ocscope,
+                    scope: scope ? scope : ocscope,
                     client_id: clientid
                 };
 
@@ -90,7 +92,7 @@
                 var params = {
                     client_id: clientid,
                     grant_type: 'refresh_token',
-                    scope: ocscope,
+                    scope: scope ? scope : ocscope,
                     refresh_token: refresh_token
                 };
                 return $resource(authurl, {}, {

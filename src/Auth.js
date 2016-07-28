@@ -11,7 +11,7 @@ function Auth() {
 
     function _getToken(credentials) {
         var params = {
-            scope: ocscope,
+            scope: scope ? scope : ocscope,
             client_id: clientid
         };
 
@@ -36,7 +36,7 @@ function Auth() {
         var params = {
             client_id: clientid,
             grant_type: 'refresh_token',
-            scope: ocscope,
+            scope: scope ? scope : ocscope,
             refresh_token: refresh_token
         };
         return $resource(authurl, {}, {
