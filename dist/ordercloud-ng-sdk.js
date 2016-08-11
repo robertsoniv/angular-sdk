@@ -17,6 +17,7 @@
             'Addresses': Addresses(),
             'AdminAddresses': AdminAddresses(),
             'AdminUsers': AdminUsers(),
+            'AdminUserGroups': AdminUserGroups(),
             'ApprovalRules': ApprovalRules(),
             'Buyers': Buyers(),
             'Categories': Categories(),
@@ -346,6 +347,85 @@
             }
         }
 
+        function AdminUserGroups() {
+            return {
+                'List': _list,
+                'Get': _get,
+                'Update': _update,
+                'Patch': _patch,
+                'Create': _create,
+                'Delete': _delete,
+                'ListUserAssignments': _listuserassignments,
+                'DeleteUserAssignment': _deleteuserassignment,
+                'SaveUserAssignment': _saveuserassignment
+            };
+
+            function _list(search, page, pageSize, searchOn, sortBy, filters) {
+                return makeApiCall('GET', '/v1/usergroups', {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                }, filters);
+            }
+
+            function _get(userGroupID) {
+                if (!userGroupID) {
+                    var errMessage = 'userGroupID is a required field for OrderCloud.AdminUserGroups.Get';
+                    console.error(errMessage);
+                    var dfd = $q.defer();
+                    dfd.reject(errMessage);
+                    return dfd.promise;
+                }
+                return makeApiCall('GET', '/v1/usergroups/:userGroupID', {
+                    'userGroupID': userGroupID
+                }, null);
+            }
+
+            function _update(userGroupID, group) {
+                return makeApiCall('PUT', '/v1/usergroups/:userGroupID', {
+                    'userGroupID': userGroupID
+                }, group);
+            }
+
+            function _patch(userGroupID, group) {
+                return makeApiCall('PATCH', '/v1/usergroups/:userGroupID', {
+                    'userGroupID': userGroupID
+                }, group);
+            }
+
+            function _create(group) {
+                return makeApiCall('POST', '/v1/usergroups', null, group);
+            }
+
+            function _delete(userGroupID) {
+                return makeApiCall('DELETE', '/v1/usergroups/:userGroupID', {
+                    'userGroupID': userGroupID
+                }, null);
+            }
+
+            function _listuserassignments(userGroupID, userID, page, pageSize) {
+                return makeApiCall('GET', '/v1/usergroups/assignments', {
+                    'userGroupID': userGroupID,
+                    'userID': userID,
+                    'page': page,
+                    'pageSize': pageSize
+                }, null);
+            }
+
+            function _deleteuserassignment(userGroupID, userID) {
+                return makeApiCall('DELETE', '/v1/usergroups/:userGroupID/assignments/:userID', {
+                    'userGroupID': userGroupID,
+                    'userID': userID
+                }, null);
+            }
+
+            function _saveuserassignment(userGroupAssignment) {
+                return makeApiCall('POST', '/v1/usergroups/assignments', null, userGroupAssignment);
+            }
+        }
+
         function ApprovalRules() {
             return {
                 'List': _list,
@@ -464,14 +544,14 @@
                 'Get': _get,
                 'Create': _create,
                 'Update': _update,
-                'Delete': _delete,
                 'Patch': _patch,
-                'ListProductAssignments': _listproductassignments,
-                'SaveProductAssignment': _saveproductassignment,
-                'DeleteProductAssignment': _deleteproductassignment,
+                'Delete': _delete,
                 'ListAssignments': _listassignments,
                 'DeleteAssignment': _deleteassignment,
-                'SaveAssignment': _saveassignment
+                'SaveAssignment': _saveassignment,
+                'ListProductAssignments': _listproductassignments,
+                'SaveProductAssignment': _saveproductassignment,
+                'DeleteProductAssignment': _deleteproductassignment
             };
 
             function _list(search, page, pageSize, searchOn, sortBy, filters, depth, buyerID) {
@@ -513,13 +593,6 @@
                 }, category);
             }
 
-            function _delete(categoryID, buyerID) {
-                return makeApiCall('DELETE', '/v1/buyers/:buyerID/categories/:categoryID', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
-                    'categoryID': categoryID
-                }, null);
-            }
-
             function _patch(categoryID, category, buyerID) {
                 return makeApiCall('PATCH', '/v1/buyers/:buyerID/categories/:categoryID', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
@@ -527,27 +600,10 @@
                 }, category);
             }
 
-            function _listproductassignments(categoryID, productID, page, pageSize, buyerID) {
-                return makeApiCall('GET', '/v1/buyers/:buyerID/categories/productassignments', {
+            function _delete(categoryID, buyerID) {
+                return makeApiCall('DELETE', '/v1/buyers/:buyerID/categories/:categoryID', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
-                    'categoryID': categoryID,
-                    'productID': productID,
-                    'page': page,
-                    'pageSize': pageSize
-                }, null);
-            }
-
-            function _saveproductassignment(productAssignment, buyerID) {
-                return makeApiCall('POST', '/v1/buyers/:buyerID/categories/productassignments', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get()
-                }, productAssignment);
-            }
-
-            function _deleteproductassignment(categoryID, productID, buyerID) {
-                return makeApiCall('DELETE', '/v1/buyers/:buyerID/categories/:categoryID/productassignments/:productID', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
-                    'categoryID': categoryID,
-                    'productID': productID
+                    'categoryID': categoryID
                 }, null);
             }
 
@@ -576,6 +632,30 @@
                 return makeApiCall('POST', '/v1/buyers/:buyerID/categories/assignments', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, categoryAssignment);
+            }
+
+            function _listproductassignments(categoryID, productID, page, pageSize, buyerID) {
+                return makeApiCall('GET', '/v1/buyers/:buyerID/categories/productassignments', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'categoryID': categoryID,
+                    'productID': productID,
+                    'page': page,
+                    'pageSize': pageSize
+                }, null);
+            }
+
+            function _saveproductassignment(productAssignment, buyerID) {
+                return makeApiCall('POST', '/v1/buyers/:buyerID/categories/productassignments', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get()
+                }, productAssignment);
+            }
+
+            function _deleteproductassignment(categoryID, productID, buyerID) {
+                return makeApiCall('DELETE', '/v1/buyers/:buyerID/categories/:categoryID/productassignments/:productID', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'categoryID': categoryID,
+                    'productID': productID
+                }, null);
             }
         }
 
@@ -937,7 +1017,7 @@
             };
 
             function _list(search, page, pageSize, searchOn, sortBy, filters) {
-                return makeApiCall('GET', '/v1/SecurityProfiles', {
+                return makeApiCall('GET', '/v1/securityprofiles', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
@@ -954,13 +1034,13 @@
                     dfd.reject(errMessage);
                     return dfd.promise;
                 }
-                return makeApiCall('GET', '/v1/SecurityProfiles/:securityProfileID', {
+                return makeApiCall('GET', '/v1/securityprofiles/:securityProfileID', {
                     'securityProfileID': securityProfileID
                 }, null);
             }
 
             function _listassignments(securityProfileID, userID, userGroupID, level, page, pageSize, buyerID) {
-                return makeApiCall('GET', '/v1/SecurityProfiles/assignments', {
+                return makeApiCall('GET', '/v1/securityprofiles/assignments', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'securityProfileID': securityProfileID,
                     'userID': userID,
@@ -972,7 +1052,7 @@
             }
 
             function _deleteassignment(securityProfileID, userID, userGroupID, buyerID) {
-                return makeApiCall('DELETE', '/v1/SecurityProfiles/:securityProfileID/assignments', {
+                return makeApiCall('DELETE', '/v1/securityprofiles/:securityProfileID/assignments', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'securityProfileID': securityProfileID,
                     'userID': userID,
@@ -981,7 +1061,7 @@
             }
 
             function _saveassignment(assignment) {
-                return makeApiCall('POST', '/v1/SecurityProfiles/assignments', null, assignment);
+                return makeApiCall('POST', '/v1/securityprofiles/assignments', null, assignment);
             }
         }
 

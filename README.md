@@ -355,6 +355,26 @@ An AngularJs SDK for OrderCloud API
 
   - [Post File Data](#post-file-data)
 
+- [AdminUserGroups](#adminusergroups)
+
+  - [Get a Single Admin User Group](#get-a-single-admin-user-group)
+
+  - [Get a List of Admin User Groups](#get-a-list-of-admin-user-groups)
+
+  - [Create New Admin User Group](#create-new-admin-user-group)
+
+  - [Create or Update Admin User Group](#create-or-update-admin-user-group)
+
+  - [Delete Admin User Group](#delete-admin-user-group)
+
+  - [Partially Update Admin User Group](#partially-update-admin-user-group)
+
+  - [List User Assignments](#list-user-assignments)
+
+  - [Delete User Assignment](#delete-user-assignment)
+
+  - [Save User Assignment](#save-user-assignment)
+
 - [AdminAddresses](#adminaddresses)
 
   - [Get a Single Admin Address](#get-a-single-admin-address)
@@ -419,17 +439,17 @@ An AngularJs SDK for OrderCloud API
 
   - [Partially Update Category](#partially-update-category)
 
-  - [List Product Assignments](#list-product-assignments)
-
-  - [Save Product Assignment](#save-product-assignment)
-
-  - [Delete Product Assignment](#delete-product-assignment)
-
   - [List Assignments](#list-assignments)
 
   - [Delete Assignment](#delete-assignment)
 
   - [Save Assignment](#save-assignment)
+
+  - [List Product Assignments](#list-product-assignments)
+
+  - [Save Product Assignment](#save-product-assignment)
+
+  - [Delete Product Assignment](#delete-product-assignment)
 
 - [Addresses](#addresses)
 
@@ -792,7 +812,10 @@ OrderCloud.Me.Get().then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null
+  "xp": null,
+  "AvailableRoles": [
+    "…"
+  ]
 }
 ```
 
@@ -1469,7 +1492,8 @@ OrderCloud.Products.ListProducts(listArgs,categoryID).then(successFn).catch(erro
       "xp": null,
       "AllowOrderExceedInventory": false,
       "InventoryVisible": false,
-      "VariantCount": 0
+      "VariantCount": 0,
+      "ShipFromAddressID": "…"
     }
   ]
 }
@@ -1540,7 +1564,8 @@ OrderCloud.Products.GetProduct(productID).then(successFn).catch(errorFn);
   "xp": null,
   "AllowOrderExceedInventory": false,
   "InventoryVisible": false,
-  "VariantCount": 0
+  "VariantCount": 0,
+  "ShipFromAddressID": "…"
 }
 ```
 
@@ -2310,7 +2335,10 @@ OrderCloud.Orders.ListEligibleApprovers(orderID,listArgs).then(successFn).catch(
       "Phone": "…",
       "TermsAccepted": null,
       "Active": false,
-      "xp": null
+      "xp": null,
+      "AvailableRoles": [
+        "…"
+      ]
     }
   ]
 }
@@ -3905,7 +3933,10 @@ OrderCloud.AdminUsers.Get(userID).then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null
+  "xp": null,
+  "AvailableRoles": [
+    "…"
+  ]
 }
 ```
 
@@ -3949,7 +3980,10 @@ OrderCloud.AdminUsers.List(listArgs).then(successFn).catch(errorFn);
       "Phone": "…",
       "TermsAccepted": null,
       "Active": false,
-      "xp": null
+      "xp": null,
+      "AvailableRoles": [
+        "…"
+      ]
     }
   ]
 }
@@ -4084,7 +4118,8 @@ OrderCloud.Products.Get(productID).then(successFn).catch(errorFn);
   "xp": null,
   "AllowOrderExceedInventory": false,
   "InventoryVisible": false,
-  "VariantCount": 0
+  "VariantCount": 0,
+  "ShipFromAddressID": "…"
 }
 ```
 
@@ -4134,7 +4169,8 @@ OrderCloud.Products.List(listArgs).then(successFn).catch(errorFn);
       "xp": null,
       "AllowOrderExceedInventory": false,
       "InventoryVisible": false,
-      "VariantCount": 0
+      "VariantCount": 0,
+      "ShipFromAddressID": "…"
     }
   ]
 }
@@ -4162,7 +4198,8 @@ OrderCloud.Products.Create(product).then(successFn).catch(errorFn);
   "VariantLevelInventory": false,
   "xp": null,
   "AllowOrderExceedInventory": false,
-  "InventoryVisible": false
+  "InventoryVisible": false,
+  "ShipFromAddressID": "…"
 }
 ```
 
@@ -4193,7 +4230,8 @@ OrderCloud.Products.Update(productID,product).then(successFn).catch(errorFn);
   "VariantLevelInventory": false,
   "xp": null,
   "AllowOrderExceedInventory": false,
-  "InventoryVisible": false
+  "InventoryVisible": false,
+  "ShipFromAddressID": "…"
 }
 ```
 
@@ -4235,7 +4273,8 @@ OrderCloud.Products.Patch(productID,product).then(successFn).catch(errorFn);
   "VariantLevelInventory": false,
   "xp": null,
   "AllowOrderExceedInventory": false,
-  "InventoryVisible": false
+  "InventoryVisible": false,
+  "ShipFromAddressID": "…"
 }
 ```
 
@@ -4269,7 +4308,8 @@ OrderCloud.Products.GenerateVariants(productID,overwriteExisting).then(successFn
   "xp": null,
   "AllowOrderExceedInventory": false,
   "InventoryVisible": false,
-  "VariantCount": 0
+  "VariantCount": 0,
+  "ShipFromAddressID": "…"
 }
 ```
 
@@ -5615,6 +5655,212 @@ OrderCloud.Files.PostFileData(filename).then(successFn).catch(errorFn);
 }
 ```
 
+# AdminUserGroups
+
+```js
+angular.module('orderCloud.sdk).factory(AdminUserGroups, AdminUserGroupsFactory)
+```
+
+
+## Get a Single Admin User Group
+
+```js
+OrderCloud.AdminUserGroups.Get(userGroupID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|userGroupID|string|ID of the user group.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "xp": null
+}
+```
+
+## Get a List of Admin User Groups
+
+```js
+OrderCloud.AdminUserGroups.List(listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…",
+      "xp": null
+    }
+  ]
+}
+```
+
+## Create New Admin User Group
+
+```js
+OrderCloud.AdminUserGroups.Create(group).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "xp": null
+}
+```
+
+## Create or Update Admin User Group
+
+```js
+OrderCloud.AdminUserGroups.Update(userGroupID,group).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|userGroupID|string|ID of the user group.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "xp": null
+}
+```
+
+## Delete Admin User Group
+
+```js
+OrderCloud.AdminUserGroups.Delete(userGroupID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|userGroupID|string|ID of the user group.|
+## Partially Update Admin User Group
+
+```js
+OrderCloud.AdminUserGroups.Patch(userGroupID,group).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|userGroupID|string|ID of the user group.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "xp": null
+}
+```
+
+## List User Assignments
+
+```js
+OrderCloud.AdminUserGroups.ListUserAssignments(userGroupID,userID,page,pageSize).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|userGroupID|string|ID of the user group.|
+|userID|string|ID of the user.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "UserGroupID": "…",
+      "UserID": "…"
+    }
+  ]
+}
+```
+
+## Delete User Assignment
+
+```js
+OrderCloud.AdminUserGroups.DeleteUserAssignment(userGroupID,userID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|userGroupID|string|ID of the user group.|
+|userID|string|ID of the user.|
+## Save User Assignment
+
+```js
+OrderCloud.AdminUserGroups.SaveUserAssignment(userGroupAssignment).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "UserGroupID": "…",
+  "UserID": "…"
+}
+```
+
 # AdminAddresses
 
 ```js
@@ -5833,7 +6079,10 @@ OrderCloud.Users.Get(userID).then(successFn).catch(errorFn);
   "Phone": "…",
   "TermsAccepted": null,
   "Active": false,
-  "xp": null
+  "xp": null,
+  "AvailableRoles": [
+    "…"
+  ]
 }
 ```
 
@@ -5878,7 +6127,10 @@ OrderCloud.Users.List(userGroupID,listArgs).then(successFn).catch(errorFn);
       "Phone": "…",
       "TermsAccepted": null,
       "Active": false,
-      "xp": null
+      "xp": null,
+      "AvailableRoles": [
+        "…"
+      ]
     }
   ]
 }
@@ -6364,72 +6616,6 @@ OrderCloud.Categories.Patch(categoryID,category).then(successFn).catch(errorFn);
 }
 ```
 
-## List Product Assignments
-
-```js
-OrderCloud.Categories.ListProductAssignments(categoryID,productID,page,pageSize).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|categoryID|string|ID of the category.|
-|productID|string|ID of the product.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "CategoryID": "…",
-      "ProductID": "…",
-      "ListOrder": null
-    }
-  ]
-}
-```
-
-## Save Product Assignment
-
-```js
-OrderCloud.Categories.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
-```
-
-### Request Body Sample
-
-```json
-{
-  "CategoryID": "…",
-  "ProductID": "…",
-  "ListOrder": null
-}
-```
-
-## Delete Product Assignment
-
-```js
-OrderCloud.Categories.DeleteProductAssignment(categoryID,productID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|categoryID|string|ID of the category.|
-|productID|string|ID of the product.|
 ## List Assignments
 
 ```js
@@ -6499,6 +6685,72 @@ OrderCloud.Categories.SaveAssignment(categoryAssignment).then(successFn).catch(e
 }
 ```
 
+## List Product Assignments
+
+```js
+OrderCloud.Categories.ListProductAssignments(categoryID,productID,page,pageSize).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|categoryID|string|ID of the category.|
+|productID|string|ID of the product.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "CategoryID": "…",
+      "ProductID": "…",
+      "ListOrder": null
+    }
+  ]
+}
+```
+
+## Save Product Assignment
+
+```js
+OrderCloud.Categories.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "CategoryID": "…",
+  "ProductID": "…",
+  "ListOrder": null
+}
+```
+
+## Delete Product Assignment
+
+```js
+OrderCloud.Categories.DeleteProductAssignment(categoryID,productID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|categoryID|string|ID of the category.|
+|productID|string|ID of the product.|
 # Addresses
 
 ```js
