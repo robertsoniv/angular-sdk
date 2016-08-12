@@ -1066,8 +1066,8 @@ function orderCloud( $q, $resource, $cookieStore, $injector, appname, apiurl, au
 					}
 					return makeApiCall('GET', '/v1/buyers/:buyerID/shipments/:shipmentID', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'shipmentID': shipmentID }, null);
 				}
-				function _list(search, page, pageSize, searchOn, sortBy, filters, orderID, buyerID) {
-					return makeApiCall('GET', '/v1/buyers/:buyerID/shipments', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID }, filters);
+				function _list(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
+					return makeApiCall('GET', '/v1/buyers/:buyerID/shipments', { 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'orderID': orderID, 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
 				}
 				function _create(shipment, buyerID) {
 					return makeApiCall('POST', '/v1/buyers/:buyerID/shipments', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, shipment);

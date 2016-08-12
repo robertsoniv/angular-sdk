@@ -3578,7 +3578,7 @@ OrderCloud.Shipments.Get(shipmentID).then(successFn).catch(errorFn);
 ## Get a List of Shipments
 
 ```js
-OrderCloud.Shipments.List(listArgs,orderID).then(successFn).catch(errorFn);
+OrderCloud.Shipments.List(orderID,listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters

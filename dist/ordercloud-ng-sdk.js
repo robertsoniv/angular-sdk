@@ -2051,15 +2051,15 @@
                 }, null);
             }
 
-            function _list(search, page, pageSize, searchOn, sortBy, filters, orderID, buyerID) {
+            function _list(orderID, search, page, pageSize, searchOn, sortBy, filters, buyerID) {
                 return makeApiCall('GET', '/v1/buyers/:buyerID/shipments', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'orderID': orderID,
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
-                    'sortBy': sortBy,
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
-                    'orderID': orderID
+                    'sortBy': sortBy
                 }, filters);
             }
 
