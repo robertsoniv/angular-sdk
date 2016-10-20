@@ -13,19 +13,20 @@
             'As': As,
             'Auth': Auth(),
             'BuyerID': BuyerID(),
+            'CatalogID': CatalogID(),
 
             'Addresses': Addresses(),
             'AdminAddresses': AdminAddresses(),
             'AdminUsers': AdminUsers(),
             'AdminUserGroups': AdminUserGroups(),
+            'Catalogs': Catalogs(),
             'ApprovalRules': ApprovalRules(),
             'Buyers': Buyers(),
             'Categories': Categories(),
             'CostCenters': CostCenters(),
+            'MesageSenders': MesageSenders(),
             'Promotions': Promotions(),
             'CreditCards': CreditCards(),
-            'EmailTemplates': EmailTemplates(),
-            'Files': Files(),
             'SecurityProfiles': SecurityProfiles(),
             'Payments': Payments(),
             'Specs': Specs(),
@@ -137,6 +138,21 @@
 
             function _set(value) {
                 $cookieStore.put(appname + '.buyerID', value);
+            }
+        }
+
+        function CatalogID() {
+            return {
+                'Get': _get,
+                'Set': _set
+            };
+
+            function _get() {
+                return $cookieStore.get(appname + '.catalogID');
+            }
+
+            function _set(value) {
+                $cookieStore.put(appname + '.catalogID', value);
             }
         }
 
@@ -294,11 +310,11 @@
         function AdminUsers() {
             return {
                 'Get': _get,
+                'Create': _create,
                 'Update': _update,
                 'Patch': _patch,
                 'List': _list,
-                'Delete': _delete,
-                'Create': _create
+                'Delete': _delete
             };
 
             function _get(userID) {
@@ -312,6 +328,10 @@
                 return makeApiCall('GET', '/v1/adminusers/:userID', {
                     'userID': userID
                 }, null);
+            }
+
+            function _create(user) {
+                return makeApiCall('POST', '/v1/adminusers', null, user);
             }
 
             function _update(userID, user) {
@@ -340,10 +360,6 @@
                 return makeApiCall('DELETE', '/v1/adminusers/:userID', {
                     'userID': userID
                 }, null);
-            }
-
-            function _create(user) {
-                return makeApiCall('POST', '/v1/adminusers', null, user);
             }
         }
 
@@ -423,6 +439,82 @@
 
             function _saveuserassignment(userGroupAssignment) {
                 return makeApiCall('POST', '/v1/usergroups/assignments', null, userGroupAssignment);
+            }
+        }
+
+        function Catalogs() {
+            return {
+                'List': _list,
+                'Create': _create,
+                'Get': _get,
+                'Update': _update,
+                'Patch': _patch,
+                'Delete': _delete,
+                'ListAssignments': _listassignments,
+                'SaveAssignment': _saveassignment,
+                'DeleteAssignment': _deleteassignment
+            };
+
+            function _list(search, page, pageSize, searchOn, sortBy, filters) {
+                return makeApiCall('GET', '/v1/catalogs', {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                }, filters);
+            }
+
+            function _create(catalog) {
+                return makeApiCall('POST', '/v1/catalogs', null, catalog);
+            }
+
+            function _get(catalogID) {
+                if (!catalogID) {
+                    var errMessage = 'catalogID is a required field for OrderCloud.Catalogs.Get';
+                    console.error(errMessage);
+                    var dfd = $q.defer();
+                    dfd.reject(errMessage);
+                    return dfd.promise;
+                }
+                return makeApiCall('GET', '/v1/catalogs/:catalogID', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get()
+                }, null);
+            }
+
+            function _update(catalogID, catalog) {
+                return makeApiCall('PUT', '/v1/catalogs/:catalogID', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get()
+                }, catalog);
+            }
+
+            function _patch(catalogID, partialCatalog) {
+                return makeApiCall('PATCH', '/v1/catalogs/:catalogID', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get()
+                }, partialCatalog);
+            }
+
+            function _delete(catalogID) {
+                return makeApiCall('DELETE', '/v1/catalogs/:catalogID', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get()
+                }, null);
+            }
+
+            function _listassignments(catalogID, page, pageSize, buyerID) {
+                return makeApiCall('GET', '/v1/catalogs/assignments', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get(),
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'page': page,
+                    'pageSize': pageSize
+                }, null);
+            }
+
+            function _saveassignment(assignment) {
+                return makeApiCall('POST', '/v1/catalogs/assignments', null, assignment);
+            }
+
+            function _deleteassignment(assignment) {
+                return makeApiCall('DELETE', '/v1/catalogs/assignments', null, assignment);
             }
         }
 
@@ -554,9 +646,9 @@
                 'DeleteProductAssignment': _deleteproductassignment
             };
 
-            function _list(search, page, pageSize, searchOn, sortBy, filters, depth, buyerID) {
-                return makeApiCall('GET', '/v1/buyers/:buyerID/categories', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+            function _list(catalogID, search, page, pageSize, searchOn, sortBy, filters, depth) {
+                return makeApiCall('GET', '/v1/catalogs/:catalogID/categories', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get(),
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
@@ -566,49 +658,50 @@
                 }, filters);
             }
 
-            function _get(categoryID, buyerID) {
-                if (!categoryID) {
-                    var errMessage = 'categoryID is a required field for OrderCloud.Categories.Get';
+            function _get(catalogID, categoryID) {
+                if (!catalogID || !categoryID) {
+                    var errMessage = 'catalogID and categoryID are required fields for OrderCloud.Categories.Get';
                     console.error(errMessage);
                     var dfd = $q.defer();
                     dfd.reject(errMessage);
                     return dfd.promise;
                 }
-                return makeApiCall('GET', '/v1/buyers/:buyerID/categories/:categoryID', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                return makeApiCall('GET', '/v1/catalogs/:catalogID/categories/:categoryID', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get(),
                     'categoryID': categoryID
                 }, null);
             }
 
-            function _create(category, buyerID) {
-                return makeApiCall('POST', '/v1/buyers/:buyerID/categories', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get()
+            function _create(catalogID, category) {
+                return makeApiCall('POST', '/v1/catalogs/:catalogID/categories', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get()
                 }, category);
             }
 
-            function _update(categoryID, category, buyerID) {
-                return makeApiCall('PUT', '/v1/buyers/:buyerID/categories/:categoryID', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+            function _update(catalogID, categoryID, category) {
+                return makeApiCall('PUT', '/v1/catalogs/:catalogID/categories/:categoryID', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get(),
                     'categoryID': categoryID
                 }, category);
             }
 
-            function _patch(categoryID, category, buyerID) {
-                return makeApiCall('PATCH', '/v1/buyers/:buyerID/categories/:categoryID', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+            function _patch(catalogID, categoryID, category) {
+                return makeApiCall('PATCH', '/v1/catalogs/:catalogID/categories/:categoryID', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get(),
                     'categoryID': categoryID
                 }, category);
             }
 
-            function _delete(categoryID, buyerID) {
-                return makeApiCall('DELETE', '/v1/buyers/:buyerID/categories/:categoryID', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+            function _delete(catalogID, categoryID) {
+                return makeApiCall('DELETE', '/v1/catalogs/:catalogID/categories/:categoryID', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get(),
                     'categoryID': categoryID
                 }, null);
             }
 
-            function _listassignments(categoryID, userID, userGroupID, level, page, pageSize, buyerID) {
-                return makeApiCall('GET', '/v1/buyers/:buyerID/categories/assignments', {
+            function _listassignments(catalogID, categoryID, userID, userGroupID, level, page, pageSize, buyerID) {
+                return makeApiCall('GET', '/v1/catalogs/:catalogID/categories/assignments', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get(),
                     'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'categoryID': categoryID,
                     'userID': userID,
@@ -619,24 +712,25 @@
                 }, null);
             }
 
-            function _deleteassignment(categoryID, userID, userGroupID, buyerID) {
-                return makeApiCall('DELETE', '/v1/buyers/:buyerID/categories/:categoryID/assignments', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+            function _deleteassignment(catalogID, categoryID, userID, userGroupID, buyerID) {
+                return makeApiCall('DELETE', '/v1/catalogs/:catalogID/categories/:categoryID/assignments', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get(),
                     'categoryID': categoryID,
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userID': userID,
                     'userGroupID': userGroupID
                 }, null);
             }
 
-            function _saveassignment(categoryAssignment, buyerID) {
-                return makeApiCall('POST', '/v1/buyers/:buyerID/categories/assignments', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get()
+            function _saveassignment(catalogID, categoryAssignment) {
+                return makeApiCall('POST', '/v1/catalogs/:catalogID/categories/assignments', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get()
                 }, categoryAssignment);
             }
 
-            function _listproductassignments(categoryID, productID, page, pageSize, buyerID) {
-                return makeApiCall('GET', '/v1/buyers/:buyerID/categories/productassignments', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+            function _listproductassignments(catalogID, categoryID, productID, page, pageSize) {
+                return makeApiCall('GET', '/v1/catalogs/:catalogID/categories/productassignments', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get(),
                     'categoryID': categoryID,
                     'productID': productID,
                     'page': page,
@@ -644,15 +738,15 @@
                 }, null);
             }
 
-            function _saveproductassignment(productAssignment, buyerID) {
-                return makeApiCall('POST', '/v1/buyers/:buyerID/categories/productassignments', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get()
+            function _saveproductassignment(catalogID, productAssignment) {
+                return makeApiCall('POST', '/v1/catalogs/:catalogID/categories/productassignments', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get()
                 }, productAssignment);
             }
 
-            function _deleteproductassignment(categoryID, productID, buyerID) {
-                return makeApiCall('DELETE', '/v1/buyers/:buyerID/categories/:categoryID/productassignments/:productID', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+            function _deleteproductassignment(catalogID, categoryID, productID) {
+                return makeApiCall('DELETE', '/v1/catalogs/:catalogID/categories/:categoryID/productassignments/:productID', {
+                    'catalogID': catalogID ? catalogID : CatalogID().Get(),
                     'categoryID': categoryID,
                     'productID': productID
                 }, null);
@@ -749,6 +843,80 @@
                 return makeApiCall('POST', '/v1/buyers/:buyerID/costcenters/assignments', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, assignment);
+            }
+        }
+
+        function MesageSenders() {
+            return {
+                'List': _list,
+                'Get': _get,
+                'ListAssignments': _listassignments,
+                'DeleteAssignment': _deleteassignment,
+                'SaveAssignment': _saveassignment,
+                'ListCCListenerAssignments': _listcclistenerassignments,
+                'SaveCCListenerAssignment': _savecclistenerassignment
+            };
+
+            function _list(search, page, pageSize, searchOn, sortBy, filters) {
+                return makeApiCall('GET', '/v1/MessageSenders', {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                }, filters);
+            }
+
+            function _get(messageSenderID) {
+                if (!messageSenderID) {
+                    var errMessage = 'messageSenderID is a required field for OrderCloud.MesageSenders.Get';
+                    console.error(errMessage);
+                    var dfd = $q.defer();
+                    dfd.reject(errMessage);
+                    return dfd.promise;
+                }
+                return makeApiCall('GET', '/v1/MessageSenders/:messageSenderID', {
+                    'messageSenderID': messageSenderID
+                }, null);
+            }
+
+            function _listassignments(messageSenderID, userID, userGroupID, level, page, pageSize, buyerID) {
+                return makeApiCall('GET', '/v1/MessageSenders/assignments', {
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'messageSenderID': messageSenderID,
+                    'userID': userID,
+                    'userGroupID': userGroupID,
+                    'level': level,
+                    'page': page,
+                    'pageSize': pageSize
+                }, null);
+            }
+
+            function _deleteassignment(messageSenderID, userID, userGroupID, buyerID) {
+                return makeApiCall('DELETE', '/v1/MessageSenders/:messageSenderID/assignments', {
+                    'messageSenderID': messageSenderID,
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
+                    'userID': userID,
+                    'userGroupID': userGroupID
+                }, null);
+            }
+
+            function _saveassignment(assignment) {
+                return makeApiCall('POST', '/v1/MessageSenders/assignments', null, assignment);
+            }
+
+            function _listcclistenerassignments(search, page, pageSize, searchOn, sortBy, filters) {
+                return makeApiCall('GET', '/v1/MessageSenders/CCListenerAssignments', {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                }, filters);
+            }
+
+            function _savecclistenerassignment(assignment) {
+                return makeApiCall('POST', '/v1/MessageSenders/CCListenerAssignments', null, assignment);
             }
         }
 
@@ -925,84 +1093,6 @@
                     'creditCardID': creditCardID,
                     'userID': userID,
                     'userGroupID': userGroupID
-                }, null);
-            }
-        }
-
-        function EmailTemplates() {
-            return {
-                'Get': _get,
-                'Update': _update,
-                'Patch': _patch,
-                'ResetToDefault': _resettodefault
-            };
-
-            function _get(emailTemplateType, buyerID) {
-                if (!emailTemplateType) {
-                    var errMessage = 'emailTemplateType is a required field for OrderCloud.EmailTemplates.Get';
-                    console.error(errMessage);
-                    var dfd = $q.defer();
-                    dfd.reject(errMessage);
-                    return dfd.promise;
-                }
-                return makeApiCall('GET', '/v1/buyers/:buyerID/emailtemplates/:emailTemplateType', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
-                    'emailTemplateType': emailTemplateType
-                }, null);
-            }
-
-            function _update(emailTemplateType, emailTemplate, buyerID) {
-                return makeApiCall('PUT', '/v1/buyers/:buyerID/emailtemplates/:emailTemplateType', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
-                    'emailTemplateType': emailTemplateType
-                }, emailTemplate);
-            }
-
-            function _patch(emailTemplateType, emailTemplate, buyerID) {
-                return makeApiCall('PATCH', '/v1/buyers/:buyerID/emailtemplates/:emailTemplateType', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
-                    'emailTemplateType': emailTemplateType
-                }, emailTemplate);
-            }
-
-            function _resettodefault(emailTemplateType, buyerID) {
-                return makeApiCall('DELETE', '/v1/buyers/:buyerID/emailtemplates/:emailTemplateType', {
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
-                    'emailTemplateType': emailTemplateType
-                }, null);
-            }
-        }
-
-        function Files() {
-            return {
-                'List': _list,
-                'Get': _get,
-                'PostFileData': _postfiledata
-            };
-
-            function _list(page, pageSize) {
-                return makeApiCall('GET', '/v1/files', {
-                    'page': page,
-                    'pageSize': pageSize
-                }, null);
-            }
-
-            function _get(fileID) {
-                if (!fileID) {
-                    var errMessage = 'fileID is a required field for OrderCloud.Files.Get';
-                    console.error(errMessage);
-                    var dfd = $q.defer();
-                    dfd.reject(errMessage);
-                    return dfd.promise;
-                }
-                return makeApiCall('GET', '/v1/files/:fileID', {
-                    'fileID': fileID
-                }, null);
-            }
-
-            function _postfiledata(filename) {
-                return makeApiCall('POST', '/v1/files', {
-                    'filename': filename
                 }, null);
             }
         }

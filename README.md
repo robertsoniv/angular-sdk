@@ -235,6 +235,84 @@ An AngularJs SDK for OrderCloud API
 
   - [Partially Update Admin User](#partially-update-admin-user)
 
+- [Catalogs](#catalogs)
+
+  - [Get a Single Catalog](#get-a-single-catalog)
+
+  - [Get a List of Catalogs](#get-a-list-of-catalogs)
+
+  - [Create New Catalog](#create-new-catalog)
+
+  - [Create or Update Catalog](#create-or-update-catalog)
+
+  - [Delete Catalog](#delete-catalog)
+
+  - [Partially Update Catalog](#partially-update-catalog)
+
+  - [List Assignments](#list-assignments)
+
+  - [Save Assignment](#save-assignment)
+
+  - [Delete Assignment](#delete-assignment)
+
+- [Categories](#categories)
+
+  - [Get a Single Category](#get-a-single-category)
+
+  - [Get a List of Categories](#get-a-list-of-categories)
+
+  - [Create New Category](#create-new-category)
+
+  - [Create or Update Category](#create-or-update-category)
+
+  - [Delete Category](#delete-category)
+
+  - [Partially Update Category](#partially-update-category)
+
+  - [List Assignments](#list-assignments)
+
+  - [Delete Assignment](#delete-assignment)
+
+  - [Save Assignment](#save-assignment)
+
+  - [List Product Assignments](#list-product-assignments)
+
+  - [Save Product Assignment](#save-product-assignment)
+
+  - [Delete Product Assignment](#delete-product-assignment)
+
+- [Specs](#specs)
+
+  - [Get a Single Spec](#get-a-single-spec)
+
+  - [Get a List of Specs](#get-a-list-of-specs)
+
+  - [Create New Spec](#create-new-spec)
+
+  - [Create or Update Spec](#create-or-update-spec)
+
+  - [Delete Spec](#delete-spec)
+
+  - [Partially Update Spec](#partially-update-spec)
+
+  - [List Product Assignments](#list-product-assignments)
+
+  - [Delete Product Assignment](#delete-product-assignment)
+
+  - [Save Product Assignment](#save-product-assignment)
+
+  - [Create Option](#create-option)
+
+  - [List Options](#list-options)
+
+  - [Update Option](#update-option)
+
+  - [Patch Option](#patch-option)
+
+  - [Get Option](#get-option)
+
+  - [Delete Option](#delete-option)
+
 - [Products](#products)
 
   - [Get a Single Product](#get-a-single-product)
@@ -295,38 +373,6 @@ An AngularJs SDK for OrderCloud API
 
   - [Delete Price Break](#delete-price-break)
 
-- [Specs](#specs)
-
-  - [Get a Single Spec](#get-a-single-spec)
-
-  - [Get a List of Specs](#get-a-list-of-specs)
-
-  - [Create New Spec](#create-new-spec)
-
-  - [Create or Update Spec](#create-or-update-spec)
-
-  - [Delete Spec](#delete-spec)
-
-  - [Partially Update Spec](#partially-update-spec)
-
-  - [List Product Assignments](#list-product-assignments)
-
-  - [Delete Product Assignment](#delete-product-assignment)
-
-  - [Save Product Assignment](#save-product-assignment)
-
-  - [Create Option](#create-option)
-
-  - [List Options](#list-options)
-
-  - [Update Option](#update-option)
-
-  - [Patch Option](#patch-option)
-
-  - [Get Option](#get-option)
-
-  - [Delete Option](#delete-option)
-
 - [Promotions](#promotions)
 
   - [Get a Single Promotion](#get-a-single-promotion)
@@ -347,13 +393,19 @@ An AngularJs SDK for OrderCloud API
 
   - [Delete Assignment](#delete-assignment)
 
-- [Files](#files)
+- [AdminAddresses](#adminaddresses)
 
-  - [Get a Single File](#get-a-single-file)
+  - [Get a Single Admin Address](#get-a-single-admin-address)
 
-  - [Get a List of Files](#get-a-list-of-files)
+  - [Get a List of Admin Addresses](#get-a-list-of-admin-addresses)
 
-  - [Post File Data](#post-file-data)
+  - [Create New Admin Address](#create-new-admin-address)
+
+  - [Create or Update Admin Address](#create-or-update-admin-address)
+
+  - [Delete Admin Address](#delete-admin-address)
+
+  - [Partially Update Admin Address](#partially-update-admin-address)
 
 - [AdminUserGroups](#adminusergroups)
 
@@ -375,19 +427,21 @@ An AngularJs SDK for OrderCloud API
 
   - [Save User Assignment](#save-user-assignment)
 
-- [AdminAddresses](#adminaddresses)
+- [MesageSenders](#mesagesenders)
 
-  - [Get a Single Admin Address](#get-a-single-admin-address)
+  - [Get a Single Message Sender](#get-a-single-message-sender)
 
-  - [Get a List of Admin Addresses](#get-a-list-of-admin-addresses)
+  - [Get a List of Message Senders](#get-a-list-of-message-senders)
 
-  - [Create New Admin Address](#create-new-admin-address)
+  - [List Assignments](#list-assignments)
 
-  - [Create or Update Admin Address](#create-or-update-admin-address)
+  - [Delete Assignment](#delete-assignment)
 
-  - [Delete Admin Address](#delete-admin-address)
+  - [Save Assignment](#save-assignment)
 
-  - [Partially Update Admin Address](#partially-update-admin-address)
+  - [List CC Listener Assignments](#list-cc-listener-assignments)
+
+  - [Save CC Listener Assignment](#save-cc-listener-assignment)
 
 - [Users](#users)
 
@@ -424,32 +478,6 @@ An AngularJs SDK for OrderCloud API
   - [Delete User Assignment](#delete-user-assignment)
 
   - [Save User Assignment](#save-user-assignment)
-
-- [Categories](#categories)
-
-  - [Get a Single Category](#get-a-single-category)
-
-  - [Get a List of Categories](#get-a-list-of-categories)
-
-  - [Create New Category](#create-new-category)
-
-  - [Create or Update Category](#create-or-update-category)
-
-  - [Delete Category](#delete-category)
-
-  - [Partially Update Category](#partially-update-category)
-
-  - [List Assignments](#list-assignments)
-
-  - [Delete Assignment](#delete-assignment)
-
-  - [Save Assignment](#save-assignment)
-
-  - [List Product Assignments](#list-product-assignments)
-
-  - [Save Product Assignment](#save-product-assignment)
-
-  - [Delete Product Assignment](#delete-product-assignment)
 
 - [Addresses](#addresses)
 
@@ -545,16 +573,6 @@ An AngularJs SDK for OrderCloud API
 
   - [Delete Assignment](#delete-assignment)
 
-- [EmailTemplates](#emailtemplates)
-
-  - [Get a Single Email Template](#get-a-single-email-template)
-
-  - [Create or Update Email Template](#create-or-update-email-template)
-
-  - [Partially Update Email Template](#partially-update-email-template)
-
-  - [Reset To Default](#reset-to-default)
-
 - [Extending the OrderCloud Data Model](#extending-the-ordercloud-data-model)
 
 ***
@@ -589,6 +607,10 @@ In order to set an initial/default buyerid, add a run function in addition to th
 The BuyerID function can be used within any AngularJS controller and/or factory within your application in order to change which buyerid should be used.
 Simply inject the BuyerID factory into your controller or factory and call OrderCloud.BuyerID.Set('NEWIDHERE');.
 If needed, OrderCloud.BuyerID().Get() will return the buyerid that is currently set.
+
+The CatalogID function can be used within any AngularJS controller and/or factory within your application in order to change which catalogid should be used.
+Simply inject the CatalogID factory into your controller or factory and call OrderCloud.CatalogID.Set('NEWIDHERE');.
+If needed, OrderCloud.CatalogID().Get() will return the catalogid that is currently set.
 
 ***
 
@@ -1483,6 +1505,9 @@ OrderCloud.Products.ListProducts(listArgs,categoryID).then(successFn).catch(erro
       "Description": "…",
       "QuantityMultiplier": 0,
       "ShipWeight": null,
+      "ShipHeight": null,
+      "ShipWidth": null,
+      "ShipLength": null,
       "Active": false,
       "Type": "Static",
       "InventoryEnabled": false,
@@ -1555,6 +1580,9 @@ OrderCloud.Products.GetProduct(productID).then(successFn).catch(errorFn);
   "Description": "…",
   "QuantityMultiplier": 0,
   "ShipWeight": null,
+  "ShipHeight": null,
+  "ShipWidth": null,
+  "ShipLength": null,
   "Active": false,
   "Type": "Static",
   "InventoryEnabled": false,
@@ -1613,7 +1641,6 @@ OrderCloud.Products.ListSpecs(productID,listArgs).then(successFn).catch(errorFn)
           "xp": null
         }
       ],
-      "DefinesVariant": false,
       "ID": "…",
       "ListOrder": 0,
       "Name": "…",
@@ -1621,6 +1648,7 @@ OrderCloud.Products.ListSpecs(productID,listArgs).then(successFn).catch(errorFn)
       "Required": false,
       "AllowOpenText": false,
       "DefaultOptionID": "…",
+      "DefinesVariant": false,
       "xp": null
     }
   ]
@@ -1654,7 +1682,6 @@ OrderCloud.Products.GetSpec(productID,specID).then(successFn).catch(errorFn);
       "xp": null
     }
   ],
-  "DefinesVariant": false,
   "ID": "…",
   "ListOrder": 0,
   "Name": "…",
@@ -1662,6 +1689,7 @@ OrderCloud.Products.GetSpec(productID,specID).then(successFn).catch(errorFn);
   "Required": false,
   "AllowOpenText": false,
   "DefaultOptionID": "…",
+  "DefinesVariant": false,
   "xp": null
 }
 ```
@@ -4079,6 +4107,937 @@ OrderCloud.AdminUsers.Patch(userID,user).then(successFn).catch(errorFn);
 }
 ```
 
+# Catalogs
+
+```js
+angular.module('orderCloud.sdk).factory(Catalogs, CatalogsFactory)
+```
+
+A Catalog represents a group of categories used to group and place content for a specific audience. All buyers are issued and assigned a default catalog upon creation. Catalogs can be shared between buyers using assignments.
+
+## Get a Single Catalog
+
+```js
+OrderCloud.Catalogs.Get(catalogID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "CategoryCount": 0,
+  "xp": null
+}
+```
+
+## Get a List of Catalogs
+
+```js
+OrderCloud.Catalogs.List(listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…",
+      "CategoryCount": 0,
+      "xp": null
+    }
+  ]
+}
+```
+
+## Create New Catalog
+
+```js
+OrderCloud.Catalogs.Create(catalog).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "xp": null
+}
+```
+
+## Create or Update Catalog
+
+```js
+OrderCloud.Catalogs.Update(catalogID,catalog).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "xp": null
+}
+```
+
+## Delete Catalog
+
+```js
+OrderCloud.Catalogs.Delete(catalogID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+## Partially Update Catalog
+
+```js
+OrderCloud.Catalogs.Patch(catalogID,partialCatalog).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "xp": null
+}
+```
+
+## List Assignments
+
+```js
+OrderCloud.Catalogs.ListAssignments(catalogID,page,pageSize).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "CatalogID": "…",
+      "BuyerID": "…"
+    }
+  ]
+}
+```
+
+## Save Assignment
+
+```js
+OrderCloud.Catalogs.SaveAssignment(assignment).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "CatalogID": "…",
+  "BuyerID": "…"
+}
+```
+
+## Delete Assignment
+
+```js
+OrderCloud.Catalogs.DeleteAssignment(assignment).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "CatalogID": "…",
+  "BuyerID": "…"
+}
+```
+
+# Categories
+
+```js
+angular.module('orderCloud.sdk).factory(Categories, CategoriesFactory)
+```
+
+Categories are used within a catalog to group and place content for a specific audience. Content can be in the form of another category, nested categories, products or HTML.
+
+## Get a Single Category
+
+```js
+OrderCloud.Categories.Get(catalogID,categoryID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+|categoryID|string|ID of the category.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "xp": null,
+  "ListOrder": 1,
+  "Active": false,
+  "ParentID": "…",
+  "ChildCount": 0
+}
+```
+
+## Get a List of Categories
+
+```js
+OrderCloud.Categories.List(catalogID,listArgs,depth).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+|depth|string|Depth of the category.|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Description": "…",
+      "xp": null,
+      "ListOrder": 1,
+      "Active": false,
+      "ParentID": "…",
+      "ChildCount": 0
+    }
+  ]
+}
+```
+
+## Create New Category
+
+```js
+OrderCloud.Categories.Create(catalogID,category).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "xp": null,
+  "ListOrder": 1,
+  "Active": false,
+  "ParentID": "…"
+}
+```
+
+## Create or Update Category
+
+```js
+OrderCloud.Categories.Update(catalogID,categoryID,category).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+|categoryID|string|ID of the category.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "xp": null,
+  "ListOrder": 1,
+  "Active": false,
+  "ParentID": "…"
+}
+```
+
+## Delete Category
+
+```js
+OrderCloud.Categories.Delete(catalogID,categoryID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+|categoryID|string|ID of the category.|
+## Partially Update Category
+
+```js
+OrderCloud.Categories.Patch(catalogID,categoryID,category).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+|categoryID|string|ID of the category.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Description": "…",
+  "xp": null,
+  "ListOrder": 1,
+  "Active": false,
+  "ParentID": "…"
+}
+```
+
+## List Assignments
+
+```js
+OrderCloud.Categories.ListAssignments(catalogID,categoryID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+|categoryID|string|ID of the category.|
+|userID|string|ID of the user.|
+|userGroupID|string|ID of the user group.|
+|level|string|Level of the category.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "CategoryID": "…",
+      "BuyerID": "…",
+      "UserID": "…",
+      "UserGroupID": "…"
+    }
+  ]
+}
+```
+
+## Delete Assignment
+
+```js
+OrderCloud.Categories.DeleteAssignment(catalogID,categoryID,userID,userGroupID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+|categoryID|string|ID of the category.|
+|userID|string|ID of the user.|
+|userGroupID|string|ID of the user group.|
+## Save Assignment
+
+```js
+OrderCloud.Categories.SaveAssignment(catalogID,categoryAssignment).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+### Request Body Sample
+
+```json
+{
+  "CategoryID": "…",
+  "BuyerID": "…",
+  "UserID": "…",
+  "UserGroupID": "…"
+}
+```
+
+## List Product Assignments
+
+```js
+OrderCloud.Categories.ListProductAssignments(catalogID,categoryID,productID,page,pageSize).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+|categoryID|string|ID of the category.|
+|productID|string|ID of the product.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "CategoryID": "…",
+      "ProductID": "…",
+      "ListOrder": null
+    }
+  ]
+}
+```
+
+## Save Product Assignment
+
+```js
+OrderCloud.Categories.SaveProductAssignment(catalogID,productAssignment).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+### Request Body Sample
+
+```json
+{
+  "CategoryID": "…",
+  "ProductID": "…",
+  "ListOrder": null
+}
+```
+
+## Delete Product Assignment
+
+```js
+OrderCloud.Categories.DeleteProductAssignment(catalogID,categoryID,productID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
+|categoryID|string|ID of the category.|
+|productID|string|ID of the product.|
+# Specs
+
+```js
+angular.module('orderCloud.sdk).factory(Specs, SpecsFactory)
+```
+
+Specs are used to capture user input when adding a Product to an Order. At its simplest, a spec is a name/value pair. A spec value may have a price markup or markdown associated with it. In more advanced scenarios, specs can drive the product SKU. For example, a product may be available in 3 colors and 3 sizes and therefore have a total of 9 SKUs. **The OrderCloud platform will choose the correct SKU based on the user-selected color and size specs**.
+
+## Get a Single Spec
+
+```js
+OrderCloud.Specs.Get(specID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|specID|string|ID of the spec.|
+### Response Body Sample
+
+```json
+{
+  "OptionCount": 0,
+  "ID": "…",
+  "ListOrder": 0,
+  "Name": "…",
+  "DefaultValue": "…",
+  "Required": false,
+  "AllowOpenText": false,
+  "DefaultOptionID": "…",
+  "DefinesVariant": false,
+  "xp": null
+}
+```
+
+## Get a List of Specs
+
+```js
+OrderCloud.Specs.List(listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "OptionCount": 0,
+      "ID": "…",
+      "ListOrder": 0,
+      "Name": "…",
+      "DefaultValue": "…",
+      "Required": false,
+      "AllowOpenText": false,
+      "DefaultOptionID": "…",
+      "DefinesVariant": false,
+      "xp": null
+    }
+  ]
+}
+```
+
+## Create New Spec
+
+```js
+OrderCloud.Specs.Create(spec).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "ListOrder": 0,
+  "Name": "…",
+  "DefaultValue": "…",
+  "Required": false,
+  "AllowOpenText": false,
+  "DefaultOptionID": "…",
+  "DefinesVariant": false,
+  "xp": null
+}
+```
+
+## Create or Update Spec
+
+```js
+OrderCloud.Specs.Update(specID,spec).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|specID|string|ID of the spec.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "ListOrder": 0,
+  "Name": "…",
+  "DefaultValue": "…",
+  "Required": false,
+  "AllowOpenText": false,
+  "DefaultOptionID": "…",
+  "DefinesVariant": false,
+  "xp": null
+}
+```
+
+## Delete Spec
+
+```js
+OrderCloud.Specs.Delete(specID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|specID|string|ID of the spec.|
+## Partially Update Spec
+
+```js
+OrderCloud.Specs.Patch(specID,spec).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|specID|string|ID of the spec.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "ListOrder": 0,
+  "Name": "…",
+  "DefaultValue": "…",
+  "Required": false,
+  "AllowOpenText": false,
+  "DefaultOptionID": "…",
+  "DefinesVariant": false,
+  "xp": null
+}
+```
+
+## List Product Assignments
+
+```js
+OrderCloud.Specs.ListProductAssignments(specID,productID,page,pageSize).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|specID|string|ID of the spec.|
+|productID|string|ID of the product.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "SpecID": "…",
+      "ProductID": "…",
+      "DefaultValue": "…",
+      "DefaultOptionID": "…"
+    }
+  ]
+}
+```
+
+## Delete Product Assignment
+
+```js
+OrderCloud.Specs.DeleteProductAssignment(specID,productID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|specID|string|ID of the spec.|
+|productID|string|ID of the product.|
+## Save Product Assignment
+
+```js
+OrderCloud.Specs.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "SpecID": "…",
+  "ProductID": "…",
+  "DefaultValue": "…",
+  "DefaultOptionID": "…"
+}
+```
+
+## Create Option
+
+```js
+OrderCloud.Specs.CreateOption(specID,option).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|specID|string|ID of the spec.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Value": "…",
+  "ListOrder": 0,
+  "IsOpenText": false,
+  "PriceMarkupType": null,
+  "PriceMarkup": null,
+  "xp": null
+}
+```
+
+## List Options
+
+```js
+OrderCloud.Specs.ListOptions(specID,listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|specID|string|ID of the spec.|
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Value": "…",
+      "ListOrder": 0,
+      "IsOpenText": false,
+      "PriceMarkupType": null,
+      "PriceMarkup": null,
+      "xp": null
+    }
+  ]
+}
+```
+
+## Update Option
+
+```js
+OrderCloud.Specs.UpdateOption(specID,optionID,option).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|specID|string|ID of the spec.|
+|optionID|string|ID of the option.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Value": "…",
+  "ListOrder": 0,
+  "IsOpenText": false,
+  "PriceMarkupType": null,
+  "PriceMarkup": null,
+  "xp": null
+}
+```
+
+## Patch Option
+
+```js
+OrderCloud.Specs.PatchOption(specID,optionID,option).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|specID|string|ID of the spec.|
+|optionID|string|ID of the option.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "Value": "…",
+  "ListOrder": 0,
+  "IsOpenText": false,
+  "PriceMarkupType": null,
+  "PriceMarkup": null,
+  "xp": null
+}
+```
+
+## Get Option
+
+```js
+OrderCloud.Specs.GetOption(specID,optionID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|specID|string|ID of the spec.|
+|optionID|string|ID of the option.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Value": "…",
+  "ListOrder": 0,
+  "IsOpenText": false,
+  "PriceMarkupType": null,
+  "PriceMarkup": null,
+  "xp": null
+}
+```
+
+## Delete Option
+
+```js
+OrderCloud.Specs.DeleteOption(specID,optionID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|specID|string|ID of the spec.|
+|optionID|string|ID of the option.|
 # Products
 
 ```js
@@ -4109,6 +5068,9 @@ OrderCloud.Products.Get(productID).then(successFn).catch(errorFn);
   "Description": "…",
   "QuantityMultiplier": 0,
   "ShipWeight": null,
+  "ShipHeight": null,
+  "ShipWidth": null,
+  "ShipLength": null,
   "Active": false,
   "Type": "Static",
   "InventoryEnabled": false,
@@ -4160,6 +5122,9 @@ OrderCloud.Products.List(listArgs).then(successFn).catch(errorFn);
       "Description": "…",
       "QuantityMultiplier": 0,
       "ShipWeight": null,
+      "ShipHeight": null,
+      "ShipWidth": null,
+      "ShipLength": null,
       "Active": false,
       "Type": "Static",
       "InventoryEnabled": false,
@@ -4191,6 +5156,9 @@ OrderCloud.Products.Create(product).then(successFn).catch(errorFn);
   "Description": "…",
   "QuantityMultiplier": 0,
   "ShipWeight": null,
+  "ShipHeight": null,
+  "ShipWidth": null,
+  "ShipLength": null,
   "Active": false,
   "Type": "Static",
   "InventoryEnabled": false,
@@ -4223,6 +5191,9 @@ OrderCloud.Products.Update(productID,product).then(successFn).catch(errorFn);
   "Description": "…",
   "QuantityMultiplier": 0,
   "ShipWeight": null,
+  "ShipHeight": null,
+  "ShipWidth": null,
+  "ShipLength": null,
   "Active": false,
   "Type": "Static",
   "InventoryEnabled": false,
@@ -4266,6 +5237,9 @@ OrderCloud.Products.Patch(productID,product).then(successFn).catch(errorFn);
   "Description": "…",
   "QuantityMultiplier": 0,
   "ShipWeight": null,
+  "ShipHeight": null,
+  "ShipWidth": null,
+  "ShipLength": null,
   "Active": false,
   "Type": "Static",
   "InventoryEnabled": false,
@@ -4299,6 +5273,9 @@ OrderCloud.Products.GenerateVariants(productID,overwriteExisting).then(successFn
   "Description": "…",
   "QuantityMultiplier": 0,
   "ShipWeight": null,
+  "ShipHeight": null,
+  "ShipWidth": null,
+  "ShipLength": null,
   "Active": false,
   "Type": "Static",
   "InventoryEnabled": false,
@@ -4620,11 +5597,10 @@ OrderCloud.Products.SaveAssignment(productAssignment).then(successFn).catch(erro
 ```json
 {
   "ProductID": "…",
-  "StandardPriceScheduleID": "…",
-  "ReplenishmentPriceScheduleID": "…",
+  "PriceScheduleID": "…",
+  "BuyerID": "…",
   "UserID": "…",
-  "UserGroupID": "…",
-  "BuyerID": "…"
+  "UserGroupID": "…"
 }
 ```
 
@@ -4662,11 +5638,10 @@ OrderCloud.Products.ListAssignments(productID,userID,userGroupID,level,priceSche
   "Items": [
     {
       "ProductID": "…",
-      "StandardPriceScheduleID": "…",
-      "ReplenishmentPriceScheduleID": "…",
+      "PriceScheduleID": "…",
+      "BuyerID": "…",
       "UserID": "…",
-      "UserGroupID": "…",
-      "BuyerID": "…"
+      "UserGroupID": "…"
     }
   ]
 }
@@ -4917,397 +5892,6 @@ OrderCloud.PriceSchedules.DeletePriceBreak(priceScheduleID,quantity).then(succes
 | -------------- | ----------- | --------------- |
 |priceScheduleID|string|ID of the price schedule.|
 |quantity|integer|Quantity of the price schedule.|
-# Specs
-
-```js
-angular.module('orderCloud.sdk).factory(Specs, SpecsFactory)
-```
-
-Specs are used to capture user input when adding a Product to an Order. At its simplest, a spec is a name/value pair. A spec value may have a price markup or markdown associated with it. In more advanced scenarios, specs can drive the product SKU. For example, a product may be available in 3 colors and 3 sizes and therefore have a total of 9 SKUs. **The OrderCloud platform will choose the correct SKU based on the user-selected color and size specs**.
-
-## Get a Single Spec
-
-```js
-OrderCloud.Specs.Get(specID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|specID|string|ID of the spec.|
-### Response Body Sample
-
-```json
-{
-  "OptionCount": 0,
-  "ID": "…",
-  "ListOrder": 0,
-  "Name": "…",
-  "DefaultValue": "…",
-  "Required": false,
-  "AllowOpenText": false,
-  "DefaultOptionID": "…",
-  "xp": null
-}
-```
-
-## Get a List of Specs
-
-```js
-OrderCloud.Specs.List(listArgs).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|search|string|Word or phrase to search for.|
-|searchOn|string|Comma-delimited list of fields to search on.|
-|sortBy|string|Comma-delimited list of fields to sort by.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "OptionCount": 0,
-      "ID": "…",
-      "ListOrder": 0,
-      "Name": "…",
-      "DefaultValue": "…",
-      "Required": false,
-      "AllowOpenText": false,
-      "DefaultOptionID": "…",
-      "xp": null
-    }
-  ]
-}
-```
-
-## Create New Spec
-
-```js
-OrderCloud.Specs.Create(spec).then(successFn).catch(errorFn);
-```
-
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "ListOrder": 0,
-  "Name": "…",
-  "DefaultValue": "…",
-  "Required": false,
-  "AllowOpenText": false,
-  "DefaultOptionID": "…",
-  "xp": null
-}
-```
-
-## Create or Update Spec
-
-```js
-OrderCloud.Specs.Update(specID,spec).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|specID|string|ID of the spec.|
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "ListOrder": 0,
-  "Name": "…",
-  "DefaultValue": "…",
-  "Required": false,
-  "AllowOpenText": false,
-  "DefaultOptionID": "…",
-  "xp": null
-}
-```
-
-## Delete Spec
-
-```js
-OrderCloud.Specs.Delete(specID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|specID|string|ID of the spec.|
-## Partially Update Spec
-
-```js
-OrderCloud.Specs.Patch(specID,spec).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|specID|string|ID of the spec.|
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "ListOrder": 0,
-  "Name": "…",
-  "DefaultValue": "…",
-  "Required": false,
-  "AllowOpenText": false,
-  "DefaultOptionID": "…",
-  "xp": null
-}
-```
-
-## List Product Assignments
-
-```js
-OrderCloud.Specs.ListProductAssignments(specID,productID,page,pageSize).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|specID|string|ID of the spec.|
-|productID|string|ID of the product.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "SpecID": "…",
-      "ProductID": "…",
-      "DefinesVariant": false
-    }
-  ]
-}
-```
-
-## Delete Product Assignment
-
-```js
-OrderCloud.Specs.DeleteProductAssignment(specID,productID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|specID|string|ID of the spec.|
-|productID|string|ID of the product.|
-## Save Product Assignment
-
-```js
-OrderCloud.Specs.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
-```
-
-### Request Body Sample
-
-```json
-{
-  "SpecID": "…",
-  "ProductID": "…",
-  "DefinesVariant": false
-}
-```
-
-## Create Option
-
-```js
-OrderCloud.Specs.CreateOption(specID,option).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|specID|string|ID of the spec.|
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "Value": "…",
-  "ListOrder": 0,
-  "IsOpenText": false,
-  "PriceMarkupType": null,
-  "PriceMarkup": null,
-  "xp": null
-}
-```
-
-## List Options
-
-```js
-OrderCloud.Specs.ListOptions(specID,listArgs).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|specID|string|ID of the spec.|
-|search|string|Word or phrase to search for.|
-|searchOn|string|Comma-delimited list of fields to search on.|
-|sortBy|string|Comma-delimited list of fields to sort by.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "ID": "…",
-      "Value": "…",
-      "ListOrder": 0,
-      "IsOpenText": false,
-      "PriceMarkupType": null,
-      "PriceMarkup": null,
-      "xp": null
-    }
-  ]
-}
-```
-
-## Update Option
-
-```js
-OrderCloud.Specs.UpdateOption(specID,optionID,option).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|specID|string|ID of the spec.|
-|optionID|string|ID of the option.|
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "Value": "…",
-  "ListOrder": 0,
-  "IsOpenText": false,
-  "PriceMarkupType": null,
-  "PriceMarkup": null,
-  "xp": null
-}
-```
-
-## Patch Option
-
-```js
-OrderCloud.Specs.PatchOption(specID,optionID,option).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|specID|string|ID of the spec.|
-|optionID|string|ID of the option.|
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "Value": "…",
-  "ListOrder": 0,
-  "IsOpenText": false,
-  "PriceMarkupType": null,
-  "PriceMarkup": null,
-  "xp": null
-}
-```
-
-## Get Option
-
-```js
-OrderCloud.Specs.GetOption(specID,optionID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|specID|string|ID of the spec.|
-|optionID|string|ID of the option.|
-### Response Body Sample
-
-```json
-{
-  "ID": "…",
-  "Value": "…",
-  "ListOrder": 0,
-  "IsOpenText": false,
-  "PriceMarkupType": null,
-  "PriceMarkup": null,
-  "xp": null
-}
-```
-
-## Delete Option
-
-```js
-OrderCloud.Specs.DeleteOption(specID,optionID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|specID|string|ID of the spec.|
-|optionID|string|ID of the option.|
 # Promotions
 
 ```js
@@ -5570,46 +6154,60 @@ OrderCloud.Promotions.DeleteAssignment(promotionID,userID,userGroupID).then(succ
 |promotionID|string|ID of the promotion.|
 |userID|string|ID of the user.|
 |userGroupID|string|ID of the user group.|
-# Files
+# AdminAddresses
 
 ```js
-angular.module('orderCloud.sdk).factory(Files, FilesFactory)
+angular.module('orderCloud.sdk).factory(AdminAddresses, AdminAddressesFactory)
 ```
 
 
-## Get a Single File
+## Get a Single Admin Address
 
 ```js
-OrderCloud.Files.Get(fileID).then(successFn).catch(errorFn);
+OrderCloud.AdminAddresses.Get(addressID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|fileID|string|ID of the file.|
+|addressID|string|ID of the address.|
 ### Response Body Sample
 
 ```json
 {
   "ID": "…",
-  "OriginalName": "…",
-  "URL": "…"
+  "CompanyName": "…",
+  "FirstName": "…",
+  "LastName": "…",
+  "Street1": "…",
+  "Street2": "…",
+  "City": "…",
+  "State": "…",
+  "Zip": "…",
+  "Country": "…",
+  "Phone": "…",
+  "AddressName": "…",
+  "xp": null
 }
 ```
 
-## Get a List of Files
+## Get a List of Admin Addresses
 
 ```js
-OrderCloud.Files.List(page,pageSize).then(successFn).catch(errorFn);
+OrderCloud.AdminAddresses.List(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
 |page|integer|Page of results to return. Default: 1|
 |pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
 ### Response Body Sample
 
 ```json
@@ -5627,31 +6225,119 @@ OrderCloud.Files.List(page,pageSize).then(successFn).catch(errorFn);
   "Items": [
     {
       "ID": "…",
-      "OriginalName": "…",
-      "URL": "…"
+      "CompanyName": "…",
+      "FirstName": "…",
+      "LastName": "…",
+      "Street1": "…",
+      "Street2": "…",
+      "City": "…",
+      "State": "…",
+      "Zip": "…",
+      "Country": "…",
+      "Phone": "…",
+      "AddressName": "…",
+      "xp": null
     }
   ]
 }
 ```
 
-## Post File Data
+## Create New Admin Address
 
 ```js
-OrderCloud.Files.PostFileData(filename).then(successFn).catch(errorFn);
+OrderCloud.AdminAddresses.Create(address).then(successFn).catch(errorFn);
+```
+
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "CompanyName": "…",
+  "FirstName": "…",
+  "LastName": "…",
+  "Street1": "…",
+  "Street2": "…",
+  "City": "…",
+  "State": "…",
+  "Zip": "…",
+  "Country": "…",
+  "Phone": "…",
+  "AddressName": "…",
+  "xp": null
+}
+```
+
+## Create or Update Admin Address
+
+```js
+OrderCloud.AdminAddresses.Update(addressID,address).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|filename|string|Filename of the file.|
-### Response Body Sample
+|addressID|string|ID of the address.|
+### Request Body Sample
 
 ```json
 {
   "ID": "…",
-  "OriginalName": "…",
-  "URL": "…"
+  "CompanyName": "…",
+  "FirstName": "…",
+  "LastName": "…",
+  "Street1": "…",
+  "Street2": "…",
+  "City": "…",
+  "State": "…",
+  "Zip": "…",
+  "Country": "…",
+  "Phone": "…",
+  "AddressName": "…",
+  "xp": null
+}
+```
+
+## Delete Admin Address
+
+```js
+OrderCloud.AdminAddresses.Delete(addressID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|addressID|string|ID of the address.|
+## Partially Update Admin Address
+
+```js
+OrderCloud.AdminAddresses.Patch(addressID,address).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|addressID|string|ID of the address.|
+### Request Body Sample
+
+```json
+{
+  "ID": "…",
+  "CompanyName": "…",
+  "FirstName": "…",
+  "LastName": "…",
+  "Street1": "…",
+  "Street2": "…",
+  "City": "…",
+  "State": "…",
+  "Zip": "…",
+  "Country": "…",
+  "Phone": "…",
+  "AddressName": "…",
+  "xp": null
 }
 ```
 
@@ -5861,48 +6547,40 @@ OrderCloud.AdminUserGroups.SaveUserAssignment(userGroupAssignment).then(successF
 }
 ```
 
-# AdminAddresses
+# MesageSenders
 
 ```js
-angular.module('orderCloud.sdk).factory(AdminAddresses, AdminAddressesFactory)
+angular.module('orderCloud.sdk).factory(MesageSenders, MesageSendersFactory)
 ```
 
 
-## Get a Single Admin Address
+## Get a Single Message Sender
 
 ```js
-OrderCloud.AdminAddresses.Get(addressID).then(successFn).catch(errorFn);
+OrderCloud.MesageSenders.Get(messageSenderID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|addressID|string|ID of the address.|
+|messageSenderID|string|ID of the message sender.|
 ### Response Body Sample
 
 ```json
 {
   "ID": "…",
-  "CompanyName": "…",
-  "FirstName": "…",
-  "LastName": "…",
-  "Street1": "…",
-  "Street2": "…",
-  "City": "…",
-  "State": "…",
-  "Zip": "…",
-  "Country": "…",
-  "Phone": "…",
-  "AddressName": "…",
-  "xp": null
+  "Name": "…",
+  "MessageTypes": [
+    "OrderDeclined"
+  ]
 }
 ```
 
-## Get a List of Admin Addresses
+## Get a List of Message Senders
 
 ```js
-OrderCloud.AdminAddresses.List(listArgs).then(successFn).catch(errorFn);
+OrderCloud.MesageSenders.List(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -5932,119 +6610,156 @@ OrderCloud.AdminAddresses.List(listArgs).then(successFn).catch(errorFn);
   "Items": [
     {
       "ID": "…",
-      "CompanyName": "…",
-      "FirstName": "…",
-      "LastName": "…",
-      "Street1": "…",
-      "Street2": "…",
-      "City": "…",
-      "State": "…",
-      "Zip": "…",
-      "Country": "…",
-      "Phone": "…",
-      "AddressName": "…",
-      "xp": null
+      "Name": "…",
+      "MessageTypes": [
+        "OrderDeclined"
+      ]
     }
   ]
 }
 ```
 
-## Create New Admin Address
+## List Assignments
 
 ```js
-OrderCloud.AdminAddresses.Create(address).then(successFn).catch(errorFn);
+OrderCloud.MesageSenders.ListAssignments(messageSenderID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
 ```
 
-### Request Body Sample
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|messageSenderID|string|ID of the message sender.|
+|userID|string|ID of the user.|
+|userGroupID|string|ID of the user group.|
+|level|string|Level of the message sender.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+### Response Body Sample
 
 ```json
 {
-  "ID": "…",
-  "CompanyName": "…",
-  "FirstName": "…",
-  "LastName": "…",
-  "Street1": "…",
-  "Street2": "…",
-  "City": "…",
-  "State": "…",
-  "Zip": "…",
-  "Country": "…",
-  "Phone": "…",
-  "AddressName": "…",
-  "xp": null
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "MessageSenderID": "…",
+      "BuyerID": "…",
+      "UserID": "…",
+      "UserGroupID": "…",
+      "MessageConfigName": "…"
+    }
+  ]
 }
 ```
 
-## Create or Update Admin Address
+## Delete Assignment
 
 ```js
-OrderCloud.AdminAddresses.Update(addressID,address).then(successFn).catch(errorFn);
+OrderCloud.MesageSenders.DeleteAssignment(messageSenderID,userID,userGroupID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|addressID|string|ID of the address.|
+|messageSenderID|string|ID of the message sender.|
+|userID|string|ID of the user.|
+|userGroupID|string|ID of the user group.|
+## Save Assignment
+
+```js
+OrderCloud.MesageSenders.SaveAssignment(assignment).then(successFn).catch(errorFn);
+```
+
 ### Request Body Sample
 
 ```json
 {
-  "ID": "…",
-  "CompanyName": "…",
-  "FirstName": "…",
-  "LastName": "…",
-  "Street1": "…",
-  "Street2": "…",
-  "City": "…",
-  "State": "…",
-  "Zip": "…",
-  "Country": "…",
-  "Phone": "…",
-  "AddressName": "…",
-  "xp": null
+  "MessageSenderID": "…",
+  "BuyerID": "…",
+  "UserID": "…",
+  "UserGroupID": "…"
 }
 ```
 
-## Delete Admin Address
+## List CC Listener Assignments
 
 ```js
-OrderCloud.AdminAddresses.Delete(addressID).then(successFn).catch(errorFn);
+OrderCloud.MesageSenders.ListCCListenerAssignments(listArgs).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
 
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
-|addressID|string|ID of the address.|
-## Partially Update Admin Address
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
 
-```js
-OrderCloud.AdminAddresses.Patch(addressID,address).then(successFn).catch(errorFn);
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "MessageSenderAssignment": {
+        "MessageSenderID": "…",
+        "BuyerID": "…",
+        "UserID": "…",
+        "UserGroupID": "…",
+        "MessageConfigName": "…"
+      },
+      "MessageConfigName": "…",
+      "MessageType": "OrderDeclined",
+      "BuyerID": "…",
+      "UserGroupID": "…",
+      "UserID": "…"
+    }
+  ]
+}
 ```
 
-### Parameters
+## Save CC Listener Assignment
 
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|addressID|string|ID of the address.|
+```js
+OrderCloud.MesageSenders.SaveCCListenerAssignment(assignment).then(successFn).catch(errorFn);
+```
+
 ### Request Body Sample
 
 ```json
 {
-  "ID": "…",
-  "CompanyName": "…",
-  "FirstName": "…",
-  "LastName": "…",
-  "Street1": "…",
-  "Street2": "…",
-  "City": "…",
-  "State": "…",
-  "Zip": "…",
-  "Country": "…",
-  "Phone": "…",
-  "AddressName": "…",
-  "xp": null
+  "MessageSenderAssignment": {
+    "MessageSenderID": "…",
+    "BuyerID": "…",
+    "UserID": "…",
+    "UserGroupID": "…"
+  },
+  "MessageType": "OrderDeclined",
+  "BuyerID": "…",
+  "UserGroupID": "…",
+  "UserID": "…"
 }
 ```
 
@@ -6455,302 +7170,6 @@ OrderCloud.UserGroups.SaveUserAssignment(userGroupAssignment).then(successFn).ca
 }
 ```
 
-# Categories
-
-```js
-angular.module('orderCloud.sdk).factory(Categories, CategoriesFactory)
-```
-
-Categories are used within a catalog to group and place content for a specific audience. Content can be in the form of another category, nested categories, products or HTML.
-
-## Get a Single Category
-
-```js
-OrderCloud.Categories.Get(categoryID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|categoryID|string|ID of the category.|
-### Response Body Sample
-
-```json
-{
-  "ID": "…",
-  "Name": "…",
-  "Description": "…",
-  "xp": null,
-  "ListOrder": 1,
-  "Active": false,
-  "ParentID": "…",
-  "ChildCount": 0
-}
-```
-
-## Get a List of Categories
-
-```js
-OrderCloud.Categories.List(listArgs,depth).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|depth|string|Depth of the category.|
-|search|string|Word or phrase to search for.|
-|searchOn|string|Comma-delimited list of fields to search on.|
-|sortBy|string|Comma-delimited list of fields to sort by.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "ID": "…",
-      "Name": "…",
-      "Description": "…",
-      "xp": null,
-      "ListOrder": 1,
-      "Active": false,
-      "ParentID": "…",
-      "ChildCount": 0
-    }
-  ]
-}
-```
-
-## Create New Category
-
-```js
-OrderCloud.Categories.Create(category).then(successFn).catch(errorFn);
-```
-
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "Name": "…",
-  "Description": "…",
-  "xp": null,
-  "ListOrder": 1,
-  "Active": false,
-  "ParentID": "…"
-}
-```
-
-## Create or Update Category
-
-```js
-OrderCloud.Categories.Update(categoryID,category).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|categoryID|string|ID of the category.|
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "Name": "…",
-  "Description": "…",
-  "xp": null,
-  "ListOrder": 1,
-  "Active": false,
-  "ParentID": "…"
-}
-```
-
-## Delete Category
-
-```js
-OrderCloud.Categories.Delete(categoryID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|categoryID|string|ID of the category.|
-## Partially Update Category
-
-```js
-OrderCloud.Categories.Patch(categoryID,category).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|categoryID|string|ID of the category.|
-### Request Body Sample
-
-```json
-{
-  "ID": "…",
-  "Name": "…",
-  "Description": "…",
-  "xp": null,
-  "ListOrder": 1,
-  "Active": false,
-  "ParentID": "…"
-}
-```
-
-## List Assignments
-
-```js
-OrderCloud.Categories.ListAssignments(categoryID,userID,userGroupID,level,page,pageSize).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|categoryID|string|ID of the category.|
-|userID|string|ID of the user.|
-|userGroupID|string|ID of the user group.|
-|level|string|Level of the category.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "CategoryID": "…",
-      "UserID": "…",
-      "UserGroupID": "…"
-    }
-  ]
-}
-```
-
-## Delete Assignment
-
-```js
-OrderCloud.Categories.DeleteAssignment(categoryID,userID,userGroupID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|categoryID|string|ID of the category.|
-|userID|string|ID of the user.|
-|userGroupID|string|ID of the user group.|
-## Save Assignment
-
-```js
-OrderCloud.Categories.SaveAssignment(categoryAssignment).then(successFn).catch(errorFn);
-```
-
-### Request Body Sample
-
-```json
-{
-  "CategoryID": "…",
-  "UserID": "…",
-  "UserGroupID": "…"
-}
-```
-
-## List Product Assignments
-
-```js
-OrderCloud.Categories.ListProductAssignments(categoryID,productID,page,pageSize).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|categoryID|string|ID of the category.|
-|productID|string|ID of the product.|
-|page|integer|Page of results to return. Default: 1|
-|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
-### Response Body Sample
-
-```json
-{
-  "Meta": {
-    "Page": 1,
-    "PageSize": 20,
-    "TotalCount": 25,
-    "TotalPages": 2,
-    "ItemRange": [
-      1,
-      20
-    ]
-  },
-  "Items": [
-    {
-      "CategoryID": "…",
-      "ProductID": "…",
-      "ListOrder": null
-    }
-  ]
-}
-```
-
-## Save Product Assignment
-
-```js
-OrderCloud.Categories.SaveProductAssignment(productAssignment).then(successFn).catch(errorFn);
-```
-
-### Request Body Sample
-
-```json
-{
-  "CategoryID": "…",
-  "ProductID": "…",
-  "ListOrder": null
-}
-```
-
-## Delete Product Assignment
-
-```js
-OrderCloud.Categories.DeleteProductAssignment(categoryID,productID).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|categoryID|string|ID of the category.|
-|productID|string|ID of the product.|
 # Addresses
 
 ```js
@@ -7881,94 +8300,6 @@ OrderCloud.CreditCards.DeleteAssignment(creditCardID,userID,userGroupID).then(su
 |creditCardID|string|ID of the credit card.|
 |userID|string|ID of the user.|
 |userGroupID|string|ID of the user group.|
-# EmailTemplates
-
-```js
-angular.module('orderCloud.sdk).factory(EmailTemplates, EmailTemplatesFactory)
-```
-
-Typically, events within an application will trigger a specific email to be sent to a user.  Examples of this would be an order confirmation or a ship notification, among many others.  Email templates are used to define various system generated messages and the content in the To, From, Reply, Subject and Body.
-
-## Get a Single Email Template
-
-```js
-OrderCloud.EmailTemplates.Get(emailTemplateType).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|emailTemplateType|string|Email template type of the email template. Possible values: OrderSubmittedForApproval, CustomerOrderSubmitted, OrderToApprove, OrderDeclined, OrderApproved, PriceRequestSubmitted, CustomerOrderShipped, ProductRequiresAttachment, InventoryPointReached, LineItemExceedsInventory, PriceRequestResponse, CustomerOrderUpdated, OrderCanceled, PriceRequestCanceled, NewOrderReceived, ApprovalNotification, EmailLoginVerificationCode.|
-### Response Body Sample
-
-```json
-{
-  "Subject": "…",
-  "Body": "…",
-  "ReplyEmail": "…",
-  "SendMessageType": false,
-  "EmailFormatType": "Html"
-}
-```
-
-## Create or Update Email Template
-
-```js
-OrderCloud.EmailTemplates.Update(emailTemplateType,emailTemplate).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|emailTemplateType|string|Email template type of the email template. Possible values: OrderSubmittedForApproval, CustomerOrderSubmitted, OrderToApprove, OrderDeclined, OrderApproved, PriceRequestSubmitted, CustomerOrderShipped, ProductRequiresAttachment, InventoryPointReached, LineItemExceedsInventory, PriceRequestResponse, CustomerOrderUpdated, OrderCanceled, PriceRequestCanceled, NewOrderReceived, ApprovalNotification, EmailLoginVerificationCode.|
-### Request Body Sample
-
-```json
-{
-  "Subject": "…",
-  "Body": "…",
-  "ReplyEmail": "…",
-  "SendMessageType": false,
-  "EmailFormatType": "Html"
-}
-```
-
-## Partially Update Email Template
-
-```js
-OrderCloud.EmailTemplates.Patch(emailTemplateType,emailTemplate).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|emailTemplateType|string|Email template type of the email template. Possible values: OrderSubmittedForApproval, CustomerOrderSubmitted, OrderToApprove, OrderDeclined, OrderApproved, PriceRequestSubmitted, CustomerOrderShipped, ProductRequiresAttachment, InventoryPointReached, LineItemExceedsInventory, PriceRequestResponse, CustomerOrderUpdated, OrderCanceled, PriceRequestCanceled, NewOrderReceived, ApprovalNotification, EmailLoginVerificationCode.|
-### Request Body Sample
-
-```json
-{
-  "Subject": "…",
-  "Body": "…",
-  "ReplyEmail": "…",
-  "SendMessageType": false,
-  "EmailFormatType": "Html"
-}
-```
-
-## Reset To Default
-
-```js
-OrderCloud.EmailTemplates.ResetToDefault(emailTemplateType).then(successFn).catch(errorFn);
-```
-
-### Parameters
-
-| Name | Type | Description |
-| -------------- | ----------- | --------------- |
-|emailTemplateType|string|Email template type of the email template. Possible values: OrderSubmittedForApproval, CustomerOrderSubmitted, OrderToApprove, OrderDeclined, OrderApproved, PriceRequestSubmitted, CustomerOrderShipped, ProductRequiresAttachment, InventoryPointReached, LineItemExceedsInventory, PriceRequestResponse, CustomerOrderUpdated, OrderCanceled, PriceRequestCanceled, NewOrderReceived, ApprovalNotification, EmailLoginVerificationCode.|
 # Extending the OrderCloud Data Model
 
 Many times, object(s) returned from the OrderCloud API require additional data points derived from the provided information in order to more easily and elegantly drive UI functionality. One simple example of this is to create a FullName property on User objects derived from the FirstName and LastName properties.
