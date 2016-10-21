@@ -1380,7 +1380,7 @@ angular.module('orderCloud.sdk).factory(Categories, CategoriesFactory)
 ## List Categories
 
 ```js
-OrderCloud.Categories.ListCategories(listArgs,depth).then(successFn).catch(errorFn);
+OrderCloud.Categories.ListCategories(listArgs,depth,catalogID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1388,6 +1388,7 @@ OrderCloud.Categories.ListCategories(listArgs,depth).then(successFn).catch(error
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |depth|string|Depth of the category.|
+|catalogID|string|ID of the catalog.|
 |search|string|Word or phrase to search for.|
 |searchOn|string|Comma-delimited list of fields to search on.|
 |sortBy|string|Comma-delimited list of fields to sort by.|
@@ -1434,7 +1435,7 @@ angular.module('orderCloud.sdk).factory(Products, ProductsFactory)
 ## List Products
 
 ```js
-OrderCloud.Products.ListProducts(listArgs,categoryID).then(successFn).catch(errorFn);
+OrderCloud.Products.ListProducts(listArgs,categoryID,catalogID).then(successFn).catch(errorFn);
 ```
 
 ### Parameters
@@ -1442,6 +1443,7 @@ OrderCloud.Products.ListProducts(listArgs,categoryID).then(successFn).catch(erro
 | Name | Type | Description |
 | -------------- | ----------- | --------------- |
 |categoryID|string|ID of the category.|
+|catalogID|string|ID of the catalog.|
 |search|string|Word or phrase to search for.|
 |searchOn|string|Comma-delimited list of fields to search on.|
 |sortBy|string|Comma-delimited list of fields to sort by.|
@@ -3827,6 +3829,7 @@ OrderCloud.Buyers.Get().then(successFn).catch(errorFn);
 {
   "ID": "…",
   "Name": "…",
+  "DefaultCatalogID": "…",
   "Active": false,
   "xp": null
 }
@@ -3866,6 +3869,7 @@ OrderCloud.Buyers.List(listArgs).then(successFn).catch(errorFn);
     {
       "ID": "…",
       "Name": "…",
+      "DefaultCatalogID": "…",
       "Active": false,
       "xp": null
     }
@@ -3885,6 +3889,7 @@ OrderCloud.Buyers.Create(company).then(successFn).catch(errorFn);
 {
   "ID": "…",
   "Name": "…",
+  "DefaultCatalogID": "…",
   "Active": false,
   "xp": null
 }
@@ -3902,6 +3907,7 @@ OrderCloud.Buyers.Update(company).then(successFn).catch(errorFn);
 {
   "ID": "…",
   "Name": "…",
+  "DefaultCatalogID": "…",
   "Active": false,
   "xp": null
 }
@@ -3925,6 +3931,7 @@ OrderCloud.Buyers.Patch(company).then(successFn).catch(errorFn);
 {
   "ID": "…",
   "Name": "…",
+  "DefaultCatalogID": "…",
   "Active": false,
   "xp": null
 }

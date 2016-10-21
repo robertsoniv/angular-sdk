@@ -702,8 +702,8 @@
             function _listassignments(catalogID, categoryID, userID, userGroupID, level, page, pageSize, buyerID) {
                 return makeApiCall('GET', '/v1/catalogs/:catalogID/categories/assignments', {
                     'catalogID': catalogID ? catalogID : CatalogID().Get(),
-                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'categoryID': categoryID,
+                    'buyerID': buyerID ? buyerID : BuyerID().Get(),
                     'userID': userID,
                     'userGroupID': userGroupID,
                     'level': level,
@@ -1710,25 +1710,27 @@
                 }, null);
             }
 
-            function _listcategories(search, page, pageSize, searchOn, sortBy, filters, depth) {
+            function _listcategories(search, page, pageSize, searchOn, sortBy, filters, depth, catalogID) {
                 return makeApiCall('GET', '/v1/me/categories', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
                     'sortBy': sortBy,
-                    'depth': depth
+                    'depth': depth,
+                    'catalogID': catalogID ? catalogID : CatalogID().Get()
                 }, filters);
             }
 
-            function _listproducts(search, page, pageSize, searchOn, sortBy, filters, categoryID) {
+            function _listproducts(search, page, pageSize, searchOn, sortBy, filters, categoryID, catalogID) {
                 return makeApiCall('GET', '/v1/me/products', {
                     'search': search,
                     'page': page,
                     'pageSize': pageSize,
                     'searchOn': searchOn,
                     'sortBy': sortBy,
-                    'categoryID': categoryID
+                    'categoryID': categoryID,
+                    'catalogID': catalogID ? catalogID : CatalogID().Get()
                 }, filters);
             }
 

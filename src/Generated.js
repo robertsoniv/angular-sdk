@@ -356,7 +356,7 @@ function orderCloud( $q, $resource, $cookieStore, $injector, appname, apiurl, au
 					return makeApiCall('DELETE', '/v1/catalogs/:catalogID/categories/:categoryID', { 'catalogID': catalogID ? catalogID : CatalogID().Get(), 'categoryID': categoryID }, null);
 				}
 				function _listassignments(catalogID, categoryID, userID, userGroupID, level, page, pageSize, buyerID) {
-					return makeApiCall('GET', '/v1/catalogs/:catalogID/categories/assignments', { 'catalogID': catalogID ? catalogID : CatalogID().Get(), 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'categoryID': categoryID, 'userID': userID, 'userGroupID': userGroupID, 'level': level, 'page': page, 'pageSize': pageSize }, null);
+					return makeApiCall('GET', '/v1/catalogs/:catalogID/categories/assignments', { 'catalogID': catalogID ? catalogID : CatalogID().Get(), 'categoryID': categoryID, 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'userID': userID, 'userGroupID': userGroupID, 'level': level, 'page': page, 'pageSize': pageSize }, null);
 				}
 				function _deleteassignment(catalogID, categoryID, userID, userGroupID, buyerID) {
 					return makeApiCall('DELETE', '/v1/catalogs/:catalogID/categories/:categoryID/assignments', { 'catalogID': catalogID ? catalogID : CatalogID().Get(), 'categoryID': categoryID, 'buyerID': buyerID ? buyerID : BuyerID().Get(), 'userID': userID, 'userGroupID': userGroupID }, null);
@@ -889,11 +889,11 @@ function orderCloud( $q, $resource, $cookieStore, $injector, appname, apiurl, au
 				function _deletecreditcard(creditcardID) {
 					return makeApiCall('DELETE', '/v1/me/creditcards/:creditcardID', { 'creditcardID': creditcardID }, null);
 				}
-				function _listcategories(search, page, pageSize, searchOn, sortBy, filters, depth) {
-					return makeApiCall('GET', '/v1/me/categories', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'depth': depth }, filters);
+				function _listcategories(search, page, pageSize, searchOn, sortBy, filters, depth, catalogID) {
+					return makeApiCall('GET', '/v1/me/categories', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'depth': depth, 'catalogID': catalogID ? catalogID : CatalogID().Get() }, filters);
 				}
-				function _listproducts(search, page, pageSize, searchOn, sortBy, filters, categoryID) {
-					return makeApiCall('GET', '/v1/me/products', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'categoryID': categoryID }, filters);
+				function _listproducts(search, page, pageSize, searchOn, sortBy, filters, categoryID, catalogID) {
+					return makeApiCall('GET', '/v1/me/products', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy, 'categoryID': categoryID, 'catalogID': catalogID ? catalogID : CatalogID().Get() }, filters);
 				}
 				function _getproduct(productID) {
 					return makeApiCall('GET', '/v1/me/products/:productID', { 'productID': productID }, null);
