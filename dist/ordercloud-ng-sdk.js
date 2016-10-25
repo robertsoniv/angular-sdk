@@ -602,6 +602,13 @@
             }
 
             function _get(buyerID) {
+                if (!buyerID) {
+                    var errMessage = ' is a required field for OrderCloud.Buyers.Get';
+                    console.error(errMessage);
+                    var dfd = $q.defer();
+                    dfd.reject(errMessage);
+                    return dfd.promise;
+                }
                 return makeApiCall('GET', '/v1/buyers/:buyerID', {
                     'buyerID': buyerID ? buyerID : BuyerID().Get()
                 }, null);
@@ -659,7 +666,7 @@
             }
 
             function _get(categoryID, catalogID) {
-                if (!catalogID || !categoryID) {
+                if (!categoryID) {
                     var errMessage = 'catalogID and categoryID are required fields for OrderCloud.Categories.Get';
                     console.error(errMessage);
                     var dfd = $q.defer();
