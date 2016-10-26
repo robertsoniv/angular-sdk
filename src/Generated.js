@@ -228,7 +228,7 @@ function orderCloud( $q, $resource, $cookieStore, $injector, appname, apiurl, au
 						dfd.reject(errMessage);
 						return dfd.promise;
 					}
-					return makeApiCall('GET', '/v1/catalogs/:catalogID', { 'catalogID': catalogID ? catalogID : CatalogID().Get() }, null);
+					return makeApiCall('GET', '/v1/catalogs/:catalogID', { 'catalogID': catalogID }, null);
 				}
 				function _update(catalog, catalogID) {
 					return makeApiCall('PUT', '/v1/catalogs/:catalogID', { 'catalogID': catalogID ? catalogID : CatalogID().Get() }, catalog);
@@ -245,8 +245,8 @@ function orderCloud( $q, $resource, $cookieStore, $injector, appname, apiurl, au
 				function _saveassignment(assignment) {
 					return makeApiCall('POST', '/v1/catalogs/assignments', null, assignment);
 				}
-				function _deleteassignment(assignment) {
-					return makeApiCall('DELETE', '/v1/catalogs/assignments', null, assignment);
+				function _deleteassignment(buyerID, catalogID) {
+					return makeApiCall('DELETE', '/v1/catalogs/:catalogID/assignments', { 'catalogID': catalogID ? catalogID : CatalogID().Get(), 'buyerID': buyerID ? buyerID : BuyerID().Get() }, null);
 				}
 			}
 			function ApprovalRules() {
@@ -306,7 +306,7 @@ function orderCloud( $q, $resource, $cookieStore, $injector, appname, apiurl, au
 						dfd.reject(errMessage);
 						return dfd.promise;
 					}
-					return makeApiCall('GET', '/v1/buyers/:buyerID', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, null);
+					return makeApiCall('GET', '/v1/buyers/:buyerID', { 'buyerID': buyerID }, null);
 				}
 				function _delete(buyerID) {
 					return makeApiCall('DELETE', '/v1/buyers/:buyerID', { 'buyerID': buyerID ? buyerID : BuyerID().Get() }, null);

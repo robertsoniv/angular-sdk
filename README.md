@@ -4313,18 +4313,14 @@ OrderCloud.Catalogs.SaveAssignment(assignment).then(successFn).catch(errorFn);
 ## Delete Assignment
 
 ```js
-OrderCloud.Catalogs.DeleteAssignment(assignment).then(successFn).catch(errorFn);
+OrderCloud.Catalogs.DeleteAssignment(catalogID).then(successFn).catch(errorFn);
 ```
 
-### Request Body Sample
+### Parameters
 
-```json
-{
-  "CatalogID": "…",
-  "BuyerID": "…"
-}
-```
-
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|catalogID|string|ID of the catalog.|
 # Categories
 
 ```js
