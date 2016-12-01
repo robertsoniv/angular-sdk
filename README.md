@@ -103,6 +103,12 @@ An AngularJs SDK for OrderCloud API
 
   - [Get Promotion](#get-promotion)
 
+- [SpendingAccounts](#spendingaccounts)
+
+  - [List Spending Accounts](#list-spending-accounts)
+
+  - [Get Spending Account](#get-spending-account)
+
 - [Orders](#orders)
 
   - [Get a Single Order](#get-a-single-order)
@@ -1743,6 +1749,7 @@ OrderCloud.Orders.ListOutgoingOrders(listArgs,from,to).then(successFn).catch(err
       "FromUserID": "…",
       "FromUserFirstName": "…",
       "FromUserLastName": "…",
+      "BillingAddressID": "…",
       "BillingAddress": {
         "ID": "…",
         "CompanyName": "…",
@@ -1819,6 +1826,7 @@ OrderCloud.Orders.ListIncomingOrders(listArgs,from,to).then(successFn).catch(err
       "FromUserID": "…",
       "FromUserFirstName": "…",
       "FromUserLastName": "…",
+      "BillingAddressID": "…",
       "BillingAddress": {
         "ID": "…",
         "CompanyName": "…",
@@ -1876,6 +1884,7 @@ OrderCloud.Orders.GetOrder(orderID).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "FromUserFirstName": "…",
   "FromUserLastName": "…",
+  "BillingAddressID": "…",
   "BillingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -2002,6 +2011,85 @@ OrderCloud.Promotions.GetPromotion(promotionID).then(successFn).catch(errorFn);
 }
 ```
 
+# SpendingAccounts
+
+```js
+angular.module('orderCloud.sdk).factory(SpendingAccounts, SpendingAccountsFactory)
+```
+
+"Me" is a container for read-only endpoints that return a filtered view of things that the current buyer user is allowed to see, i.e. things that they are assigned to either directly or as a member of a buyer organization or user group. It also provides ways for a user to update or change their own information.
+
+## List Spending Accounts
+
+```js
+OrderCloud.SpendingAccounts.ListSpendingAccounts(listArgs).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|search|string|Word or phrase to search for.|
+|searchOn|string|Comma-delimited list of fields to search on.|
+|sortBy|string|Comma-delimited list of fields to sort by.|
+|page|integer|Page of results to return. Default: 1|
+|pageSize|integer|Number of results to return per page. Default: 20, max: 100.|
+|filters||Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'|
+### Response Body Sample
+
+```json
+{
+  "Meta": {
+    "Page": 1,
+    "PageSize": 20,
+    "TotalCount": 25,
+    "TotalPages": 2,
+    "ItemRange": [
+      1,
+      20
+    ]
+  },
+  "Items": [
+    {
+      "ID": "…",
+      "Name": "…",
+      "Balance": 0.0,
+      "AllowAsPaymentMethod": false,
+      "RedemptionCode": "…",
+      "StartDate": null,
+      "EndDate": null,
+      "xp": null
+    }
+  ]
+}
+```
+
+## Get Spending Account
+
+```js
+OrderCloud.SpendingAccounts.GetSpendingAccount(spendingAccountID).then(successFn).catch(errorFn);
+```
+
+### Parameters
+
+| Name | Type | Description |
+| -------------- | ----------- | --------------- |
+|spendingAccountID|string|ID of the spending account.|
+### Response Body Sample
+
+```json
+{
+  "ID": "…",
+  "Name": "…",
+  "Balance": 0.0,
+  "AllowAsPaymentMethod": false,
+  "RedemptionCode": "…",
+  "StartDate": null,
+  "EndDate": null,
+  "xp": null
+}
+```
+
 # Orders
 
 ```js
@@ -2030,6 +2118,7 @@ OrderCloud.Orders.Get(orderID).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "FromUserFirstName": "…",
   "FromUserLastName": "…",
+  "BillingAddressID": "…",
   "BillingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -2164,6 +2253,7 @@ OrderCloud.Orders.ListOutgoing(from,to,listArgs).then(successFn).catch(errorFn);
       "FromUserID": "…",
       "FromUserFirstName": "…",
       "FromUserLastName": "…",
+      "BillingAddressID": "…",
       "BillingAddress": {
         "ID": "…",
         "CompanyName": "…",
@@ -2240,6 +2330,7 @@ OrderCloud.Orders.ListIncoming(from,to,listArgs).then(successFn).catch(errorFn);
       "FromUserID": "…",
       "FromUserFirstName": "…",
       "FromUserLastName": "…",
+      "BillingAddressID": "…",
       "BillingAddress": {
         "ID": "…",
         "CompanyName": "…",
@@ -2421,6 +2512,7 @@ OrderCloud.Orders.Submit(orderID).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "FromUserFirstName": "…",
   "FromUserLastName": "…",
+  "BillingAddressID": "…",
   "BillingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -2477,6 +2569,7 @@ OrderCloud.Orders.Approve(orderID,comments).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "FromUserFirstName": "…",
   "FromUserLastName": "…",
+  "BillingAddressID": "…",
   "BillingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -2533,6 +2626,7 @@ OrderCloud.Orders.Decline(orderID,comments).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "FromUserFirstName": "…",
   "FromUserLastName": "…",
+  "BillingAddressID": "…",
   "BillingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -2588,6 +2682,7 @@ OrderCloud.Orders.Cancel(orderID).then(successFn).catch(errorFn);
   "FromUserID": "…",
   "FromUserFirstName": "…",
   "FromUserLastName": "…",
+  "BillingAddressID": "…",
   "BillingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -2641,6 +2736,7 @@ OrderCloud.Orders.Ship(orderID,shipment).then(successFn).catch(errorFn);
   "ID": "…",
   "Shipper": "…",
   "DateShipped": null,
+  "DateDelivered": null,
   "TrackingNumber": "…",
   "Cost": null,
   "Items": [
@@ -2885,6 +2981,7 @@ OrderCloud.Orders.RemovePromotion(orderID,promoCode).then(successFn).catch(error
   "FromUserID": "…",
   "FromUserFirstName": "…",
   "FromUserLastName": "…",
+  "BillingAddressID": "…",
   "BillingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -2965,6 +3062,8 @@ OrderCloud.LineItems.Get(orderID,lineItemID).then(successFn).catch(errorFn);
   "CostCenter": "…",
   "DateNeeded": null,
   "ShippingAccount": "…",
+  "ShippingAddressID": "…",
+  "ShipFromAddressID": "…",
   "ShippingAddress": {
     "ID": "…",
     "CompanyName": "…",
@@ -3050,6 +3149,8 @@ OrderCloud.LineItems.List(orderID,listArgs).then(successFn).catch(errorFn);
       "CostCenter": "…",
       "DateNeeded": null,
       "ShippingAccount": "…",
+      "ShippingAddressID": "…",
+      "ShipFromAddressID": "…",
       "ShippingAddress": {
         "ID": "…",
         "CompanyName": "…",
@@ -3592,6 +3693,7 @@ OrderCloud.Shipments.Get(shipmentID).then(successFn).catch(errorFn);
   "ID": "…",
   "Shipper": "…",
   "DateShipped": null,
+  "DateDelivered": null,
   "TrackingNumber": "…",
   "Cost": null,
   "Items": [
@@ -3641,6 +3743,7 @@ OrderCloud.Shipments.List(orderID,listArgs).then(successFn).catch(errorFn);
       "ID": "…",
       "Shipper": "…",
       "DateShipped": null,
+      "DateDelivered": null,
       "TrackingNumber": "…",
       "Cost": null,
       "Items": [
@@ -3669,6 +3772,7 @@ OrderCloud.Shipments.Create(shipment).then(successFn).catch(errorFn);
   "ID": "…",
   "Shipper": "…",
   "DateShipped": null,
+  "DateDelivered": null,
   "TrackingNumber": "…",
   "Cost": null,
   "Items": [
@@ -3700,6 +3804,7 @@ OrderCloud.Shipments.Update(shipmentID,shipment).then(successFn).catch(errorFn);
   "ID": "…",
   "Shipper": "…",
   "DateShipped": null,
+  "DateDelivered": null,
   "TrackingNumber": "…",
   "Cost": null,
   "Items": [
@@ -3742,6 +3847,7 @@ OrderCloud.Shipments.Patch(shipmentID,shipment).then(successFn).catch(errorFn);
   "ID": "…",
   "Shipper": "…",
   "DateShipped": null,
+  "DateDelivered": null,
   "TrackingNumber": "…",
   "Cost": null,
   "Items": [
@@ -3796,6 +3902,7 @@ OrderCloud.Shipments.DeleteItem(shipmentID,orderID,lineItemID).then(successFn).c
   "ID": "…",
   "Shipper": "…",
   "DateShipped": null,
+  "DateDelivered": null,
   "TrackingNumber": "…",
   "Cost": null,
   "Items": [

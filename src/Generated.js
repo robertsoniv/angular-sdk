@@ -842,6 +842,8 @@ function orderCloud( $q, $resource, $cookieStore, $injector, appname, apiurl, au
 					'GetOrder': _getorder,
 					'ListPromotions': _listpromotions,
 					'GetPromotion': _getpromotion,
+					'ListSpendingAccounts': _listspendingaccounts,
+					'GetSpendingAccount': _getspendingaccount,
 					'CreateFromTempUser': _createfromtempuser
 					}
 				;
@@ -925,6 +927,12 @@ function orderCloud( $q, $resource, $cookieStore, $injector, appname, apiurl, au
 				}
 				function _getpromotion(promotionID) {
 					return makeApiCall('GET', '/v1/me/promotions/:promotionID', { 'promotionID': promotionID }, null);
+				}
+				function _listspendingaccounts(search, page, pageSize, searchOn, sortBy, filters) {
+					return makeApiCall('GET', '/v1/me/spendingAccounts', { 'search': search, 'page': page, 'pageSize': pageSize, 'searchOn': searchOn, 'sortBy': sortBy }, filters);
+				}
+				function _getspendingaccount(spendingAccountID) {
+					return makeApiCall('GET', '/v1/me/spendingaccounts/:spendingAccountID', { 'spendingAccountID': spendingAccountID }, null);
 				}
 				function _createfromtempuser(user, tempUserToken) {
 					return makeApiCall('PUT', '/v1/me', { 'tempUserToken': tempUserToken }, user);

@@ -1609,6 +1609,8 @@
                 'GetOrder': _getorder,
                 'ListPromotions': _listpromotions,
                 'GetPromotion': _getpromotion,
+                'ListSpendingAccounts': _listspendingaccounts,
+                'GetSpendingAccount': _getspendingaccount,
                 'CreateFromTempUser': _createfromtempuser
             };
 
@@ -1811,6 +1813,22 @@
             function _getpromotion(promotionID) {
                 return makeApiCall('GET', '/v1/me/promotions/:promotionID', {
                     'promotionID': promotionID
+                }, null);
+            }
+
+            function _listspendingaccounts(search, page, pageSize, searchOn, sortBy, filters) {
+                return makeApiCall('GET', '/v1/me/spendingAccounts', {
+                    'search': search,
+                    'page': page,
+                    'pageSize': pageSize,
+                    'searchOn': searchOn,
+                    'sortBy': sortBy
+                }, filters);
+            }
+
+            function _getspendingaccount(spendingAccountID) {
+                return makeApiCall('GET', '/v1/me/spendingaccounts/:spendingAccountID', {
+                    'spendingAccountID': spendingAccountID
                 }, null);
             }
 
