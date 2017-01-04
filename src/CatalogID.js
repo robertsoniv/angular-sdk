@@ -5,10 +5,10 @@ function CatalogID() {
     };
 
     function _get() {
-        return $cookieStore.get(appname + '.catalogID');
+        return $cookies.get(appname + '.catalogID');
     }
 
     function _set(value) {
-        $cookieStore.put(appname + '.catalogID', value);
+        $cookies.put(appname + '.catalogID', value);
     }
 }

@@ -47,23 +47,23 @@ function Auth() {
     }
 
     function _setToken(token) {
-        $cookieStore.put(appname + '.token', token);
+        $cookies.put(appname + '.token', token);
     }
 
     function _removeToken() {
-        $cookieStore.remove(appname + '.token')
+        $cookies.remove(appname + '.token')
     }
 
     function _setImpersonationToken(token) {
-        $cookieStore.put(appname + '.impersonation.token', token);
+        $cookies.put(appname + '.impersonation.token', token);
     }
 
     function _removeImpersonationToken() {
-        $cookieStore.remove(appname + '.impersonation.token')
+        $cookies.remove(appname + '.impersonation.token')
     }
 
     function _readToken() {
-        return $cookieStore.get(appname + (impersonating ? '.impersonation' : '') + '.token');
+        return $cookies.get(appname + (impersonating ? '.impersonation' : '') + '.token');
     }
 
 }
