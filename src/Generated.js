@@ -1,6 +1,6 @@
 angular.module('orderCloud.sdk', ['ngResource','ngCookies'])
 .factory('OrderCloud', orderCloud);
-function orderCloud( $q, $resource, $cookieStore, $injector, appname, apiurl, authurl, clientid ) {
+function orderCloud( $q, $resource, $cookies, $injector, appname, apiurl, authurl, clientid ) {
 	var impersonating = false;
 	var scope = $injector.has('scope') ? $injector.get('scope') : null;
 	var ocscope = $injector.has('ocscope') ? $injector.get('ocscope') : null;

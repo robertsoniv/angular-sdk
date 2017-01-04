@@ -5,10 +5,10 @@ function BuyerID() {
     };
 
     function _get() {
-        return $cookieStore.get(appname + '.buyerID');
+        return $cookies.get(appname + '.buyerID');
     }
 
     function _set(value) {
-        $cookieStore.put(appname + '.buyerID', value);
+        $cookies.put(appname + '.buyerID', value);
     }
 }

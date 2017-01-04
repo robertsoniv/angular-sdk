@@ -1,6 +1,6 @@
 {
   "name": "ordercloud-ng-sdk",
-  "version": "1.0.26",
+  "version": "1.0.27-prerelease",
   "description": "OrderCloud AngularJS 1.x SDK",
   "main": "dist/ordercloud-ng-sdk.js",
   "scripts": {

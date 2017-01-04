@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    orderCloud.$inject = ["$q", "$resource", "$cookieStore", "$injector", "appname", "apiurl", "authurl", "clientid"];
+    orderCloud.$inject = ["$q", "$resource", "$cookies", "$injector", "appname", "apiurl", "authurl", "clientid"];
     angular.module('orderCloud.sdk', ['ngResource', 'ngCookies'])
         .factory('OrderCloud', orderCloud);
 
-    function orderCloud($q, $resource, $cookieStore, $injector, appname, apiurl, authurl, clientid) {
+    function orderCloud($q, $resource, $cookies, $injector, appname, apiurl, authurl, clientid) {
         var impersonating = false;
         var scope = $injector.has('scope') ? $injector.get('scope') : null;
         var ocscope = $injector.has('ocscope') ? $injector.get('ocscope') : null;
@@ -14,6 +14,7 @@
             'Auth': Auth(),
             'BuyerID': BuyerID(),
             'CatalogID': CatalogID(),
+            'Refresh': Refresh(),
 
             'Addresses': Addresses(),
             'AdminAddresses': AdminAddresses(),
@@ -105,23 +106,23 @@
             }
 
             function _setToken(token) {
-                $cookieStore.put(appname + '.token', token);
+                $cookies.put(appname + '.token', token);
             }
 
             function _removeToken() {
-                $cookieStore.remove(appname + '.token')
+                $cookies.remove(appname + '.token')
             }
 
             function _setImpersonationToken(token) {
-                $cookieStore.put(appname + '.impersonation.token', token);
+                $cookies.put(appname + '.impersonation.token', token);
             }
 
             function _removeImpersonationToken() {
-                $cookieStore.remove(appname + '.impersonation.token')
+                $cookies.remove(appname + '.impersonation.token')
             }
 
             function _readToken() {
-                return $cookieStore.get(appname + (impersonating ? '.impersonation' : '') + '.token');
+                return $cookies.get(appname + (impersonating ? '.impersonation' : '') + '.token');
             }
 
         }
@@ -133,11 +134,11 @@
             };
 
             function _get() {
-                return $cookieStore.get(appname + '.buyerID');
+                return $cookies.get(appname + '.buyerID');
             }
 
             function _set(value) {
-                $cookieStore.put(appname + '.buyerID', value);
+                $cookies.put(appname + '.buyerID', value);
             }
         }
 
@@ -148,12 +149,64 @@
             };
 
             function _get() {
-                return $cookieStore.get(appname + '.catalogID');
+                return $cookies.get(appname + '.catalogID');
             }
 
             function _set(value) {
-                $cookieStore.put(appname + '.catalogID', value);
+                $cookies.put(appname + '.catalogID', value);
             }
+        }
+
+        function Refresh() {
+            var service = {
+                Set: _set,
+                Get: _get,
+                SetToken: _setToken,
+                ReadToken: _readToken,
+                GetToken: _getToken,
+                RemoveToken: _removeToken
+            };
+            var remember;
+            var scope = $injector.has('scope') ? $injector.get('scope') : null;
+            var ocscope = $injector.has('ocscope') ? $injector.get('ocscope') : null;
+
+            return service;
+            ////
+
+            function _set(value) {
+                remember = value;
+            }
+
+            function _get() {
+                return remember;
+            }
+
+            function _setToken(token) {
+                return $cookies.put(appname + '.refresh_token', token);
+            }
+
+            function _readToken() {
+                return $cookies.get(appname + '.refresh_token');
+            }
+
+            function _removeToken() {
+                $cookies.remove(appname + '.refresh_token');
+            }
+
+            function _getToken(token) {
+                var data = $.param({
+                    grant_type: 'refresh_token',
+                    scope: scope ? scope : ocscope,
+                    client_id: clientid,
+                    refresh_token: token
+                });
+                return $resource(authurl, {}, {
+                    refresh: {
+                        method: 'POST'
+                    }
+                }).refresh(data).$promise;
+            }
+
         }
 
         function Addresses() {
